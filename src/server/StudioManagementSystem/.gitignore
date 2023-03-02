@@ -1,0 +1,9 @@
+﻿# ignore the build artifacts
+
+obj/
+bin/
+
+# ignore the .idea (Rider) local editor configs
+
+.idea/
+*.DotSettings.user
