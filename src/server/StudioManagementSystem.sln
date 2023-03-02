@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem.Core", "StudioManagementSystem.Core\StudioManagementSystem.Core.csproj", "{D06864E7-F9E9-4C44-812E-13C660E841F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem.Infrastructure", "StudioManagementSystem.Infrastructure\StudioManagementSystem.Infrastructure.csproj", "{AEFE760B-6A80-46D2-9BDF-A7FD19CB51BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D06864E7-F9E9-4C44-812E-13C660E841F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06864E7-F9E9-4C44-812E-13C660E841F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06864E7-F9E9-4C44-812E-13C660E841F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEFE760B-6A80-46D2-9BDF-A7FD19CB51BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFE760B-6A80-46D2-9BDF-A7FD19CB51BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFE760B-6A80-46D2-9BDF-A7FD19CB51BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFE760B-6A80-46D2-9BDF-A7FD19CB51BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
