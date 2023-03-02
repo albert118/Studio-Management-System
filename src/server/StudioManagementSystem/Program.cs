@@ -1,24 +1,27 @@
+using StudioManagementSystem;
+
+const string appSettingsFilePath = "appsettings.json";
+
+// retrieve and inject the application configuration
+var appConfig = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile(appSettingsFilePath)
+    .Build();
+
+// create the application
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var startup = new Startup(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Configure the host container (Autofac) within this method
+startup.ConfigureHostContainer(builder.Host, appConfig);
+
+// Configure the global Microsoft container services
+startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+// Configure the app and web request pipeline
+startup.Configure(app, builder.Environment);
 
 app.Run();
