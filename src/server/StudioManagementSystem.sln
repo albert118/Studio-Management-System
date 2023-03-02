@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem", "StudioManagementSystem.csproj", "{27221079-8BB1-4B8F-B120-91597BA805EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem", "StudioManagementSystem\StudioManagementSystem.csproj", "{27221079-8BB1-4B8F-B120-91597BA805EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudioManagementSystem.Core", "StudioManagementSystem.Core\StudioManagementSystem.Core.csproj", "{D06864E7-F9E9-4C44-812E-13C660E841F3}"
 EndProject
