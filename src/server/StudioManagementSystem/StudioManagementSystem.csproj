@@ -18,4 +18,8 @@
       <Folder Include="MyFeature" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="StudioManagementSystem.Core\StudioManagementSystem.Core.csproj" />
+    </ItemGroup>
+
 </Project>
