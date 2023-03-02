@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Microsoft.EntityFrameworkCore;
+using StudioManagementSystem.Infrastructure;
 
 namespace StudioManagementSystem;
 

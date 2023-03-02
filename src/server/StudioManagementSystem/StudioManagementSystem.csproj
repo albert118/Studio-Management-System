@@ -19,6 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\StudioManagementSystem.Core\StudioManagementSystem.Core.csproj" />
+      <ProjectReference Include="..\StudioManagementSystem.Infrastructure\StudioManagementSystem.Infrastructure.csproj" />
       <ProjectReference Include="StudioManagementSystem.Core\StudioManagementSystem.Core.csproj" />
     </ItemGroup>
 
