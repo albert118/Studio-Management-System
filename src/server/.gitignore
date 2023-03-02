@@ -7,3 +7,7 @@ bin/
 
 .idea/
 *.DotSettings.user
+
+# ignore visual studio local editor settings
+
+.vs/
