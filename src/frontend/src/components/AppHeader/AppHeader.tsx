@@ -21,7 +21,7 @@ function AppHeader() {
         <Header aria-label="UTS Software Mangement System">
           <SkipToContent />
           <HeaderName href="/" prefix="UTS">
-            Software Mangement System
+            Studio Mangement System
           </HeaderName>
           <HeaderNavigation aria-label="UTS Software Mangement System">
             <HeaderMenuItem isCurrentPage={location.pathname == "/"} href="/">
