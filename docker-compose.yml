@@ -5,6 +5,10 @@ networks:
     default:
         name: sms-network
 
+volumes:
+    database:
+    letsencrypt:
+
 services:
     maria-db:
         # https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
@@ -13,6 +17,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        volumes:
+            - database:/var/lib/mysql
         ports:
             - 33060:3306
         restart: unless-stopped
@@ -30,9 +36,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - '.:/app'
-            - '/app/node_modules'
-        environment:
-            - CHOKIDAR_USEPOLLING=true
+            - '/data/node_modules'
         depends_on:
             - maria-db
 
@@ -47,7 +51,7 @@ services:
         restart: unless-stopped
         volumes:
             - ./data:/data
-            - ./letsencrypt:/etc/letsencrypt
+            - letsencrypt:/etc/letsencrypt
         ports:
             - '80:80'
             - '81:81'
