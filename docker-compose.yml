@@ -11,7 +11,7 @@ services:
         # Maria db is cross compatible with ARM (M1 Apple)
         container_name: maria-db
         build:
-            context: ./database
+            context: .
             dockerfile: Dockerfile
         ports:
             - 33060:3306
