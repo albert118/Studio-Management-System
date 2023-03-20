@@ -31,8 +31,6 @@ services:
         volumes:
             - '.:/app'
             - '/app/node_modules'
-        ports:
-            - 3001:3000
         environment:
             - CHOKIDAR_USEPOLLING=true
         depends_on:
@@ -62,9 +60,9 @@ services:
             DB_MYSQL_NAME: 'NginxProxyManager'
         depends_on:
             - maria-db
-
-# opt in to enable the npm health check
-healthcheck:
-    test: ['CMD', '/bin/check-health']
-    interval: 10s
-    timeout: 3s
+        # opt in to enable the npm health check
+        healthcheck:
+            test: ['CMD', '/bin/check-health']
+            interval: 30s
+            start_period: 20s
+            timeout: 10s
