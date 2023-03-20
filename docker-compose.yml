@@ -26,7 +26,7 @@ services:
     frontend:
         container_name: frontend
         build:
-            context: ./src/frontend
+            context: .
             dockerfile: Dockerfile
         volumes:
             - '.:/app'
@@ -41,7 +41,9 @@ services:
         # the react-app and .NET backend are exposed internally on this stack's docker network rather than exposing their ports directly
         # see: https://nginxproxymanager.com/guide/
         container_name: nginx-revproxy
-        image: 'jc21/nginx-proxy-manager:latest'
+        build:
+            context: .
+            dockerfile: Dockerfile
         restart: unless-stopped
         volumes:
             - ./data:/data
