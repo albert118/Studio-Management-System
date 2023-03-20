@@ -4,23 +4,25 @@
 # This is a multi stage Docker (build) file
 ################################################################################
 
+## MariaDb Database
+
+FROM mariadb:10.5.8
+
+COPY scripts/init-users.sql /docker-entrypoint-initdb.d/init-users.sql
 
 ## React Js (frontend)
 
 # the alias is for grabbing build artifacts in a later stage
 FROM node:13.12.0-alpine as builder
 
-WORKDIR src/
-
-ENV PATH src/node_modules/.bin:$PATH
+ENV PATH src/frontend/node_modules/.bin:$PATH
 
 # install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
-RUN npm install react-scripts@3.4.1 -g
+COPY src/frontend/package.json src/frontend/package-lock.json ./
+RUN npm install && npm install react-scripts@3.4.1 -g
 
 # add the app
-COPY . ./
+COPY src/frontend/ ./
 
 # build and the production app (this creates a build folder in the CWD)
 RUN npm run build
