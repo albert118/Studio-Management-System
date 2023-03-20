@@ -2,6 +2,8 @@ version: '3.9'
 
 services:
     maria-db:
+        # https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
+        # Maria db is cross compatible with ARM (M1 Apple)
         image: mariadb:10.5.8
         container_name: maria-db
         ports:
