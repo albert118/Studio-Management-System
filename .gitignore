@@ -13,3 +13,8 @@
 # nginx proxy manager content
 
 data/*
+
+# sensitive data
+
+.env
+local.env
