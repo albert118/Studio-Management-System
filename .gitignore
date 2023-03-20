@@ -10,10 +10,6 @@
 # ignore the vscode local editor settings
 .vscode/*
 
-# nginx proxy manager content
-
-data/*
-
 # sensitive data
 
 .env
