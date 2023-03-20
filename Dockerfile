@@ -13,22 +13,24 @@ COPY scripts/init-users.sql /docker-entrypoint-initdb.d/init-users.sql
 ## React Js (frontend)
 
 # the alias is for grabbing build artifacts in a later stage
-FROM node:13.12.0-alpine as builder
+FROM node:16-alpine as builder
 
-ENV PATH src/frontend/node_modules/.bin:$PATH
+# install dependencies to the image
+COPY src/frontend /data/
+RUN npm ci
+ENV PATH /data/node_modules/.bin:$PATH
 
-# install dependencies
-COPY src/frontend/package.json src/frontend/package-lock.json ./
-RUN npm install && npm install react-scripts@3.4.1 -g
-
-# add the app
-COPY src/frontend/ ./
+# copy the app files to the image
+COPY src/frontend/ /app/
 
 # build and the production app (this creates a build folder in the CWD)
+WORKDIR /app
 RUN npm run build
 
 ## Nginx Proxy Manager (rev proxy)
 
-FROM jc21/nginx-proxy-manager:latest
+FROM jc21/nginx-proxy-manager:latest as production
 
-COPY --from=builder /src/build /usr/share/nginx/html
+ENV NODE_ENV production
+
+COPY --from=builder /app/build /usr/share/nginx/html
