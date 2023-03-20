@@ -1,0 +1,7 @@
+2023/03/21 11:39:28 [error] 708#708: *50 frontend could not be resolved (110: Operation timed out), client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:40:59 [error] 161#161: *2 frontend could not be resolved (110: Operation timed out), client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:41:50 [error] 161#161: *13 frontend could not be resolved (110: Operation timed out), client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:43:46 [error] 161#161: *38 frontend could not be resolved (110: Operation timed out), client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:47:52 [error] 1664#1664: *92 directory index of "/usr/share/nginx/" is forbidden, client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:47:54 [error] 1664#1664: *92 directory index of "/usr/share/nginx/" is forbidden, client: 172.20.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"
+2023/03/21 11:55:13 [error] 168#168: *38 directory index of "/usr/share/nginx/" is forbidden, client: 172.21.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost"

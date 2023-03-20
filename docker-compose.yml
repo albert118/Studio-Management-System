@@ -1,32 +1,23 @@
 version: '3.9'
 
 services:
-    maria-db:
-        # https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
-        # Maria db is cross compatible with ARM (M1 Apple)
-        image: mariadb:10.5.8
-        container_name: maria-db
+    mysql-db:
+        image: mysql:5.7
+        container_name: mysql-db
         ports:
             - 33060:3306
         restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: StudioManagementSystem
-            MYSQL_USER: MYSQL_USER
-            MYSQL_PASSWORD: MYSQL_PASSWORD
-            MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-            MYSQL_HOST: localhost
-
     frontend:
         container_name: frontend
         build:
             context: ./src/frontend
             dockerfile: Dockerfile
         volumes:
-            - '.:/app'
-            - '/app/node_modules'
+            - '.:frontend/src/'
+            - 'frontend/src/node_modules'
         ports:
             - 3001:3000
         environment:
             - CHOKIDAR_USEPOLLING=true
         depends_on:
-            - maria-db
+            - mysql-db
