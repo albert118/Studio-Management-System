@@ -1,5 +1,10 @@
 version: '3.9'
 
+# create an internal docker network for our application stack
+networks:
+    default:
+        name: sms-network
+
 services:
     maria-db:
         # https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
@@ -33,7 +38,27 @@ services:
         depends_on:
             - maria-db
 
-# create an internal docker network for our application stack
-networks:
-    default:
-        name: sms-network
+    nginx-revproxy:
+        # this revproxy exposes the application securely
+        # the react-app and .NET backend are exposed internally on this stack's docker network rather than exposing their ports directly
+        # see: https://nginxproxymanager.com/guide/
+        container_name: nginx-revproxy
+        image: 'jc21/nginx-proxy-manager:latest'
+        restart: unless-stopped
+        volumes:
+            - ./data:/data
+            - ./letsencrypt:/etc/letsencrypt
+        ports:
+            - '80:80'
+            - '81:81'
+            - '443:443'
+        environment:
+            DISABLE_IPV6: 'true'
+            # use the existing mariadb service rather than inbuilt sqlite db
+            DB_MYSQL_HOST: 'maria-db'
+            DB_MYSQL_PORT: 3306
+            DB_MYSQL_USER: 'npm_user'
+            DB_MYSQL_PASSWORD: 'super_secret_password'
+            DB_MYSQL_NAME: 'NginxProxyManager'
+        depends_on:
+            - maria-db
