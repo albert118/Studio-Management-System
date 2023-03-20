@@ -7,14 +7,21 @@ services:
         ports:
             - 33060:3306
         restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: StudioManagementSystem
+            MYSQL_USER: MYSQL_USER
+            MYSQL_PASSWORD: MYSQL_PASSWORD
+            MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+            MYSQL_HOST: localhost
+
     frontend:
         container_name: frontend
         build:
             context: ./src/frontend
             dockerfile: Dockerfile
         volumes:
-            - '.:frontend/src/'
-            - 'frontend/src/node_modules'
+            - '.:/app'
+            - '/app/node_modules'
         ports:
             - 3001:3000
         environment:
