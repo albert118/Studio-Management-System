@@ -33,12 +33,10 @@ _TODO (basically use the ef core tools in your editor or `dotnet ef` on the CLI 
 ## Using the Reverse Proxy
 
 We use Nginx (NPM for short - very confusing I know). This image has a web UI for configuring it easily.
-Credentials are
+Credentials are distributed over a secure channel (currently MS Teams) on as-needed basis.
 
-```
-fullname: SmsAdministrator
-Nickname: smsAdmin
-email: studio-management-system-admin@notreal.dev
-```
+For production, our SPA (React) is compiled into static files and served directly by the proxy.
 
-password is distributed over a secure channel (currently MS Teams) on as-needed basis.
+## Accessing the Database for Development Purposes
+
+In development mode, the MariaDb database is exposed via port `33060`. The various user credentials are currently under the `database/` directory in this repo.
