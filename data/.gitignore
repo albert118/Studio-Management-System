@@ -1,6 +1,0 @@
-# nginx proxy manager content
-
-letsencrypt-acme-challenge/*
-logs/*
-custom_ssl/*
-access/*

@@ -5,17 +5,21 @@ networks:
     default:
         name: sms-network
 
+# custom
 volumes:
     database:
     letsencrypt:
+    nginx:
 
 services:
     maria-db:
         # https://stackoverflow.com/questions/65456814/docker-apple-silicon-m1-preview-mysql-no-matching-manifest-for-linux-arm64-v8
         # Maria db is cross compatible with ARM (M1 Apple)
+        # this Dockerfile is separate because it causes issues in the multistage build process for unknown reasons
+        # which is fine anyway, this keeps the build time faster as we can setup the dependency with a small Dockerfile
         container_name: maria-db
         build:
-            context: .
+            context: ./database
             dockerfile: Dockerfile
         volumes:
             - database:/var/lib/mysql
@@ -34,9 +38,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        volumes:
-            - '.:/app'
-            - '/data/node_modules'
         depends_on:
             - maria-db
 
@@ -50,7 +51,7 @@ services:
             dockerfile: Dockerfile
         restart: unless-stopped
         volumes:
-            - ./data:/data
+            - ./nginx:/data
             - letsencrypt:/etc/letsencrypt
         ports:
             - '80:80'
