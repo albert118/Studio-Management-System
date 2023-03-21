@@ -4,7 +4,7 @@
 # This is a multi stage Docker (build) file
 ################################################################################
 
-## React Js (frontend)
+## React Js (production-spa-builder)
 
 # the alias is for grabbing build artifacts in a later stage
 FROM node:16-alpine as builder
