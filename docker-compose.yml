@@ -33,8 +33,8 @@ services:
             MYSQL_ROOT_PASSWORD: super_secret_root_password
             MYSQL_HOST: localhost
 
-    frontend:
-        container_name: frontend
+    production-spa-builder:
+        container_name: production-spa-builder
         build:
             context: .
             dockerfile: Dockerfile
