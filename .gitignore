@@ -9,3 +9,8 @@
 
 # ignore the vscode local editor settings
 .vscode/*
+
+# sensitive data
+
+.env
+local.env
