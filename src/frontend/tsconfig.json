@@ -1,6 +1,11 @@
 {
 	"compilerOptions": {
-		"baseUrl": "src",
+		// enable absolute imports
+		"baseUrl": "./src",
+		"paths": {
+			"~/*": ["./*"]
+		},
+
 		"target": "ESNext",
 		"useDefineForClassFields": true,
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],
