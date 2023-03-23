@@ -8,8 +8,6 @@
 
     <ItemGroup>
       <Folder Include="ModelConfig" />
-      <Folder Include="Interfaces" />
-      <Folder Include="Repositories" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,6 +15,10 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
       <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StudioManagementSystem.Core\StudioManagementSystem.Core.csproj" />
     </ItemGroup>
 
 </Project>
