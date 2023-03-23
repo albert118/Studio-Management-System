@@ -7,15 +7,15 @@
 ## React Js (production-spa-builder)
 
 # the alias is for grabbing build artifacts in a later stage
-FROM node:16-alpine as builder
+FROM node:18-alpine as builder
 
 # # make a working directory for the app
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # install dependencies to the image
-COPY src/frontend/tsconfig.json src/frontend/package.json src/frontend/package-lock.json /usr/src/app/
-RUN npm ci
+COPY src/frontend/vite.config.ts src/frontend/tsconfig.node.json src/frontend/tsconfig.json src/frontend/package.json src/frontend/package-lock.json /usr/src/app/
+RUN npm ci --legacy-peer-deps
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
