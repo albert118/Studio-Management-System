@@ -32,7 +32,7 @@ _TODO (basically use the ef core tools in your editor or `dotnet ef` on the CLI 
 
 ## Using the Reverse Proxy (Nginx Proxy Manager)
 
-We use Nginx Proxy Manager (aka. NPM for short - very confusing I know). This image has a web UI for configuring it easily.
+We use Nginx Proxy Manager (aka. NPM for short - very confusing I know). This (docker) image has a web UI for configuring it easily.
 
 > [🔗 Checkout Nginx Proxy Manager's site for more details and docs](https://nginxproxymanager.com/)
 
