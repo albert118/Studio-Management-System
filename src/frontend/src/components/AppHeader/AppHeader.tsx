@@ -11,7 +11,7 @@ import {
 	HeaderGlobalBar
 } from 'carbon-components-react';
 import { Notification, UserAvatar } from '@carbon/icons-react';
-import 'AppHeader.scss';
+import 'components/AppHeader/AppHeader.scss';
 import AppRoutes from 'navigation/AppRoutes';
 
 function AppHeader() {
