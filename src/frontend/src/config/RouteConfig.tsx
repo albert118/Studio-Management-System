@@ -1,16 +1,7 @@
-import Dashboard from '../pages/Dashboard/Dashboard';
-import Project from '../pages/Project/Project';
-import Group from '../pages/Group/Group';
-import Layout from '../pages/Layout';
+import { Dashboard, Project, Group, Layout } from 'pages';
+import type { RouteObject } from 'react-router';
 
-type Route = {
-	path: string;
-	element: JSX.Element;
-};
-
-export type RouteConfig = Route[];
-
-export const routeConfig: RouteConfig = [
+const routes: RouteObject[] = [
 	{
 		path: '/',
 		element: (
@@ -36,3 +27,5 @@ export const routeConfig: RouteConfig = [
 		)
 	}
 ];
+
+export default routes;
