@@ -1,9 +1,10 @@
 import { Dashboard, Project, Group, Layout } from 'pages';
 import type { RouteObject } from 'react-router';
+import AppRoutes from 'navigation/AppRoutes';
 
 const routes: RouteObject[] = [
 	{
-		path: '/',
+		path: AppRoutes.root,
 		element: (
 			<Layout>
 				<Dashboard />
@@ -11,7 +12,7 @@ const routes: RouteObject[] = [
 		)
 	},
 	{
-		path: '/project',
+		path: AppRoutes.project,
 		element: (
 			<Layout>
 				<Project />
@@ -19,7 +20,7 @@ const routes: RouteObject[] = [
 		)
 	},
 	{
-		path: '/group',
+		path: AppRoutes.group,
 		element: (
 			<Layout>
 				<Group />

@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { routeConfig } from 'config';
+import routes from 'navigation/RouterConfig';
 
 import 'index.scss';
 
-const router = createBrowserRouter(routeConfig);
+const router = createBrowserRouter(routes);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>

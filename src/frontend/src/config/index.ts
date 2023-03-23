@@ -1,4 +1,4 @@
 import ApiConfig from 'config/ApiConfig';
-import { routeConfig } from 'config/RouteConfig';
+import BrandConfig from 'config/BrandConfig';
 
-export { ApiConfig, routeConfig };
+export { ApiConfig, BrandConfig };
