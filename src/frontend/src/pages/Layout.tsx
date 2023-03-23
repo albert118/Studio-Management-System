@@ -1,18 +1,13 @@
-import React from "react";
-import AppHeader from "../components/AppHeader/AppHeader";
-import { Content } from "carbon-components-react";
-import carbon__themes from "@carbon/themes";
+import AppHeader from 'components/AppHeader/AppHeader';
+import { Content } from 'carbon-components-react';
 
-interface Props {
-  children: React.ReactNode;
-}
-function Layouts({ children }: Props) {
-  return (
-    <>
-      <AppHeader />
-      <Content>{children}</Content>
-    </>
-  );
+function Layouts(props: any) {
+	return (
+		<div>
+			<AppHeader />
+			<Content>{props.Children}</Content>
+		</div>
+	);
 }
 
 export default Layouts;
