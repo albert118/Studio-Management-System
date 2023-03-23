@@ -29,4 +29,4 @@ RUN npm run build
 
 FROM jc21/nginx-proxy-manager:latest as production
 
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
