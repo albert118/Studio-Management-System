@@ -12,5 +12,4 @@
 
 # sensitive data
 
-.env
-local.env
+*.env
