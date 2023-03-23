@@ -1,6 +1,6 @@
 import ApiConfig from './ApiConfig';
-import { routerConfig } from './RouterConfig';
+import { routeConfig } from './RouteConfig';
 
 export { default } from './Config';
 
-export { ApiConfig, routerConfig };
+export { ApiConfig, routeConfig };
