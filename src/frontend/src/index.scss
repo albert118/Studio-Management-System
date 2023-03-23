@@ -1,8 +1,6 @@
 @use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/theme' with ($theme: themes.$g100);
+@use '@carbon/react/scss/theme' with (
+	$theme: themes.$g100
+);
 
 @use 'carbon-components-react';
-
-// body {
-//     background-color: #161616;
-// }
