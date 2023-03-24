@@ -1,3 +1,9 @@
 @use 'carbon-components-react';
 
+// the order is important here!
+// we wish to cascade from most generic to most specific
 @import 'resets/resets.css';
+
+@import 'pages/pages.css';
+
+@import 'components/components.scss';
