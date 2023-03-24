@@ -4,10 +4,11 @@
  */
 
 const AppRoutes = Object.freeze({
-	root: '/',
-	project: '/project',
-	group: '/group',
-	error: '*'
+    root: '/',
+    project: '/project',
+    group: '/group',
+    about: '/about',
+    error: '*'
 });
 
 export default AppRoutes;
