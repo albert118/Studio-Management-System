@@ -6,36 +6,29 @@ import AppRoutes from '~/navigation/AppRoutes';
 
 function Dashboard() {
     return (
-        <Grid className='p-dashboard' fullwidth>
-            <WelcomeHeader />
+        <Grid>
+            <Column lg={16} md={8} sm={4}>
+                <h1>{BrandConfig.BrandName}</h1>
+            </Column>
+            <Column lg={8} md={6} sm={4}>
+                <ProductDescription />
+            </Column>
         </Grid>
     );
 }
 
-function WelcomeHeader() {
-    return (
-        <Column lg={16} md={8} sm={4} className='branding-welcome-banner'>
-            <h1>{BrandConfig.BrandName}</h1>
-            <HeroContent />
-        </Column>
-    );
-}
-
-function HeroContent() {
+function ProductDescription() {
     const navigate = useNavigate();
 
     return (
-        <Grid className='hero-content'>
-            <Column md={4} lg={7} sm={4} className='message'>
-                <h2>What is {BrandConfig.BrandName}?</h2>
-                <p>
-                    The {BrandConfig.BrandName} is a tool for student's and teachers that's designed
-                    to streamline your experience and workflow throughout the semester and to the
-                    next.
-                </p>
-                <Button onClick={() => navigate(`${AppRoutes.about}`)}>Read more</Button>
-            </Column>
-        </Grid>
+        <div className='product-description'>
+            <h2>What is the {BrandConfig.BrandName}?</h2>
+            <p>
+                The {BrandConfig.BrandName} is a tool for student's and teachers that's designed to
+                streamline your experience and workflow throughout the semester and to the next.
+            </p>
+            <Button onClick={() => navigate(`${AppRoutes.about}`)}>Read more</Button>
+        </div>
     );
 }
 

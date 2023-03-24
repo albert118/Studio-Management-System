@@ -1,24 +1,6 @@
-@use '/@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/spacing' as *;
 
-.p-dashboard {
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-}
-
-.hero-content {
-    width: 100%;
-}
-
-.branding-welcome-banner {
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-07 * 4;
-    padding-left: $spacing-06;
-}
-
-.hero-message > h2 {
-    padding: $spacing-06;
-}
-
-.hero-message > p {
+.product-description > h2,
+.product-description > p {
     margin: $spacing-06 0;
 }
