@@ -26,7 +26,7 @@ function HeroContent() {
 
     return (
         <Grid className='hero-content'>
-            <Column md={4} lg={7} sm={4} className='hero-message'>
+            <Column md={4} lg={7} sm={4} className='message'>
                 <h2>What is {BrandConfig.BrandName}?</h2>
                 <p>
                     The {BrandConfig.BrandName} is a tool for student's and teachers that's designed
