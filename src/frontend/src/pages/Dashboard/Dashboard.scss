@@ -1,15 +1,24 @@
-.p-dashboard {
-    padding-left: 20px;
-    padding-right: 20px;
+@use '@carbon/react/scss/spacing' as *;
 
-    .branding-welcome-banner {
-        margin-top: 2em;
-        margin-bottom: 2em;
-    }
+.p-dashboard {
+    padding-left: $spacing-05;
+    padding-right: $spacing-05;
+}
+
+.branding-welcome-banner {
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07 * 4;
+    padding-left: $spacing-06;
 }
 
 .hero-content {
+    width: 100%;
 }
 
-.hero-message {
+.hero-message > p {
+    margin: 1em 0;
+}
+.hero-message > h2 {
+    margin-top: 2em;
+    margin-bottom: 2em;
 }
