@@ -1,6 +1,9 @@
 @use 'carbon-components-react';
 @use '@carbon/react';
 
+// global carbon overrides
+@use './overrides.scss';
+
 // the order is important here!
 // we wish to cascade from most generic to most specific
 
