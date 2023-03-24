@@ -6,7 +6,8 @@
 const AppRoutes = Object.freeze({
 	root: '/',
 	project: '/project',
-	group: '/group'
+	group: '/group',
+	error: '*'
 });
 
 export default AppRoutes;
