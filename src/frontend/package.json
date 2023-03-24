@@ -11,7 +11,11 @@
   "dependencies": {
     "@carbon/react": "^1.25.0",
     "@carbon/themes": "^11.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
     "carbon-components-react": "^8.25.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-react": "^7.32.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
