@@ -1,6 +1,54 @@
 @use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
 
-.product-description > h2,
-.product-description > p {
-    margin: $spacing-06 0;
+@use './mixins.scss' as *;
+@use './overrides.scss';
+
+.dashboard-page__banner,
+.dashboard-page__description {
+    margin-left: -20px;
+    margin-right: -20px;
+    @include breakpoint-down(md) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.dashboard-page__description {
+    padding: $spacing-05;
+    padding-left: $spacing-06;
+}
+
+.dashboard-page__banner {
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07 * 4;
+    padding-left: $spacing-06;
+    @include welcome-banner__background;
+}
+
+.dashboard-page__login {
+    margin-top: $spacing-05;
+}
+
+.dashboard-page__heading {
+    @include type-style('productive-heading-05');
+}
+
+.dashboard-page__subheading {
+    @include type-style('productive-heading-03');
+    font-weight: 600;
+}
+
+.dashboard-page__p {
+    @include type-style('productive-heading-03');
+    margin-top: $spacing-06;
+
+    @include breakpoint-between((320px + 1), md) {
+        max-width: 75%;
+    }
+}
+
+.dashboard-page__description > .dashboard-page__p {
+    margin-bottom: $spacing-08;
 }
