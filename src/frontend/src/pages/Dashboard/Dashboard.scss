@@ -31,6 +31,12 @@
     margin-top: $spacing-05;
 }
 
+.dashboard-page__logo {
+    max-width: 100%;
+    object-fit: cover;
+    width: 500px;
+}
+
 .dashboard-page__heading {
     @include type-style('productive-heading-05');
 }
