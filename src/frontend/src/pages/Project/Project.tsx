@@ -1,4 +1,4 @@
-function AboutPage() {
+function Project() {
 	return (
 		<>
 			<section className='theme-section'>
@@ -8,4 +8,4 @@ function AboutPage() {
 	);
 }
 
-export default AboutPage;
+export default Project;

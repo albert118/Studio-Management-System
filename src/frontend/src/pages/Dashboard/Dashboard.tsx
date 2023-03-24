@@ -1,11 +1,11 @@
-import "./Dashboard.scss";
+import { BrandConfig } from 'config';
 
 function Dashboard() {
-  return (
-    <>
-      <h1>Studio Management Software</h1>
-    </>
-  );
+	return (
+		<div>
+			<h1>{BrandConfig.BrandName}</h1>
+		</div>
+	);
 }
 
 export default Dashboard;
