@@ -13,4 +13,6 @@ export interface IGroup {
     name: string;
     description: string;
     MemberInfo: IMemberInfo;
+    members: string;
+    project: string;
 }

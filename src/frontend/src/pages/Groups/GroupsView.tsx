@@ -1,27 +1,18 @@
 import { IViewProps } from './types';
 
 import { Grid, Column } from '@carbon/react';
-import { Button, Breadcrumb, BreadcrumbItem } from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
 
 import AppRoutes from 'navigation/AppRoutes';
 import { useNavigate } from 'react-router-dom';
+import { GroupsDataTable } from './GroupsDataTable';
 
-function _GroupsView({ groups }: IViewProps) {
-    return (
-        <div>
-            <div className='bx--row landing-page__banner'>
-                <div className='bx--col-lg-16'>
-                    <Breadcrumb noTrailingSlash>
-                        <BreadcrumbItem>
-                            <a href={AppRoutes.root}>Project</a>
-                        </BreadcrumbItem>
-                    </Breadcrumb>
-                    <h1 className='landing-page__heading'>Groups</h1>
-                </div>
-            </div>
-        </div>
-    );
-}
+// TODO
+// <Breadcrumb noTrailingSlash>
+//     <BreadcrumbItem>
+//         <a href={AppRoutes.root}>Project</a>
+//     </BreadcrumbItem>
+// </Breadcrumb>
 
 export default function GroupsView({ groups }: IViewProps) {
     const navigate = useNavigate();
@@ -42,9 +33,7 @@ export default function GroupsView({ groups }: IViewProps) {
                 </Button>
             </Column>
             <Column lg={16} md={8} sm={4} className='groups-page__table'>
-                IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS
-                IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS
-                IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS IM IN YOUR WALLS
+                <GroupsDataTable groups={groups} />
             </Column>
         </Grid>
     );
