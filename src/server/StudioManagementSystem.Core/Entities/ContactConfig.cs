@@ -22,11 +22,6 @@ public class ContactConfig
         builder.Property(e => e.FirstName).IsRequired();
         builder.Property(e => e.LastName).IsRequired();
 
-        builder.Property(e => e.IsActive).HasDefaultValue(false);
-
-        builder.Property(e => e.IsArchived).HasDefaultValue(false);
-
-        builder.Property(e => e.UpdatedOn).HasDefaultValue(DateTime.UtcNow);
-        builder.Property(e => e.CreatedOn).HasDefaultValue(DateTime.UtcNow);
+        builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureActive();
     }
 }
