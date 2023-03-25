@@ -7,7 +7,7 @@ public class ProjectConfig
 {
     public void Configure(EntityTypeBuilder<Project> builder)
     {
-        builder.ToTable(nameof(Project).ToLowerInvariant());
+        builder.ToTable(nameof(Project));
 
         builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
 

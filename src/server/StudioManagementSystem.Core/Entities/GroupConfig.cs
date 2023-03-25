@@ -7,7 +7,7 @@ public class GroupConfig
 {
     public void Configure(EntityTypeBuilder<Group> builder)
     {
-        builder.ToTable(nameof(Group).ToLowerInvariant());
+        builder.ToTable(nameof(Group));
 
         builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
 

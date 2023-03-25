@@ -10,7 +10,7 @@ public class ContactConfig
 {
     public void Configure(EntityTypeBuilder<Contact> builder)
     {
-        builder.ToTable(nameof(Contact).ToLowerInvariant());
+        builder.ToTable(nameof(Contact));
 
         // enable TPH strategy and label our discriminator
         builder.HasDiscriminator<string>("contact_type")
