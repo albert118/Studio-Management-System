@@ -1,12 +1,14 @@
-import { ProjectAccordian } from "components/ProjectAccordion";
+import { Accordion } from "carbon-components-react";
+import ProjectAccordian from "components/ProjectAccordion/ProjectAccordian";
 
 function Project() {
 	return (
-		<section className='theme-section'>
+		<section className='projects-content'>
 			<h1>Projects</h1>
-			<ProjectAccordian/>
+			<Accordion className="accordian">
+				<ProjectAccordian/>
+			</Accordion>
 		</section>
-
 	);
 }
 
