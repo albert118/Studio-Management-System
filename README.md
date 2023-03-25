@@ -26,9 +26,26 @@ The database data is stored as a Docker volume local to your machine. All import
 
 ### Running the Migrations
 
-Having started up the docker dependencies, let's run the migrations.
+Having started up the docker dependencies, let's run the migrations. This is typical EF Core project, [read more here](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
 
-_TODO (basically use the ef core tools in your editor or `dotnet ef` on the CLI to update the database)._
+install the tools (if you haven't already), 
+
+```
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
+```
+
+verify your version and installation,
+
+```
+dotnet ef
+```
+
+update the database,
+
+```
+dotnet ef database update
+```
 
 ## Using the Reverse Proxy (Nginx Proxy Manager)
 
