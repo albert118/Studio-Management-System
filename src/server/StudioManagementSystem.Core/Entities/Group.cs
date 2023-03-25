@@ -2,6 +2,11 @@
 
 public class Group : IArchivable, IMetaData, ILockable
 {
+    public Group(string name)
+    {
+        Name = name;
+    }
+
     public string Name { get; set; }
 
     public bool IsArchived { get; set; }
