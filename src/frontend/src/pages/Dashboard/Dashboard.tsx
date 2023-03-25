@@ -12,7 +12,6 @@ function Dashboard() {
         <Grid fullWidth>
             <Column lg={16} md={8} sm={4} className='dashboard-page__banner'>
                 <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
-                {/* <div className='dashboard-page__login-promt'> */}
                 <p className='dashboard-page__p'>Existing user? Sign in here</p>
                 <Button
                     className='dashboard-page__login'
