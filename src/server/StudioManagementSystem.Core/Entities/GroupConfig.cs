@@ -9,6 +9,8 @@ public class GroupConfig
     {
         builder.ToTable(nameof(Group).ToLowerInvariant());
 
+        builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
+
         builder.Property(e => e.Name).IsRequired();
 
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();

@@ -7,6 +7,8 @@ public class Group : IArchivable, IMetaData, ILockable
         Name = name;
     }
 
+    public Guid Id { get; set; }
+
     public Project? AssignedProject { get; set; }
 
     public string Name { get; set; }

@@ -10,6 +10,8 @@ public class Project : IArchivable, IMetaData, ILockable
         AssignedGroups = null;
     }
 
+    public Guid Id { get; set; }
+
     public string Title { get; set; }
 
     public string Description { get; set; }

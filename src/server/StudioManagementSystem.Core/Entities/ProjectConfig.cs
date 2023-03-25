@@ -9,6 +9,8 @@ public class ProjectConfig
     {
         builder.ToTable(nameof(Project).ToLowerInvariant());
 
+        builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
+
         builder.Property(e => e.Title).IsRequired();
         builder.Property(e => e.Description).IsRequired();
 
