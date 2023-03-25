@@ -1,14 +1,14 @@
 using StudioManagementSystem.Core.Entities;
-using StudioManagementSystem.Infrastructure.Interfaces.Data;
+using StudioManagementSystem.Infrastructure.DataServices;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
 public class MySpecialObjectRepositoryAsync : IMySpecialObjectRepositoryAsync
 {
-    private readonly MySpecialObjectDbContextAsync _SpecialObjectDbContext;
+    private readonly StudioManagementSystemDbContextAsync _SpecialObjectDbContext;
 
-    public MySpecialObjectRepositoryAsync(MySpecialObjectDbContextAsync SpecialObjectDbContext)
+    public MySpecialObjectRepositoryAsync(StudioManagementSystemDbContextAsync SpecialObjectDbContext)
     {
         _SpecialObjectDbContext = SpecialObjectDbContext;
     }

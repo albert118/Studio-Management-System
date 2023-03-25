@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioManagementSystem.Core;
 
@@ -10,9 +11,11 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    partial class StudioManagementDbMigrationContextModelSnapshot : ModelSnapshot
+    [Migration("20230325062832_Added_ProjectToDbContext")]
+    partial class Added_ProjectToDbContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,7 +76,7 @@ namespace StudioManagementSystem.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contact", (string)null);
+                    b.ToTable("contact", (string)null);
 
                     b.HasDiscriminator<string>("contact_type").HasValue("Contact");
 
@@ -113,7 +116,7 @@ namespace StudioManagementSystem.Core.Migrations
 
                     b.HasIndex("AssignedProjectId");
 
-                    b.ToTable("Group", (string)null);
+                    b.ToTable("group", (string)null);
                 });
 
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.MySpecialObject", b =>
@@ -163,7 +166,7 @@ namespace StudioManagementSystem.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Project", (string)null);
+                    b.ToTable("project", (string)null);
                 });
 
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.OwnerContact", b =>
