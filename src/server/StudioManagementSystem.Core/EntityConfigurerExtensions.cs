@@ -8,8 +8,9 @@ public static class EntityConfigurerExtensions
     public static EntityTypeBuilder<TEntity> ConfigureMetaData<TEntity>(this EntityTypeBuilder<TEntity> builder)
         where TEntity : class, IMetaData
     {
-        builder.Property(e => e.UpdatedOn).HasDefaultValue(DateTime.UtcNow);
-        builder.Property(e => e.CreatedOn).HasDefaultValue(DateTime.UtcNow);
+
+        builder.Property(e => e.UpdatedOn).HasValueGenerator<DateTimeMetaDataGenerator>();
+        builder.Property(e => e.CreatedOn).HasValueGenerator<DateTimeMetaDataGenerator>();
 
         return builder;
     }
