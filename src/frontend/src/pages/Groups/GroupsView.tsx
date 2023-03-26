@@ -32,7 +32,7 @@ export default function GroupsView({ groups }: IViewProps) {
                     Create a new group
                 </Button>
             </Column>
-            <Column lg={16} md={8} sm={4} className='groups-page__table'>
+            <Column lg={16} md={8} sm={4} className='groups-page__datatable'>
                 <GroupsDataTable groups={groups} />
             </Column>
         </Grid>
