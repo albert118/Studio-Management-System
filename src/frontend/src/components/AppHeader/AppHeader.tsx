@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '~/main';
 
 function AppHeader() {
-    const [login, setLogin] = useState('');
+    const [login, setLogin] = useState('Log In');
     const location = useLocation();
     useEffect(() => {
         async function getUserEmail() {
