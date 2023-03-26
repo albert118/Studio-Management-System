@@ -9,7 +9,7 @@ export interface IMemberInfo {
 }
 
 export interface IGroup {
-    id: string;
+    id: number | string;
     name: string;
     description: string;
     MemberInfo: IMemberInfo;
