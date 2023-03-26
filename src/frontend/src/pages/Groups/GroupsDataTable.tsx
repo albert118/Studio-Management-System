@@ -8,15 +8,12 @@
 // https://github.com/carbon-design-system/carbon/discussions/10752#discussioncomment-4710978
 
 import {
-    DataTable,
-    Table,
-    TableHead,
-    TableHeader,
-    TableRow,
-    TableContainer,
-    TableBody,
-    TableCell
-} from 'carbon-components-react';
+    SmsDataTable,
+    ExpandingDataTableHeader,
+    ExpandingRowFragment
+} from 'components/SmsDataTable/SmsDataTable';
+
+import { Table, TableBody, TableContainer } from 'carbon-components-react';
 
 export function GroupsDataTable({ groups }) {
     const headers = [
@@ -26,31 +23,26 @@ export function GroupsDataTable({ groups }) {
     ];
 
     return (
-        <DataTable rows={groups} headers={headers}>
-            {({ rows, headers, getHeaderProps, getTableProps }) => (
+        <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
+            {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
                 <TableContainer title='Groups'>
                     <Table {...getTableProps()}>
-                        <TableHead>
-                            <TableRow>
-                                {headers.map(header => (
-                                    <TableHeader {...getHeaderProps({ header })}>
-                                        {header.header}
-                                    </TableHeader>
-                                ))}
-                            </TableRow>
-                        </TableHead>
+                        <ExpandingDataTableHeader
+                            headers={headers}
+                            getHeaderProps={getHeaderProps}
+                        />
                         <TableBody>
                             {rows.map(row => (
-                                <TableRow key={row.id}>
-                                    {row.cells.map(cell => (
-                                        <TableCell key={cell.id}>{cell.value}</TableCell>
-                                    ))}
-                                </TableRow>
+                                <ExpandingRowFragment
+                                    row={row}
+                                    headers={headers}
+                                    getRowProps={getRowProps}
+                                />
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             )}
-        </DataTable>
+        </SmsDataTable>
     );
 }
