@@ -23,7 +23,6 @@ function SmsDataTable({ rows, headers, tableHeader, ...optionalProps }) {
             className={optionalProps.className != undefined && optionalProps.className}
             rows={HyrdateRowObjects(rows)}
             headers={headers}
-            useZebraStyles={true}
             isSortable={true}
         >
             {optionalProps.children}
@@ -44,7 +43,7 @@ function ExpandingDataTableHeader({ headers, getHeaderProps }) {
     );
 }
 
-function ExpandingRowFragment({ row, headers, getRowProps }) {
+function ExpandingRowFragment({ row, headers, getRowProps, ...optionalProps }) {
     return (
         <React.Fragment key={row.id}>
             <TableExpandRow {...getRowProps({ row })}>
@@ -54,7 +53,7 @@ function ExpandingRowFragment({ row, headers, getRowProps }) {
             </TableExpandRow>
             {row.isExpanded && (
                 <TableExpandedRow colSpan={headers.length + 1}>
-                    <p>Expanded!</p>
+                    {optionalProps.children}
                 </TableExpandedRow>
             )}
         </React.Fragment>
