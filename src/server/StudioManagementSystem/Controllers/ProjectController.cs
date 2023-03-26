@@ -62,15 +62,5 @@ public class ProjectController : ControllerBase
             return NotFound();
         return task.Result;
     }
-
-    [HttpDelete("{id}")]
-    public ActionResult<Guid> DeleteProject(Guid id)
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepositoryAsync.DeleteProjectAsync(id, ct);
-
-        if (task.Result == Guid.Empty)
-            return NotFound();
-        return NoContent();
-    }
+    
 }

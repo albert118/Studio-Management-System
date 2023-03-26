@@ -5,11 +5,12 @@ using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
+[InstanceScopedService]
 public class ProjectRepositoryAsync : IProjectRepositoryAsync
 {
-    private readonly StudioManagementSystemDbContextAsync _smsDbContext;
+    private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
 
-    public ProjectRepositoryAsync(StudioManagementSystemDbContextAsync smsDbContext)
+    public ProjectRepositoryAsync(IStudioManagementSystemDbContextAsync smsDbContext)
     {
         _smsDbContext = smsDbContext;
     }
@@ -57,20 +58,5 @@ public class ProjectRepositoryAsync : IProjectRepositoryAsync
 
         return myProject;
     }
-
-    public async Task<Guid> DeleteProjectAsync(Guid id, CancellationToken ct)
-    {
-        var project = await _smsDbContext.Projects.FindAsync(id, ct);
-        try
-        {
-            _smsDbContext.Projects.Remove(project);
-            await _smsDbContext.SaveChangesAsync(ct);
-        }
-        catch (Exception ex)
-        {
-            return Guid.Empty;
-        }
-
-        return id;
-    }
+    
 }

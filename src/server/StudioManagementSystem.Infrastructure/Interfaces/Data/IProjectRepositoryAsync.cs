@@ -8,5 +8,5 @@ public interface IProjectRepositoryAsync
     Task<Project?> GetProjectAsync(Guid id, CancellationToken ct);
     Task<Guid> AddProjectAsync(Project project, CancellationToken ct);
     Task<Project?> UpdateProjectAsync(Guid id, Project project, CancellationToken ct);
-    Task<Guid> DeleteProjectAsync(Guid id, CancellationToken ct);
+
 }

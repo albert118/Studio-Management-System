@@ -3,10 +3,11 @@ using StudioManagementSystem.Core.Entities;
 
 namespace StudioManagementSystem.Infrastructure.DataServices;
 
-public class StudioManagementSystemDbContextAsync : AsyncDbContext
+public class StudioManagementSystemDbContextAsync : AsyncDbContext , IStudioManagementSystemDbContextAsync
 {
+    public StudioManagementSystemDbContextAsync(DbContextOptions <StudioManagementSystemDbContextAsync> options ) : base(options) { }
     public StudioManagementSystemDbContextAsync(DbContextOptions options) : base(options) { }
-
+    
     public DbSet<MySpecialObject> MySpecialObjects => Set<MySpecialObject>();
 
     public DbSet<Contact> Contacts => Set<Contact>();
