@@ -5,6 +5,7 @@ export function HyrdateRowObjects(dehydratedRows: Array<IRowObject>) {
     return dehydratedRows.map(row => {
         return {
             ...row,
+            key: row.id,
             disabled: false,
             isSelected: false,
             isExpanded: false
