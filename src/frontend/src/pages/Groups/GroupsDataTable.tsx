@@ -22,6 +22,8 @@ export function GroupsDataTable({ groups }) {
         { key: 'members', header: 'Members' }
     ];
 
+    const getRow = rowId => groups.find(({ id }) => id == rowId);
+
     return (
         <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
@@ -37,12 +39,37 @@ export function GroupsDataTable({ groups }) {
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}
-                                />
+                                >
+                                    {/* <p>{getRowDescription(row.id)}</p> */}
+                                    <ExpandedRowDetail row={getRow(row.id)} />
+                                </ExpandingRowFragment>
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             )}
         </SmsDataTable>
+    );
+}
+function ExpandedRowDetail({ row }) {
+    return (
+        <div className='groups-page__datatable-row-detail'>
+            <p>
+                <h5>Description</h5>
+                {row && row.description ? row.description : ''}
+            </p>
+            <div>
+                <h5>Group Members</h5>
+                <ul>
+                    {row && row.MemberInfo?.members
+                        ? row.MemberInfo.members.map(member => (
+                              <li>
+                                  <p>{member}</p>
+                              </li>
+                          ))
+                        : ''}
+                </ul>
+            </div>
+        </div>
     );
 }

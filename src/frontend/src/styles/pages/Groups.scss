@@ -41,3 +41,14 @@
         max-width: 75%;
     }
 }
+
+.groups-page__datatable-row-detail {
+    display: flex;
+    column-gap: $spacing-06 * 4;
+    padding-top: $spacing-06;
+    padding-bottom: $spacing-06;
+}
+
+.groups-page__datatable-row-detail li {
+    margin-top: $spacing-03;
+}
