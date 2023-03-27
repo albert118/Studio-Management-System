@@ -30,7 +30,7 @@ export function ProjectsDataTable({ projects }) {
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch />
-                            <Button>Create A New Project</Button>
+                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>Create A New Project</Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
