@@ -1,7 +1,7 @@
 @use '@carbon/react/scss/breakpoint' as *;
 
 // enable single column, centred, forms that have a neat "narrow/mobile" breakpoint
-.cds--content .cds--css-grid {
+.cds--content .cds--css-grid.form-container {
     max-width: 100%;
 
     @include breakpoint(lg) {
