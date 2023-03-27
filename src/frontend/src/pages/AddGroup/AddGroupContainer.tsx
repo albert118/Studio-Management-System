@@ -3,7 +3,7 @@ import { IViewProps } from './types';
 
 export default function AddGroupContainer() {
     const demoViewProps: IViewProps = {
-        projectPreferenceOptions: [
+        availableProjects: [
             {
                 id: '1',
                 description: 'Apple Inc.'

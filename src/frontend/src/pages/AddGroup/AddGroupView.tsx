@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Column } from '@carbon/react';
-import { Button, Form, TextArea, TextInput, Select, SelectItem } from 'carbon-components-react';
+import { Button, Form, TextArea, TextInput, SelectItem } from 'carbon-components-react';
 import { FormContainer, Stack } from 'components/Forms';
-import { useState } from 'react';
-import { IViewProps } from './types';
+import TrippleSelectDropdown from './TrippleSelectDropdown';
+import { IViewProps, IFormData, SelectedPreferences, NewGroupDto } from './types';
 
-export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
-    const [availableOptions, setAvailableOptions] = useState(projectPreferenceOptions);
+const defaultItem = 'placeholder-item';
 
-    const removeOption = (event: React.ChangeEvent<HTMLSelectElement>) => {
+export default function AddGroupView({ availableProjects }: IViewProps) {
+    const [selectedPreferences, setSelectedPreferences] = useState({} as SelectedPreferences);
+    const [generalFormData, setFormData] = useState({} as IFormData);
+    const [groupNameHasError, setGroupNameError] = useState(false);
+
+    const updateFormData = (event: React.ChangeEvent<any>) => {
+        setFormData({
+            ...generalFormData,
+            [event.target.name]: event.target.value
+        });
+    };
+
+    const mapFormToDto = () => {
+        const dto = {} as NewGroupDto;
+
+        dto.name = generalFormData.name!;
+        dto.description = generalFormData.description;
+        dto.preferences = selectedPreferences;
+
+        return dto;
+    };
+
+    const submitHandler = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const updatedList = availableOptions.filter(option => option.id !== event.target.value);
-        setAvailableOptions(updatedList);
+
+        if (generalFormData.name) {
+            setGroupNameError(true);
+            return;
+        }
+
+        setGroupNameError(false);
+        const dto = mapFormToDto();
+        console.log(dto);
+        // TODO: add datahook for API POST
     };
 
     return (
@@ -20,25 +49,32 @@ export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
                 <h1>Create a new group</h1>
                 <p>
                     Creating a new group will allow you to join a project and collaborate with your
-                    team mates. Not everyone has to create a new group, feel free discover an
-                    existing group.
+                    team mates.
+                    <br />
+                    Not everyone has to create a new group, feel free discover an existing group.
                 </p>
             </Column>
             <Column lg={16} md={8} sm={4}>
-                <Form>
+                <Form onSubmit={submitHandler}>
                     <Stack>
                         <TextInput
                             helperText='Keep it memorable and less than 100 characters'
-                            id='group-name'
+                            name='name'
+                            id='name'
                             labelText='Group name'
                             placeholder='Add a memorable and unique group name'
+                            onChange={updateFormData}
+                            invalidText='A group name is required to create a new group'
+                            invalid={groupNameHasError}
                         />
                         <TextArea
                             helperText='Optional, this will will appear when people view your group details'
-                            id='group-description'
+                            name='description'
+                            id='description'
                             labelText='Description (optional)'
                             placeholder='Add an optional description of your group'
                             rows={4}
+                            onChange={updateFormData}
                         />
 
                         <div className='subheading'>
@@ -54,56 +90,22 @@ export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
                             </p>
                         </div>
 
-                        <Select
-                            id='project-preference-one'
-                            labelText='First preference'
-                            defaultValue='placeholder-item'
-                            invalidText='A valid project preference is required'
-                            onChange={removeOption}
+                        <TrippleSelectDropdown
+                            preferences={selectedPreferences}
+                            setPreferences={setSelectedPreferences}
+                            placeholderOption={defaultItem}
                         >
                             <PlaceholderSelectItem />
-                            {availableOptions.map(option => (
+                            {availableProjects.map(project => (
                                 <SelectItem
-                                    text={option.description}
-                                    value={option.id}
-                                    key={option.id}
+                                    text={project.description}
+                                    value={project.id}
+                                    key={project.id}
                                 />
                             ))}
-                        </Select>
-                        <Select
-                            id='project-preference-two'
-                            labelText='Second preference (optional)'
-                            defaultValue='placeholder-item'
-                            invalidText='A valid project preference is required'
-                            onChange={removeOption}
-                        >
-                            <PlaceholderSelectItem />
-                            {availableOptions.map(option => (
-                                <SelectItem
-                                    text={option.description}
-                                    value={option.id}
-                                    key={option.id}
-                                />
-                            ))}
-                        </Select>
-                        <Select
-                            id='project-preference-three'
-                            labelText='Third preference (optional)'
-                            defaultValue='placeholder-item'
-                            invalidText='A valid project preference is required'
-                            onChange={removeOption}
-                        >
-                            <PlaceholderSelectItem />
-                            {availableOptions.map(option => (
-                                <SelectItem
-                                    text={option.description}
-                                    value={option.id}
-                                    key={option.id}
-                                />
-                            ))}
-                        </Select>
+                        </TrippleSelectDropdown>
 
-                        <Button kind='primary' tabIndex={0} type='submit'>
+                        <Button kind='primary' type='submit'>
                             Create
                         </Button>
                     </Stack>
@@ -114,5 +116,5 @@ export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
 }
 
 function PlaceholderSelectItem() {
-    return <SelectItem text='Choose a project preference' value='placeholder-item' />;
+    return <SelectItem text='Choose a project preference' value={defaultItem} />;
 }
