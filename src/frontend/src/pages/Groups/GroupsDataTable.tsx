@@ -13,7 +13,15 @@ import {
     ExpandingRowFragment
 } from 'components/SmsDataTable/SmsDataTable';
 
-import { Table, TableBody, TableContainer } from 'carbon-components-react';
+import {
+    Table,
+    TableBody,
+    TableContainer,
+    TableToolbar,
+    TableToolbarContent,
+    TableToolbarSearch,
+    Button
+} from 'carbon-components-react';
 
 export function GroupsDataTable({ groups }) {
     const headers = [
@@ -26,8 +34,16 @@ export function GroupsDataTable({ groups }) {
 
     return (
         <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
-            {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+            {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
                 <TableContainer title='Groups'>
+                    <TableToolbar>
+                        <TableToolbarContent>
+                            <TableToolbarSearch onChange={onInputChange} />
+                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
+                                Create A New Project
+                            </Button>
+                        </TableToolbarContent>
+                    </TableToolbar>
                     <Table {...getTableProps()}>
                         <ExpandingDataTableHeader
                             headers={headers}
