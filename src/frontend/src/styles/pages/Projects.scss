@@ -1,0 +1,42 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '../mixins' as *;
+
+.projects-page__banner {
+    padding-top: $spacing-07;
+    padding-bottom: $spacing-07;
+}
+
+.projects-page__table {
+    padding-left: $spacing-07;
+}
+
+.projects-page__p {
+    margin-top: $spacing-05;
+    margin-bottom: $spacing-05;
+}
+
+.projects-page__heading {
+    @include type-style('productive-heading-05');
+}
+
+.projects-page__p {
+    @include type-style('productive-heading-03');
+    margin-top: $spacing-06;
+
+    @include breakpoint-between((320px + 1), md) {
+        max-width: 75%;
+    }
+}
+
+.projects-page__datatable-row-detail {
+    display: flex;
+    column-gap: $spacing-06 * 4;
+    padding-top: $spacing-06;
+    padding-bottom: $spacing-06;
+}
+
+.projects-page__datatable-row-detail li {
+    margin-top: $spacing-03;
+}

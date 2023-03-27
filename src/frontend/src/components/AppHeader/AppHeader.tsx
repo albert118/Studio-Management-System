@@ -35,9 +35,9 @@ function AppHeader() {
 						</HeaderMenuItem>
 						<HeaderMenuItem
 							isCurrentPage={
-								location.pathname == AppRoutes.project
+								location.pathname == AppRoutes.projects
 							}
-							href={AppRoutes.project}
+							href={AppRoutes.projects}
 						>
 							Projects
 						</HeaderMenuItem>
