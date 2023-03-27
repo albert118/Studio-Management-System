@@ -11,7 +11,6 @@ export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
     const removeOption = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.preventDefault();
         const updatedList = availableOptions.filter(option => option.id !== event.target.value);
-        console.log(updatedList);
         setAvailableOptions(updatedList);
     };
 
