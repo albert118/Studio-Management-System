@@ -13,7 +13,16 @@ import {
     ExpandingRowFragment
 } from 'components/SmsDataTable/SmsDataTable';
 
-import { Table, TableBody, TableContainer, TableToolbar, TableToolbarContent, TableToolbarSearch, Button, Pagination } from 'carbon-components-react';
+import {
+    Table,
+    TableBody,
+    TableContainer,
+    TableToolbar,
+    TableToolbarContent,
+    TableToolbarSearch,
+    Button,
+    Pagination
+} from 'carbon-components-react';
 
 export function ProjectsDataTable({ projects }) {
     const headers = [
@@ -24,13 +33,18 @@ export function ProjectsDataTable({ projects }) {
     const getRow = rowId => projects.find(({ id }) => id == rowId);
 
     return (
-        <SmsDataTable rows={projects} headers={headers}  className='projects-page__datatable'>
-            {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
-                <TableContainer title='Projects' description='This is a list of all the project for this semsester.'>
+        <SmsDataTable rows={projects} headers={headers} className='projects-page__datatable'>
+            {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
+                <TableContainer
+                    title='Projects'
+                    description='This is a list of all the project for this semsester.'
+                >
                     <TableToolbar>
                         <TableToolbarContent>
-                            <TableToolbarSearch />
-                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>Create A New Project</Button>
+                            <TableToolbarSearch onChange={onInputChange} />
+                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
+                                Create A New Project
+                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
@@ -52,10 +66,8 @@ export function ProjectsDataTable({ projects }) {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                
             )}
         </SmsDataTable>
-        
     );
 }
 function ExpandedRowDetail({ row }) {
