@@ -7,19 +7,12 @@ import AppRoutes from 'navigation/AppRoutes';
 import { useNavigate } from 'react-router-dom';
 import { ProjectsDataTable } from './ProjectsDataTable';
 
-// TODO
-// <Breadcrumb noTrailingSlash>
-//     <BreadcrumbItem>
-//         <a href={AppRoutes.root}>Project</a>
-//     </BreadcrumbItem>
-// </Breadcrumb>
-
 export default function ProjectsView({ projects }: IViewProps) {
     const navigate = useNavigate();
 
     const currentSession = 'Autumn 2023';
 
-    return (<>
+    return (
         <Grid fullwidth>
             <Column lg={16} md={8} sm={4} className='projects-page__banner'>
                 <h1 className='projects-page__heading'>{currentSession} Projects</h1>
@@ -38,5 +31,5 @@ export default function ProjectsView({ projects }: IViewProps) {
                 <ProjectsDataTable projects={projects} />
             </Column>
         </Grid>
-        </>);
+    );
 }

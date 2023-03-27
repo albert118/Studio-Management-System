@@ -59,7 +59,6 @@ export function ProjectsDataTable({ projects }) {
                                     headers={headers}
                                     getRowProps={getRowProps}
                                 >
-                                    {/* <p>{getRowDescription(row.id)}</p> */}
                                     <ExpandedRowDetail row={getRow(row.id)} />
                                 </ExpandingRowFragment>
                             ))}
