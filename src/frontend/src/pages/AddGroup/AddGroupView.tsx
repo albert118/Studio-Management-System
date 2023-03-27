@@ -47,6 +47,10 @@ export default function AddGroupView({ projectPreferenceOptions }: IViewProps) {
                                 You may select up to three projects. The first is your most
                                 preferred project. You will be assigned to whichever project has
                                 space left first-to-last.
+                                <br />
+                                These preferences will become your group's default preferences too.
+                                Although they can change them, this is the recommended path to
+                                allocate your group to a single project.
                             </p>
                         </div>
 
