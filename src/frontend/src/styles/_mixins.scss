@@ -1,7 +1,7 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/theme' as *;
 
-@mixin welcome-banner__background() {
+@mixin neutral-banner__background() {
     background-color: $layer-01;
     position: relative;
 }

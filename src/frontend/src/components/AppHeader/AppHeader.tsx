@@ -42,8 +42,8 @@ function AppHeader() {
 							Projects
 						</HeaderMenuItem>
 						<HeaderMenuItem
-							isCurrentPage={location.pathname == AppRoutes.group}
-							href={AppRoutes.group}
+							isCurrentPage={location.pathname == AppRoutes.groups}
+							href={AppRoutes.groups}
 						>
 							Groups
 						</HeaderMenuItem>

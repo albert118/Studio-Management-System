@@ -1,0 +1,28 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use './overrides';
+
+.form-container {
+    padding-top: $spacing-07;
+    padding-bottom: $spacing-08;
+}
+
+.form-container h1 {
+    @include type-style('productive-heading-03');
+}
+
+.form-container h2 {
+    @include type-style('productive-heading-01');
+}
+
+.form-container p {
+    margin-bottom: $spacing-06;
+}
+
+.form-container .stack > * {
+    margin-top: $spacing-06;
+}
+
+.form-container .stack > .subheading {
+    margin-top: $spacing-08;
+}
