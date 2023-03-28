@@ -1,4 +1,4 @@
-import { Dashboard, Project, Groups, Error, Layout } from 'pages';
+import { Dashboard, Projects, Groups, Error, Layout } from 'pages';
 import type { RouteObject } from 'react-router';
 import AppRoutes from 'navigation/AppRoutes';
 import AddGroupContainer from '~/pages/AddGroup';
@@ -13,10 +13,10 @@ const routes: RouteObject[] = [
         )
     },
     {
-        path: AppRoutes.project,
+        path: AppRoutes.projects,
         element: (
             <Layout>
-                <Project />
+                <Projects />
             </Layout>
         )
     },

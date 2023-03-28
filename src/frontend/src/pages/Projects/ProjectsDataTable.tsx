@@ -20,22 +20,25 @@ import {
     TableToolbar,
     TableToolbarContent,
     TableToolbarSearch,
-    Button
+    Button,
+    Pagination
 } from 'carbon-components-react';
 
-export function GroupsDataTable({ groups }) {
+export function ProjectsDataTable({ projects }) {
     const headers = [
         { key: 'name', header: 'Name' },
-        { key: 'project', header: 'Project' },
-        { key: 'members', header: 'Members' }
+        { key: 'description', header: 'Description' }
     ];
 
-    const getRow = rowId => groups.find(({ id }) => id == rowId);
+    const getRow = rowId => projects.find(({ id }) => id == rowId);
 
     return (
-        <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
+        <SmsDataTable rows={projects} headers={headers} className='projects-page__datatable'>
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
-                <TableContainer title='Groups'>
+                <TableContainer
+                    title='Projects'
+                    description='This is a list of all the project for this semsester.'
+                >
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch onChange={onInputChange} />
@@ -56,7 +59,6 @@ export function GroupsDataTable({ groups }) {
                                     headers={headers}
                                     getRowProps={getRowProps}
                                 >
-                                    {/* <p>{getRowDescription(row.id)}</p> */}
                                     <ExpandedRowDetail row={getRow(row.id)} />
                                 </ExpandingRowFragment>
                             ))}
@@ -69,23 +71,11 @@ export function GroupsDataTable({ groups }) {
 }
 function ExpandedRowDetail({ row }) {
     return (
-        <div className='groups-page__datatable-row-detail'>
+        <div className='projects-page__datatable-row-detail'>
             <p>
                 <h5>Description</h5>
                 {row && row.description ? row.description : ''}
             </p>
-            <div>
-                <h5>Group Members</h5>
-                <ul>
-                    {row && row.MemberInfo?.members
-                        ? row.MemberInfo.members.map(member => (
-                              <li>
-                                  <p>{member}</p>
-                              </li>
-                          ))
-                        : ''}
-                </ul>
-            </div>
         </div>
     );
 }
