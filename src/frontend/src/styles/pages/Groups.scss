@@ -1,0 +1,54 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '../mixins' as *;
+
+.groups-page__banner,
+.groups-page__table {
+    margin-left: -20px;
+    margin-right: -20px;
+    @include breakpoint-down(md) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.groups-page__banner {
+    padding-top: $spacing-05;
+    padding-left: $spacing-05;
+    padding-bottom: $spacing-07 * 4;
+    @include neutral-banner__background;
+}
+
+.groups-page__table {
+    padding-left: $spacing-07;
+}
+
+.groups-page__p {
+    margin-top: $spacing-05;
+    margin-bottom: $spacing-05;
+}
+
+.groups-page__heading {
+    @include type-style('productive-heading-05');
+}
+
+.groups-page__p {
+    @include type-style('productive-heading-03');
+    margin-top: $spacing-06;
+
+    @include breakpoint-between((320px + 1), md) {
+        max-width: 75%;
+    }
+}
+
+.groups-page__datatable-row-detail {
+    display: flex;
+    column-gap: $spacing-06 * 4;
+    padding-top: $spacing-06;
+    padding-bottom: $spacing-06;
+}
+
+.groups-page__datatable-row-detail li {
+    margin-top: $spacing-03;
+}

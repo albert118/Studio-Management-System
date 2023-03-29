@@ -41,14 +41,14 @@ function AppHeader() {
                             Home
                         </HeaderMenuItem>
                         <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.project}
-                            href={AppRoutes.project}
+                            isCurrentPage={location.pathname == AppRoutes.projects}
+                            href={AppRoutes.projects}
                         >
                             Projects
                         </HeaderMenuItem>
                         <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.group}
-                            href={AppRoutes.group}
+                            isCurrentPage={location.pathname == AppRoutes.groups}
+                            href={AppRoutes.groups}
                         >
                             Groups
                         </HeaderMenuItem>

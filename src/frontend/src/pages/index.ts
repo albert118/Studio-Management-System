@@ -1,8 +1,15 @@
 import Dashboard from 'pages/Dashboard/Dashboard';
-import Project from 'pages/Project/Project';
-import Group from 'pages/Group/Group';
+import GroupsContainer from 'pages/Groups';
+import ProjectsContainer from 'pages/Projects';
 import Error from 'pages/Error/Error';
 import Login from 'pages/Login/Login';
 import Layout from 'pages/Layout';
 
-export { Dashboard, Project, Group, Login, Error, Layout };
+export {
+    Dashboard,
+    ProjectsContainer as Projects,
+    Login,
+    GroupsContainer as Groups,
+    Error,
+    Layout
+};

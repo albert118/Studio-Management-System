@@ -1,6 +1,7 @@
-import { Dashboard, Project, Group, Login, Error, Layout } from 'pages';
+import { Dashboard, Projects, Groups, Error, Layout, Login } from 'pages';
 import type { RouteObject } from 'react-router';
 import AppRoutes from 'navigation/AppRoutes';
+import AddGroupContainer from '~/pages/AddGroup';
 
 const routes: RouteObject[] = [
     {
@@ -12,18 +13,26 @@ const routes: RouteObject[] = [
         )
     },
     {
-        path: AppRoutes.project,
+        path: AppRoutes.projects,
         element: (
             <Layout>
-                <Project />
+                <Projects />
             </Layout>
         )
     },
     {
-        path: AppRoutes.group,
+        path: AppRoutes.groups,
         element: (
             <Layout>
-                <Group />
+                <Groups />
+            </Layout>
+        )
+    },
+    {
+        path: `${AppRoutes.groups}/add`,
+        element: (
+            <Layout>
+                <AddGroupContainer />
             </Layout>
         )
     },
