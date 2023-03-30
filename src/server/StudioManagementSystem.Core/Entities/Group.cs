@@ -1,10 +1,20 @@
-﻿namespace StudioManagementSystem.Core.Entities;
+﻿using StudioManagementSystem.Core.Dtos;
+
+namespace StudioManagementSystem.Core.Entities;
 
 public class Group : IArchivable, IMetaData, ILockable
 {
     public Group(string name)
     {
         Name = name;
+    }
+
+    public Group(CreateGroupDto dto)
+    {
+        Name = dto.Name;
+        // TODO: migration for new fields
+        // Description = dto.Description;
+        // Preferences = dto.PreferenceOptions; // TODO: add mapping
     }
 
     public Guid Id { get; set; }
