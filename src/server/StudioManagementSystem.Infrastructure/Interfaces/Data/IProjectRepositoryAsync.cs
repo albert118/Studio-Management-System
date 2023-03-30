@@ -1,4 +1,4 @@
-﻿using StudioManagementSystem.Core.Entities;
+using StudioManagementSystem.Core.Entities;
 
 namespace StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
