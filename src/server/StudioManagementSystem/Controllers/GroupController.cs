@@ -3,6 +3,7 @@ using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
+using StudioManagementSystem.Mappers;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -21,17 +22,17 @@ public class GroupController : ControllerBase
     }
 
     [HttpGet]
-    public List<Group> GetGroups()
+    public List<GroupDto> GetGroups()
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.GetGroupsAsync(ct);
         task.Wait(ct);
 
-        return task.Result;
+        return task.Result.Select(g => g.MapToGroupDto()).ToList();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Group> GetGroup(Guid id)
+    public ActionResult<GroupDto> GetGroup(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.GetGroupAsync(id, ct);
@@ -40,7 +41,7 @@ public class GroupController : ControllerBase
         if (task.Result == null)
             return NotFound();
 
-        return task.Result;
+        return task.Result.MapToGroupDto();
     }
 
     [HttpPost]

@@ -41,7 +41,7 @@ public class GroupRepository : IGroupRepository
     public async Task<Guid> AddGroupAsync(Group group, CancellationToken ct)
     {
         try {
-            if (await GetGroupByNameAsync(group.Name, ct) == null) {
+            if (await GetGroupByNameAsync(group.Name, ct) != null) {
                 throw new DataException($"Cannot create a group with an existing name, '{group.Name}");
             }
 
