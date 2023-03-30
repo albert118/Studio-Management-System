@@ -20,8 +20,7 @@ import {
     TableToolbar,
     TableToolbarContent,
     TableToolbarSearch,
-    Button,
-    Pagination
+    Button
 } from 'carbon-components-react';
 
 export function ProjectsDataTable({ projects }) {
@@ -41,7 +40,7 @@ export function ProjectsDataTable({ projects }) {
                 >
                     <TableToolbar>
                         <TableToolbarContent>
-                            <TableToolbarSearch onChange={onInputChange} />
+                            <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
                             <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
                                 Create A New Project
                             </Button>

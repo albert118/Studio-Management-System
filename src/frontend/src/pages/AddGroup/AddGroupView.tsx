@@ -3,14 +3,19 @@ import { Column } from '@carbon/react';
 import { Button, Form, TextArea, TextInput, SelectItem } from 'carbon-components-react';
 import { FormContainer, Stack } from 'components/Forms';
 import TrippleSelectDropdown from './TrippleSelectDropdown';
-import { IViewProps, IFormData, SelectedPreferences, NewGroupDto } from './types';
+import { IViewProps, IFormData, NewGroupDto, newSelectedPreferences } from './types';
 
 const defaultItem = 'placeholder-item';
 
 export default function AddGroupView({ availableProjects }: IViewProps) {
-    const [selectedPreferences, setSelectedPreferences] = useState({} as SelectedPreferences);
+    const [selectedPreferences, setSelectedPreferences] = useState(newSelectedPreferences());
+    const [arePreferencesValid, setPreferencesInvalid] = useState(false);
     const [generalFormData, setFormData] = useState({} as IFormData);
     const [groupNameHasError, setGroupNameError] = useState(false);
+
+    const isSubmittable = (): boolean => {
+        return arePreferencesValid && !groupNameHasError;
+    };
 
     const updateFormData = (event: React.ChangeEvent<any>) => {
         setFormData({
@@ -58,7 +63,7 @@ export default function AddGroupView({ availableProjects }: IViewProps) {
                 <Form onSubmit={submitHandler}>
                     <Stack>
                         <TextInput
-                            helperText='Keep it memorable and less than 100 characters'
+                            helperText='Keep it memorable and less than 50 characters'
                             name='name'
                             id='name'
                             labelText='Group name'
@@ -66,6 +71,7 @@ export default function AddGroupView({ availableProjects }: IViewProps) {
                             onChange={updateFormData}
                             invalidText='A group name is required to create a new group'
                             invalid={groupNameHasError}
+                            maxLength={51}
                         />
                         <TextArea
                             helperText='Optional, this will will appear when people view your group details'
@@ -94,6 +100,8 @@ export default function AddGroupView({ availableProjects }: IViewProps) {
                             preferences={selectedPreferences}
                             setPreferences={setSelectedPreferences}
                             placeholderOption={defaultItem}
+                            arePreferencesValid={arePreferencesValid}
+                            setPreferencesInvalid={setPreferencesInvalid}
                         >
                             <PlaceholderSelectItem />
                             {availableProjects.map(project => (
@@ -105,7 +113,7 @@ export default function AddGroupView({ availableProjects }: IViewProps) {
                             ))}
                         </TrippleSelectDropdown>
 
-                        <Button kind='primary' type='submit'>
+                        <Button kind='primary' type='submit' disabled={isSubmittable()}>
                             Create
                         </Button>
                     </Stack>

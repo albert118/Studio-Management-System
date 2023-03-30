@@ -19,8 +19,7 @@ import {
     TableContainer,
     TableToolbar,
     TableToolbarContent,
-    TableToolbarSearch,
-    Button
+    TableToolbarSearch
 } from 'carbon-components-react';
 
 export function GroupsDataTable({ groups }) {
@@ -38,10 +37,7 @@ export function GroupsDataTable({ groups }) {
                 <TableContainer title='Groups'>
                     <TableToolbar>
                         <TableToolbarContent>
-                            <TableToolbarSearch onChange={onInputChange} />
-                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
-                                Create A New Project
-                            </Button>
+                            <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>

@@ -13,6 +13,19 @@ export type SelectedPreferences = {
     preferenceThree: null | string;
 };
 
+export const newSelectedPreferences = (): SelectedPreferences => {
+    return {
+        preferenceOne: null,
+        preferenceTwo: null,
+        preferenceThree: null
+    };
+};
+
+export const getPreferencesAsList = (obj: SelectedPreferences): string[] => {
+    const arr = [obj.preferenceOne, obj.preferenceTwo, obj.preferenceThree];
+    return arr.filter(pref => !!pref && pref !== '') as string[];
+};
+
 export type NewGroupDto = {
     name: string;
     description: undefined | string;
@@ -28,4 +41,6 @@ export interface ITrippleSelectProps extends React.PropsWithChildren {
     preferences: SelectedPreferences;
     setPreferences: React.Dispatch<React.SetStateAction<SelectedPreferences>>;
     placeholderOption: string;
+    arePreferencesValid: boolean;
+    setPreferencesInvalid: React.Dispatch<React.SetStateAction<boolean>>;
 }
