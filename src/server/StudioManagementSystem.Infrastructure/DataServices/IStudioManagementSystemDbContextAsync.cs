@@ -5,7 +5,6 @@ namespace StudioManagementSystem.Infrastructure.DataServices;
 
 public interface IStudioManagementSystemDbContextAsync
 {
-    DbSet<MySpecialObject> MySpecialObjects { get; }
     DbSet<Contact> Contacts { get; }
     DbSet<OwnerContact> OwnerContacts { get; }
     DbSet<StudentContact> StudentContacts { get; }
