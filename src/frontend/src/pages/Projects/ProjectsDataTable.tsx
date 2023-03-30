@@ -20,8 +20,7 @@ import {
     TableToolbar,
     TableToolbarContent,
     TableToolbarSearch,
-    Button,
-    Pagination
+    Button
 } from 'carbon-components-react';
 
 export function ProjectsDataTable({ projects }) {
