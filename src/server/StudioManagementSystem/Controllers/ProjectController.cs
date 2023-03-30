@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
+using StudioManagementSystem.Mappers;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -19,19 +21,17 @@ public class ProjectController : ControllerBase
     }
 
     [HttpGet]
-    public List<Project> GetProjects()
+    public List<ProjectDto> GetProjects()
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectRepository.GetProjectsAsync(ct);
         task.Wait(ct);
 
-        if (task.Result == null)
-            return new List<Project>();
-        return task.Result.ToList();
+        return task.Result.Select(p => p.MapToProjectDto()).ToList();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Project> GetProject(Guid id)
+    public ActionResult<ProjectDto> GetProject(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectRepository.GetProjectAsync(id, ct);
@@ -39,7 +39,8 @@ public class ProjectController : ControllerBase
 
         if (task.Result == null)
             return NotFound();
-        return task.Result;
+
+        return task.Result.MapToProjectDto();
     }
 
     [HttpPost]
@@ -55,8 +56,8 @@ public class ProjectController : ControllerBase
         return task.Result;
     }
 
-    [HttpPut("{id}")]
-    public ActionResult<Project> UpdateProject(Guid id, Project project)
+    [HttpPatch("{id}")]
+    public ActionResult UpdateProject(Guid id, Project project)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectRepository.UpdateProjectAsync(id, project.Title, project.Description, ct);
@@ -64,5 +65,4 @@ public class ProjectController : ControllerBase
 
         return task.Result ? Ok() : StatusCode(500);
     }
-    
 }
