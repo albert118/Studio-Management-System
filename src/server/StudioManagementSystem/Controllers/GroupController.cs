@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
@@ -40,14 +41,14 @@ public class GroupController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<Guid> AddGroup(Group group)
+    public ActionResult<Guid> AddGroup(CreateGroupDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var myGroup = new Group(group.Name);
-        var task = _groupRepository.AddGroupAsync(myGroup, ct);
+        var task = _groupRepository.AddGroupAsync(new(dto), ct);
 
         if (task.Result == Guid.Empty)
-            return NotFound();
+            return StatusCode(500);
+
         return task.Result;
     }
 
