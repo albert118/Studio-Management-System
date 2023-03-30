@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
-using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 using System.Data;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
