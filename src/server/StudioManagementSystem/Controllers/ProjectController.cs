@@ -23,6 +23,7 @@ public class ProjectController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectRepository.GetProjectsAsync(ct);
+        task.Wait(ct);
 
         if (task.Result == null)
             return new List<Project>();
@@ -34,6 +35,7 @@ public class ProjectController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectRepository.GetProjectAsync(id, ct);
+        task.Wait(ct);
 
         if (task.Result == null)
             return NotFound();
@@ -46,6 +48,7 @@ public class ProjectController : ControllerBase
         var ct = _cancellationTokenAccessor.Token;
         var myProject = new Project(project.Title, project.Description);
         var task = _projectRepository.AddProjectAsync(myProject, ct);
+        task.Wait(ct);
 
         if (task.Result == Guid.Empty)
             return NotFound();
@@ -56,11 +59,10 @@ public class ProjectController : ControllerBase
     public ActionResult<Project> UpdateProject(Guid id, Project project)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepository.UpdateProjectAsync(id, project, ct);
+        var task = _projectRepository.UpdateProjectAsync(id, project.Title, project.Description, ct);
+        task.Wait(ct);
 
-        if (task.Result == null)
-            return NotFound();
-        return task.Result;
+        return task.Result ? Ok() : StatusCode(500);
     }
     
 }
