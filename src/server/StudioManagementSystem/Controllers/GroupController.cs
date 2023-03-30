@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudioManagementSystem.Core.Entities;
+using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
 namespace StudioManagementSystem.Controllers;
@@ -34,6 +35,7 @@ public class GroupController : ControllerBase
 
         if (task.Result == null)
             return NotFound();
+
         return task.Result;
     }
 
