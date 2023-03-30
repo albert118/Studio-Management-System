@@ -41,7 +41,7 @@ public class GroupRepository : IGroupRepository
     {
         try {
             if (await GetGroupByNameAsync(group.Name, ct) != null) {
-                throw new DataException($"Cannot create a group with an existing name, '{group.Name}");
+                throw new DataException($"Cannot create a {nameof(Group)} with an existing name, '{group.Name}");
             }
 
             await _smsDbContext.Groups.AddAsync(group, ct);
@@ -49,7 +49,7 @@ public class GroupRepository : IGroupRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An exception occured while creating a new group");
+            _logger.LogError(ex, $"An exception occured while creating a new {nameof(Group)}");
             return Guid.Empty;
         }
 
@@ -66,7 +66,7 @@ public class GroupRepository : IGroupRepository
             await _smsDbContext.SaveChangesAsync(ct);
         }
         catch (Exception ex) {
-            _logger.LogError(ex, "An exception occured while updating a group name");
+            _logger.LogError(ex, "An exception occured while updating a {Group} with id: '{Id}'", nameof(Group), id);
             return false;
         }
 
