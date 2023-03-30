@@ -23,10 +23,7 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.GetGroupsAsync(ct);
-
-        if (task.Result == null)
-            return new List<Group>();
-        return task.Result.ToList();
+        return task.Result;
     }
 
     [HttpGet("{id}")]
@@ -53,13 +50,10 @@ public class GroupController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<Group> UpdateGroup(Guid id, Group group)
+    public ActionResult UpdateGroup(Guid id, Group group)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.UpdateGroupNameAsync(id, group.Name, ct);
-
-        if (task.Result == null)
-            return NotFound();
-        return task.Result;
+        return task.Result ? Ok() : StatusCode(500);
     }
 }

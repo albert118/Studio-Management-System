@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
@@ -10,10 +11,12 @@ namespace StudioManagementSystem.Infrastructure.Repositories;
 public class GroupRepository : IGroupRepository
 {
     private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
-    
-    public GroupRepository(IStudioManagementSystemDbContextAsync smsDbContext)
+    private readonly ILogger<GroupRepository> _logger;
+
+    public GroupRepository(IStudioManagementSystemDbContextAsync smsDbContext, ILogger<GroupRepository> logger)
     {
         _smsDbContext = smsDbContext;
+        _logger = logger;
     }
     
     public async Task<List<Group>> GetGroupsAsync(CancellationToken ct)
@@ -37,28 +40,28 @@ public class GroupRepository : IGroupRepository
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "An exception occured while creating a new group");
             return Guid.Empty;
         }
 
         return group.Id;
     }
 
-    public async Task<Group?> UpdateGroupNameAsync(Guid id, string name, CancellationToken ct)
+    public async Task<bool> UpdateGroupNameAsync(Guid id, string name, CancellationToken ct)
     {
         var group = await GetGroupAsync(id, ct)
             ?? throw new DataException($"Couldn't find {nameof(Group)} with ID: '{id}'");
 
-        try
-        {
+        try {
             group.Name = name;
             await _smsDbContext.SaveChangesAsync(ct);
         }
-        catch (Exception ex)
-        {
-            return null;
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while updating a group name");
+            return false;
         }
 
-        return group;
+        return true;
     }
 
 }
