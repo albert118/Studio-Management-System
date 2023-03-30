@@ -23,4 +23,11 @@ public class OwnerContactRepository : IOwnerContactRepository
         var owners = _smsDbContext.OwnerContacts.Where(c => ownerContactIds.Contains(c.Id)).ToListAsync(ct);
         return owners;
     }
+
+    public async Task<Guid> AddOwnerContactAsync(string firstName, string lastName, string email, CancellationToken ct)
+    {
+        var newOwnerContact = new OwnerContact(firstName, lastName, email);
+        await _smsDbContext.OwnerContacts.AddAsync(newOwnerContact, ct);
+        return newOwnerContact.Id;
+    }
 }

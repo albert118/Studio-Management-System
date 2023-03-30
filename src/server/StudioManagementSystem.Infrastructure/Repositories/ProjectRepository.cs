@@ -43,20 +43,12 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Guid> AddProjectAsync(Project project, CancellationToken ct)
     {
-        try
-        {
-            if (await GetProjectByTitleAsync(project.Title, ct) != null) {
-                throw new DataException($"Cannot create a {nameof(Project)} with an existing name, '{project.Title}");
-            }
+        if (await GetProjectByTitleAsync(project.Title, ct) != null) {
+            throw new DataException($"Cannot create a {nameof(Project)} with an existing name, '{project.Title}");
+        }
 
-            await _smsDbContext.Projects.AddAsync(project, ct);
-            await _smsDbContext.SaveChangesAsync(ct);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, $"An exception occured while creating a new {nameof(Project)}");
-            return Guid.Empty;
-        }
+        await _smsDbContext.Projects.AddAsync(project, ct);
+        await _smsDbContext.SaveChangesAsync(ct);
 
         return project.Id;
     }
