@@ -1,6 +1,6 @@
 using StudioManagementSystem.Core.Entities;
 
-namespace StudioManagementSystem.Infrastructure.Interfaces.DataServices;
+namespace StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 public interface IProjectRepository
 {

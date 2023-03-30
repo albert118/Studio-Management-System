@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
-using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
+using StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
