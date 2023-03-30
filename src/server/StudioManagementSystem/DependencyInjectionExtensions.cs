@@ -47,7 +47,6 @@ public static class EfContextRegistrationExtensions
     public static ContainerBuilder AddEfCoreDbContexts(this ContainerBuilder builder)
     {
         return builder.AddStudioManagementSystemDbContext();
-        // return builder.AddMySpecialDbContext();
     }
 
     /// <summary>
@@ -98,16 +97,4 @@ public static class EfContextRegistrationExtensions
          
          return builder;
      }
-
-    // Example DI for a database context
-    // private static ContainerBuilder AddMySpecialDbContext(this ContainerBuilder builder)
-    // {
-    //     builder
-    //         .AddDbContextOptions<MySpecialDbContext>()
-    //         .RegisterType<MySpecialDbContext>()
-    //         .As<IMySpecialDbContext>()
-    //         .InstancePerLifetimeScope();
-    //
-    //     return builder;
-    // }
 }
