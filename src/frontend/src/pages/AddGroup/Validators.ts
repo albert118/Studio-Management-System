@@ -1,8 +1,5 @@
 import { SelectedPreferences, getPreferencesAsList } from './types';
-
-const distinct = (arr: any[]): any[] => [...new Set(arr.map(item => item))];
-
-const isUnique = (arr: any[]): boolean => distinct(arr).length === arr.length;
+import { isUnique } from 'utils/array';
 
 export const preferenceValidtor = (existingPreferences: SelectedPreferences): boolean => {
     return !isUnique(getPreferencesAsList(existingPreferences));
