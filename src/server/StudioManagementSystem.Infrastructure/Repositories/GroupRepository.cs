@@ -32,10 +32,19 @@ public class GroupRepository : IGroupRepository
         return group;
     }
 
+    public async Task<Group?> GetGroupByNameAsync(string name, CancellationToken ct)
+    {
+        var group = await _smsDbContext.Groups.FirstOrDefaultAsync(g => g.Name == name, ct);
+        return group;
+    }
+
     public async Task<Guid> AddGroupAsync(Group group, CancellationToken ct)
     {
-        try
-        {
+        try {
+            if (await GetGroupByNameAsync(group.Name, ct) == null) {
+                throw new DataException($"Cannot create a group with an existing name, '{group.Name}");
+            }
+
             await _smsDbContext.Groups.AddAsync(group, ct);
             await _smsDbContext.SaveChangesAsync(ct);
         }

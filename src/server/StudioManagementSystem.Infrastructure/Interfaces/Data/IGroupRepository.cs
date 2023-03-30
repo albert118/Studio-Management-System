@@ -6,6 +6,7 @@ public interface IGroupRepository
 {
     Task<List<Group>> GetGroupsAsync(CancellationToken ct);
     Task<Group?> GetGroupAsync(Guid id, CancellationToken ct);
+    Task<Group?> GetGroupByNameAsync(string name, CancellationToken ct);
     Task<Guid> AddGroupAsync(Group group, CancellationToken ct);
     Task<bool> UpdateGroupNameAsync(Guid id, string name, CancellationToken ct);
 

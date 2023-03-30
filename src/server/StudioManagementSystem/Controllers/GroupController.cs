@@ -25,6 +25,8 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.GetGroupsAsync(ct);
+        task.Wait(ct);
+
         return task.Result;
     }
 
@@ -33,6 +35,7 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.GetGroupAsync(id, ct);
+        task.Wait(ct);
 
         if (task.Result == null)
             return NotFound();
@@ -45,6 +48,7 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.AddGroupAsync(new(dto), ct);
+        task.Wait(ct);
 
         if (task.Result == Guid.Empty)
             return StatusCode(500);
@@ -52,11 +56,23 @@ public class GroupController : ControllerBase
         return task.Result;
     }
 
+    [HttpPost("{name}")]
+    public ActionResult<bool> IsGroupNameTaken(string name)
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _groupRepository.GetGroupByNameAsync(name, ct);
+        task.Wait(ct);
+
+        return task.Result != null;
+    }
+
     [HttpPut("{id}")]
     public ActionResult UpdateGroup(Guid id, Group group)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.UpdateGroupNameAsync(id, group.Name, ct);
+        task.Wait(ct);
+
         return task.Result ? Ok() : StatusCode(500);
     }
 }
