@@ -67,11 +67,11 @@ public class GroupController : ControllerBase
         return task.Result != null;
     }
 
-    [HttpPut("{id}")]
-    public ActionResult UpdateGroup(Guid id, Group group)
+    [HttpPatch("{id}/{name}")]
+    public ActionResult UpdateGroupName(Guid id, string name)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepository.UpdateGroupNameAsync(id, group.Name, ct);
+        var task = _groupRepository.UpdateGroupNameAsync(id, name, ct);
         task.Wait(ct);
 
         return task.Result ? Ok() : StatusCode(500);
