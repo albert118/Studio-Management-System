@@ -2,7 +2,7 @@ using StudioManagementSystem.Core.Entities;
 
 namespace StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
-public interface IProjectRepositoryAsync
+public interface IProjectRepository
 {
     Task<List<Project>> GetProjectsAsync(CancellationToken ct);
     Task<Project?> GetProjectAsync(Guid id, CancellationToken ct);

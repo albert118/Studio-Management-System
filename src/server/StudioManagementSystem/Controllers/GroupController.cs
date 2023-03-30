@@ -9,12 +9,12 @@ namespace StudioManagementSystem.Controllers;
 public class GroupController : ControllerBase
 {
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
-    private readonly IGroupRepositoryAsync _groupRepositoryAsync;
+    private readonly IGroupRepository _groupRepository;
 
-    public GroupController(IGroupRepositoryAsync groupRepositoryAsync,
+    public GroupController(IGroupRepository groupRepository,
         ICancellationTokenAccessor cancellationTokenAccessor)
     {
-        _groupRepositoryAsync = groupRepositoryAsync;
+        _groupRepository = groupRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
@@ -22,7 +22,7 @@ public class GroupController : ControllerBase
     public List<Group> GetGroups()
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepositoryAsync.GetGroupsAsync(ct);
+        var task = _groupRepository.GetGroupsAsync(ct);
 
         if (task.Result == null)
             return new List<Group>();
@@ -33,7 +33,7 @@ public class GroupController : ControllerBase
     public ActionResult<Group> GetGroup(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepositoryAsync.GetGroupAsync(id, ct);
+        var task = _groupRepository.GetGroupAsync(id, ct);
 
         if (task.Result == null)
             return NotFound();
@@ -45,7 +45,7 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var myGroup = new Group(group.Name);
-        var task = _groupRepositoryAsync.AddGroupAsync(myGroup, ct);
+        var task = _groupRepository.AddGroupAsync(myGroup, ct);
 
         if (task.Result == Guid.Empty)
             return NotFound();
@@ -56,7 +56,7 @@ public class GroupController : ControllerBase
     public ActionResult<Group> UpdateGroup(Guid id, Group group)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepositoryAsync.UpdateGroupAsync(id, group, ct);
+        var task = _groupRepository.UpdateGroupAsync(id, group, ct);
 
         if (task.Result == null)
             return NotFound();

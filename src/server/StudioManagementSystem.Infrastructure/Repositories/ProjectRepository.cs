@@ -6,11 +6,11 @@ using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
 [InstanceScopedService]
-public class ProjectRepositoryAsync : IProjectRepositoryAsync
+public class ProjectRepository : IProjectRepository
 {
     private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
 
-    public ProjectRepositoryAsync(IStudioManagementSystemDbContextAsync smsDbContext)
+    public ProjectRepository(IStudioManagementSystemDbContextAsync smsDbContext)
     {
         _smsDbContext = smsDbContext;
     }

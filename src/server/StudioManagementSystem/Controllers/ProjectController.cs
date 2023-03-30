@@ -9,12 +9,12 @@ namespace StudioManagementSystem.Controllers;
 public class ProjectController : ControllerBase
 {
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
-    private readonly IProjectRepositoryAsync _projectRepositoryAsync;
+    private readonly IProjectRepository _projectRepository;
 
-    public ProjectController(IProjectRepositoryAsync projectRepositoryAsync,
+    public ProjectController(IProjectRepository projectRepository,
         ICancellationTokenAccessor cancellationTokenAccessor)
     {
-        _projectRepositoryAsync = projectRepositoryAsync;
+        _projectRepository = projectRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
@@ -22,7 +22,7 @@ public class ProjectController : ControllerBase
     public List<Project> GetProjects()
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepositoryAsync.GetProjectsAsync(ct);
+        var task = _projectRepository.GetProjectsAsync(ct);
 
         if (task.Result == null)
             return new List<Project>();
@@ -33,7 +33,7 @@ public class ProjectController : ControllerBase
     public ActionResult<Project> GetProject(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepositoryAsync.GetProjectAsync(id, ct);
+        var task = _projectRepository.GetProjectAsync(id, ct);
 
         if (task.Result == null)
             return NotFound();
@@ -45,7 +45,7 @@ public class ProjectController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var myProject = new Project(project.Title, project.Description);
-        var task = _projectRepositoryAsync.AddProjectAsync(myProject, ct);
+        var task = _projectRepository.AddProjectAsync(myProject, ct);
 
         if (task.Result == Guid.Empty)
             return NotFound();
@@ -56,7 +56,7 @@ public class ProjectController : ControllerBase
     public ActionResult<Project> UpdateProject(Guid id, Project project)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepositoryAsync.UpdateProjectAsync(id, project, ct);
+        var task = _projectRepository.UpdateProjectAsync(id, project, ct);
 
         if (task.Result == null)
             return NotFound();

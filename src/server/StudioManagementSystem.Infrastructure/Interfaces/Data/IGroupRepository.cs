@@ -2,7 +2,7 @@
 
 namespace StudioManagementSystem.Infrastructure.Interfaces.DataServices;
 
-public interface IGroupRepositoryAsync
+public interface IGroupRepository
 {
     Task<List<Group>> GetGroupsAsync(CancellationToken ct);
     Task<Group?> GetGroupAsync(Guid id, CancellationToken ct);
