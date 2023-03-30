@@ -2,6 +2,7 @@
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
 using StudioManagementSystem.Infrastructure.Interfaces.DataServices;
+using System.Data;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
@@ -23,7 +24,7 @@ public class GroupRepository : IGroupRepository
 
     public async Task<Group?> GetGroupAsync(Guid id, CancellationToken ct)
     {
-        var group = await _smsDbContext.Groups.FindAsync(id, ct);
+        var group = await _smsDbContext.Groups.FirstOrDefaultAsync(g => g.Id == id, ct);
         return group;
     }
 
@@ -42,12 +43,14 @@ public class GroupRepository : IGroupRepository
         return group.Id;
     }
 
-    public async Task<Group?> UpdateGroupAsync(Guid id, Group group, CancellationToken ct)
+    public async Task<Group?> UpdateGroupNameAsync(Guid id, string name, CancellationToken ct)
     {
-        var myGroup = await _smsDbContext.Groups.FindAsync(id, ct);
+        var group = await GetGroupAsync(id, ct)
+            ?? throw new DataException($"Couldn't find {nameof(Group)} with ID: '{id}'");
+
         try
         {
-            myGroup.Name = group.Name;
+            group.Name = name;
             await _smsDbContext.SaveChangesAsync(ct);
         }
         catch (Exception ex)
@@ -55,7 +58,7 @@ public class GroupRepository : IGroupRepository
             return null;
         }
 
-        return myGroup;
+        return group;
     }
 
 }

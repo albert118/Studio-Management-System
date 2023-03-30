@@ -56,11 +56,10 @@ public class GroupController : ControllerBase
     public ActionResult<Group> UpdateGroup(Guid id, Group group)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepository.UpdateGroupAsync(id, group, ct);
+        var task = _groupRepository.UpdateGroupNameAsync(id, group.Name, ct);
 
         if (task.Result == null)
             return NotFound();
         return task.Result;
     }
-    
 }
