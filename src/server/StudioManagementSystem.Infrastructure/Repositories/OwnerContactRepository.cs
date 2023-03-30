@@ -28,6 +28,7 @@ public class OwnerContactRepository : IOwnerContactRepository
     {
         var newOwnerContact = new OwnerContact(firstName, lastName, email);
         await _smsDbContext.OwnerContacts.AddAsync(newOwnerContact, ct);
+        await _smsDbContext.SaveChangesAsync(ct);
         return newOwnerContact.Id;
     }
 }
