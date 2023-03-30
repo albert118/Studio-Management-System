@@ -7,6 +7,8 @@ public interface IStudioManagementSystemDbContextAsync
 {
     DbSet<MySpecialObject> MySpecialObjects { get; }
     DbSet<Contact> Contacts { get; }
+    DbSet<OwnerContact> OwnerContacts { get; }
+    DbSet<StudentContact> StudentContacts { get; }
     DbSet<Group> Groups { get; }
     DbSet<Project> Projects { get; }
     

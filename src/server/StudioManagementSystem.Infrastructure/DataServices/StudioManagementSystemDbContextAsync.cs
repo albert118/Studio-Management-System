@@ -12,6 +12,10 @@ public class StudioManagementSystemDbContextAsync : AsyncDbContext , IStudioMana
 
     public DbSet<Contact> Contacts => Set<Contact>();
 
+    public DbSet<OwnerContact> OwnerContacts => Set<OwnerContact>();
+
+    public DbSet<StudentContact> StudentContacts => Set<StudentContact>();
+
     public DbSet<Group> Groups => Set<Group>();
 
     public DbSet<Project> Projects => Set<Project>();

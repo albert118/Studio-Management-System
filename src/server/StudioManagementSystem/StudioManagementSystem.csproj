@@ -15,10 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="MyFeature" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\StudioManagementSystem.Core\StudioManagementSystem.Core.csproj" />
       <ProjectReference Include="..\StudioManagementSystem.Infrastructure\StudioManagementSystem.Infrastructure.csproj" />
     </ItemGroup>
