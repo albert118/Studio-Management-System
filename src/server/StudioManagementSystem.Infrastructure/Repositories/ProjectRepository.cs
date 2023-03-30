@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
+using StudioManagementSystem.Infrastructure.Interfaces;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using System.Data;
 
@@ -11,11 +12,14 @@ namespace StudioManagementSystem.Infrastructure.Repositories;
 public class ProjectRepository : IProjectRepository
 {
     private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
+    private readonly IOwnerContactRepository _ownerContactRepository;
     private readonly ILogger<ProjectRepository> _logger;
 
-    public ProjectRepository(IStudioManagementSystemDbContextAsync smsDbContext, ILogger<ProjectRepository> logger)
+    public ProjectRepository(IStudioManagementSystemDbContextAsync smsDbContext, IOwnerContactRepository ownerContactRepository,
+        ILogger<ProjectRepository> logger)
     {
         _smsDbContext = smsDbContext;
+        _ownerContactRepository = ownerContactRepository;
         _logger = logger;
     }
 
@@ -59,11 +63,10 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<bool> UpdateProjectAsync(Guid id, string title, string description, CancellationToken ct)
     {
-        var project = await GetProjectAsync(id, ct)
-                    ?? throw new DataException($"Couldn't find {nameof(Project)} with ID: '{id}'");
-
         try
         {
+            var project = await GetProjectAsync(id, ct)
+                      ?? throw new DataException($"Couldn't find {nameof(Project)} with ID: '{id}'");
             project.Title = title;
             project.Description = description;
             await _smsDbContext.SaveChangesAsync(ct);
@@ -76,5 +79,21 @@ public class ProjectRepository : IProjectRepository
 
         return true;
     }
-    
+
+    public async Task<bool> AssignOwnersToProjectAsync(Guid id, IEnumerable<Guid> ownerContactIds, CancellationToken ct)
+    {
+        try {
+            var project = await GetProjectAsync(id, ct)
+                          ?? throw new DataException($"Couldn't find {nameof(Project)} with ID: '{id}'");
+            var owners = await _ownerContactRepository.GetOwnersByIdAsync(ownerContactIds, ct);
+            project.ProductOwners = owners;
+            await _smsDbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while assigning product owners to a {Project} with id: '{Id}'", nameof(Project), id);
+            return false;
+        }
+
+        return true;
+    }
 }

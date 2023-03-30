@@ -3,6 +3,7 @@ using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
+using StudioManagementSystem.ProjectManagement;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -11,13 +12,15 @@ namespace StudioManagementSystem.Controllers;
 public class ProjectController : ControllerBase
 {
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
+    private readonly IProjectManager _projectManager;
     private readonly IProjectRepository _projectRepository;
 
     public ProjectController(IProjectRepository projectRepository,
-        ICancellationTokenAccessor cancellationTokenAccessor)
+        ICancellationTokenAccessor cancellationTokenAccessor, IProjectManager projectManager)
     {
         _projectRepository = projectRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
+        _projectManager = projectManager;
     }
 
     [HttpGet]
@@ -44,15 +47,11 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<Guid> AddProject(Project project)
+    public ActionResult<Guid> AddProject(CreateProjectDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var myProject = new Project(project.Title, project.Description);
-        var task = _projectRepository.AddProjectAsync(myProject, ct);
+        var task = _projectManager.CreateNewProjectAsync(dto, ct);
         task.Wait(ct);
-
-        if (task.Result == Guid.Empty)
-            return NotFound();
         return task.Result;
     }
 
