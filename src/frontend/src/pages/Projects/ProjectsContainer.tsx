@@ -37,5 +37,5 @@ const dummyData: Array<IProject> = [
 export default function ProjectsContainer() {
     const [data, useData] = useState<Array<IProject>>(dummyData);
 
-    return <ProjectsView projects={data} />;
+    return <ProjectsView />;
 }
