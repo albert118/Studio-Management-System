@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 
 namespace StudioManagementSystem;
@@ -33,6 +33,7 @@ public class Startup
         services.AddCors(options =>
         {
             options.AddDefaultPolicy(policy => policy
+                .WithOrigins("http://127.0.0.1:5173")
                 .WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
