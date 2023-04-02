@@ -126,7 +126,5 @@ const dummyData: Array<IGroup> = [
 ];
 
 export default function GroupsContainer() {
-    const [data, useData] = useState<Array<IGroup>>(dummyData);
-
     return <GroupsView />;
 }
