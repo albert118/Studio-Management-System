@@ -6,11 +6,14 @@ import { Button } from 'carbon-components-react';
 import AppRoutes from 'navigation/AppRoutes';
 import { useNavigate } from 'react-router-dom';
 import { ProjectsDataTable } from './ProjectsDataTable';
+import useProjects from '~/hooks/ProjectHooks';
 
-export default function ProjectsView({ projects }: IViewProps) {
+export default function ProjectsView() {
     const navigate = useNavigate();
 
     const currentSession = 'Autumn 2023';
+
+    const { projects } = useProjects();
 
     return (
         <Grid fullwidth>
