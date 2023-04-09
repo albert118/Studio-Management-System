@@ -1,6 +1,7 @@
-﻿using Autofac;
+using Autofac;
 using Microsoft.EntityFrameworkCore;
 using StudioManagementSystem.Infrastructure;
+using StudioManagementSystem.Infrastructure.DataServices;
 
 namespace StudioManagementSystem;
 
@@ -45,8 +46,7 @@ public static class EfContextRegistrationExtensions
     /// </summary>
     public static ContainerBuilder AddEfCoreDbContexts(this ContainerBuilder builder)
     {
-        return builder;
-        // return builder.AddMySpecialDbContext();
+        return builder.AddStudioManagementSystemDbContext();
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public static class EfContextRegistrationExtensions
     public static ContainerBuilder AddDatabaseSettings(this ContainerBuilder containerBuilder, IConfiguration config)
     {
         var databaseSettings = new DatabaseSettings(
-            config.GetConnectionString("InMealDbConnection")!,
+            config.GetConnectionString("StudioManagementDbConnection")!,
             new(new Version(
                 int.Parse(config.GetSection("ConnectionStrings:ServerVersionMajor").Value!),
                 int.Parse(config.GetSection("ConnectionStrings:ServerVersionMinor").Value!),
@@ -86,16 +86,15 @@ public static class EfContextRegistrationExtensions
 
         return containerBuilder;
     }
-
-    // Example DI for a database context
-    // private static ContainerBuilder AddMySpecialDbContext(this ContainerBuilder builder)
-    // {
-    //     builder
-    //         .AddDbContextOptions<MySpecialDbContext>()
-    //         .RegisterType<MySpecialDbContext>()
-    //         .As<IMySpecialDbContext>()
-    //         .InstancePerLifetimeScope();
-    //
-    //     return builder;
-    // }
+    
+     private static ContainerBuilder AddStudioManagementSystemDbContext(this ContainerBuilder builder)
+     {
+         builder
+             .AddDbContextOptions<StudioManagementSystemDbContextAsync>()
+             .RegisterType<StudioManagementSystemDbContextAsync>()
+             .As<IStudioManagementSystemDbContextAsync>()
+             .InstancePerLifetimeScope();
+         
+         return builder;
+     }
 }

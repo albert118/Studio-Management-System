@@ -1,41 +1,33 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Select } from 'carbon-components-react';
 import { ITrippleSelectProps } from './types';
-import { Stack } from '~/components/Forms';
+import { Stack } from 'components/Forms';
+import { usePreferenceValidator } from './usePreferenceValidtor';
 
 export default function TrippleSelectDropdown({
     preferences,
     setPreferences,
     placeholderOption,
-    children
+    children,
+    arePreferencesValid,
+    setPreferencesInvalid
 }: ITrippleSelectProps) {
-    const [preferencesInvalid, setPreferencesInvalid] = useState(false);
+    const { validate } = usePreferenceValidator(preferences);
 
-    const hasAlreadySelectedPreference = (selectedPreference: string) => {
-        return (
-            preferences.preferenceOne === selectedPreference ||
-            preferences.preferenceTwo === selectedPreference ||
-            preferences.preferenceThree === selectedPreference
-        );
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const onUpdatePreference = (event: React.ChangeEvent<HTMLSelectElement>) => {
         event.preventDefault();
-
-        let newValue = event.target.name === placeholderOption ? null : event.target.value;
-
-        if (hasAlreadySelectedPreference(event.target.value)) {
-            setPreferencesInvalid(true);
-            return;
-        }
 
         setPreferences({
             ...preferences,
-            [event.target.name]: newValue
+            [event.target.name]:
+                // let's not save the place-holder, as this will be confusing
+                event.target.value === placeholderOption ? null : event.target.value
         });
-
-        setPreferencesInvalid(false);
     };
+
+    useEffect(() => {
+        setPreferencesInvalid(validate());
+    }, [preferences]);
 
     return (
         <Stack>
@@ -44,9 +36,9 @@ export default function TrippleSelectDropdown({
                 id='preference-one'
                 labelText='First preference'
                 defaultValue='placeholder-item'
-                onChange={handleChange}
+                onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={preferencesInvalid}
+                invalid={arePreferencesValid}
             >
                 {children}
             </Select>
@@ -55,9 +47,9 @@ export default function TrippleSelectDropdown({
                 id='project-preference-two'
                 labelText='Second preference (optional)'
                 defaultValue='placeholder-item'
-                onChange={handleChange}
+                onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={preferencesInvalid}
+                invalid={arePreferencesValid}
             >
                 {children}
             </Select>
@@ -66,9 +58,9 @@ export default function TrippleSelectDropdown({
                 id='project-preference-three'
                 labelText='Third preference (optional)'
                 defaultValue='placeholder-item'
-                onChange={handleChange}
+                onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={preferencesInvalid}
+                invalid={arePreferencesValid}
             >
                 {children}
             </Select>
