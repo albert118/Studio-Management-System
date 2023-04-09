@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IGroup } from './types';
+import { IGroup } from 'types/types';
 
 import GroupsView from './GroupsView';
 

@@ -1,0 +1,20 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '../mixins' as *;
+
+.simple-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: $spacing-08;
+    background-color: var(--sms-colors-neutral-background);
+    @include drop-shadow();
+
+    button {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.simple-card:hover {
+    background-color: var(--sms-colors-background);
+}
