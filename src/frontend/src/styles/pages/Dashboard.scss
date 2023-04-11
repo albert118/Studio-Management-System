@@ -1,5 +1,4 @@
 @use '@carbon/react/scss/spacing' as *;
-@use '@carbon/react/scss/type' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
@@ -35,17 +34,17 @@
     width: 500px;
 }
 
-.dashboard-page__heading {
-    @include type-style('productive-heading-05');
-}
+// .dashboard-page__heading {
+//     @include type-style('productive-heading-05');
+// }
 
 .dashboard-page__subheading {
-    @include type-style('productive-heading-03');
+    // @include type-style('productive-heading-03');
     font-weight: 600;
 }
 
 .dashboard-page__p {
-    @include type-style('productive-heading-03');
+    // @include type-style('productive-heading-03');
     margin-top: $spacing-06;
 
     @include breakpoint-between((320px + 1), md) {
