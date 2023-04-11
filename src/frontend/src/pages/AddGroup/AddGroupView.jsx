@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { Column } from '@carbon/react';
-import { Button, Form, TextArea, TextInput, SelectItem } from 'carbon-components-react';
+import { useState } from 'react';
+import { Column, Button, Form, TextArea, TextInput, SelectItem } from '@carbon/react';
 import { FormContainer, Stack } from 'components/Forms';
 import TrippleSelectDropdown from './TrippleSelectDropdown';
-import { IViewProps, IFormData, NewGroupDto, newSelectedPreferences } from './types';
+import { formData, NewGroupDto, newSelectedPreferences } from './types';
 
 const defaultItem = 'placeholder-item';
 
-export default function AddGroupView({ availableProjects }: IViewProps) {
+export default function AddGroupView({ availableProjects }) {
     const [selectedPreferences, setSelectedPreferences] = useState(newSelectedPreferences());
     const [arePreferencesValid, setPreferencesInvalid] = useState(false);
-    const [generalFormData, setFormData] = useState({} as IFormData);
+    const [generalFormData, setFormData] = useState(formData);
     const [groupNameHasError, setGroupNameError] = useState(false);
 
-    const isSubmittable = (): boolean => {
+    const isSubmittable = () => {
         return arePreferencesValid && !groupNameHasError;
     };
 
-    const updateFormData = (event: React.ChangeEvent<any>) => {
+    const updateFormData = event => {
         setFormData({
             ...generalFormData,
             [event.target.name]: event.target.value
@@ -25,16 +24,16 @@ export default function AddGroupView({ availableProjects }: IViewProps) {
     };
 
     const mapFormToDto = () => {
-        const dto = {} as NewGroupDto;
+        const dto = NewGroupDto();
 
-        dto.name = generalFormData.name!;
+        dto.name = generalFormData.name;
         dto.description = generalFormData.description;
         dto.preferences = selectedPreferences;
 
         return dto;
     };
 
-    const submitHandler = (event: React.ChangeEvent<HTMLFormElement>) => {
+    const submitHandler = event => {
         event.preventDefault();
 
         if (generalFormData.name) {

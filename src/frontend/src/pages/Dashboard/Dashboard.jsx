@@ -1,6 +1,5 @@
 import { BrandConfig } from 'config';
-import { Grid, Column } from '@carbon/react';
-import { Button } from 'carbon-components-react';
+import { Button, Grid, Column } from '@carbon/react';
 import { useNavigate } from 'react-router-dom';
 import AppRoutes from '~/navigation/AppRoutes';
 import logo from 'assets/logo.jpg';

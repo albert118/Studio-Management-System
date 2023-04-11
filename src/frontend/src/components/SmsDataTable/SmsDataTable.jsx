@@ -10,7 +10,7 @@ import {
     TableExpandedRow,
     TableCell,
     DataTable
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 export { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment };
 

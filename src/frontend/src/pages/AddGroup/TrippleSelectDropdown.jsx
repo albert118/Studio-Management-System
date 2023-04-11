@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { Select } from 'carbon-components-react';
-import { ITrippleSelectProps } from './types';
+import { Select } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { usePreferenceValidator } from './usePreferenceValidtor';
 
@@ -11,10 +10,10 @@ export default function TrippleSelectDropdown({
     children,
     arePreferencesValid,
     setPreferencesInvalid
-}: ITrippleSelectProps) {
+}) {
     const { validate } = usePreferenceValidator(preferences);
 
-    const onUpdatePreference = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const onUpdatePreference = event => {
         event.preventDefault();
 
         setPreferences({
