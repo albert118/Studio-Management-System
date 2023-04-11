@@ -1,13 +1,10 @@
-import { IViewProps } from './types';
-
-import { Grid, Column } from '@carbon/react';
-import { Button, Tile } from 'carbon-components-react';
+import { Button, Tile, Grid, Column } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { ArrowRight, MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
 
-export default function MyGroupView({ myGroup }: IViewProps) {
+export default function MyGroupView({ myGroup }) {
     return (
-        <Grid fullwidth>
+        <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
                 <h1 className='mygroup-page__heading'>{myGroup.name}</h1>
                 <p className='mygroup-page__p'>{myGroup.description}</p>
@@ -57,7 +54,7 @@ export default function MyGroupView({ myGroup }: IViewProps) {
     );
 }
 
-function ProjectCard({ project }: any) {
+function ProjectCard({ project }) {
     return (
         <div className='simple-card project'>
             <div>
