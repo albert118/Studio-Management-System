@@ -1,7 +1,7 @@
 import { BrandConfig } from 'config';
 import { Button, Grid, Column } from '@carbon/react';
 import { useNavigate } from 'react-router-dom';
-import AppRoutes from '~/navigation/AppRoutes';
+import AppRoutes from 'navigation/AppRoutes';
 import logo from 'assets/logo.jpg';
 
 function Dashboard() {
