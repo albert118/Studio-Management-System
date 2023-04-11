@@ -5,8 +5,7 @@
 
 // the order is important here!
 // we wish to cascade from most generic to most specific
-
-@import 'resets/resets.css';
+// no resets are included here (as of yet), @carbon/react specifies it's own resets and normalisations
 
 @import 'pages/pages.scss';
 
