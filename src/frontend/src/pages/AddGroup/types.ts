@@ -21,6 +21,14 @@ export const newSelectedPreferences = (): SelectedPreferences => {
     };
 };
 
+export const formData = (): IFormData => {
+    return {} as IFormData;
+};
+
+export const NewGroupDto = (): NewGroupDto => {
+    return {} as NewGroupDto;
+};
+
 export const getPreferencesAsList = (obj: SelectedPreferences): string[] => {
     const arr = [obj.preferenceOne, obj.preferenceTwo, obj.preferenceThree];
     return arr.filter(pref => !!pref && pref !== '') as string[];

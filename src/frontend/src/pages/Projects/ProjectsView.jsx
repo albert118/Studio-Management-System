@@ -1,13 +1,11 @@
-import { IViewProps } from './types';
-
 import { Grid, Column } from '@carbon/react';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 
 import AppRoutes from 'navigation/AppRoutes';
 import { useNavigate } from 'react-router-dom';
 import { ProjectsDataTable } from './ProjectsDataTable';
 
-export default function ProjectsView({ projects }: IViewProps) {
+export default function ProjectsView({ projects }) {
     const navigate = useNavigate();
 
     const currentSession = 'Autumn 2023';

@@ -20,7 +20,7 @@ import {
     TableToolbar,
     TableToolbarContent,
     TableToolbarSearch
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 export function GroupsDataTable({ groups }) {
     const headers = [

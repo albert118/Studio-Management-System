@@ -21,7 +21,7 @@ import {
     TableToolbarContent,
     TableToolbarSearch,
     Button
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 export function ProjectsDataTable({ projects }) {
     const headers = [

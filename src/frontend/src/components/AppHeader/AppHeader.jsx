@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 import {
     Header,
     HeaderContainer,
@@ -9,7 +10,8 @@ import {
     HeaderMenu,
     HeaderGlobalAction,
     HeaderGlobalBar
-} from 'carbon-components-react';
+} from '@carbon/react';
+
 import { Notification, UserAvatar } from '@carbon/icons-react';
 import AppRoutes from 'navigation/AppRoutes';
 import { useEffect, useState } from 'react';
