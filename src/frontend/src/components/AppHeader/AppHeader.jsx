@@ -15,7 +15,7 @@ import {
 import { Notification, UserAvatar } from '@carbon/icons-react';
 import AppRoutes from 'navigation/AppRoutes';
 import { useEffect, useState } from 'react';
-import { supabase } from '~/main';
+import { supabase } from 'main';
 
 function AppHeader() {
     const [login, setLogin] = useState('Log In');
