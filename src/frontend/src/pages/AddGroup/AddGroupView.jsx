@@ -70,7 +70,7 @@ export default function AddGroupView({ availableProjects }) {
                             onChange={updateFormData}
                             invalidText='A group name is required to create a new group'
                             invalid={groupNameHasError}
-                            maxLength={51}
+                            maxLength={50}
                         />
                         <TextArea
                             helperText='Optional, this will will appear when people view your group details'

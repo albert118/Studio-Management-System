@@ -7,11 +7,16 @@ const dummyData: IGroup = {
     name: 'Group 01',
     description:
         "this is your group's homepage. You can add a description for potential members to read when exploring all groups",
-    MemberInfo: {
+    memberInfo: {
         max: 6,
         count: 3,
         members: ['John', 'Agatha', 'Jenny']
     },
+    preferences: [
+        { title: 'IBM', rank: 1 },
+        { title: 'Microsoft Corp,', rank: 2 },
+        { title: 'Apple Computers', rank: 3 }
+    ],
     members: '3/6',
     project: 'Apple Computers'
 };

@@ -4,11 +4,17 @@ export interface IMemberInfo {
     members: Array<string>;
 }
 
+export interface IPreference {
+    title: string;
+    rank: number; // 1, 2, 3, etc...
+}
+
 export interface IGroup {
     id: number | string;
     name: string;
     description: string;
-    MemberInfo: IMemberInfo;
+    memberInfo: IMemberInfo;
+    preferences: Array<IPreference>;
     members: string;
     project: string;
 }

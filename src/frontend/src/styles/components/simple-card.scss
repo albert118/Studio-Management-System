@@ -4,7 +4,7 @@
 .simple-card {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     padding: $spacing-08;
     background-color: var(--sms-colors-neutral-background);
     @include drop-shadow();

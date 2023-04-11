@@ -63,6 +63,7 @@ export function GroupsDataTable({ groups }) {
         </SmsDataTable>
     );
 }
+
 function ExpandedRowDetail({ row }) {
     return (
         <div className='groups-page__datatable-row-detail'>
