@@ -1,3 +1,27 @@
+@font-face {
+    font-family: 'NB International';
+    src: url("/themes/uts_theme/src/vendor/neubauberlin/nb_international_pro_regular-webfont.woff2") format("woff2"),url("/themes/uts_theme/src/vendor/neubauberlin/nb_international_pro_regular-webfont.woff") format("woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'NB International';
+    src: url("/themes/uts_theme/src/vendor/neubauberlin/nb_international_pro_bold-webfont.woff2") format("woff2"),url("/themes/uts_theme/src/vendor/neubauberlin/nb_international_pro_bold-webfont.woff") format("woff");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'NB Akademie Std';
+    src: url("/themes/uts_theme/src/vendor/neubauberlin/nb_akademie_std_regular-webfont.woff2") format("woff2"),url("/themes/uts_theme/src/vendor/neubauberlin/nb_akademie_std_regular-webfont.woff") format("woff");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'NB Akademie Std';
+    src: url("/themes/uts_theme/src/vendor/neubauberlin/nb_akademie_std_bold-webfont.woff2") format("woff2"),url("/themes/uts_theme/src/vendor/neubauberlin/nb_akademie_std_bold-webfont.woff") format("woff");
+    font-weight: bold;
+}
+
 .footer-social__menu .footer-social__item a {
     display: block;
     text-indent: 100%;
@@ -5,23 +29,18 @@
     overflow: hidden;
 }
 
-.footer-menu__level-1,
-.footer-menu__level-2,
-.footer-social__menu {
+.footer-menu__level-1,.footer-menu__level-2,.footer-social__menu {
     margin: 0;
     padding: 0 !important;
     list-style: none;
 }
 
-.footer-menu__level-1 li,
-.footer-menu__level-2 li,
-.footer-social__menu li {
-    margin: 0;
+.footer-menu__level-1 li,.footer-menu__level-2 li,.footer-social__menu li {
+    margin: 0 ;
     padding: 0 !important;
 }
 
-.grid__container,
-.footer-grid__container {
+.grid__container,.footer-grid__container {
     display: block;
     max-width: 1320px;
     padding-left: 6vw;
@@ -33,7 +52,7 @@
 
 @media (min-width: 600px) {
     .acknowledgement__row {
-        display: -webkit-box;
+        display:-webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
@@ -48,22 +67,18 @@
     }
 }
 
-.footer-grid__col,
-.acknowledgement__col,
-.footer-menu__level-1 > .footer-menu__item {
+.footer-grid__col,.acknowledgement__col,.footer-menu__level-1 > .footer-menu__item {
     margin-bottom: 1.5rem;
     width: 100%;
 }
 
 @media (min-width: 600px) {
-    .acknowledgement__col__1,
-    .acknowledgement__col__2 {
-        width: 50%;
+    .acknowledgement__col__1,.acknowledgement__col__2 {
+        width:50%;
     }
 }
 
-.footer-grid__row,
-.footer-menu__level-1 {
+.footer-grid__row,.footer-menu__level-1 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -80,13 +95,13 @@
 
 @media (min-width: 1000px) {
     .footer-grid--col-2 {
-        width: 33.33333%;
+        width:33.33333%;
     }
 }
 
 @media (min-width: 1000px) {
     .footer-grid--col-4 {
-        width: 66.66667%;
+        width:66.66667%;
     }
 }
 
@@ -97,36 +112,31 @@
 
 @media (min-width: 600px) {
     .footer-menu__level-1 > .footer-menu__item {
-        width: 25%;
+        width:25%;
     }
 }
 
-.footer__wrapper a,
-:link {
+.footer__wrapper a,:link {
     color: #0f4beb;
     text-decoration: none;
 }
 
-.footer__wrapper a:focus,
-:link:focus {
+.footer__wrapper a:focus,:link:focus {
     outline: 1px solid #0f4beb;
     outline-offset: 2px;
 }
 
-.footer__wrapper a:hover,
-:link:hover {
+.footer__wrapper a:hover,:link:hover {
     border-bottom: 1px solid #0f4beb;
     text-decoration: none;
 }
 
-.footer__wrapper a:active,
-:link:active {
+.footer__wrapper a:active,:link:active {
     color: #0f4beb;
     outline: 0;
 }
 
-.footer__wrapper a:visited,
-:link:visited {
+.footer__wrapper a:visited,:link:visited {
     color: #0f4beb;
 }
 
@@ -156,8 +166,7 @@
     -webkit-text-size-adjust: 100%;
 }
 
-.footer__wrapper footer,
-.footer__wrapper nav {
+.footer__wrapper footer,.footer__wrapper nav {
     display: block;
 }
 
@@ -199,7 +208,7 @@
 .footer__wrapper html {
     font-size: 100%;
     line-height: 1.5em;
-    font-family: 'NB Akademie Std', Arial, sans-serif;
+    font-family: "NB Akademie Std",Arial,sans-serif;
     color: #323232;
     background: #fff;
     -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -231,7 +240,7 @@
 }
 
 .footer__wrapper h3 {
-    font-family: 'NB International', Arial, sans-serif;
+    font-family: "NB International",Arial,sans-serif;
     font-weight: normal;
     color: #323232;
 }
@@ -264,7 +273,7 @@
 
 @media (min-width: 600px) {
     .acknowledgement {
-        margin-top: -4rem;
+        margin-top:-4rem;
         margin-bottom: 4rem;
     }
 }
@@ -280,13 +289,13 @@
 
 @media (max-width: 999px) {
     .acknowledgement__col__1 {
-        width: 100%;
+        width:100%;
     }
 }
 
-@media (min-width: 1000px) and (max-width: 1199px) {
+@media (min-width: 1000px) and (max-width:1199px) {
     .acknowledgement__col__1 {
-        padding: 0.9375rem 0;
+        padding:0.9375rem 0;
     }
 }
 
@@ -302,15 +311,15 @@
     object-fit: cover;
 }
 
-@media (min-width: 1000px) and (max-width: 1199px) {
+@media (min-width: 1000px) and (max-width:1199px) {
     .acknowledgement__col__2 img {
-        height: 149px;
+        height:149px;
     }
 }
 
 @media (max-width: 999px) {
     .acknowledgement__col__2 {
-        display: none;
+        display:none;
     }
 }
 
@@ -377,7 +386,7 @@
 
 @media (min-width: 600px) {
     .footer__wrapper {
-        padding: 4rem 0 0.5rem;
+        padding:4rem 0 0.5rem;
         margin-top: 7.5rem;
     }
 }
@@ -394,8 +403,7 @@
     margin-right: auto;
 }
 
-.footer h3,
-.footer-menu__level-1 > .footer-menu__item > a {
+.footer h3,.footer-menu__level-1 > .footer-menu__item > a {
     font-size: 1.25rem;
     line-height: 1.5rem;
     margin: 0 0 1.5rem;
@@ -444,7 +452,7 @@
 
 @media (min-width: 1000px) {
     .footer-social {
-        margin-bottom: 1.25rem;
+        margin-bottom:1.25rem;
     }
 }
 
@@ -468,7 +476,7 @@
     width: 25px;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.75;
+    opacity: .75;
 }
 
 .footer-social__menu .footer-social__item a:hover {
@@ -482,25 +490,28 @@
 }
 
 @media (max-width: 1199px) {
-    @supports (-webkit-line-clamp: 3) {
+
+    @supports (-webkit-line-clamp:3) {
     }
 }
 
-@supports (-webkit-line-clamp: 3) {
+@supports (-webkit-line-clamp:3) {
 }
 
 @media (max-width: 1199px) {
-    @supports (-webkit-line-clamp: 3) {
+
+    @supports (-webkit-line-clamp:3) {
     }
 }
 
 @media (max-width: 1199px) {
-    @supports (-webkit-line-clamp: 3) {
+
+    @supports (-webkit-line-clamp:3) {
     }
 }
 
-@supports (-webkit-line-clamp: 4) {
+@supports (-webkit-line-clamp:4) {
 }
 
-@supports (-webkit-line-clamp: 3) {
+@supports (-webkit-line-clamp:3) {
 }
