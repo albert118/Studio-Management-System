@@ -13,6 +13,8 @@ export interface IPreference {
 export interface IProject {
     id: number | string;
     description: string;
+    title: string | null;
+    Owners: Array<string>;
 }
 
 export interface IGroup {
