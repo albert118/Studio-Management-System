@@ -11,7 +11,9 @@ public static class GroupMapper
             Id: group.Id,
             Name: group.Name,
             Description: string.Empty, // TODO
-            Members: new()             // TODO
+            Members: new(),
+            Preferences: new(), // TODO
+            Project: group.AssignedProject?.MapToProjectDto()
         );
     }
 }
