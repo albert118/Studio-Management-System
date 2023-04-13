@@ -23,6 +23,6 @@ export interface IGroup {
     description: string;
     memberInfo: IMemberInfo;
     preferences: Array<IPreference>;
-    members: string;
+    memberCount: string;
     project: string;
 }

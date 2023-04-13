@@ -11,9 +11,10 @@ public static class GroupMapper
             Id: group.Id,
             Name: group.Name,
             Description: string.Empty, // TODO
-            MemberInfo: group.Members.ToMemberInfoDto(),
+            MemberInfo: group.Members.ToMemberInfoDto(group),
             Preferences: new(), // TODO
-            Project: group.AssignedProject?.MapToProjectDto()
+            Project: group.AssignedProject?.MapToProjectDto(),
+            MemberCount: $"{group.Members.Count}/{group.MaxMembers}"
         );
     }
 }

@@ -30,7 +30,7 @@ export function GroupsDataTable({ groups }) {
     const headers = [
         { key: 'name', header: 'Name' },
         { key: 'project', header: 'Project' },
-        { key: 'members', header: 'Members' }
+        { key: 'memberCount', header: 'Members' }
     ];
 
     const getRow = rowId => groups.find(({ id }) => id == rowId);

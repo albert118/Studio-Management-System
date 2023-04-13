@@ -3,16 +3,21 @@ import { IGroup } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 
-const useGroups = () => {
+export default function useGroups() {
     const [groups, setGroups] = useState<IGroup[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchGroups = async () => {
+            setLoading(true);
+
             const response = await fetch(`${ApiConfig.API_URL}/groups/all`, {
                 ...defaultRequestOptions
             });
             const data = await response.json();
+
             setGroups(data);
+            setLoading(false);
         };
         fetchGroups();
     }, []);
@@ -45,7 +50,27 @@ const useGroups = () => {
         setGroups(groups.filter(group => group.id !== groupId));
     };
 
-    return { groups, addGroup, updateGroup, deleteGroup };
-};
+    return { groups, addGroup, updateGroup, deleteGroup, isLoading };
+}
 
-export default useGroups;
+export function useGroup(groupId: string) {
+    const [group, setGroup] = useState<IGroup[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchGroup = async () => {
+            setLoading(true);
+
+            const response = await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
+                ...defaultRequestOptions
+            });
+            const data = await response.json();
+
+            setGroup(data);
+            setLoading(false);
+        };
+        fetchGroup();
+    }, []);
+
+    return { group, isLoading };
+}

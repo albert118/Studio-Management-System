@@ -5,10 +5,10 @@ namespace StudioManagementSystem.Mappers;
 
 public static class MemberMapper
 {
-    public static MemberInfoDto ToMemberInfoDto(this List<StudentContact> members)
+    public static MemberInfoDto ToMemberInfoDto(this List<StudentContact> members, Group group)
     {
         return new MemberInfoDto(
-            Max: 100,
+            Max: group.MaxMembers,
             Count: members.Count,
             Members: members.Select(m => m.ToGroupMemberDto()).ToList()
         );
