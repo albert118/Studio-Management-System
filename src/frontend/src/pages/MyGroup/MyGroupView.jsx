@@ -27,8 +27,12 @@ export default function MyGroupView({ myGroup }) {
                     <Stack>
                         <div className='simple-card'>
                             <Collaborate size={32} />
+                            <div>
+                                <h5>View existing group members</h5>
+                                See who's current members and contact details.
+                            </div>
                             <ModalWrapper
-                                buttonTriggerText='View group members'
+                                buttonTriggerText='View'
                                 modalHeading='Group members'
                                 passiveModal
                             >
@@ -37,8 +41,12 @@ export default function MyGroupView({ myGroup }) {
                         </div>
                         <div className='simple-card'>
                             <EmailNew size={32} />
+                            <div>
+                                <h5>Manage group applications</h5>
+                                Approve (or deny) new member applications.
+                            </div>
                             <ModalWrapper
-                                buttonTriggerText='View pending applications'
+                                buttonTriggerText='View'
                                 modalHeading='Pending applications'
                                 passiveModal
                             >
@@ -47,8 +55,12 @@ export default function MyGroupView({ myGroup }) {
                         </div>
                         <div className='simple-card'>
                             <MailAll size={32} />
+                            <div>
+                                <h5>Invite new group members</h5>
+                                Create and send invitations to new members.
+                            </div>
                             <ModalWrapper
-                                buttonTriggerText='Invite group members'
+                                buttonTriggerText='Invite'
                                 modalHeading='Create invitations'
                                 primaryButtonText='Send invitations'
                             >
@@ -77,12 +89,20 @@ export default function MyGroupView({ myGroup }) {
                     <Stack>
                         <div className='simple-card danger ghost'>
                             <Edit className='danger ghost' size={32} />
+                            <div>
+                                <h5>Edit your group</h5>
+                                Update details such as group name.
+                            </div>
                             <ModalWrapper buttonTriggerText='Edit group' modalHeading='Edit group'>
                                 <EditGroup />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card danger ghost'>
                             <Exit className='danger ghost' size={32} />
+                            <div>
+                                <h5>Leave your group</h5>
+                                You will have to reapply to join back.
+                            </div>
                             <ModalWrapper
                                 buttonTriggerText='Leave group'
                                 modalHeading='Leave group'
