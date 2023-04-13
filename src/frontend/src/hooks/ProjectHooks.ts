@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { IProject } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
+import defaultRequestOptions from './defaultRequestHeaders';
 
 const useProjects = () => {
     const [projects, setProjects] = useState<IProject[]>([]);
 
     useEffect(() => {
         const fetchProjects = async () => {
-            const response = await fetch(ApiConfig.API_URL + '/project');
+            const response = await fetch(`${ApiConfig.API_URL}/projects/all`, {
+                ...defaultRequestOptions
+            });
             const data = await response.json();
             setProjects(data);
         };
@@ -16,10 +19,8 @@ const useProjects = () => {
 
     const addProject = async (project: Omit<IProject, 'id'>) => {
         const response = await fetch(ApiConfig.API_URL + '/project', {
+            ...defaultRequestOptions,
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(project)
         });
         const newProject = await response.json();
@@ -27,11 +28,9 @@ const useProjects = () => {
     };
 
     const updateProject = async (project: IProject) => {
-        const response = await fetch(ApiConfig.API_URL + '/project/${project.id}', {
+        const response = await fetch(`${ApiConfig.API_URL}/project/${project.id}`, {
+            ...defaultRequestOptions,
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(project)
         });
         const updatedProject = await response.json();
@@ -39,7 +38,8 @@ const useProjects = () => {
     };
 
     const deleteProject = async (projectId: number) => {
-        await fetch(ApiConfig.API_URL + '/project/${projectId}', {
+        await fetch(`${ApiConfig.API_URL}/project/${projectId}`, {
+            ...defaultRequestOptions,
             method: 'DELETE'
         });
         setProjects(projects.filter(project => project.id !== projectId));
