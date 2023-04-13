@@ -75,9 +75,10 @@ export default function MyGroupView({ myGroup }) {
                         {myGroup.preferences.map(preference => {
                             return (
                                 <ProjectPreferenceCard
+                                    key={preference.rank}
                                     title={preference.title}
                                     rank={preference.rank}
-                                    preference={preference.projectId}
+                                    projectId={preference.projectId}
                                 />
                             );
                         })}
@@ -127,8 +128,8 @@ export default function MyGroupView({ myGroup }) {
 function MyGroupMembers({ members }) {
     return (
         <Stack>
-            {members.map(member => (
-                <span>{member}</span>
+            {members.map((member, idx) => (
+                <span key={idx}>{member}</span>
             ))}
         </Stack>
     );
