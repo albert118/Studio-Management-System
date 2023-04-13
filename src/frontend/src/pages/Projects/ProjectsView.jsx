@@ -11,7 +11,7 @@ export default function ProjectsView({ projects }) {
     const currentSession = 'Autumn 2023';
 
     return (
-        <Grid fullwidth>
+        <Grid>
             <Column lg={16} md={8} sm={4} className='projects-page__banner'>
                 <h1 className='projects-page__heading'>{currentSession} Projects</h1>
                 <p className='projects-page__p'>Browse all active projects</p>
