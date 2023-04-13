@@ -7,14 +7,16 @@ public class Group : IArchivable, IMetaData, ILockable
     public Group(string name)
     {
         Name = name;
+        Members = new();
     }
 
     public Group(CreateGroupDto dto)
     {
         Name = dto.Name;
+        Members = new();
         // TODO: migration for new fields
         // Description = dto.Description;
-        // Preferences = dto.PreferenceOptions; // TODO: add mapping
+        // Preferences = dto.PreferenceOptions;
     }
 
     public Guid Id { get; set; }
@@ -30,4 +32,6 @@ public class Group : IArchivable, IMetaData, ILockable
     public DateTime CreatedOn { get; set; }
 
     public bool IsLocked { get; set; }
+
+    public List<StudentContact> Members { get; set; }
 }
