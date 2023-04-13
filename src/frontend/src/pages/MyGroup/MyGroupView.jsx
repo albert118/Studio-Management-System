@@ -93,7 +93,11 @@ export default function MyGroupView({ myGroup }) {
                                 <h5>Edit your group</h5>
                                 Update details such as group name.
                             </div>
-                            <ModalWrapper buttonTriggerText='Edit group' modalHeading='Edit group'>
+                            <ModalWrapper
+                                buttonTriggerText='Edit group'
+                                danger
+                                modalHeading='Edit group'
+                            >
                                 <EditGroup />
                             </ModalWrapper>
                         </div>
