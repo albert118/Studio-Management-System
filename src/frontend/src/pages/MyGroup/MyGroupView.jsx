@@ -10,7 +10,7 @@ import {
 } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
-import { ProjectPreferenceCard } from './ProjectPreferenceCard';
+import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { FormContainer } from 'components/Forms';
 
 export default function MyGroupView({ myGroup }) {
@@ -71,16 +71,20 @@ export default function MyGroupView({ myGroup }) {
                 <Tile className='mygroup-page__project-preference-management'>
                     <h3>Project Preferences</h3>
                     <Stack>
-                        {myGroup.preferences.map(preference => {
-                            return (
-                                <ProjectPreferenceCard
-                                    key={preference.rank}
-                                    title={preference.title}
-                                    rank={preference.rank}
-                                    projectId={preference.projectId}
-                                />
-                            );
-                        })}
+                        {myGroup.preferences ? (
+                            myGroup.preferences.map(preference => {
+                                return (
+                                    <ProjectPreferenceCard
+                                        key={preference.rank}
+                                        title={preference.title}
+                                        rank={preference.rank}
+                                        projectId={preference.projectId}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <NoProjectPreferenceCard />
+                        )}
                     </Stack>
                 </Tile>
             </Column>

@@ -25,7 +25,7 @@ import {
 
 export function ProjectsDataTable({ projects }) {
     const headers = [
-        { key: 'name', header: 'Name' },
+        { key: 'title', header: 'Name' },
         { key: 'description', header: 'Description' }
     ];
 

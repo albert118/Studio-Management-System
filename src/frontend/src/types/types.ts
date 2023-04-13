@@ -10,12 +10,19 @@ export interface IPreference {
     projectId: number | string;
 }
 
+export interface IProject {
+    id: number | string;
+    description: string;
+    title: string | null;
+    Owners: Array<string>;
+}
+
 export interface IGroup {
     id: number | string;
     name: string;
     description: string;
     memberInfo: IMemberInfo;
     preferences: Array<IPreference>;
-    members: string;
+    memberCount: string;
     project: string;
 }

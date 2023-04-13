@@ -21,19 +21,25 @@ public class GroupRepository : IGroupRepository
     
     public async Task<List<Group>> GetGroupsAsync(CancellationToken ct)
     {
-        var groups = await _smsDbContext.Groups.ToListAsync(ct);
+        var groups = await _smsDbContext.Groups
+            .Include(e => e.Members)
+            .ToListAsync(ct);
         return groups;
     }
 
     public async Task<Group?> GetGroupAsync(Guid id, CancellationToken ct)
     {
-        var group = await _smsDbContext.Groups.FirstOrDefaultAsync(g => g.Id == id, ct);
+        var group = await _smsDbContext.Groups
+            .Include(e => e.Members)
+            .FirstOrDefaultAsync(g => g.Id == id, ct);
         return group;
     }
 
     public async Task<Group?> GetGroupByNameAsync(string name, CancellationToken ct)
     {
-        var group = await _smsDbContext.Groups.FirstOrDefaultAsync(g => g.Name == name, ct);
+        var group = await _smsDbContext.Groups
+            .Include(e => e.Members)
+            .FirstOrDefaultAsync(g => g.Name == name, ct);
         return group;
     }
 

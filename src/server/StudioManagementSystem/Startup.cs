@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 
 namespace StudioManagementSystem;
@@ -16,7 +16,7 @@ public class Startup
     /// Add and configure services for the container
     /// </summary>
     /// <param name="services"></param>
-    public void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
     {
         services.AddControllers();
 
@@ -29,15 +29,15 @@ public class Startup
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
-        // TODO: enable only in development
-        services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(policy => policy
-                .WithOrigins("http://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-            );
-        });
+        if (env.IsDevelopment()) {
+            services.AddCors(options => {
+                options.AddDefaultPolicy(policy => policy
+                    .WithOrigins("http://localhost:5173")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                );
+            });
+        }
     }
 
     /// <summary>

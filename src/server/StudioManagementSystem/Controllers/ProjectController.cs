@@ -23,16 +23,6 @@ public class ProjectController : ControllerBase
         _projectManager = projectManager;
     }
 
-    [HttpGet]
-    public List<ProjectDto> GetProjects()
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _projectRepository.GetProjectsAsync(ct);
-        task.Wait(ct);
-
-        return task.Result.Select(p => p.MapToProjectDto()).ToList();
-    }
-
     [HttpGet("{id}")]
     public ActionResult<ProjectDto> GetProject(Guid id)
     {

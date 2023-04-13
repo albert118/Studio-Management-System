@@ -8,7 +8,7 @@ function Dashboard() {
     const navigate = useNavigate();
 
     return (
-        <Grid fullWidth>
+        <Grid>
             <Column lg={16} md={8} sm={4} className='dashboard-page__banner'>
                 <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
                 <p className='dashboard-page__p'>Existing user? Sign in here</p>

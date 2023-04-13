@@ -1,28 +1,17 @@
-import { useState } from 'react';
-import { IGroup } from 'types/types';
 import MyGroupView from './MyGroupView';
-
-const dummyData: IGroup = {
-    id: 1,
-    name: 'Group 01',
-    description:
-        "this is your group's homepage. You can add a description for potential members to read when exploring all groups",
-    memberInfo: {
-        max: 6,
-        count: 3,
-        members: ['John', 'Agatha', 'Jenny']
-    },
-    preferences: [
-        { title: 'IBM', rank: 1, projectId: 1234 },
-        { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
-        { title: 'Apple Computers', rank: 3, projectId: 1234 }
-    ],
-    members: '3/6',
-    project: 'Apple Computers'
-};
+import { useGroup } from 'hooks/GroupHooks';
+import { useParams } from 'react-router-dom';
 
 export default function MyGroupContainer() {
-    const [myGroup, setMyGroup] = useState(dummyData);
+    const { groupId } = useParams();
 
-    return <MyGroupView myGroup={myGroup} />;
+    if (!groupId) {
+        // TODO: develop an error page and handle this better
+        return <div>Error! No group ID</div>;
+    }
+
+    const { group, isLoading } = useGroup(groupId);
+
+    // TODO: add a spinner
+    return isLoading ? 'loading...' : <MyGroupView myGroup={group} />;
 }

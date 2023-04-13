@@ -19,16 +19,6 @@ public class GroupController : ControllerBase
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
-    [HttpGet]
-    public List<GroupDto> GetGroups()
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepository.GetGroupsAsync(ct);
-        task.Wait(ct);
-
-        return task.Result.Select(g => g.MapToGroupDto()).ToList();
-    }
-
     [HttpGet("{id}")]
     public ActionResult<GroupDto> GetGroup(Guid id)
     {
