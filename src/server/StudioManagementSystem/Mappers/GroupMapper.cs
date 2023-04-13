@@ -11,7 +11,7 @@ public static class GroupMapper
             Id: group.Id,
             Name: group.Name,
             Description: string.Empty, // TODO
-            Members: new(),
+            MemberInfo: group.Members.ToMemberInfoDto(),
             Preferences: new(), // TODO
             Project: group.AssignedProject?.MapToProjectDto()
         );

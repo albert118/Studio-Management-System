@@ -4,7 +4,7 @@ public record GroupDto(
     Guid Id,
     string Name,
     string Description,
-    List<MemberInfoDto> Members,
+    MemberInfoDto MemberInfo,
     List<PreferenceDto> Preferences,
     ProjectDto? Project
 );
