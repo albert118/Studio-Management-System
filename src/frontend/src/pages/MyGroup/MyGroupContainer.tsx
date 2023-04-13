@@ -13,9 +13,9 @@ const dummyData: IGroup = {
         members: ['John', 'Agatha', 'Jenny']
     },
     preferences: [
-        { title: 'IBM', rank: 1 },
-        { title: 'Microsoft Corp,', rank: 2 },
-        { title: 'Apple Computers', rank: 3 }
+        { title: 'IBM', rank: 1, projectId: 1234 },
+        { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+        { title: 'Apple Computers', rank: 3, projectId: 1234 }
     ],
     members: '3/6',
     project: 'Apple Computers'

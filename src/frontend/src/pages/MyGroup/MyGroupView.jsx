@@ -77,6 +77,7 @@ export default function MyGroupView({ myGroup }) {
                                 <ProjectPreferenceCard
                                     title={preference.title}
                                     rank={preference.rank}
+                                    preference={preference.projectId}
                                 />
                             );
                         })}

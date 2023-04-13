@@ -7,6 +7,7 @@ export interface IMemberInfo {
 export interface IPreference {
     title: string;
     rank: number; // 1, 2, 3, etc...
+    projectId: number | string;
 }
 
 export interface IGroup {
