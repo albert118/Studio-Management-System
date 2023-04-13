@@ -1,6 +1,5 @@
 import {
     ModalWrapper,
-    Button,
     Tile,
     Grid,
     Column,
