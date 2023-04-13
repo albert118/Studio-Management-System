@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IGroup } from 'pages/Groups/types';
+import { IGroup } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 
 const useGroups = () => {

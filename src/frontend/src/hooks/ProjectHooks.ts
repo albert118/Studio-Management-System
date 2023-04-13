@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-7230;
-import { IProject } from 'pages/Projects/types';
+import { IProject } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 
 const useProjects = () => {

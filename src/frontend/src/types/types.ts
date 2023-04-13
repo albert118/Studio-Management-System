@@ -10,6 +10,11 @@ export interface IPreference {
     projectId: number | string;
 }
 
+export interface IProject {
+    id: number | string;
+    description: string;
+}
+
 export interface IGroup {
     id: number | string;
     name: string;
