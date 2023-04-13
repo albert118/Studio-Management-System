@@ -23,7 +23,7 @@ public class ProjectController : ControllerBase
         _projectManager = projectManager;
     }
 
-    [HttpGet]
+    [HttpGet("/all")]
     public List<ProjectDto> GetProjects()
     {
         var ct = _cancellationTokenAccessor.Token;

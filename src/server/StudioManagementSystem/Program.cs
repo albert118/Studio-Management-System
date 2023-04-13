@@ -17,7 +17,7 @@ var startup = new Startup(builder.Configuration);
 startup.ConfigureHostContainer(builder.Host, appConfig);
 
 // Configure the global Microsoft container services
-startup.ConfigureServices(builder.Services);
+startup.ConfigureServices(builder.Services, builder.Environment);
 
 var app = builder.Build();
 
