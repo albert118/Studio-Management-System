@@ -1,0 +1,15 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-06;
+}
+
+.stack > * {
+    margin-top: $spacing-06;
+}
+
+.stack > .subheading {
+    margin-top: $spacing-08;
+}

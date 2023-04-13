@@ -7,6 +7,8 @@
 // we wish to cascade from most generic to most specific
 // no resets are included here (as of yet), @carbon/react specifies it's own resets and normalisations
 
+@import 'colors.scss';
+
 @import 'pages/pages.scss';
 
 @import 'components/components.scss';

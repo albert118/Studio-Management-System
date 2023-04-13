@@ -4,6 +4,8 @@ import ProjectsContainer from 'pages/Projects';
 import Error from 'pages/Error/Error';
 import Login from 'pages/Login/Login';
 import Layout from 'pages/Layout';
+import MyGroupContainer from 'pages/MyGroup/MyGroupContainer';
+import AddGroupContainer from 'pages/AddGroup/AddGroupContainer';
 
 export {
     Dashboard,
@@ -11,5 +13,7 @@ export {
     Login,
     GroupsContainer as Groups,
     Error,
-    Layout
+    Layout,
+    MyGroupContainer as MyGroup,
+    AddGroupContainer as AddGroup
 };
