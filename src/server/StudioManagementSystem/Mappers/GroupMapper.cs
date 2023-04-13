@@ -8,6 +8,7 @@ public static class GroupMapper
     public static GroupDto MapToGroupDto(this Group group)
     {
         return new(
+            Id: group.Id,
             Name: group.Name,
             Description: string.Empty, // TODO
             Members: new()             // TODO
