@@ -16,11 +16,15 @@ import {
 import {
     Table,
     TableBody,
+    Button,
     TableContainer,
     TableToolbar,
     TableToolbarContent,
     TableToolbarSearch
 } from '@carbon/react';
+import { ArrowRight } from '@carbon/icons-react';
+import { useNavigate } from 'react-router-dom';
+import AppRoutes from 'navigation/AppRoutes';
 
 export function GroupsDataTable({ groups }) {
     const headers = [
@@ -48,11 +52,11 @@ export function GroupsDataTable({ groups }) {
                         <TableBody>
                             {rows.map(row => (
                                 <ExpandingRowFragment
+                                    key={row.id}
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}
                                 >
-                                    {/* <p>{getRowDescription(row.id)}</p> */}
                                     <ExpandedRowDetail row={getRow(row.id)} />
                                 </ExpandingRowFragment>
                             ))}
@@ -65,23 +69,33 @@ export function GroupsDataTable({ groups }) {
 }
 
 function ExpandedRowDetail({ row }) {
+    const navigate = useNavigate();
+
     return (
         <div className='groups-page__datatable-row-detail'>
-            <p>
+            <div>
                 <h5>Description</h5>
                 {row && row.description ? row.description : ''}
-            </p>
+            </div>
             <div>
                 <h5>Group Members</h5>
                 <ul>
-                    {row && row.MemberInfo?.members
-                        ? row.MemberInfo.members.map(member => (
-                              <li>
+                    {row && row.memberInfo?.members
+                        ? row.memberInfo.members.map((member, idx) => (
+                              <li key={idx}>
                                   <p>{member}</p>
                               </li>
                           ))
                         : ''}
                 </ul>
+            </div>
+            <div className='goto-action'>
+                <Button
+                    onClick={() => navigate(`${AppRoutes.group}/${row.id}`)}
+                    renderIcon={ArrowRight}
+                >
+                    Go to
+                </Button>
             </div>
         </div>
     );

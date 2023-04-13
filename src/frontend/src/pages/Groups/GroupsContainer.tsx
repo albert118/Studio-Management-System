@@ -14,9 +14,9 @@ const dummyData: Array<IGroup> = [
             members: ['John', 'Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '3/6',
         project: 'Apple Computers'
@@ -31,9 +31,9 @@ const dummyData: Array<IGroup> = [
             members: ['John', 'Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '3/6',
         project: 'Applebees'
@@ -48,9 +48,9 @@ const dummyData: Array<IGroup> = [
             members: ['Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '2/6',
         project: 'Apple a day...'
@@ -65,9 +65,9 @@ const dummyData: Array<IGroup> = [
             members: ['John', 'Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '3/6',
         project: 'Apple "Think Different"'
@@ -82,9 +82,9 @@ const dummyData: Array<IGroup> = [
             members: ['John', 'Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '3/6',
         project: 'Apple iPhone'
@@ -99,9 +99,9 @@ const dummyData: Array<IGroup> = [
             members: ['John', 'Agatha', 'Jenny']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '3/6',
         project: 'Apple Genius Bar'
@@ -116,9 +116,9 @@ const dummyData: Array<IGroup> = [
             members: ['Agatha']
         },
         preferences: [
-            { title: 'IBM', rank: 1 },
-            { title: 'Microsoft Corp,', rank: 2 },
-            { title: 'Apple Computers', rank: 3 }
+            { title: 'IBM', rank: 1, projectId: 1234 },
+            { title: 'Microsoft Corp,', rank: 2, projectId: 1234 },
+            { title: 'Apple Computers', rank: 3, projectId: 1234 }
         ],
         members: '1/8',
         project: 'Apple Lift'
