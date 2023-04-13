@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { IProject } from './types';
-
+import useProjects from 'hooks/ProjectHooks';
 import ProjectsView from './ProjectsView';
 
 export default function ProjectsContainer() {
-    return <ProjectsView />;
+    const { projects } = useProjects();
+
+    return <ProjectsView projects={projects} />;
 }
