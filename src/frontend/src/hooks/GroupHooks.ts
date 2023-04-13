@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { IGroup } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
+import defaultRequestOptions from './defaultRequestHeaders';
 
 const useGroups = () => {
     const [groups, setGroups] = useState<IGroup[]>([]);
 
     useEffect(() => {
         const fetchGroups = async () => {
-            const response = await fetch(ApiConfig.API_URL + '/group');
+            const response = await fetch(`${ApiConfig.API_URL}/groups/all`, {
+                ...defaultRequestOptions
+            });
             const data = await response.json();
             setGroups(data);
         };
@@ -15,11 +18,9 @@ const useGroups = () => {
     }, []);
 
     const addGroup = async (group: Omit<IGroup, 'id'>) => {
-        const response = await fetch(ApiConfig.API_URL + '/group', {
+        const response = await fetch(`${ApiConfig.API_URL}/group`, {
+            ...defaultRequestOptions,
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(group)
         });
         const newGroup = await response.json();
@@ -27,11 +28,9 @@ const useGroups = () => {
     };
 
     const updateGroup = async (group: IGroup) => {
-        const response = await fetch(ApiConfig.API_URL + '/group/${group.id}', {
+        const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
+            ...defaultRequestOptions,
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: JSON.stringify(group)
         });
         const updatedGroup = await response.json();
@@ -39,7 +38,8 @@ const useGroups = () => {
     };
 
     const deleteGroup = async (groupId: number) => {
-        await fetch(ApiConfig.API_URL + '/group/${groupId}', {
+        await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
+            ...defaultRequestOptions,
             method: 'DELETE'
         });
         setGroups(groups.filter(group => group.id !== groupId));
