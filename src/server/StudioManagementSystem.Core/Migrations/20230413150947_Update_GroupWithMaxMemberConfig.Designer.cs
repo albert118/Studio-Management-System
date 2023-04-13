@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioManagementSystem.Core;
 
@@ -10,9 +11,11 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    partial class StudioManagementDbMigrationContextModelSnapshot : ModelSnapshot
+    [Migration("20230413150947_Update_GroupWithMaxMemberConfig")]
+    partial class Update_GroupWithMaxMemberConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
