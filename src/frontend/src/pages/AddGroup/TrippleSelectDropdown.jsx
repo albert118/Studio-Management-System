@@ -9,7 +9,7 @@ export default function TrippleSelectDropdown({
     placeholderOption,
     children,
     arePreferencesValid,
-    setPreferencesInvalid
+    setPreferenceValidity
 }) {
     const { validate } = usePreferenceValidator(preferences);
 
@@ -25,7 +25,7 @@ export default function TrippleSelectDropdown({
     };
 
     useEffect(() => {
-        setPreferencesInvalid(validate());
+        setPreferenceValidity(validate());
     }, [preferences]);
 
     return (
@@ -37,7 +37,7 @@ export default function TrippleSelectDropdown({
                 defaultValue='placeholder-item'
                 onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={arePreferencesValid}
+                invalid={!arePreferencesValid}
             >
                 {children}
             </Select>
@@ -48,7 +48,7 @@ export default function TrippleSelectDropdown({
                 defaultValue='placeholder-item'
                 onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={arePreferencesValid}
+                invalid={!arePreferencesValid}
             >
                 {children}
             </Select>
@@ -59,7 +59,7 @@ export default function TrippleSelectDropdown({
                 defaultValue='placeholder-item'
                 onChange={onUpdatePreference}
                 invalidText='You can only select unique preferences'
-                invalid={arePreferencesValid}
+                invalid={!arePreferencesValid}
             >
                 {children}
             </Select>
