@@ -1,3 +1,5 @@
+import { Guid } from 'guid-typescript';
+
 export type Nullable<T> = T | null;
 
 export interface IMemberInfo {
@@ -20,7 +22,7 @@ export interface IProject {
 }
 
 export interface IGroup {
-    id: number | string;
+    id: Guid;
     name: string;
     description: string;
     memberInfo: IMemberInfo;
