@@ -88,9 +88,9 @@ export default function AddGroupView({ availableProjects }) {
                         <NumberInput
                             name='maxMembers'
                             id='maxMembers'
-                            onChange={e =>
-                                setFormData({ ...formData, [e.target.name]: e.target.value })
-                            }
+                            onChange={(_, data) => {
+                                setFormData({ ...formData, maxMembers: data.value });
+                            }}
                             label='Group size'
                             helperText='The number of group members (min. 2, max. 10)'
                             value={defaultGroupSize}
