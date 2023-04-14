@@ -23,6 +23,17 @@ public class Group : IArchivable, IMetaData, ILockable
         // Preferences = dto.Preferences;
     }
 
+    public Group(UpdateGroupDto dto)
+    {
+        Name = dto.Name;
+        Members = new();
+        MaxMembers = dto.MaxMembers;
+        Description = dto.Description;
+
+        // TODO: migration for new field
+        // Preferences = dto.Preferences;
+    }
+
     public Guid Id { get; set; }
 
     public Project? AssignedProject { get; set; }

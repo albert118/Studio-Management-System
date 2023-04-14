@@ -62,13 +62,15 @@ public class GroupRepository : IGroupRepository
         return group.Id;
     }
 
-    public async Task<bool> UpdateGroupNameAsync(Guid id, string name, CancellationToken ct)
+    public async Task<bool> UpdateGroup(Guid id, Group updatedGroup, CancellationToken ct)
     {
         var group = await GetGroupAsync(id, ct)
             ?? throw new DataException($"Couldn't find {nameof(Group)} with ID: '{id}'");
 
         try {
-            group.Name = name;
+            group.Name = updatedGroup.Name;
+            group.Description = updatedGroup.Description;
+            group.MaxMembers = updatedGroup.MaxMembers;
             await _smsDbContext.SaveChangesAsync(ct);
         }
         catch (Exception ex) {
@@ -78,5 +80,4 @@ public class GroupRepository : IGroupRepository
 
         return true;
     }
-
 }
