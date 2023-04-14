@@ -49,11 +49,16 @@
     padding-top: $spacing-06;
     padding-bottom: $spacing-06;
 
+    .description {
+        max-width: $spacing-07 * 10;
+        min-width: $spacing-07 * 10;
+    }
+
     p,
     h5 {
         @include wrap-text();
         max-width: $spacing-07 * 10;
-        min-width: $spacing-05 * 10;
+        min-width: $spacing-07 * 10;
     }
 }
 
