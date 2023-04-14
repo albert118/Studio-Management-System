@@ -11,7 +11,7 @@ export interface IMemberInfo {
 export interface IPreference {
     title: string;
     rank: number; // 1, 2, 3, etc...
-    projectId: number | string;
+    projectId: Guid;
 }
 
 export interface IProject {
@@ -26,7 +26,7 @@ export interface IGroup {
     name: string;
     description: string;
     memberInfo: IMemberInfo;
-    preferences: Array<IPreference>;
+    preferences: IPreference[];
     memberCount: string;
     project: string;
 }
