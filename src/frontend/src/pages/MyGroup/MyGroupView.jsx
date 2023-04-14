@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ModalWrapper, Tile, Grid, Column, MultiSelect, Form, TextArea } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
@@ -5,7 +6,9 @@ import { FormContainer } from 'components/Forms';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
 
-export default function MyGroupView({ group, updateGroup, setGroup }) {
+export default function MyGroupView({ group, updateGroup }) {
+    const [editingGroup, setEditingGroup] = useState(group);
+
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
@@ -94,9 +97,9 @@ export default function MyGroupView({ group, updateGroup, setGroup }) {
                                 buttonTriggerText='Edit group'
                                 danger
                                 modalHeading='Edit group'
-                                handleSubmit={async () => await updateGroup()}
+                                handleSubmit={async () => await updateGroup(editingGroup)}
                             >
-                                <EditGroup group={group} setGroup={setGroup} />
+                                <EditGroup group={editingGroup} setGroup={setEditingGroup} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card danger ghost'>

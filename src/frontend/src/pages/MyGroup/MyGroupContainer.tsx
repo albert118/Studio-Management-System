@@ -10,12 +10,8 @@ export default function MyGroupContainer() {
         return <div>Error! No group ID</div>;
     }
 
-    const { group, updateGroup, setGroup, isLoading } = useGroup(groupId);
+    const { group, updateGroup, isLoading } = useGroup(groupId);
 
     // TODO: add a spinner
-    return isLoading ? (
-        'loading...'
-    ) : (
-        <MyGroupView group={group} updateGroup={updateGroup} setGroup={setGroup} />
-    );
+    return isLoading ? 'loading...' : <MyGroupView group={group} updateGroup={updateGroup} />;
 }

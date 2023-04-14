@@ -68,14 +68,16 @@ export function useGroup(groupId: string) {
         fetchGroup();
     }, []);
 
-    const updateGroup = async () => {
+    const updateGroup = async (updatedGroup: IGroup) => {
         const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
             ...defaultRequestOptions,
             method: 'PATCH',
-            body: JSON.stringify(group)
+            body: JSON.stringify(updatedGroup)
         });
-        const updatedGroup = await response.json();
-        setGroup(updatedGroup);
+
+        if (response.ok) {
+            setGroup(updatedGroup);
+        }
     };
 
     const deleteGroup = async (groupId: number) => {
@@ -86,5 +88,5 @@ export function useGroup(groupId: string) {
         setGroup({} as IGroup);
     };
 
-    return { group, updateGroup, deleteGroup, isLoading, setGroup };
+    return { group, updateGroup, deleteGroup, isLoading };
 }
