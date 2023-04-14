@@ -10,7 +10,7 @@ public static class GroupMapper
         return new(
             Id: group.Id,
             Name: group.Name,
-            Description: string.Empty, // TODO
+            Description: group.Description,
             MemberInfo: group.Members.ToMemberInfoDto(group),
             Preferences: new(), // TODO
             Project: group.AssignedProject?.MapToProjectDto(),
