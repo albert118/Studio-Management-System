@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IGroup } from 'types/types';
+import { IGroup, NewGroupDto } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 
@@ -22,7 +22,7 @@ export default function useGroups() {
         fetchGroups();
     }, []);
 
-    const addGroup = async (group: Omit<IGroup, 'id'>) => {
+    const addGroup = async (group: NewGroupDto) => {
         const response = await fetch(`${ApiConfig.API_URL}/group`, {
             ...defaultRequestOptions,
             method: 'POST',
@@ -32,29 +32,11 @@ export default function useGroups() {
         setGroups([...groups, newGroup]);
     };
 
-    const updateGroup = async (group: IGroup) => {
-        const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
-            ...defaultRequestOptions,
-            method: 'PUT',
-            body: JSON.stringify(group)
-        });
-        const updatedGroup = await response.json();
-        setGroups(groups.map(g => (g.id === updatedGroup.id ? updatedGroup : g)));
-    };
-
-    const deleteGroup = async (groupId: number) => {
-        await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
-            ...defaultRequestOptions,
-            method: 'DELETE'
-        });
-        setGroups(groups.filter(group => group.id !== groupId));
-    };
-
-    return { groups, addGroup, updateGroup, deleteGroup, isLoading };
+    return { groups, addGroup, isLoading };
 }
 
 export function useGroup(groupId: string) {
-    const [group, setGroup] = useState<IGroup[]>([]);
+    const [group, setGroup] = useState<IGroup>({} as IGroup);
     const [isLoading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -72,5 +54,23 @@ export function useGroup(groupId: string) {
         fetchGroup();
     }, []);
 
-    return { group, isLoading };
+    const updateGroup = async (group: IGroup) => {
+        const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
+            ...defaultRequestOptions,
+            method: 'PUT',
+            body: JSON.stringify(group)
+        });
+        const updatedGroup = await response.json();
+        setGroup(updatedGroup);
+    };
+
+    const deleteGroup = async (groupId: number) => {
+        await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
+            ...defaultRequestOptions,
+            method: 'DELETE'
+        });
+        setGroup({} as IGroup);
+    };
+
+    return { group, updateGroup, deleteGroup, isLoading };
 }

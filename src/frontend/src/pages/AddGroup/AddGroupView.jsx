@@ -1,50 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Column, Button, Form, TextArea, TextInput, SelectItem } from '@carbon/react';
 import { FormContainer, Stack } from 'components/Forms';
 import TrippleSelectDropdown from './TrippleSelectDropdown';
-import { formData, NewGroupDto, newSelectedPreferences } from './types';
+import { NewGroupDto } from 'types/types';
+import { newSelectedPreferences } from './types';
+import { useSubmissionValidator } from './useSubmissionValidator';
 
 const defaultItem = 'placeholder-item';
 
-export default function AddGroupView({ availableProjects }) {
+export default function AddGroupView({ availableProjects, saveGroup }) {
     const [selectedPreferences, setSelectedPreferences] = useState(newSelectedPreferences());
-    const [arePreferencesValid, setPreferencesInvalid] = useState(false);
-    const [generalFormData, setFormData] = useState(formData);
-    const [groupNameHasError, setGroupNameError] = useState(false);
+    const [arePreferencesValid, setPreferenceValidity] = useState(true);
+    const [formData, setFormData] = useState({ name: '', description: '' });
+    const [isSubmittable, setSubmittable] = useState(false);
 
-    const isSubmittable = () => {
-        return arePreferencesValid && !groupNameHasError;
-    };
+    const { validate, errors } = useSubmissionValidator(formData, arePreferencesValid);
 
-    const updateFormData = event => {
-        setFormData({
-            ...generalFormData,
-            [event.target.name]: event.target.value
-        });
-    };
+    useEffect(() => {
+        setSubmittable(validate());
+    }, [formData, arePreferencesValid]);
 
-    const mapFormToDto = () => {
-        const dto = NewGroupDto();
-
-        dto.name = generalFormData.name;
-        dto.description = generalFormData.description;
-        dto.preferences = selectedPreferences;
-
-        return dto;
-    };
-
-    const submitHandler = event => {
-        event.preventDefault();
-
-        if (generalFormData.name) {
-            setGroupNameError(true);
-            return;
-        }
-
-        setGroupNameError(false);
-        const dto = mapFormToDto();
-        console.log(dto);
-        // TODO: add datahook for API POST
+    const submit = e => {
+        e.preventDefault();
+        saveGroup(NewGroupDto(...Object.values(formData), selectedPreferences));
     };
 
     return (
@@ -59,27 +37,30 @@ export default function AddGroupView({ availableProjects }) {
                 </p>
             </Column>
             <Column lg={16} md={8} sm={4}>
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submit}>
                     <Stack>
                         <TextInput
-                            helperText='Keep it memorable and less than 50 characters'
                             name='name'
                             id='name'
+                            onChange={e =>
+                                setFormData({ ...formData, [e.target.name]: e.target.value })
+                            }
                             labelText='Group name'
+                            helperText='Keep it memorable and less than 50 characters'
                             placeholder='Add a memorable and unique group name'
-                            onChange={updateFormData}
                             invalidText='A group name is required to create a new group'
-                            invalid={groupNameHasError}
+                            invalid={errors.name}
                             maxLength={50}
                         />
                         <TextArea
-                            helperText='Optional, this will will appear when people view your group details'
                             name='description'
-                            id='description'
+                            onChange={e =>
+                                setFormData({ ...formData, [e.target.name]: e.target.value })
+                            }
                             labelText='Description (optional)'
+                            helperText='Optional, this will will appear when people view your group details'
                             placeholder='Add an optional description of your group'
                             rows={4}
-                            onChange={updateFormData}
                         />
 
                         <div className='subheading'>
@@ -100,7 +81,7 @@ export default function AddGroupView({ availableProjects }) {
                             setPreferences={setSelectedPreferences}
                             placeholderOption={defaultItem}
                             arePreferencesValid={arePreferencesValid}
-                            setPreferencesInvalid={setPreferencesInvalid}
+                            setPreferenceValidity={setPreferenceValidity}
                         >
                             <PlaceholderSelectItem />
                             {availableProjects.map(project => (
@@ -112,7 +93,7 @@ export default function AddGroupView({ availableProjects }) {
                             ))}
                         </TrippleSelectDropdown>
 
-                        <Button kind='primary' type='submit' disabled={isSubmittable()}>
+                        <Button kind='primary' type='submit' disabled={!isSubmittable}>
                             Create
                         </Button>
                     </Stack>
