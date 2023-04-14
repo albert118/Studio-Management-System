@@ -1,23 +1,25 @@
 import AddGroupView from './AddGroupView';
-import { IViewProps } from './types';
+import { NewGroupDto } from './types';
 
 export default function AddGroupContainer() {
-    const demoViewProps: IViewProps = {
-        availableProjects: [
-            {
-                id: '1',
-                description: 'Apple Inc.'
-            },
-            {
-                id: '2',
-                description: 'Microsft Corp.'
-            },
-            {
-                id: '3',
-                description: 'IBM'
-            }
-        ]
+    const availableProjects = [
+        {
+            id: '1',
+            description: 'Apple Inc.'
+        },
+        {
+            id: '2',
+            description: 'Microsft Corp.'
+        },
+        {
+            id: '3',
+            description: 'IBM'
+        }
+    ];
+
+    const saveGroup = async (group: NewGroupDto) => {
+        console.log(JSON.stringify(group));
     };
 
-    return <AddGroupView {...demoViewProps} />;
+    return <AddGroupView availableProjects={availableProjects} saveGroup={saveGroup} />;
 }
