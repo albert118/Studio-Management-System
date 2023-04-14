@@ -26,3 +26,27 @@ export interface IGroup {
     memberCount: string;
     project: string;
 }
+
+export const NewGroupDto = (
+    name: string,
+    description: string,
+    preferences: SelectedPreferences
+): NewGroupDto => {
+    return {
+        name,
+        description,
+        preferences
+    } as NewGroupDto;
+};
+
+export type NewGroupDto = {
+    name: string;
+    description: undefined | string;
+    preferences: SelectedPreferences;
+};
+
+export type SelectedPreferences = {
+    preferenceOne: null | string;
+    preferenceTwo: null | string;
+    preferenceThree: null | string;
+};

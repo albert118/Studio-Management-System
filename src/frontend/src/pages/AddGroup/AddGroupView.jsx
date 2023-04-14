@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { Column, Button, Form, TextArea, TextInput, SelectItem } from '@carbon/react';
 import { FormContainer, Stack } from 'components/Forms';
 import TrippleSelectDropdown from './TrippleSelectDropdown';
-import { NewGroupDto, newSelectedPreferences } from './types';
+import { NewGroupDto } from 'types/types';
+import { newSelectedPreferences } from './types';
 import { useSubmissionValidator } from './useSubmissionValidator';
 
 const defaultItem = 'placeholder-item';
@@ -21,7 +22,7 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
 
     const submit = e => {
         e.preventDefault();
-        saveGroup(NewGroupDto({ ...formData, selectedPreferences }));
+        saveGroup(NewGroupDto(...Object.values(formData), selectedPreferences));
     };
 
     return (

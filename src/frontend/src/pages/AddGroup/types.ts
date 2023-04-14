@@ -1,12 +1,8 @@
+import { SelectedPreferences } from 'types/types';
+
 export type ProjectPreferenceOption = {
     description: string;
     id: string;
-};
-
-export type SelectedPreferences = {
-    preferenceOne: null | string;
-    preferenceTwo: null | string;
-    preferenceThree: null | string;
 };
 
 export const newSelectedPreferences = (): SelectedPreferences => {
@@ -20,24 +16,6 @@ export const newSelectedPreferences = (): SelectedPreferences => {
 export const getPreferencesAsList = (obj: SelectedPreferences): string[] => {
     const arr = [obj.preferenceOne, obj.preferenceTwo, obj.preferenceThree];
     return arr.filter(pref => !!pref && pref !== '') as string[];
-};
-
-export const NewGroupDto = (
-    name: string,
-    description: string,
-    preferences: SelectedPreferences
-): NewGroupDto => {
-    return {
-        name,
-        description,
-        preferences
-    } as NewGroupDto;
-};
-
-export type NewGroupDto = {
-    name: string;
-    description: undefined | string;
-    preferences: SelectedPreferences;
 };
 
 export interface ITrippleSelectProps extends React.PropsWithChildren {
