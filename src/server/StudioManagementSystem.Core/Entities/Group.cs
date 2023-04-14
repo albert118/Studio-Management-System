@@ -19,7 +19,7 @@ public class Group : IArchivable, IMetaData, ILockable
         MaxMembers = 2; // TODO update the UI form to include this field (no less than 2, no more than 8 I guess)
         // TODO: migration for new fields
         // Description = dto.Description;
-        // Preferences = dto.PreferenceOptions;
+        // Preferences = dto.Preferences;
     }
 
     public Guid Id { get; set; }
