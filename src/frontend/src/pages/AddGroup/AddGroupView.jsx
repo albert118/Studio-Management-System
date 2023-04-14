@@ -5,13 +5,24 @@ import TrippleSelectDropdown from './TrippleSelectDropdown';
 import { NewGroupDto } from 'types/types';
 import { newSelectedPreferences } from './types';
 import { useSubmissionValidator } from './useSubmissionValidator';
+import useGroups from 'hooks/GroupHooks';
+import { useNavigate } from 'react-router-dom';
+import AppRoutes from 'navigation/AppRoutes';
 
 const defaultItem = 'placeholder-item';
+const defaultGroupSize = 2;
 
-export default function AddGroupView({ availableProjects, saveGroup }) {
+export default function AddGroupView({ availableProjects }) {
+    const { addGroup, apiErrors } = useGroups();
+    const navigate = useNavigate();
+
     const [selectedPreferences, setSelectedPreferences] = useState(newSelectedPreferences());
     const [arePreferencesValid, setPreferenceValidity] = useState(true);
-    const [formData, setFormData] = useState({ name: '', description: '' });
+    const [formData, setFormData] = useState({
+        name: '',
+        description: '',
+        maxMembers: defaultGroupSize
+    });
     const [isSubmittable, setSubmittable] = useState(false);
 
     const { validate, errors } = useSubmissionValidator(formData, arePreferencesValid);
@@ -20,9 +31,17 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
         setSubmittable(validate());
     }, [formData, arePreferencesValid]);
 
-    const submit = e => {
+    const submit = async e => {
         e.preventDefault();
-        saveGroup(NewGroupDto(...Object.values(formData), selectedPreferences));
+        const groupId = await addGroup(
+            NewGroupDto(...Object.values(formData), selectedPreferences)
+        );
+
+        if (apiErrors) {
+            return;
+        }
+
+        navigate(`${AppRoutes.group}/${groupId}`);
     };
 
     return (
@@ -39,6 +58,8 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
             <Column lg={16} md={8} sm={4}>
                 <Form onSubmit={submit}>
                     <Stack>
+                        {/* TODO: improve this with a banner */}
+                        <div>{JSON.stringify(apiErrors)}</div>
                         <TextInput
                             name='name'
                             id='name'
@@ -54,6 +75,7 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
                         />
                         <TextArea
                             name='description'
+                            id='description'
                             onChange={e =>
                                 setFormData({ ...formData, [e.target.name]: e.target.value })
                             }
@@ -65,12 +87,14 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
 
                         <NumberInput
                             name='maxMembers'
+                            id='maxMembers'
                             onChange={e =>
                                 setFormData({ ...formData, [e.target.name]: e.target.value })
                             }
                             label='Group size'
                             helperText='The number of group members (min. 2, max. 10)'
-                            min={2}
+                            value={defaultGroupSize}
+                            min={defaultGroupSize}
                             max={10}
                         />
 

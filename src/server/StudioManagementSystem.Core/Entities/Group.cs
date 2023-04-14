@@ -15,8 +15,8 @@ public class Group : IArchivable, IMetaData, ILockable
     {
         Name = dto.Name;
         Members = new();
-        // 2 is a reasonable default for now
-        MaxMembers = 2; // TODO update the UI form to include this field (no less than 2, no more than 8 I guess)
+        MaxMembers = dto.MaxMembers;
+
         // TODO: migration for new fields
         // Description = dto.Description;
         // Preferences = dto.Preferences;

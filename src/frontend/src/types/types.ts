@@ -1,3 +1,5 @@
+export type Nullable<T> = T | null;
+
 export interface IMemberInfo {
     max: number;
     count: number;
@@ -49,7 +51,7 @@ export type NewGroupDto = {
 };
 
 export type SelectedPreferences = {
-    preferenceOne: null | string;
-    preferenceTwo: null | string;
-    preferenceThree: null | string;
+    preferenceOne: Nullable<string>;
+    preferenceTwo: Nullable<string>;
+    preferenceThree: Nullable<string>;
 };
