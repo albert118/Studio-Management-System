@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Column, Button, Form, TextArea, TextInput, SelectItem } from '@carbon/react';
+import { Column, Button, Form, TextArea, TextInput, SelectItem, NumberInput } from '@carbon/react';
 import { FormContainer, Stack } from 'components/Forms';
 import TrippleSelectDropdown from './TrippleSelectDropdown';
 import { NewGroupDto } from 'types/types';
@@ -61,6 +61,17 @@ export default function AddGroupView({ availableProjects, saveGroup }) {
                             helperText='Optional, this will will appear when people view your group details'
                             placeholder='Add an optional description of your group'
                             rows={4}
+                        />
+
+                        <NumberInput
+                            name='maxMembers'
+                            onChange={e =>
+                                setFormData({ ...formData, [e.target.name]: e.target.value })
+                            }
+                            label='Group size'
+                            helperText='The number of group members (min. 2, max. 10)'
+                            min={2}
+                            max={10}
                         />
 
                         <div className='subheading'>

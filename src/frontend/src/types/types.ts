@@ -30,11 +30,13 @@ export interface IGroup {
 export const NewGroupDto = (
     name: string,
     description: string,
+    maxMembers: number,
     preferences: SelectedPreferences
 ): NewGroupDto => {
     return {
         name,
         description,
+        maxMembers,
         preferences
     } as NewGroupDto;
 };
@@ -42,6 +44,7 @@ export const NewGroupDto = (
 export type NewGroupDto = {
     name: string;
     description: undefined | string;
+    maxMembers: number;
     preferences: SelectedPreferences;
 };
 
