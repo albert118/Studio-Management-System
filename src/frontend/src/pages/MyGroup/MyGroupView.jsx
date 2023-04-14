@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { ModalWrapper, Tile, Grid, Column, MultiSelect, Form, TextArea } from '@carbon/react';
+import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
-import { FormContainer } from 'components/Forms';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
+import { LeaveGroup } from './LeaveGroup';
+import { GroupMemberInvite } from './GroupMemberInvite';
+import { PendingApplications } from './PendingApplications';
+import { MyGroupMembers } from './MyGroupMembers';
 
 export default function MyGroupView({ group, updateGroup }) {
     const [editingGroup, setEditingGroup] = useState(group);
@@ -121,75 +124,5 @@ export default function MyGroupView({ group, updateGroup }) {
                 </Tile>
             </Column>
         </Grid>
-    );
-}
-
-function MyGroupMembers({ members }) {
-    return (
-        <Stack>
-            {members.map((member, idx) => (
-                <span key={idx}>{member}</span>
-            ))}
-        </Stack>
-    );
-}
-
-function PendingApplications() {
-    return (
-        <Stack>
-            <div className='simple-card invitation'>
-                <p>Jeremy would like to join the group</p>
-                <p>Hi you're group looked cool!</p>
-            </div>
-        </Stack>
-    );
-}
-
-function GroupMemberInvite() {
-    return (
-        <Stack>
-            <FormContainer>
-                <Column lg={16} md={8} sm={4} className='__form-prompt'>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus id,
-                        consequuntur corporis quibusdam magni quos eaque commodi in dicta voluptatum
-                        omnis? Eos ullam assumenda tempora. Earum sapiente dolorem eveniet
-                        accusamus?
-                    </p>
-                </Column>
-                <Column lg={16} md={8} sm={4}>
-                    <Form onSubmit={e => console.log(e)}>
-                        <Stack>
-                            <MultiSelect
-                                helperText='You can select up to as many as your group can fit'
-                                name='invitees'
-                                id='invitees'
-                                titleText='Invitees'
-                                label='Create multiple invites by selecting multiple people'
-                                items={['Abbey', 'Mark', 'Melody']}
-                            />
-                            <TextArea
-                                helperText='Add a message with your invite (optional)'
-                                name='invitation-message'
-                                id='invitation-message'
-                                labelText='Message (optional)'
-                                placeholder='Optionally include a message with your invitation'
-                                rows={2}
-                                maxLength={100}
-                            />
-                        </Stack>
-                    </Form>
-                </Column>
-            </FormContainer>
-        </Stack>
-    );
-}
-
-function LeaveGroup() {
-    return (
-        <p>
-            Are you sure you want to leave this group? This will mean you have to re-apply to join
-            back again.
-        </p>
     );
 }
