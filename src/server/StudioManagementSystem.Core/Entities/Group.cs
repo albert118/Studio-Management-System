@@ -9,6 +9,7 @@ public class Group : IArchivable, IMetaData, ILockable
         Name = name;
         Members = new();
         MaxMembers = 2;
+        Description = string.Empty;
     }
 
     public Group(CreateGroupDto dto)
@@ -16,9 +17,9 @@ public class Group : IArchivable, IMetaData, ILockable
         Name = dto.Name;
         Members = new();
         MaxMembers = dto.MaxMembers;
+        Description = dto.Description ?? string.Empty;
 
-        // TODO: migration for new fields
-        // Description = dto.Description;
+        // TODO: migration for new field
         // Preferences = dto.Preferences;
     }
 
@@ -37,6 +38,8 @@ public class Group : IArchivable, IMetaData, ILockable
     public bool IsLocked { get; set; }
 
     public int MaxMembers { get; set; }
+
+    public string Description { get; set; }
 
     public List<StudentContact> Members { get; set; }
 }
