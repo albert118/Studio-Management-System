@@ -58,7 +58,7 @@ export default function AddGroupView({ availableProjects }) {
             <Column lg={16} md={8} sm={4}>
                 <Form onSubmit={submit}>
                     <Stack>
-                        {/* TODO: improve this with a banner */}
+                        {/* TODO: improve this with an inline notification (CBS component ) https://carbondesignsystem.com/components/notification/usage/*/}
                         <div>{JSON.stringify(apiErrors)}</div>
                         <TextInput
                             name='name'

@@ -1,24 +1,16 @@
-import {
-    ModalWrapper,
-    Tile,
-    Grid,
-    Column,
-    MultiSelect,
-    Form,
-    TextArea,
-    TextInput
-} from '@carbon/react';
+import { ModalWrapper, Tile, Grid, Column, MultiSelect, Form, TextArea } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
-import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { FormContainer } from 'components/Forms';
+import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
+import { EditGroup } from './EditGroup';
 
-export default function MyGroupView({ myGroup }) {
+export default function MyGroupView({ group, updateGroup, setGroup }) {
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
-                <h1 className='mygroup-page__heading'>{myGroup.name}</h1>
-                <p className='mygroup-page__p'>{myGroup.description}</p>
+                <h1 className='mygroup-page__heading'>{group.name}</h1>
+                <p className='mygroup-page__p'>{group.description}</p>
             </Column>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r2'>
                 <Tile className='mygroup-page__application-management'>
@@ -35,7 +27,7 @@ export default function MyGroupView({ myGroup }) {
                                 modalHeading='Group members'
                                 passiveModal
                             >
-                                <MyGroupMembers members={myGroup.memberInfo.members} />
+                                <MyGroupMembers members={group.memberInfo.members} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
@@ -71,8 +63,8 @@ export default function MyGroupView({ myGroup }) {
                 <Tile className='mygroup-page__project-preference-management'>
                     <h3>Project Preferences</h3>
                     <Stack>
-                        {myGroup.preferences ? (
-                            myGroup.preferences.map(preference => {
+                        {group.preferences ? (
+                            group.preferences.map(preference => {
                                 return (
                                     <ProjectPreferenceCard
                                         key={preference.rank}
@@ -102,8 +94,9 @@ export default function MyGroupView({ myGroup }) {
                                 buttonTriggerText='Edit group'
                                 danger
                                 modalHeading='Edit group'
+                                handleSubmit={async () => await updateGroup()}
                             >
-                                <EditGroup />
+                                <EditGroup group={group} setGroup={setGroup} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card danger ghost'>
@@ -180,46 +173,6 @@ function GroupMemberInvite() {
                                 placeholder='Optionally include a message with your invitation'
                                 rows={2}
                                 maxLength={100}
-                            />
-                        </Stack>
-                    </Form>
-                </Column>
-            </FormContainer>
-        </Stack>
-    );
-}
-
-function EditGroup() {
-    return (
-        <Stack>
-            <FormContainer>
-                <Column lg={16} md={8} sm={4} className='__form-prompt'>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus id,
-                        consequuntur corporis quibusdam magni quos eaque commodi in dicta voluptatum
-                        omnis? Eos ullam assumenda tempora. Earum sapiente dolorem eveniet
-                        accusamus?
-                    </p>
-                </Column>
-                <Column lg={16} md={8} sm={4}>
-                    <Form onSubmit={e => console.log(e)}>
-                        <Stack>
-                            <TextInput
-                                helperText='Make sure to add a memorable group name'
-                                name='name'
-                                id='name'
-                                labelText='Group name'
-                                placeholder='Add a memorable and unique group name'
-                                invalidText='A group name is required to create a new group'
-                                maxLength={50}
-                            />
-                            <TextArea
-                                helperText='Optional, this will will appear when people view your group details'
-                                name='description'
-                                id='description'
-                                labelText='Description (optional)'
-                                placeholder='Add an optional description of your group'
-                                rows={4}
                             />
                         </Stack>
                     </Form>

@@ -68,10 +68,10 @@ export function useGroup(groupId: string) {
         fetchGroup();
     }, []);
 
-    const updateGroup = async (group: IGroup) => {
+    const updateGroup = async () => {
         const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
             ...defaultRequestOptions,
-            method: 'PUT',
+            method: 'PATCH',
             body: JSON.stringify(group)
         });
         const updatedGroup = await response.json();
@@ -86,5 +86,5 @@ export function useGroup(groupId: string) {
         setGroup({} as IGroup);
     };
 
-    return { group, updateGroup, deleteGroup, isLoading };
+    return { group, updateGroup, deleteGroup, isLoading, setGroup };
 }
