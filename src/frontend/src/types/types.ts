@@ -1,3 +1,7 @@
+import { Guid } from 'guid-typescript';
+
+export type Nullable<T> = T | null;
+
 export interface IMemberInfo {
     max: number;
     count: number;
@@ -7,7 +11,7 @@ export interface IMemberInfo {
 export interface IPreference {
     title: string;
     rank: number; // 1, 2, 3, etc...
-    projectId: number | string;
+    projectId: Guid;
 }
 
 export interface IProject {
@@ -18,11 +22,11 @@ export interface IProject {
 }
 
 export interface IGroup {
-    id: number | string;
+    id: Guid;
     name: string;
     description: string;
     memberInfo: IMemberInfo;
-    preferences: Array<IPreference>;
+    preferences: IPreference[];
     memberCount: string;
     project: string;
 }
@@ -30,11 +34,13 @@ export interface IGroup {
 export const NewGroupDto = (
     name: string,
     description: string,
+    maxMembers: number,
     preferences: SelectedPreferences
 ): NewGroupDto => {
     return {
         name,
         description,
+        maxMembers,
         preferences
     } as NewGroupDto;
 };
@@ -42,11 +48,12 @@ export const NewGroupDto = (
 export type NewGroupDto = {
     name: string;
     description: undefined | string;
+    maxMembers: number;
     preferences: SelectedPreferences;
 };
 
 export type SelectedPreferences = {
-    preferenceOne: null | string;
-    preferenceTwo: null | string;
-    preferenceThree: null | string;
+    preferenceOne: Nullable<string>;
+    preferenceTwo: Nullable<string>;
+    preferenceThree: Nullable<string>;
 };

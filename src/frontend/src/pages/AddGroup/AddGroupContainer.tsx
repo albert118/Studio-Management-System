@@ -1,6 +1,5 @@
 import { NewGroupDto } from 'types/types';
 import AddGroupView from './AddGroupView';
-import useGroups from 'hooks/GroupHooks';
 
 const availableProjects = [
     {
@@ -17,10 +16,5 @@ const availableProjects = [
     }
 ];
 export default function AddGroupContainer() {
-    const { addGroup } = useGroups();
-    const saveGroup = async (group: NewGroupDto) => {
-        await addGroup(group);
-    };
-
-    return <AddGroupView availableProjects={availableProjects} saveGroup={saveGroup} />;
+    return <AddGroupView availableProjects={availableProjects} />;
 }

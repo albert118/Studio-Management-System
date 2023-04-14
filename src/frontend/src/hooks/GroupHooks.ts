@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { IGroup, NewGroupDto } from 'types/types';
+import { Nullable, IGroup, NewGroupDto } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
+import { KestrelServerError, ApiError } from './types';
 
 export default function useGroups() {
     const [groups, setGroups] = useState<IGroup[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
     useEffect(() => {
         const fetchGroups = async () => {
@@ -22,17 +24,29 @@ export default function useGroups() {
         fetchGroups();
     }, []);
 
-    const addGroup = async (group: NewGroupDto) => {
+    const addGroup = async (group: NewGroupDto): Promise<string> => {
         const response = await fetch(`${ApiConfig.API_URL}/group`, {
             ...defaultRequestOptions,
             method: 'POST',
             body: JSON.stringify(group)
         });
-        const newGroup = await response.json();
-        setGroups([...groups, newGroup]);
+
+        let newGroupId: string = '';
+        const data = await response.json();
+
+        if (response.ok) {
+            newGroupId = data;
+        } else {
+            const errorData = data as KestrelServerError;
+            const apiError = { error: errorData.title, message: errorData.errors };
+            console.error(JSON.stringify(apiError));
+            setErrors(apiError);
+        }
+
+        return newGroupId;
     };
 
-    return { groups, addGroup, isLoading };
+    return { groups, addGroup, isLoading, errors };
 }
 
 export function useGroup(groupId: string) {
@@ -54,14 +68,16 @@ export function useGroup(groupId: string) {
         fetchGroup();
     }, []);
 
-    const updateGroup = async (group: IGroup) => {
+    const updateGroup = async (updatedGroup: IGroup) => {
         const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
             ...defaultRequestOptions,
-            method: 'PUT',
-            body: JSON.stringify(group)
+            method: 'PATCH',
+            body: JSON.stringify(updatedGroup)
         });
-        const updatedGroup = await response.json();
-        setGroup(updatedGroup);
+
+        if (response.ok) {
+            setGroup(updatedGroup);
+        }
     };
 
     const deleteGroup = async (groupId: number) => {

@@ -6,6 +6,7 @@
 .mygroup-page__r1 {
     padding-top: $spacing-05;
     padding-left: $spacing-05;
+    padding-right: $spacing-05;
     padding-bottom: $spacing-07 * 4;
     @include neutral-banner__background;
 
@@ -27,6 +28,8 @@
     @include breakpoint-between((320px + 1), md) {
         max-width: 75%;
     }
+
+    @include wrap-text();
 }
 
 .mygroup-page__heading {

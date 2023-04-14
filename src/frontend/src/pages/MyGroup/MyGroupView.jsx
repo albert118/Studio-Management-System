@@ -1,24 +1,22 @@
-import {
-    ModalWrapper,
-    Tile,
-    Grid,
-    Column,
-    MultiSelect,
-    Form,
-    TextArea,
-    TextInput
-} from '@carbon/react';
+import { useState } from 'react';
+import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
 import { Stack } from 'components/Forms';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
-import { FormContainer } from 'components/Forms';
+import { EditGroup } from './EditGroup';
+import { LeaveGroup } from './LeaveGroup';
+import { GroupMemberInvite } from './GroupMemberInvite';
+import { PendingApplications } from './PendingApplications';
+import { MyGroupMembers } from './MyGroupMembers';
 
-export default function MyGroupView({ myGroup }) {
+export default function MyGroupView({ group, updateGroup }) {
+    const [editingGroup, setEditingGroup] = useState(group);
+
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
-                <h1 className='mygroup-page__heading'>{myGroup.name}</h1>
-                <p className='mygroup-page__p'>{myGroup.description}</p>
+                <h1 className='mygroup-page__heading'>{group.name}</h1>
+                <p className='mygroup-page__p'>{group.description}</p>
             </Column>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r2'>
                 <Tile className='mygroup-page__application-management'>
@@ -35,7 +33,7 @@ export default function MyGroupView({ myGroup }) {
                                 modalHeading='Group members'
                                 passiveModal
                             >
-                                <MyGroupMembers members={myGroup.memberInfo.members} />
+                                <MyGroupMembers members={group.memberInfo.members} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
@@ -71,8 +69,8 @@ export default function MyGroupView({ myGroup }) {
                 <Tile className='mygroup-page__project-preference-management'>
                     <h3>Project Preferences</h3>
                     <Stack>
-                        {myGroup.preferences ? (
-                            myGroup.preferences.map(preference => {
+                        {group.preferences ? (
+                            group.preferences.map(preference => {
                                 return (
                                     <ProjectPreferenceCard
                                         key={preference.rank}
@@ -102,8 +100,9 @@ export default function MyGroupView({ myGroup }) {
                                 buttonTriggerText='Edit group'
                                 danger
                                 modalHeading='Edit group'
+                                handleSubmit={async () => await updateGroup(editingGroup)}
                             >
-                                <EditGroup />
+                                <EditGroup group={editingGroup} setGroup={setEditingGroup} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card danger ghost'>
@@ -125,115 +124,5 @@ export default function MyGroupView({ myGroup }) {
                 </Tile>
             </Column>
         </Grid>
-    );
-}
-
-function MyGroupMembers({ members }) {
-    return (
-        <Stack>
-            {members.map((member, idx) => (
-                <span key={idx}>{member}</span>
-            ))}
-        </Stack>
-    );
-}
-
-function PendingApplications() {
-    return (
-        <Stack>
-            <div className='simple-card invitation'>
-                <p>Jeremy would like to join the group</p>
-                <p>Hi you're group looked cool!</p>
-            </div>
-        </Stack>
-    );
-}
-
-function GroupMemberInvite() {
-    return (
-        <Stack>
-            <FormContainer>
-                <Column lg={16} md={8} sm={4} className='__form-prompt'>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus id,
-                        consequuntur corporis quibusdam magni quos eaque commodi in dicta voluptatum
-                        omnis? Eos ullam assumenda tempora. Earum sapiente dolorem eveniet
-                        accusamus?
-                    </p>
-                </Column>
-                <Column lg={16} md={8} sm={4}>
-                    <Form onSubmit={e => console.log(e)}>
-                        <Stack>
-                            <MultiSelect
-                                helperText='You can select up to as many as your group can fit'
-                                name='invitees'
-                                id='invitees'
-                                titleText='Invitees'
-                                label='Create multiple invites by selecting multiple people'
-                                items={['Abbey', 'Mark', 'Melody']}
-                            />
-                            <TextArea
-                                helperText='Add a message with your invite (optional)'
-                                name='invitation-message'
-                                id='invitation-message'
-                                labelText='Message (optional)'
-                                placeholder='Optionally include a message with your invitation'
-                                rows={2}
-                                maxLength={100}
-                            />
-                        </Stack>
-                    </Form>
-                </Column>
-            </FormContainer>
-        </Stack>
-    );
-}
-
-function EditGroup() {
-    return (
-        <Stack>
-            <FormContainer>
-                <Column lg={16} md={8} sm={4} className='__form-prompt'>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus id,
-                        consequuntur corporis quibusdam magni quos eaque commodi in dicta voluptatum
-                        omnis? Eos ullam assumenda tempora. Earum sapiente dolorem eveniet
-                        accusamus?
-                    </p>
-                </Column>
-                <Column lg={16} md={8} sm={4}>
-                    <Form onSubmit={e => console.log(e)}>
-                        <Stack>
-                            <TextInput
-                                helperText='Make sure to add a memorable group name'
-                                name='name'
-                                id='name'
-                                labelText='Group name'
-                                placeholder='Add a memorable and unique group name'
-                                invalidText='A group name is required to create a new group'
-                                maxLength={50}
-                            />
-                            <TextArea
-                                helperText='Optional, this will will appear when people view your group details'
-                                name='description'
-                                id='description'
-                                labelText='Description (optional)'
-                                placeholder='Add an optional description of your group'
-                                rows={4}
-                            />
-                        </Stack>
-                    </Form>
-                </Column>
-            </FormContainer>
-        </Stack>
-    );
-}
-
-function LeaveGroup() {
-    return (
-        <p>
-            Are you sure you want to leave this group? This will mean you have to re-apply to join
-            back again.
-        </p>
     );
 }
