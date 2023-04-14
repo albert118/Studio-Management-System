@@ -19,7 +19,6 @@ const availableProjects = [
 export default function AddGroupContainer() {
     const { addGroup } = useGroups();
     const saveGroup = async (group: NewGroupDto) => {
-        console.log(JSON.stringify(group));
         await addGroup(group);
     };
 
