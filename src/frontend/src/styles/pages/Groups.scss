@@ -51,8 +51,7 @@
 
     p,
     h5 {
-        overflow-wrap: break-word;
-        hyphens: auto;
+        @include wrap-text();
         max-width: $spacing-07 * 10;
         min-width: $spacing-05 * 10;
     }
