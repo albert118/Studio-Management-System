@@ -75,7 +75,7 @@ function ExpandedRowDetail({ row }) {
         <div className='groups-page__datatable-row-detail'>
             <div>
                 <h5>Description</h5>
-                {row && row.description ? row.description : ''}
+                <p>{row && row.description ? row.description : ''}</p>
             </div>
             <div>
                 <h5>Group Members</h5>

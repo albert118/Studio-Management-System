@@ -48,6 +48,14 @@
     column-gap: $spacing-06 * 4;
     padding-top: $spacing-06;
     padding-bottom: $spacing-06;
+
+    p,
+    h5 {
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: $spacing-07 * 10;
+        min-width: $spacing-05 * 10;
+    }
 }
 
 .groups-page__datatable-row-detail > .goto-action {
