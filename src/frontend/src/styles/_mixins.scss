@@ -11,10 +11,17 @@
         0 8px 8px rgba(0, 0, 0, 0.15);
 }
 
-@mixin wrap-text() {
+@mixin contain-text() {
     overflow-wrap: break-word;
     hyphens: auto;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+
+@mixin wrap-text() {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
