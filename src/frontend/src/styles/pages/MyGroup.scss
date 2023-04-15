@@ -29,7 +29,7 @@
         max-width: 75%;
     }
 
-    @include wrap-text();
+    @include contain-text();
 }
 
 .mygroup-page__heading {

@@ -1,0 +1,25 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '../mixins' as *;
+
+.project-page {
+    p {
+        margin-top: $spacing-05;
+        margin-bottom: $spacing-05;
+
+        @include type-style('productive-heading-03');
+        margin-top: $spacing-06;
+
+        @include breakpoint-between((320px + 1), md) {
+            max-width: 75%;
+        }
+
+        @include wrap-text();
+    }
+}
+
+.project-page__r1,
+.project-page__r2 {
+    margin-bottom: $spacing-12;
+}

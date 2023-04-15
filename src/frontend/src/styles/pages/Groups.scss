@@ -56,7 +56,7 @@
 
     p,
     h5 {
-        @include wrap-text();
+        @include contain-text();
         max-width: $spacing-07 * 10;
         min-width: $spacing-07 * 10;
     }
