@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
-import { Stack } from 'components/Forms';
+import { Stack } from 'components';
 import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';

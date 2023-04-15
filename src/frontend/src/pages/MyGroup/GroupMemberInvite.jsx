@@ -1,5 +1,5 @@
 import { Column, MultiSelect, Form, TextArea } from '@carbon/react';
-import { Stack } from 'components/Forms';
+import { Stack } from 'components';
 import { FormContainer } from 'components/Forms';
 
 export function GroupMemberInvite() {

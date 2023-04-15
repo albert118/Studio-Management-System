@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Column, Button, Form, TextArea, TextInput, SelectItem, NumberInput } from '@carbon/react';
-import { FormContainer, Stack } from 'components/Forms';
-import TrippleSelectDropdown from './TrippleSelectDropdown';
+import { FormContainer } from 'components/Forms';
+import { Stack } from 'components';
 import { NewGroupDto } from 'types/types';
+import useGroups from 'hooks/GroupHooks';
+import AppRoutes from 'navigation/AppRoutes';
+import TrippleSelectDropdown from './TrippleSelectDropdown';
 import { newSelectedPreferences } from './types';
 import { useSubmissionValidator } from './useSubmissionValidator';
-import useGroups from 'hooks/GroupHooks';
-import { useNavigate } from 'react-router-dom';
-import AppRoutes from 'navigation/AppRoutes';
 
 const defaultItem = 'placeholder-item';
 const defaultGroupSize = 2;
