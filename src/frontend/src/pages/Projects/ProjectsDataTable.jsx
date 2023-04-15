@@ -1,12 +1,3 @@
-// @ts-nocheck
-
-// Most carbon components lack typescript definitions
-// this is notable around something complex like the DataTable used here,
-// so we disable ts for the whole file as a workaround this is exported back to to View though, which still enables TS.
-
-// see here for the current progress of adding TypeScript support to @carbon/react
-// https://github.com/carbon-design-system/carbon/discussions/10752#discussioncomment-4710978
-
 import {
     SmsDataTable,
     ExpandingDataTableHeader,
@@ -19,14 +10,14 @@ import {
     TableContainer,
     TableToolbar,
     TableToolbarContent,
-    TableToolbarSearch,
-    Button
+    TableToolbarSearch
 } from '@carbon/react';
 
 export function ProjectsDataTable({ projects }) {
     const headers = [
         { key: 'title', header: 'Name' },
-        { key: 'description', header: 'Description' }
+        { key: 'description', header: 'Description' },
+        { key: 'owners', header: 'Owner(s)' }
     ];
 
     const getRow = rowId => projects.find(({ id }) => id == rowId);
