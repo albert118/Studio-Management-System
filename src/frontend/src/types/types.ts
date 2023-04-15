@@ -14,13 +14,6 @@ export interface IPreference {
     projectId: Guid;
 }
 
-export interface IProject {
-    id: number | string;
-    description: string;
-    title: string | null;
-    Owners: Array<string>;
-}
-
 export interface IGroup {
     id: Guid;
     name: string;
@@ -56,4 +49,35 @@ export type SelectedPreferences = {
     preferenceOne: Nullable<string>;
     preferenceTwo: Nullable<string>;
     preferenceThree: Nullable<string>;
+};
+
+export const NewProjectDto = (
+    name: string,
+    description: string,
+    owners: ProjectOwner[]
+): NewProjectDto => {
+    return {
+        name,
+        description,
+        owners
+    } as NewProjectDto;
+};
+
+export type NewProjectDto = {
+    name: string;
+    description: undefined | string;
+    owners: ProjectOwner[];
+};
+
+export interface IProject {
+    id: number | string;
+    description: string;
+    title: string | null;
+    Owners: Array<string>;
+}
+
+export type ProjectOwner = {
+    id: Guid;
+    name: string;
+    email: string;
 };
