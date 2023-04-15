@@ -1,6 +1,16 @@
 import type { RouteObject } from 'react-router';
 
-import { Dashboard, Projects, Groups, Error, Layout, Login, MyGroup, AddGroup } from 'pages';
+import {
+    Dashboard,
+    Projects,
+    Groups,
+    Error,
+    Layout,
+    Login,
+    MyGroup,
+    AddGroup,
+    Project
+} from 'pages';
 import AppRoutes from 'navigation/AppRoutes';
 
 const routes: RouteObject[] = [
@@ -17,6 +27,23 @@ const routes: RouteObject[] = [
         element: (
             <Layout>
                 <Projects />
+            </Layout>
+        )
+    },
+    {
+        path: `${AppRoutes.projects}/add`,
+        element: (
+            <Layout>
+                {/* TODO */}
+                <Dashboard />
+            </Layout>
+        )
+    },
+    {
+        path: `${AppRoutes.project}/:projectId`,
+        element: (
+            <Layout>
+                <Project />
             </Layout>
         )
     },
