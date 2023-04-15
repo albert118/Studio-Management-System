@@ -41,9 +41,6 @@ export function ProjectsDataTable({ projects }) {
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
-                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
-                                Create A New Project
-                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
@@ -68,6 +65,7 @@ export function ProjectsDataTable({ projects }) {
         </SmsDataTable>
     );
 }
+
 function ExpandedRowDetail({ row }) {
     return (
         <div className='projects-page__datatable-row-detail'>
