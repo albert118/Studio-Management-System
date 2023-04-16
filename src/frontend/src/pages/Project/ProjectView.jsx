@@ -15,7 +15,7 @@ export default function ProjectView({ project }) {
     return (
         <Grid className='project-page'>
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
-                <h1 className='project-page__heading'>{project.name}</h1>
+                <h1 className='project-page__heading'>{project.title}</h1>
             </Column>
             <Column lg={16} md={8} sm={4} className='project-page__r2'>
                 <Grid className='project-page__overview-content'>
