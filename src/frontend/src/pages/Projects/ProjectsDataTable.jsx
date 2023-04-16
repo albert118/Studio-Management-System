@@ -13,6 +13,9 @@ import {
     TableToolbarSearch
 } from '@carbon/react';
 
+import AppRoutes from 'navigation/AppRoutes';
+import { GoToButton } from 'components';
+
 export function ProjectsDataTable({ projects }) {
     const headers = [
         { key: 'title', header: 'Name' },
@@ -64,6 +67,9 @@ function ExpandedRowDetail({ row }) {
                 <h5>Description</h5>
                 {row && row.description ? row.description : ''}
             </p>
+            <div className='goto-action'>
+                <GoToButton url={`${AppRoutes.project}/${row.id}`} />
+            </div>
         </div>
     );
 }
