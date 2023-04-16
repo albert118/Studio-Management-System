@@ -12,7 +12,7 @@ import {
     TableToolbarContent,
     TableToolbarSearch
 } from '@carbon/react';
-import { useNavigate } from 'react-router-dom';
+
 import AppRoutes from 'navigation/AppRoutes';
 import { GoToButton } from 'components';
 
@@ -59,8 +59,6 @@ export function GroupsDataTable({ groups }) {
 }
 
 function ExpandedRowDetail({ row }) {
-    const navigate = useNavigate();
-
     return (
         <div className='groups-page__datatable-row-detail'>
             <div className='description'>
