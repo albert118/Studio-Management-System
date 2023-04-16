@@ -6,7 +6,7 @@ import { Guid } from 'guid-typescript';
 export default function MyGroupContainer() {
     const { groupId } = useParams();
 
-    if (!groupId || Guid.isGuid(groupId)) {
+    if (!groupId) {
         // TODO: develop an error page and handle this better
         return <div>Error! No group ID</div>;
     }

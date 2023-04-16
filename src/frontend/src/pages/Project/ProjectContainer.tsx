@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 export default function ProjectContainer() {
     const { projectId } = useParams();
 
-    if (!projectId || Guid.isGuid(projectId)) {
+    if (!projectId) {
         // TODO: develop an error page and handle this better
         return <div>Error! No project ID</div>;
     }
