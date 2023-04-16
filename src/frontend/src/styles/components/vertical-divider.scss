@@ -1,12 +1,16 @@
+@use '@carbon/react/scss/spacing' as *;
+
 .vertical-divider {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
+    padding-top: $spacing-08;
+    padding-bottom: $spacing-08;
 
     .stem {
         border: 1px solid black;
-        height: 80%;
+        height: 100%;
         width: 1px;
     }
 
