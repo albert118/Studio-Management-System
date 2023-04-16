@@ -9,7 +9,6 @@
         margin-bottom: $spacing-05;
 
         @include type-style('productive-heading-03');
-        margin-top: $spacing-06;
 
         @include breakpoint-between((320px + 1), md) {
             max-width: 75%;
