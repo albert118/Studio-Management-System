@@ -6,6 +6,7 @@ public class Project : IArchivable, IMetaData, ILockable
     {
         Title = title;
         Description = description;
+        Domain = string.Empty;
         ProductOwners = null;
         AssignedGroups = null;
     }
@@ -19,6 +20,8 @@ public class Project : IArchivable, IMetaData, ILockable
     public ICollection<Group>? AssignedGroups { get; set; }
 
     public ICollection<OwnerContact>? ProductOwners { get; set; }
+
+    public string Domain { get; set; }
 
     public bool IsArchived { get; set; }
 
