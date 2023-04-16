@@ -8,7 +8,7 @@ export default function ProjectContainer() {
 
     if (!projectId || Guid.isGuid(projectId)) {
         // TODO: develop an error page and handle this better
-        return <div>Error! No group ID</div>;
+        return <div>Error! No project ID</div>;
     }
 
     const { project, isLoading } = useProject(Guid.parse(projectId));
