@@ -14,5 +14,5 @@ export default function MyGroupContainer() {
     const { group, updateGroup, isLoading } = useGroup(Guid.parse(groupId));
 
     // TODO: add a spinner
-    return isLoading ? <>'loading...'</> : <MyGroupView group={group} updateGroup={updateGroup} />;
+    return isLoading ? <>loading...</> : <MyGroupView group={group} updateGroup={updateGroup} />;
 }

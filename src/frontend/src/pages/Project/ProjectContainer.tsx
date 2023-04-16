@@ -1,23 +1,17 @@
-import { useState } from 'react';
 import ProjectView from './ProjectView';
-
-const dummyProject = {
-    name: 'Special Project',
-    description: 'lorem ipsum',
-    owners: ['Smith', 'John', 'Alex'],
-    meta: {
-        createdYear: 2023,
-        domain: 'Software'
-    },
-    assignedGroups: [
-        { id: 123, name: 'Group #1' },
-        { id: 123, name: 'Group #2' },
-        { id: 123, name: 'Group #3' }
-    ]
-};
+import { useProject } from 'hooks/ProjectHooks';
+import { Guid } from 'guid-typescript';
+import { useParams } from 'react-router-dom';
 
 export default function ProjectContainer() {
-    const [project, _] = useState(dummyProject);
+    const { projectId } = useParams();
 
-    return <ProjectView project={project} />;
+    if (!projectId || Guid.isGuid(projectId)) {
+        // TODO: develop an error page and handle this better
+        return <div>Error! No group ID</div>;
+    }
+
+    const { project, isLoading } = useProject(Guid.parse(projectId));
+
+    return isLoading ? <>loading...</> : <ProjectView project={project} />;
 }

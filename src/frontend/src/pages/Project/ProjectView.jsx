@@ -21,7 +21,7 @@ export default function ProjectView({ project }) {
                 <Grid className='project-page__overview-content'>
                     <Column lg={7} md={4} sm={4} className='overview'>
                         <Stack>
-                            <InlineDetail label='title' detail={project.name} />
+                            <InlineDetail label='title' detail={project.title} />
                             <InlineDetail label='owners' detail={project.owners.join(', ')} />
                             <InlineDetail label='year' detail={project.meta?.createdYear} />
                             <InlineDetail label='domain' detail={project.meta?.domain} />
@@ -32,10 +32,17 @@ export default function ProjectView({ project }) {
                             detail={`${project.assignedGroups.length} groups have worked on this project.`}
                         >
                             <Stack>
-                                {project?.assignedGroups &&
-                                    project.assignedGroups.map(group => (
-                                        <SimpleCard size={Size.sm} title={group.name} label='X'>
-                                            <GoToButton url={`${AppRoutes.group}/${group.id}`} />
+                                {project.assignedGroups &&
+                                    project.assignedGroups.map(flyweight => (
+                                        <SimpleCard
+                                            key={flyweight.groupId}
+                                            size={Size.sm}
+                                            title={group.name}
+                                            label='...A label...'
+                                        >
+                                            <GoToButton
+                                                url={`${AppRoutes.group}/${flyweight.groupId}`}
+                                            />
                                         </SimpleCard>
                                     ))}
                             </Stack>

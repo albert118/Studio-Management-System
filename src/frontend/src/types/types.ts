@@ -69,11 +69,23 @@ export type NewProjectDto = {
     owners: ProjectOwner[];
 };
 
+export interface IGroupFlyweight {
+    groupId: Guid;
+    name: string;
+}
+
+export interface IProjectMeta {
+    createdYear: string;
+    domain: string;
+}
+
 export interface IProject {
-    id: number | string;
+    id: Guid;
     description: string;
     title: string | null;
-    Owners: Array<string>;
+    Owners: string[];
+    assignedGroups: IGroupFlyweight[];
+    meta: IProjectMeta;
 }
 
 export type ProjectOwner = {
