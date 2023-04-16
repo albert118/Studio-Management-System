@@ -1,0 +1,23 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../mixins' as *;
+
+.inline-detail {
+    display: flex;
+    column-gap: $spacing-05;
+    justify-content: space-between;
+
+    padding-right: $spacing-05;
+
+    label,
+    p {
+        @include type-style('productive-heading-02');
+        margin-top: $spacing-03;
+        margin-bottom: $spacing-03;
+    }
+
+    p {
+        @include contain-text();
+        font-weight: 400;
+    }
+}
