@@ -9,7 +9,8 @@ import {
     Login,
     MyGroup,
     AddGroup,
-    Project
+    Project,
+    AddProject
 } from 'pages';
 import AppRoutes from 'navigation/AppRoutes';
 
@@ -34,8 +35,7 @@ const routes: RouteObject[] = [
         path: `${AppRoutes.projects}/add`,
         element: (
             <Layout>
-                {/* TODO */}
-                <Dashboard />
+                <AddProject />
             </Layout>
         )
     },

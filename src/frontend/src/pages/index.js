@@ -7,6 +7,7 @@ import Layout from 'pages/Layout';
 import MyGroupContainer from 'pages/MyGroup/MyGroupContainer';
 import AddGroupContainer from 'pages/AddGroup/AddGroupContainer';
 import ProjectContainer from './Project/ProjectContainer';
+import AddProjectContainer from './AddProject/AddProjectContainer';
 
 export {
     Dashboard,
@@ -17,5 +18,6 @@ export {
     Layout,
     MyGroupContainer as MyGroup,
     AddGroupContainer as AddGroup,
-    ProjectContainer as Project
+    ProjectContainer as Project,
+    AddProjectContainer as AddProject
 };
