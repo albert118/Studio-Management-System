@@ -60,7 +60,7 @@ export function useProject(projectId: Guid) {
         const fetchGroup = async () => {
             setLoading(true);
 
-            const response = await fetch(`${ApiConfig.API_URL}/group/${projectId}`, {
+            const response = await fetch(`${ApiConfig.API_URL}/project/${projectId}`, {
                 ...defaultRequestOptions
             });
             const data = await response.json();

@@ -20,7 +20,7 @@ import { NewProjectDto } from 'types/types';
 const defaultItem = 'placeholder-item';
 
 export default function AddProjectView({ availableOwners }) {
-    const { addProject, apiErrors, isLoading } = useProjects();
+    const { addProject, apiErrors } = useProjects();
     const navigate = useNavigate();
     const errors = null; // TODO (add validators)
 
@@ -40,7 +40,6 @@ export default function AddProjectView({ availableOwners }) {
 
     const submit = async e => {
         e.preventDefault();
-        console.log(NewProjectDto(...Object.values(formData)));
         const projectId = await addProject(NewProjectDto(...Object.values(formData)));
 
         if (apiErrors) {

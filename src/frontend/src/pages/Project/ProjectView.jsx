@@ -1,4 +1,4 @@
-import { Grid, Column, Button } from '@carbon/react';
+import { Grid, Column } from '@carbon/react';
 import AppRoutes from 'navigation/AppRoutes';
 import {
     Stack,
@@ -12,7 +12,6 @@ import {
 } from 'components';
 
 import { Size } from 'types/enums';
-import { MailAll } from '@carbon/icons-react';
 
 export default function ProjectView({ project }) {
     const groupsDetailText = () => {
@@ -105,20 +104,7 @@ export default function ProjectView({ project }) {
                         <VerticalDivider />
                     </Column>
                     <Column lg={{ span: 6, offset: 10 }} md={4} sm={4}>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
-                            eum odio sapiente incidunt ratione sint, vitae inventore, amet molestias
-                            eveniet dolorum eligendi a veniam ut quae atque aspernatur aliquam?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
-                            eum odio sapiente incidunt ratione sint, vitae inventore, amet molestias
-                            eveniet dolorum eligendi a veniam ut quae atque aspernatur aliquam?
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
-                            eum odio sapiente incidunt ratione sint, vitae inventore?
-                        </p>
+                        <p>{project.description}</p>
                     </Column>
                 </Grid>
             </Column>

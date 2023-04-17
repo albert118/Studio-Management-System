@@ -1,4 +1,3 @@
-import { NewGroupDto } from 'types/types';
 import AddGroupView from './AddGroupView';
 
 const availableProjects = [
