@@ -7,7 +7,8 @@ import {
     SimpleCard,
     GoToButton,
     VerticalDivider,
-    VerticalSocialDivider
+    VerticalSocialDivider,
+    EmailModalButton
 } from 'components';
 
 import { Size } from 'types/enums';
@@ -62,9 +63,41 @@ export default function ProjectView({ project }) {
                             detail='Contact these stakeholders for further information'
                         >
                             <Stack>
-                                <Button renderIcon={MailAll}>Product owner(s)</Button>
-                                <Button renderIcon={MailAll}>Industry sponsor</Button>
-                                <Button renderIcon={MailAll}>Previous group(s)</Button>
+                                <EmailModalButton
+                                    title='Product Owners'
+                                    description=''
+                                    buttonText='Contact'
+                                    modalHeading='Create email'
+                                >
+                                    this
+                                </EmailModalButton>
+
+                                <EmailModalButton
+                                    title='Product owner(s)'
+                                    description=''
+                                    buttonText='Contact'
+                                    modalHeading='Create email'
+                                >
+                                    this
+                                </EmailModalButton>
+
+                                <EmailModalButton
+                                    title='Industry sponsor'
+                                    description=''
+                                    buttonText='Contact'
+                                    modalHeading='Create email'
+                                >
+                                    this
+                                </EmailModalButton>
+
+                                <EmailModalButton
+                                    title='Previous group(s)'
+                                    description=''
+                                    buttonText='Contact'
+                                    modalHeading='Create email'
+                                >
+                                    this
+                                </EmailModalButton>
                             </Stack>
                         </BlockDetail>
                     </Column>

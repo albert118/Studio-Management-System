@@ -2,7 +2,7 @@ import { LogoGithub, LogoFigma, LogoJupyter } from '@carbon/icons-react';
 import { IconButton } from '@carbon/react';
 import { VerticalDivider } from 'components';
 
-export function VerticalSocialDivider({ onClickGitHub, onClickFigma, onClickJupyter }) {
+export default function VerticalSocialDivider({ onClickGitHub, onClickFigma, onClickJupyter }) {
     return (
         <div className='vertical-social-divider'>
             <VerticalDivider />

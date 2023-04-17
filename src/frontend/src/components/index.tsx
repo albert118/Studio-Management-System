@@ -4,7 +4,8 @@ import SimpleCard from './SimpleCard/SimpleCard';
 import Stack from './Stack/Stack';
 import InlineDetail from './InlineDetail/InlineDetail';
 import BlockDetail from './BlockDetail/BlockDetail';
-import { VerticalSocialDivider } from './VerticalSocialDivider/VerticalSocialDivider';
+import VerticalSocialDivider from './VerticalSocialDivider/VerticalSocialDivider';
+import EmailModalButton from './EmailModalButton/EmailModalButton';
 
 export {
     Stack,
@@ -13,5 +14,6 @@ export {
     GoToButton,
     VerticalDivider,
     VerticalSocialDivider,
-    SimpleCard
+    SimpleCard,
+    EmailModalButton
 };
