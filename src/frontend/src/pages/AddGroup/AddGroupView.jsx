@@ -130,7 +130,7 @@ export default function AddGroupView({ availableProjects }) {
                         </TrippleSelectDropdown>
 
                         <Button kind='primary' type='submit' disabled={!isSubmittable}>
-                            Create
+                            Create and view
                         </Button>
                     </Stack>
                 </Form>
