@@ -14,20 +14,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import { useState, useEffect } from 'react';
-import { Guid } from 'guid-typescript';
+import { mapToDropdownItems } from './utils';
 
 const defaultItem = 'placeholder-item';
-
-const hydrateDropdownItems = items => {
-    let hyrdatedItems = items.map(item => {
-        return {
-            id: item.id,
-            label: item.name
-        };
-    });
-
-    return hyrdatedItems;
-};
 
 export default function AddProjectView({ availableOwners }) {
     const { addProject, apiErrors, isLoading } = useProjects();
@@ -129,7 +118,7 @@ export default function AddProjectView({ availableOwners }) {
                             defaultValue={defaultItem}
                             helperText='The principal product owner is not selectable again'
                             id='product-owners'
-                            items={hydrateDropdownItems(availableOwners)}
+                            items={mapToDropdownItems(availableOwners)}
                             label='Select as many remaining product owners as required'
                             titleText='Product owners'
                         />
