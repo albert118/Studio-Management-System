@@ -1,4 +1,4 @@
-import { Grid, Column } from '@carbon/react';
+import { Grid, Column, Button } from '@carbon/react';
 import AppRoutes from 'navigation/AppRoutes';
 import {
     Stack,
@@ -6,22 +6,24 @@ import {
     BlockDetail,
     SimpleCard,
     GoToButton,
-    VerticalDivider
+    VerticalDivider,
+    VerticalSocialDivider
 } from 'components';
 
 import { Size } from 'types/enums';
+import { MailAll } from '@carbon/icons-react';
 
 export default function ProjectView({ project }) {
     return (
         <Grid className='project-page'>
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
-                <h1 className='project-page__heading'>{project.title}</h1>
-            </Column>
-            <Column lg={16} md={8} sm={4} className='project-page__r2'>
                 <Grid className='project-page__overview-content'>
-                    <Column lg={7} md={4} sm={4} className='overview'>
+                    <Column lg={1}>
+                        <VerticalSocialDivider />
+                    </Column>
+                    <Column lg={{ span: 5, offset: 2 }} md={4} sm={4} className='overview'>
+                        <h1 className='project-page__heading'>{project.title}</h1>
                         <Stack>
-                            <InlineDetail label='title' detail={project.title} />
                             <InlineDetail label='owners' detail={project.owners?.join(', ')} />
                             <InlineDetail label='year' detail={project.meta?.createdYear} />
                             <InlineDetail label='domain' detail={project.meta?.domain} />
@@ -47,15 +49,35 @@ export default function ProjectView({ project }) {
                                     ))}
                             </Stack>
                         </BlockDetail>
+
+                        <BlockDetail
+                            label='Product Owners'
+                            detail='Contact these stakeholders for further information'
+                        >
+                            <Stack>
+                                <Button renderIcon={MailAll}>Product owner(s)</Button>
+                                <Button renderIcon={MailAll}>Industry sponsor</Button>
+                                <Button renderIcon={MailAll}>Previous group(s)</Button>
+                            </Stack>
+                        </BlockDetail>
                     </Column>
-                    <Column lg={{ span: 1, offset: 7 }}>
+                    <Column lg={{ span: 1, offset: 8 }}>
                         <VerticalDivider />
                     </Column>
-                    <Column lg={{ span: 8, offset: 8 }} md={4} sm={4}>
+                    <Column lg={{ span: 6, offset: 10 }} md={4} sm={4}>
                         <p>
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
                             eum odio sapiente incidunt ratione sint, vitae inventore, amet molestias
                             eveniet dolorum eligendi a veniam ut quae atque aspernatur aliquam?
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
+                            eum odio sapiente incidunt ratione sint, vitae inventore, amet molestias
+                            eveniet dolorum eligendi a veniam ut quae atque aspernatur aliquam?
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et cupiditate,
+                            eum odio sapiente incidunt ratione sint, vitae inventore?
                         </p>
                     </Column>
                 </Grid>

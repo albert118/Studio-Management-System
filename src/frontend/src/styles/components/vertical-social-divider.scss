@@ -1,0 +1,29 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.vertical-social-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-03;
+
+    .vertical-divider {
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: $spacing-04;
+    }
+
+    .social-btn {
+        cursor: pointer;
+        padding: $spacing-04;
+        background-color: transparent;
+        color: var(--cds-button--primary, #0f62fe);
+        border-radius: 50%;
+    }
+
+    .social-btn:hover,
+    .social-btn:active {
+        background-color: lightgray;
+    }
+}

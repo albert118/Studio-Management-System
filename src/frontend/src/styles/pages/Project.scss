@@ -18,7 +18,11 @@
     }
 }
 
-.project-page__r1,
-.project-page__r2 {
+.project-page__heading {
+    margin-bottom: $spacing-08;
+}
+
+.project-page__r1 {
+    margin-top: $spacing-12;
     margin-bottom: $spacing-12;
 }
