@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import { useState, useEffect } from 'react';
 import { mapToDropdownItems } from './utils';
+import { NewProjectDto } from 'types/types';
 
 const defaultItem = 'placeholder-item';
 
@@ -24,8 +25,10 @@ export default function AddProjectView({ availableOwners }) {
     const errors = null; // TODO (add validators)
 
     const [formData, setFormData] = useState({
-        name: '',
+        title: '',
         description: '',
+        domain: '',
+        principalProductOwner: '',
         owners: []
     });
 
@@ -37,7 +40,8 @@ export default function AddProjectView({ availableOwners }) {
 
     const submit = async e => {
         e.preventDefault();
-        const projectId = await addProject(NewProjectDto(...Object.valules(formData)));
+        console.log(NewProjectDto(...Object.values(formData)));
+        const projectId = await addProject(NewProjectDto(...Object.values(formData)));
 
         if (apiErrors) {
             return;
@@ -62,8 +66,8 @@ export default function AddProjectView({ availableOwners }) {
                         {/* TODO: improve this with an inline notification (CBS component ) https://carbondesignsystem.com/components/notification/usage/*/}
                         <div>{JSON.stringify(apiErrors)}</div>
                         <TextInput
-                            name='name'
-                            id='name'
+                            name='title'
+                            id='title'
                             onChange={e =>
                                 setFormData({ ...formData, [e.target.name]: e.target.value })
                             }
@@ -88,24 +92,41 @@ export default function AddProjectView({ availableOwners }) {
                             maxLength={10000}
                         />
 
+                        <TextInput
+                            name='domain'
+                            id='domain'
+                            onChange={e =>
+                                setFormData({ ...formData, [e.target.name]: e.target.value })
+                            }
+                            labelText='Project domain'
+                            helperText='software, electrical, etc.'
+                            placeholder='Adding a domain will help groups narrow down the scope of your project'
+                            invalidText='A project domain is required'
+                            // invalid={errors.name}
+                            maxLength={20}
+                        />
+
                         <div className='subheading'>
                             <h2>Add product owners</h2>
                             <p>
                                 There may be several product owners for a project. However, one
                                 contact should be selected as the principle owner. Aside from the
                                 principle owner, as many product owners can be linked as needed!
-                                <br />
-                                {/* TODO implement and add a navigation prompt */}
-                                <i>You can add more contacts under the admin dashboard.</i>
                             </p>
+                            {/* TODO implement and add a navigation prompt */}
+                            <p>You can add more contacts under the admin dashboard.</p>
                         </div>
 
                         <Select
                             defaultValue={defaultItem}
                             helperText='The primary point of contact and lead stakeholder of the product'
-                            id='principal-owner'
+                            id='principal-product-owner'
+                            name='principalProductOwner'
                             invalidText='A principal product owner is required'
                             labelText='Principal product owner'
+                            onChange={e =>
+                                setFormData({ ...formData, [e.target.name]: e.target.value })
+                            }
                         >
                             <SelectItem text='Choose a principal owner' value={defaultItem} />
                             {availableOwners &&
@@ -117,7 +138,14 @@ export default function AddProjectView({ availableOwners }) {
                         <MultiSelect
                             defaultValue={defaultItem}
                             helperText='The principal product owner is not selectable again'
-                            id='product-owners'
+                            id='owners'
+                            name='owners'
+                            onChange={output => {
+                                setFormData({
+                                    ...formData,
+                                    owners: output.selectedItems.map(item => item.id)
+                                });
+                            }}
                             items={mapToDropdownItems(availableOwners)}
                             label='Select as many remaining product owners as required'
                             titleText='Product owners'

@@ -52,21 +52,27 @@ export type SelectedPreferences = {
 };
 
 export const NewProjectDto = (
-    name: string,
+    title: string,
     description: string,
-    owners: ProjectOwner[]
+    domain: string,
+    principalProductOwner: Guid,
+    owners: Guid[]
 ): NewProjectDto => {
     return {
-        name,
+        title,
         description,
-        owners
+        domain,
+        principalProductOwnerId: principalProductOwner,
+        ownerContactIds: owners
     } as NewProjectDto;
 };
 
 export type NewProjectDto = {
-    name: string;
-    description: undefined | string;
-    owners: ProjectOwner[];
+    title: string;
+    description: string;
+    domain: string;
+    principalProductOwnerId: Guid;
+    ownerContactIds: Guid[];
 };
 
 export interface IGroupFlyweight {
@@ -82,8 +88,9 @@ export interface IProjectMeta {
 export interface IProject {
     id: Guid;
     description: string;
-    title: string | null;
-    Owners: string[];
+    title: string;
+    principalProjectOwner: ProjectOwner;
+    owners: ProjectOwner[];
     assignedGroups: IGroupFlyweight[];
     meta: IProjectMeta;
 }
@@ -91,8 +98,9 @@ export interface IProject {
 export class Project implements IProject {
     id: Guid;
     description: string;
-    title: string | null;
-    Owners: string[];
+    title: string;
+    principalProjectOwner: ProjectOwner;
+    owners: ProjectOwner[];
     assignedGroups: IGroupFlyweight[];
     meta: IProjectMeta;
 
@@ -100,7 +108,8 @@ export class Project implements IProject {
         this.id = Guid.parse(Guid.EMPTY);
         this.description = '';
         this.title = '';
-        this.Owners = [];
+        this.owners = [];
+        this.principalProjectOwner = {} as ProjectOwner;
         this.assignedGroups = [];
         this.meta = {
             createdYear: '',

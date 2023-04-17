@@ -40,7 +40,13 @@ public class ProjectController : ControllerBase
     public ActionResult<Guid> AddProject(CreateProjectDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _projectManager.CreateNewProjectAsync(dto, ct);
+        var task = _projectManager.CreateNewProjectAsync(
+            new(dto.Title, dto.Description, dto.Domain),
+            dto.PrincipalOwnerContactId,
+            dto.OwnerContactIds,
+            ct
+       );
+
         task.Wait(ct);
         return task.Result;
     }

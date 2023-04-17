@@ -7,12 +7,10 @@ export type DropdownItem = {
 };
 
 export const mapToDropdownItems = (items: ProjectOwner[]): DropdownItem[] => {
-    let hyrdatedItems = items.map(item => {
+    return items.map(item => {
         return {
             id: item.id,
             label: item.name
         };
     });
-
-    return hyrdatedItems;
 };
