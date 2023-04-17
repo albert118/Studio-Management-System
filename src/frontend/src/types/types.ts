@@ -88,6 +88,27 @@ export interface IProject {
     meta: IProjectMeta;
 }
 
+export class Project implements IProject {
+    id: Guid;
+    description: string;
+    title: string | null;
+    Owners: string[];
+    assignedGroups: IGroupFlyweight[];
+    meta: IProjectMeta;
+
+    constructor() {
+        this.id = Guid.parse(Guid.EMPTY);
+        this.description = '';
+        this.title = '';
+        this.Owners = [];
+        this.assignedGroups = [];
+        this.meta = {
+            createdYear: '',
+            domain: ''
+        };
+    }
+}
+
 export type ProjectOwner = {
     id: Guid;
     name: string;

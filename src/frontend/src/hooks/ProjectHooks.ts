@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IProject, Nullable } from 'types/types';
+import { Project, IProject, Nullable } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { NewProjectDto } from 'types/types';
@@ -54,6 +54,7 @@ export default function useProjects() {
 export function useProject(projectId: Guid) {
     const [project, setProject] = useState<IProject>({} as IProject);
     const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
     useEffect(() => {
         const fetchGroup = async () => {
@@ -64,7 +65,16 @@ export function useProject(projectId: Guid) {
             });
             const data = await response.json();
 
-            setProject(data);
+            if (response.ok) {
+                setProject(data);
+            } else {
+                const errorData = data as KestrelServerError;
+                const apiError = { error: errorData.title, message: errorData.errors };
+                console.error(JSON.stringify(apiError));
+                setErrors(apiError);
+                setProject(new Project());
+            }
+
             setLoading(false);
         };
         fetchGroup();
@@ -92,5 +102,5 @@ export function useProject(projectId: Guid) {
         setProject({} as IProject);
     };
 
-    return { project, updateProject, deleteProject, isLoading };
+    return { project, updateProject, deleteProject, isLoading, errors };
 }

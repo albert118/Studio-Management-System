@@ -14,6 +14,16 @@ import { Size } from 'types/enums';
 import { MailAll } from '@carbon/icons-react';
 
 export default function ProjectView({ project }) {
+    const groupsDetailText = () => {
+        const detailText = {
+            0: 'No one has worked on this project yet',
+            1: 'Only one group has worked on this project',
+            default: `${project.assignedGroups?.length} groups have worked on this project`
+        };
+
+        return detailText[project.assignedGroups?.length] || detailText['default'];
+    };
+
     return (
         <Grid className='project-page'>
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
@@ -29,10 +39,7 @@ export default function ProjectView({ project }) {
                             <InlineDetail label='domain' detail={project.meta?.domain} />
                         </Stack>
 
-                        <BlockDetail
-                            label='Groups'
-                            detail={`${project.assignedGroups?.length} groups have worked on this project.`}
-                        >
+                        <BlockDetail label='Groups' detail={groupsDetailText()}>
                             <Stack>
                                 {project.assignedGroups &&
                                     project.assignedGroups.map(flyweight => (
