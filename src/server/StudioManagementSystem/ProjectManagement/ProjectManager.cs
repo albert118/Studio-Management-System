@@ -7,7 +7,7 @@ namespace StudioManagementSystem.ProjectManagement;
 
 public interface IProjectManager
 {
-    Task<Guid> CreateNewProjectAsync(CreateProjectDto dto, CancellationToken ct);
+    Task<Guid> CreateNewProjectAsync(Project project, Guid primaryOwner, List<Guid> owners, CancellationToken ct);
 }
 
 [InstanceScopedBusinessService]
@@ -22,11 +22,11 @@ public class ProjectManager : IProjectManager
         _logger = logger;
     }
 
-    public async Task<Guid> CreateNewProjectAsync(CreateProjectDto dto, CancellationToken ct)
+    public async Task<Guid> CreateNewProjectAsync(Project project, Guid primaryOwner, List<Guid> owners, CancellationToken ct)
     {
-        var newProject = new Project(dto.Title, dto.Description);
-        var projectId = await _projectRepository.AddProjectAsync(newProject, ct);
-        await AssignOwnersToProjectAsync(projectId, dto.OwnerContactIds, ct);
+        var projectId = await _projectRepository.AddProjectAsync(project, ct);
+        // await AssignOwnersToProjectAsync(primaryOwner, owners, ct);
+        await AssignOwnersToProjectAsync(projectId, owners, ct);
         return projectId;
     }
 

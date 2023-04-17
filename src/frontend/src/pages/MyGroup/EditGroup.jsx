@@ -1,5 +1,5 @@
 import { Column, Form, TextArea, TextInput, NumberInput } from '@carbon/react';
-import { Stack } from 'components/Forms';
+import { Stack } from 'components';
 import { FormContainer } from 'components/Forms';
 
 const defaultGroupSize = 2;

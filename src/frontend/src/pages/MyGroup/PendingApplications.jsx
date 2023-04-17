@@ -1,4 +1,4 @@
-import { Stack } from 'components/Forms';
+import { Stack } from 'components';
 
 export function PendingApplications() {
     return (

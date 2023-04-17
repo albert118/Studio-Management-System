@@ -17,4 +17,12 @@ public static class GroupMapper
             MemberCount: $"{group.Members.Count}/{group.MaxMembers}"
         );
     }
+
+    public static AssignedGroupDto MapToAssignedGroupDto(this Group group)
+    {
+        return new(
+            GroupId: group.Id,
+            Name: group.Name
+        );
+    }
 }

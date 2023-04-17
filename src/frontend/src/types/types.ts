@@ -14,13 +14,6 @@ export interface IPreference {
     projectId: Guid;
 }
 
-export interface IProject {
-    id: number | string;
-    description: string;
-    title: string | null;
-    Owners: Array<string>;
-}
-
 export interface IGroup {
     id: Guid;
     name: string;
@@ -56,4 +49,77 @@ export type SelectedPreferences = {
     preferenceOne: Nullable<string>;
     preferenceTwo: Nullable<string>;
     preferenceThree: Nullable<string>;
+};
+
+export const NewProjectDto = (
+    title: string,
+    description: string,
+    domain: string,
+    principalProductOwner: Guid,
+    owners: Guid[]
+): NewProjectDto => {
+    return {
+        title,
+        description,
+        domain,
+        principalProductOwnerId: principalProductOwner,
+        ownerContactIds: owners
+    } as NewProjectDto;
+};
+
+export type NewProjectDto = {
+    title: string;
+    description: string;
+    domain: string;
+    principalProductOwnerId: Guid;
+    ownerContactIds: Guid[];
+};
+
+export interface IGroupFlyweight {
+    groupId: Guid;
+    name: string;
+}
+
+export interface IProjectMeta {
+    createdYear: string;
+    domain: string;
+}
+
+export interface IProject {
+    id: Guid;
+    description: string;
+    title: string;
+    principalProjectOwner: ProjectOwner;
+    owners: ProjectOwner[];
+    assignedGroups: IGroupFlyweight[];
+    meta: IProjectMeta;
+}
+
+export class Project implements IProject {
+    id: Guid;
+    description: string;
+    title: string;
+    principalProjectOwner: ProjectOwner;
+    owners: ProjectOwner[];
+    assignedGroups: IGroupFlyweight[];
+    meta: IProjectMeta;
+
+    constructor() {
+        this.id = Guid.parse(Guid.EMPTY);
+        this.description = '';
+        this.title = '';
+        this.owners = [];
+        this.principalProjectOwner = {} as ProjectOwner;
+        this.assignedGroups = [];
+        this.meta = {
+            createdYear: '',
+            domain: ''
+        };
+    }
+}
+
+export type ProjectOwner = {
+    id: Guid;
+    name: string;
+    email: string;
 };

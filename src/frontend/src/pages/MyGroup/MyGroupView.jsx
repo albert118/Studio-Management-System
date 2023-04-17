@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
-import { Stack } from 'components/Forms';
-import { MailAll, EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
+import { Stack, EmailModalButton } from 'components';
+import { EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
 import { LeaveGroup } from './LeaveGroup';
@@ -51,18 +51,14 @@ export default function MyGroupView({ group, updateGroup }) {
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
-                            <MailAll size={32} />
-                            <div>
-                                <h5>Invite new group members</h5>
-                                Create and send invitations to new members.
-                            </div>
-                            <ModalWrapper
-                                buttonTriggerText='Invite'
+                            <EmailModalButton
+                                title='Invite new group members'
+                                description='Create and send invitations to new members.'
+                                buttonText='Invite'
                                 modalHeading='Create invitations'
-                                primaryButtonText='Send invitations'
                             >
                                 <GroupMemberInvite />
-                            </ModalWrapper>
+                            </EmailModalButton>
                         </div>
                     </Stack>
                 </Tile>

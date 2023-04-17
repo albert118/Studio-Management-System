@@ -3,6 +3,7 @@ import { Nullable, IGroup, NewGroupDto } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
+import { Guid } from 'guid-typescript';
 
 export default function useGroups() {
     const [groups, setGroups] = useState<IGroup[]>([]);
@@ -49,7 +50,7 @@ export default function useGroups() {
     return { groups, addGroup, isLoading, errors };
 }
 
-export function useGroup(groupId: string) {
+export function useGroup(groupId: Guid) {
     const [group, setGroup] = useState<IGroup>({} as IGroup);
     const [isLoading, setLoading] = useState<boolean>(true);
 
@@ -76,6 +77,7 @@ export function useGroup(groupId: string) {
         });
 
         if (response.ok) {
+            const updatedGroup = await response.json();
             setGroup(updatedGroup);
         }
     };

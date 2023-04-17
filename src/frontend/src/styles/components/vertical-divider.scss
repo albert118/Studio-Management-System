@@ -1,0 +1,24 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.vertical-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-top: $spacing-03;
+    padding-bottom: $spacing-03;
+
+    .stem {
+        border: 1px solid black;
+        height: 100%;
+        width: 1px;
+    }
+
+    .circle {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+}

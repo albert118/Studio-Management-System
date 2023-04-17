@@ -136,6 +136,10 @@ namespace StudioManagementSystem.Core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Domain")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IsArchived")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")

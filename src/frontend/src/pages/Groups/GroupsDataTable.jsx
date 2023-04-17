@@ -1,12 +1,3 @@
-// @ts-nocheck
-
-// Most carbon components lack typescript definitions
-// this is notable around something complex like the DataTable used here,
-// so we disable ts for the whole file as a workaround this is exported back to to View though, which still enables TS.
-
-// see here for the current progress of adding TypeScript support to @carbon/react
-// https://github.com/carbon-design-system/carbon/discussions/10752#discussioncomment-4710978
-
 import {
     SmsDataTable,
     ExpandingDataTableHeader,
@@ -19,31 +10,28 @@ import {
     TableContainer,
     TableToolbar,
     TableToolbarContent,
-    TableToolbarSearch,
-    Button
+    TableToolbarSearch
 } from '@carbon/react';
 
-export function ProjectsDataTable({ projects }) {
+import AppRoutes from 'navigation/AppRoutes';
+import { GoToButton } from 'components';
+
+export function GroupsDataTable({ groups }) {
     const headers = [
-        { key: 'title', header: 'Name' },
-        { key: 'description', header: 'Description' }
+        { key: 'name', header: 'Name' },
+        { key: 'project', header: 'Project' },
+        { key: 'memberCount', header: 'Members' }
     ];
 
-    const getRow = rowId => projects.find(({ id }) => id == rowId);
+    const getRow = rowId => groups.find(({ id }) => id == rowId);
 
     return (
-        <SmsDataTable rows={projects} headers={headers} className='projects-page__datatable'>
+        <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
-                <TableContainer
-                    title='Projects'
-                    description='This is a list of all the project for this semsester.'
-                >
+                <TableContainer title='Groups'>
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
-                            <Button onClick={() => navigate(`${AppRoutes.projects}/add`)}>
-                                Create A New Project
-                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
@@ -54,6 +42,7 @@ export function ProjectsDataTable({ projects }) {
                         <TableBody>
                             {rows.map(row => (
                                 <ExpandingRowFragment
+                                    key={row.id}
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}
@@ -68,13 +57,29 @@ export function ProjectsDataTable({ projects }) {
         </SmsDataTable>
     );
 }
+
 function ExpandedRowDetail({ row }) {
     return (
-        <div className='projects-page__datatable-row-detail'>
-            <p>
+        <div className='groups-page__datatable-row-detail'>
+            <div className='description'>
                 <h5>Description</h5>
-                {row && row.description ? row.description : ''}
-            </p>
+                <p>{row && row.description ? row.description : ''}</p>
+            </div>
+            <div>
+                <h5>Group Members</h5>
+                <ul>
+                    {row && row.memberInfo?.members
+                        ? row.memberInfo.members.map((member, idx) => (
+                              <li key={idx}>
+                                  <p>{member}</p>
+                              </li>
+                          ))
+                        : ''}
+                </ul>
+            </div>
+            <div className='goto-action'>
+                <GoToButton url={`${AppRoutes.group}/${row.id}`} />
+            </div>
         </div>
     );
 }

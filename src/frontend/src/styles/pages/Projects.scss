@@ -35,6 +35,26 @@
     column-gap: $spacing-06 * 4;
     padding-top: $spacing-06;
     padding-bottom: $spacing-06;
+
+    .description {
+        max-width: $spacing-07 * 10;
+        min-width: $spacing-07 * 10;
+    }
+
+    p,
+    h5 {
+        @include contain-text();
+        max-width: $spacing-07 * 10;
+        min-width: $spacing-07 * 10;
+    }
+
+    .goto-action {
+        display: flex;
+        justify-content: flex-end;
+        align-self: center;
+        width: 100%;
+        padding-right: $spacing-05;
+    }
 }
 
 .projects-page__datatable-row-detail li {

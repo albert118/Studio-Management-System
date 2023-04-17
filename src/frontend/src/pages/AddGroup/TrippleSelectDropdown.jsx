@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Select } from '@carbon/react';
-import { Stack } from 'components/Forms';
+import { Stack } from 'components';
 import { usePreferenceValidator } from './usePreferenceValidtor';
 
 export default function TrippleSelectDropdown({
