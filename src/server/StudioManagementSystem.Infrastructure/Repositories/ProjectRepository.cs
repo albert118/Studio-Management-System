@@ -26,7 +26,11 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<List<Project>> GetProjectsAsync(CancellationToken ct)
     {
-        var projects = await _smsDbContext.Projects.ToListAsync(ct);
+        var projects = await _smsDbContext.Projects
+            .Include(e => e.PrincipalOwner)
+            .Include(e => e.ProductOwners)
+            .ToListAsync(ct);
+
         return projects;
     }
 
