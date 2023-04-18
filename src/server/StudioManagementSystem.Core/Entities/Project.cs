@@ -7,8 +7,6 @@ public class Project : IArchivable, IMetaData, ILockable
         Title = title;
         Description = description;
         Domain = domain;
-        ProductOwners = null;
-        AssignedGroups = null;
     }
 
     public Guid Id { get; set; }
@@ -17,9 +15,11 @@ public class Project : IArchivable, IMetaData, ILockable
 
     public string Description { get; set; }
 
-    public ICollection<Group>? AssignedGroups { get; set; }
+    public List<Group>? AssignedGroups { get; set; } = new();
 
-    public ICollection<OwnerContact>? ProductOwners { get; set; }
+    public List<OwnerContact>? ProductOwners { get; set; } = new();
+
+    public Guid PrincipalOwnerId { get; set; }
 
     public OwnerContact PrincipalOwner { get; set; }
 
