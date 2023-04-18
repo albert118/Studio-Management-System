@@ -41,8 +41,7 @@ public class ProjectController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _projectManager.CreateNewProjectAsync(
-            new(dto.Title, dto.Description, dto.Domain),
-            dto.PrincipalOwnerContactId,
+            new(dto.Title, dto.Description, dto.Domain, dto.PrincipalOwnerContactId),
             dto.OwnerContactIds,
             ct
        );

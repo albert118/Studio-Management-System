@@ -47,8 +47,24 @@ public class ProjectRepository : IProjectRepository
             throw new DataException($"Cannot create a {nameof(Project)} with an existing name, '{project.Title}");
         }
 
-        await _smsDbContext.Projects.AddAsync(project, ct);
-        await _smsDbContext.SaveChangesAsync(ct);
+        try {
+            var principalOwner = (await _ownerContactRepository.GetOwnersByIdAsync(
+                new List<Guid> { project.PrincipalOwnerId }, ct)
+            ).FirstOrDefault();
+
+            if (principalOwner is null) {
+                throw new DataException($"Cannot assign a non-existent ${nameof(OwnerContact)} with id: '${project.PrincipalOwnerId}' as the principal owner to a ${nameof(Project)}");
+            }
+
+            project.PrincipalOwner = principalOwner;
+
+            await _smsDbContext.Projects.AddAsync(project, ct);
+            await _smsDbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while assigning the principal owner to a new {Project}", nameof(Project));
+            return Guid.Empty;
+        }
 
         return project.Id;
     }
@@ -66,31 +82,6 @@ public class ProjectRepository : IProjectRepository
         catch (Exception ex)
         {
             _logger.LogError(ex, "An exception occured while updating {Project} with id: '{Id}'", nameof(Project), id);
-            return false;
-        }
-
-        return true;
-    }
-
-    public async Task<bool> AssignPrincipalOwnerAsync(Guid id, Guid principalOwnerContactId, CancellationToken ct)
-    {
-        try {
-            var project = await GetProjectAsync(id, ct)
-                          ?? throw new DataException($"Couldn't find {nameof(Project)} with ID: '{id}'");
-
-            var principalOwner = (await _ownerContactRepository.GetOwnersByIdAsync(
-                new List<Guid> {principalOwnerContactId}, ct
-            )).FirstOrDefault();
-
-            if (principalOwner is null) {
-                throw new DataException($"Cannot assign a non-existent ${nameof(OwnerContact)} with id: '${principalOwnerContactId}' as the principal owner to a ${nameof(Project)} with id: '${id}'");
-            }
-
-            project.PrincipalOwner = principalOwner;
-            await _smsDbContext.SaveChangesAsync(ct);
-        }
-        catch (Exception ex) {
-            _logger.LogError(ex, "An exception occured while assigning the principal owner to a {Project} with id: '{Id}'", nameof(Project), id);
             return false;
         }
 

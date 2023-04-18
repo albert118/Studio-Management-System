@@ -9,6 +9,5 @@ public interface IProjectRepository
     Task<Project?> GetProjectByTitleAsync(string title, CancellationToken ct);
     Task<Guid> AddProjectAsync(Project project, CancellationToken ct);
     Task<bool> UpdateProjectAsync(Guid id, string title, string description, CancellationToken ct);
-    Task<bool> AssignPrincipalOwnerAsync(Guid id, Guid principalOwnerContactId, CancellationToken ct);
     Task<bool> AssignOwnersToProjectAsync(Guid id, IEnumerable<Guid> ownerContactIds, CancellationToken ct);
 }

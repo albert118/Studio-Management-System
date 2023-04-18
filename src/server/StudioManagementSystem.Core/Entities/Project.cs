@@ -2,11 +2,12 @@
 
 public class Project : IArchivable, IMetaData, ILockable
 {
-    public Project(string title, string description, string domain)
+    public Project(string title, string description, string domain, Guid principalOwnerId)
     {
         Title = title;
         Description = description;
         Domain = domain;
+        PrincipalOwnerId = principalOwnerId;
     }
 
     public Guid Id { get; set; }
