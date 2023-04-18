@@ -11,9 +11,8 @@ namespace StudioManagementSystem.Core.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // this table never existed, so comment out to  fix the migration error
-            // migrationBuilder.DropTable(
-            //     name: "OwnerContactProject");
+            migrationBuilder.DropTable(
+                name: "OwnerContactProject");
 
             migrationBuilder.CreateTable(
                 name: "ProductOwnersToManagedProducts",
@@ -52,36 +51,35 @@ namespace StudioManagementSystem.Core.Migrations
             migrationBuilder.DropTable(
                 name: "ProductOwnersToManagedProducts");
 
-            // this table never existed, so comment out to  fix the migration error
-            // migrationBuilder.CreateTable(
-            //     name: "OwnerContactProject",
-            //     columns: table => new
-            //     {
-            //         ManagedProjectsId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-            //         ProductOwnersId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
-            //     },
-            //     constraints: table =>
-            //     {
-            //         table.PrimaryKey("PK_OwnerContactProject", x => new { x.ManagedProjectsId, x.ProductOwnersId });
-            //         table.ForeignKey(
-            //             name: "FK_OwnerContactProject_Contact_ProductOwnersId",
-            //             column: x => x.ProductOwnersId,
-            //             principalTable: "Contact",
-            //             principalColumn: "Id",
-            //             onDelete: ReferentialAction.Cascade);
-            //         table.ForeignKey(
-            //             name: "FK_OwnerContactProject_Project_ManagedProjectsId",
-            //             column: x => x.ManagedProjectsId,
-            //             principalTable: "Project",
-            //             principalColumn: "Id",
-            //             onDelete: ReferentialAction.Cascade);
-            //     })
-            //     .Annotation("MySql:CharSet", "utf8mb4");
-            //
-            // migrationBuilder.CreateIndex(
-            //     name: "IX_OwnerContactProject_ProductOwnersId",
-            //     table: "OwnerContactProject",
-            //     column: "ProductOwnersId");
+            migrationBuilder.CreateTable(
+                name: "OwnerContactProject",
+                columns: table => new
+                {
+                    ManagedProjectsId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ProductOwnersId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OwnerContactProject", x => new { x.ManagedProjectsId, x.ProductOwnersId });
+                    table.ForeignKey(
+                        name: "FK_OwnerContactProject_Contact_ProductOwnersId",
+                        column: x => x.ProductOwnersId,
+                        principalTable: "Contact",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OwnerContactProject_Project_ManagedProjectsId",
+                        column: x => x.ManagedProjectsId,
+                        principalTable: "Project",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OwnerContactProject_ProductOwnersId",
+                table: "OwnerContactProject",
+                column: "ProductOwnersId");
         }
     }
 }
