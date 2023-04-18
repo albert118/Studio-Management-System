@@ -25,7 +25,7 @@ public class Project : IArchivable, IMetaData, ILockable
     // this property is initialised by the repository after we assert a valid principal owner ID was passed for assignment
     public OwnerContact PrincipalOwner { get; set; } = null!;
 
-    public ICollection<GroupProjectPreference> ProjectPreferences { get; set; } = new List<GroupProjectPreference>();
+    public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
 
     public string Domain { get; set; }
 

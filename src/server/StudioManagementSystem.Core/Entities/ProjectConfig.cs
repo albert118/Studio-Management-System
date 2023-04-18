@@ -13,7 +13,6 @@ public class ProjectConfig
 
         builder.Property(e => e.Title).IsRequired();
         builder.Property(e => e.Description).IsRequired();
-        builder.Property(e => e.ProjectPreferences).IsRequired(false);
 
         builder
             .HasOne(e => e.PrincipalOwner)
@@ -25,6 +24,11 @@ public class ProjectConfig
             .HasMany(e => e.ProductOwners)
             .WithMany(e => e.ManagedProducts)
             .UsingEntity("ProductOwnersToManagedProducts");
+
+        builder
+            .HasMany(e => e.GroupProjectPreferences)
+            .WithOne(e => e.Project)
+            .HasForeignKey(e => e.ProjectId);
 
         builder.ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }

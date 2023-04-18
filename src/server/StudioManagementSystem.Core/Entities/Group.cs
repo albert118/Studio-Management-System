@@ -54,5 +54,5 @@ public class Group : IArchivable, IMetaData, ILockable
 
     public List<StudentContact> Members { get; set; }
 
-    public List<GroupProjectPreference> ProjectPreferences { get; set; }
+    public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
 }

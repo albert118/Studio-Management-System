@@ -8,9 +8,9 @@ public class GroupProjectPreference
 
     public Guid ProjectId { get; set; }
 
-    public Project Project { get; set; }
+    public Project Project { get; set; } = null!;
 
     public Guid GroupId { get; set; }
 
-    public Group Group { get; set; }
+    public Group Group { get; set; } = null!;
 }

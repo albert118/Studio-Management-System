@@ -12,7 +12,11 @@ public class GroupConfig
         builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
 
         builder.Property(e => e.Name).IsRequired();
-        builder.Property(e => e.ProjectPreferences).IsRequired();
+
+        builder
+            .HasMany(e => e.GroupProjectPreferences)
+            .WithOne(e => e.Group)
+            .HasForeignKey(e => e.GroupId);
 
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }
