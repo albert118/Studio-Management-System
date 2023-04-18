@@ -67,6 +67,7 @@ export function useProject(projectId: Guid) {
 
             if (response.ok) {
                 setProject(data);
+                setErrors(null);
             } else {
                 const errorData = data as KestrelServerError;
                 const apiError = { error: errorData.title, message: errorData.errors };

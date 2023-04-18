@@ -20,7 +20,8 @@ export function ProjectsDataTable({ projects }) {
     const headers = [
         { key: 'title', header: 'Name' },
         { key: 'description', header: 'Description' },
-        { key: 'owners', header: 'Owner(s)' }
+        { key: 'principalOwnerName', header: 'Principal Owner' },
+        { key: 'ownerNames', header: 'Owner(s)' }
     ];
 
     const getRow = rowId => projects.find(({ id }) => id == rowId);
@@ -45,6 +46,7 @@ export function ProjectsDataTable({ projects }) {
                         <TableBody>
                             {rows.map(row => (
                                 <ExpandingRowFragment
+                                    key={row.id}
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}

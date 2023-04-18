@@ -89,8 +89,8 @@ export interface IProject {
     id: Guid;
     description: string;
     title: string;
-    principalProjectOwner: ProjectOwner;
-    owners: ProjectOwner[];
+    principalOwner: PrincipalOwner;
+    owners: PrincipalOwner[];
     assignedGroups: IGroupFlyweight[];
     meta: IProjectMeta;
 }
@@ -99,8 +99,8 @@ export class Project implements IProject {
     id: Guid;
     description: string;
     title: string;
-    principalProjectOwner: ProjectOwner;
-    owners: ProjectOwner[];
+    principalOwner: PrincipalOwner;
+    owners: PrincipalOwner[];
     assignedGroups: IGroupFlyweight[];
     meta: IProjectMeta;
 
@@ -109,7 +109,7 @@ export class Project implements IProject {
         this.description = '';
         this.title = '';
         this.owners = [];
-        this.principalProjectOwner = {} as ProjectOwner;
+        this.principalOwner = {} as PrincipalOwner;
         this.assignedGroups = [];
         this.meta = {
             createdYear: '',
@@ -118,7 +118,7 @@ export class Project implements IProject {
     }
 }
 
-export type ProjectOwner = {
+export type PrincipalOwner = {
     id: Guid;
     name: string;
     email: string;
