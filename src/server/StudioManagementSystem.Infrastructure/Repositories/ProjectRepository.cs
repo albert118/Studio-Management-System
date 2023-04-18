@@ -32,7 +32,11 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<Project?> GetProjectAsync(Guid id, CancellationToken ct)
     {
-        var project = await _smsDbContext.Projects.FirstOrDefaultAsync(p => p.Id == id, ct);
+        var project = await _smsDbContext.Projects
+            .Include(e => e.PrincipalOwner)
+            .Include(e => e.ProductOwners)
+            .FirstOrDefaultAsync(p => p.Id == id, ct);
+
         return project;
     }
 
