@@ -22,7 +22,8 @@ public class Project : IArchivable, IMetaData, ILockable
 
     public Guid PrincipalOwnerId { get; set; }
 
-    public OwnerContact PrincipalOwner { get; set; }
+    // this property is initialised by the repository after we assert a valid principal owner ID was passed for assignment
+    public OwnerContact PrincipalOwner { get; set; } = null!;
 
     public string Domain { get; set; }
 
