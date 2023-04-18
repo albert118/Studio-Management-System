@@ -12,6 +12,7 @@ public class GroupConfig
         builder.Property(e => e.Id).HasValueGenerator<IdGenerator>();
 
         builder.Property(e => e.Name).IsRequired();
+        builder.Property(e => e.ProjectPreferences).IsRequired();
 
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }

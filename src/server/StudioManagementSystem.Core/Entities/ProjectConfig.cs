@@ -13,6 +13,7 @@ public class ProjectConfig
 
         builder.Property(e => e.Title).IsRequired();
         builder.Property(e => e.Description).IsRequired();
+        builder.Property(e => e.ProjectPreferences).IsRequired(false);
 
         builder
             .HasOne(e => e.PrincipalOwner)

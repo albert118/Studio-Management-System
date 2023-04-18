@@ -53,4 +53,6 @@ public class Group : IArchivable, IMetaData, ILockable
     public string Description { get; set; }
 
     public List<StudentContact> Members { get; set; }
+
+    public List<GroupProjectPreference> ProjectPreferences { get; set; }
 }
