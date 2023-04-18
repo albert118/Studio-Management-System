@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
-using StudioManagementSystem.Infrastructure.Interfaces;
+using StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
@@ -24,11 +24,10 @@ public class OwnerContactRepository : IOwnerContactRepository
         return owners;
     }
 
-    public async Task<Guid> AddOwnerContactAsync(string firstName, string lastName, string email, CancellationToken ct)
+    public async Task<Guid> AddOwnerContactAsync(OwnerContact ownerContact, CancellationToken ct)
     {
-        var newOwnerContact = new OwnerContact(firstName, lastName, email);
-        await _smsDbContext.OwnerContacts.AddAsync(newOwnerContact, ct);
+        await _smsDbContext.OwnerContacts.AddAsync(ownerContact, ct);
         await _smsDbContext.SaveChangesAsync(ct);
-        return newOwnerContact.Id;
+        return ownerContact.Id;
     }
 }

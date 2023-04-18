@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudioManagementSystem.Core.Dtos;
-using StudioManagementSystem.Infrastructure.Interfaces;
+using StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -21,7 +21,7 @@ public class OwnerContactController : ControllerBase
     public ActionResult<Guid> CreateOwnerContact(CreateOwnerContactDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _ownerContactRepository.AddOwnerContactAsync(dto.firstName, dto.lastName, dto.email, ct);
+        var task = _ownerContactRepository.AddOwnerContactAsync(new(dto), ct);
         task.Wait(ct);
 
         return task.Result;

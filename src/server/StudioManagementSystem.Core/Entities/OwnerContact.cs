@@ -1,8 +1,12 @@
-﻿namespace StudioManagementSystem.Core.Entities;
+﻿using StudioManagementSystem.Core.Dtos;
+
+namespace StudioManagementSystem.Core.Entities;
 
 public class OwnerContact : Contact
 {
     public OwnerContact(string firstName, string lastName, string? email) : base(firstName, lastName, email) { }
+
+    public OwnerContact(CreateOwnerContactDto dto) : base(dto.FirstName, dto.LastName, dto.Email) { }
 
     /// <summary>
     /// denotes the Studio (subject) allocation an owner is in (eg. Apps, Studio, Prof)

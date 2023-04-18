@@ -1,9 +1,9 @@
 ﻿using StudioManagementSystem.Core.Entities;
 
-namespace StudioManagementSystem.Infrastructure.Interfaces;
+namespace StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 public interface IOwnerContactRepository
 {
     Task<List<OwnerContact>> GetOwnersByIdAsync(IEnumerable<Guid> ownerContactIds, CancellationToken ct);
-    Task<Guid> AddOwnerContactAsync(string firstName, string lastName, string email, CancellationToken ct);
+    Task<Guid> AddOwnerContactAsync(OwnerContact ownerContact, CancellationToken ct);
 }
