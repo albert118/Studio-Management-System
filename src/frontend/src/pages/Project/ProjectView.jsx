@@ -34,7 +34,10 @@ export default function ProjectView({ project }) {
                     <Column lg={{ span: 5, offset: 2 }} md={4} sm={4} className='overview'>
                         <h1 className='project-page__heading'>{project.title}</h1>
                         <Stack>
-                            <InlineDetail label='owners' detail={project.owners?.join(', ')} />
+                            <InlineDetail
+                                label='owners'
+                                detail={project.owners.map(owner => owner.name).join(', ')}
+                            />
                             <InlineDetail label='year' detail={project.meta?.createdYear} />
                             <InlineDetail label='domain' detail={project.meta?.domain} />
                         </Stack>
@@ -63,16 +66,7 @@ export default function ProjectView({ project }) {
                         >
                             <Stack>
                                 <EmailModalButton
-                                    title='Product Owners'
-                                    description=''
-                                    buttonText='Contact'
-                                    modalHeading='Create email'
-                                >
-                                    this
-                                </EmailModalButton>
-
-                                <EmailModalButton
-                                    title='Product owner(s)'
+                                    title='Product Owner(s)'
                                     description=''
                                     buttonText='Contact'
                                     modalHeading='Create email'
