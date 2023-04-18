@@ -142,7 +142,7 @@ export default function AddProjectView({ availableOwners }) {
                             onChange={output => {
                                 setFormData({
                                     ...formData,
-                                    owners: output.selectedItems.map(item => item.id)
+                                    owners: output.selectedItems.map(item => item.id.value)
                                 });
                             }}
                             items={mapToDropdownItems(availableOwners)}

@@ -62,7 +62,7 @@ export const NewProjectDto = (
         title,
         description,
         domain,
-        principalProductOwnerId: principalProductOwner,
+        principalOwnerContactId: principalProductOwner,
         ownerContactIds: owners
     } as NewProjectDto;
 };
@@ -71,7 +71,7 @@ export type NewProjectDto = {
     title: string;
     description: string;
     domain: string;
-    principalProductOwnerId: Guid;
+    principalOwnerContactId: Guid;
     ownerContactIds: Guid[];
 };
 
