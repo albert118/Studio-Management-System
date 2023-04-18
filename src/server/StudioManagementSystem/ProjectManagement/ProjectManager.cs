@@ -1,13 +1,11 @@
-﻿using StudioManagementSystem.Core.Dtos;
-using StudioManagementSystem.Core.Entities;
+﻿using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 namespace StudioManagementSystem.ProjectManagement;
 
-
 public interface IProjectManager
 {
-    Task<Guid> CreateNewProjectAsync(Project project, Guid primaryOwner, List<Guid> owners, CancellationToken ct);
+    Task<Guid> CreateNewProjectAsync(Project project, Guid principalOwner, List<Guid> owners, CancellationToken ct);
 }
 
 [InstanceScopedBusinessService]
@@ -22,15 +20,19 @@ public class ProjectManager : IProjectManager
         _logger = logger;
     }
 
-    public async Task<Guid> CreateNewProjectAsync(Project project, Guid primaryOwner, List<Guid> owners, CancellationToken ct)
+    public async Task<Guid> CreateNewProjectAsync(Project project, Guid principalOwner, List<Guid> owners, CancellationToken ct)
     {
         var projectId = await _projectRepository.AddProjectAsync(project, ct);
-        // await AssignOwnersToProjectAsync(primaryOwner, owners, ct);
+        await AssignPrincipalOwnerToProjectAsync(projectId, principalOwner, ct);
         await AssignOwnersToProjectAsync(projectId, owners, ct);
         return projectId;
     }
 
-    // could be made public at a later date
+    public async Task<bool> AssignPrincipalOwnerToProjectAsync(Guid projectId, Guid principalOwnerContactId, CancellationToken ct)
+    {
+        return await _projectRepository.AssignPrincipalOwnerAsync(projectId, principalOwnerContactId, ct);
+    }
+
     public async Task<bool> AssignOwnersToProjectAsync(Guid projectId, IEnumerable<Guid> ownerContactIds, CancellationToken ct)
     {
         return await _projectRepository.AssignOwnersToProjectAsync(projectId, ownerContactIds, ct);

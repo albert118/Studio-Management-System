@@ -72,6 +72,31 @@ public class ProjectRepository : IProjectRepository
         return true;
     }
 
+    public async Task<bool> AssignPrincipalOwnerAsync(Guid id, Guid principalOwnerContactId, CancellationToken ct)
+    {
+        try {
+            var project = await GetProjectAsync(id, ct)
+                          ?? throw new DataException($"Couldn't find {nameof(Project)} with ID: '{id}'");
+
+            var principalOwner = (await _ownerContactRepository.GetOwnersByIdAsync(
+                new List<Guid> {principalOwnerContactId}, ct
+            )).FirstOrDefault();
+
+            if (principalOwner is null) {
+                throw new DataException($"Cannot assign a non-existent ${nameof(OwnerContact)} with id: '${principalOwnerContactId}' as the principal owner to a ${nameof(Project)} with id: '${id}'");
+            }
+
+            project.PrincipalOwner = principalOwner;
+            await _smsDbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while assigning the principal owner to a {Project} with id: '{Id}'", nameof(Project), id);
+            return false;
+        }
+
+        return true;
+    }
+
     public async Task<bool> AssignOwnersToProjectAsync(Guid id, IEnumerable<Guid> ownerContactIds, CancellationToken ct)
     {
         try {

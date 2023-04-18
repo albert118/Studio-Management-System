@@ -21,6 +21,8 @@ public class Project : IArchivable, IMetaData, ILockable
 
     public ICollection<OwnerContact>? ProductOwners { get; set; }
 
+    public OwnerContact PrincipalOwner { get; set; }
+
     public string Domain { get; set; }
 
     public bool IsArchived { get; set; }
