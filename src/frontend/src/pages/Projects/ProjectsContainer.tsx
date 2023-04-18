@@ -1,4 +1,4 @@
-import useProjects from 'hooks/ProjectHooks';
+import { useProjects } from 'hooks';
 import ProjectsView from './ProjectsView';
 
 export default function ProjectsContainer() {
