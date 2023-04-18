@@ -46,6 +46,7 @@ export function ProjectsDataTable({ projects }) {
                         <TableBody>
                             {rows.map(row => (
                                 <ExpandingRowFragment
+                                    key={row.id}
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}
