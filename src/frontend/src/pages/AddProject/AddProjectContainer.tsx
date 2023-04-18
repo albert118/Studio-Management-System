@@ -1,8 +1,8 @@
 import AddProjectView from './AddProjectView';
-import { ProjectOwner } from 'types/types';
+import { PrincipalOwner } from 'types/types';
 import { Guid } from 'guid-typescript';
 
-const dummyOwners: ProjectOwner[] = [
+const dummyOwners: PrincipalOwner[] = [
     {
         id: Guid.parse('6476324e-0c56-45e4-bd28-5c10dd5fda1c'),
         name: 'Jeremy Clarkson',
