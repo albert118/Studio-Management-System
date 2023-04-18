@@ -35,6 +35,10 @@ export default function ProjectView({ project }) {
                         <h1 className='project-page__heading'>{project.title}</h1>
                         <Stack>
                             <InlineDetail
+                                label='principal owner'
+                                detail={project.principalOwner.name}
+                            />
+                            <InlineDetail
                                 label='owners'
                                 detail={project.owners.map(owner => owner.name).join(', ')}
                             />

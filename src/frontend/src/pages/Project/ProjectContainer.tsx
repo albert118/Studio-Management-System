@@ -12,7 +12,6 @@ export default function ProjectContainer() {
     }
 
     const { project, isLoading } = useProject(Guid.parse(projectId));
-    console.log(project);
 
     return isLoading ? <>loading...</> : <ProjectView project={project} />;
 }
