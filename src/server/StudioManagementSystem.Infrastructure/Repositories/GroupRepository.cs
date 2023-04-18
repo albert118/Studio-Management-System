@@ -80,4 +80,23 @@ public class GroupRepository : IGroupRepository
 
         return true;
     }
+
+    public async Task<bool> AddGroupProjectPreferencesAsync(List<GroupProjectPreference> preferences, Group group, CancellationToken ct)
+    {
+        try {
+            await _smsDbContext.GroupProjectPreferences.AddRangeAsync(preferences, ct);
+            group.GroupProjectPreferences = preferences;
+            await _smsDbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while adding {GroupProjectPreference}s to a {Group} with id: '{Id}'",
+                nameof(GroupProjectPreference),
+                nameof(Group),
+                group.Id
+            );
+            return false;
+        }
+
+        return true;
+    }
 }
