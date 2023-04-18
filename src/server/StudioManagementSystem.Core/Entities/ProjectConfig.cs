@@ -25,6 +25,6 @@ public class ProjectConfig
             .WithMany(e => e.ManagedProducts)
             .UsingEntity("ProductOwnersToManagedProducts");
 
-        builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
+        builder.ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }
 }
