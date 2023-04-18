@@ -18,9 +18,6 @@ public class Group : IArchivable, IMetaData, ILockable
         Members = new();
         MaxMembers = dto.MaxMembers;
         Description = dto.Description ?? string.Empty;
-
-        // TODO: migration for new field
-        // Preferences = dto.Preferences;
     }
 
     public Group(UpdateGroupDto dto)
