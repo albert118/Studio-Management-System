@@ -1,3 +1,3 @@
 ﻿namespace StudioManagementSystem.Core.Dtos;
 
-public record CreateOwnerContactDto(string firstName, string lastName, string email);
+public record CreateOwnerContactDto(string FirstName, string LastName, string Email);

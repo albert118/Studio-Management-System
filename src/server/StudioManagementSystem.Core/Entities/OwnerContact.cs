@@ -1,11 +1,12 @@
-﻿namespace StudioManagementSystem.Core.Entities;
+﻿using StudioManagementSystem.Core.Dtos;
+
+namespace StudioManagementSystem.Core.Entities;
 
 public class OwnerContact : Contact
 {
-    public OwnerContact(string firstName, string lastName, string? email) : base(firstName, lastName, email)
-    {
-        ManagedProjects = null;
-    }
+    public OwnerContact(string firstName, string lastName, string? email) : base(firstName, lastName, email) { }
+
+    public OwnerContact(CreateOwnerContactDto dto) : base(dto.FirstName, dto.LastName, dto.Email) { }
 
     /// <summary>
     /// denotes the Studio (subject) allocation an owner is in (eg. Apps, Studio, Prof)
@@ -14,5 +15,7 @@ public class OwnerContact : Contact
     /// admin views. So, there's flexibility here
     public string? StudioSection { get; set; }
 
-    public ICollection<Project>? ManagedProjects { get; set; }
+    public ICollection<Project>? PrincipalProjects { get; set; } = new List<Project>();
+
+    public List<Project>? ManagedProducts { get; set; } = new();
 }

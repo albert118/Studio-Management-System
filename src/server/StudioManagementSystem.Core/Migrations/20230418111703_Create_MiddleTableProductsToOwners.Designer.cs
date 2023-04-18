@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioManagementSystem.Core;
 
@@ -10,9 +11,11 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    partial class StudioManagementDbMigrationContextModelSnapshot : ModelSnapshot
+    [Migration("20230418111703_Create_MiddleTableProductsToOwners")]
+    partial class Create_MiddleTableProductsToOwners
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,9 +153,6 @@ namespace StudioManagementSystem.Core.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
-                    b.Property<Guid>("PrincipalOwnerId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -161,8 +161,6 @@ namespace StudioManagementSystem.Core.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PrincipalOwnerId");
 
                     b.ToTable("Project", (string)null);
                 });
@@ -213,17 +211,6 @@ namespace StudioManagementSystem.Core.Migrations
                     b.Navigation("AssignedProject");
                 });
 
-            modelBuilder.Entity("StudioManagementSystem.Core.Entities.Project", b =>
-                {
-                    b.HasOne("StudioManagementSystem.Core.Entities.OwnerContact", "PrincipalOwner")
-                        .WithMany("PrincipalProjects")
-                        .HasForeignKey("PrincipalOwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PrincipalOwner");
-                });
-
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.StudentContact", b =>
                 {
                     b.HasOne("StudioManagementSystem.Core.Entities.Group", "AssignedGroup")
@@ -241,11 +228,6 @@ namespace StudioManagementSystem.Core.Migrations
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.Project", b =>
                 {
                     b.Navigation("AssignedGroups");
-                });
-
-            modelBuilder.Entity("StudioManagementSystem.Core.Entities.OwnerContact", b =>
-                {
-                    b.Navigation("PrincipalProjects");
                 });
 #pragma warning restore 612, 618
         }

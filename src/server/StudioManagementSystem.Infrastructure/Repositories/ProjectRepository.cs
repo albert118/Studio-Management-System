@@ -5,6 +5,7 @@ using StudioManagementSystem.Infrastructure.DataServices;
 using StudioManagementSystem.Infrastructure.Interfaces;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using System.Data;
+using System.Runtime.ExceptionServices;
 
 namespace StudioManagementSystem.Infrastructure.Repositories;
 
@@ -47,10 +48,33 @@ public class ProjectRepository : IProjectRepository
             throw new DataException($"Cannot create a {nameof(Project)} with an existing name, '{project.Title}");
         }
 
-        await _smsDbContext.Projects.AddAsync(project, ct);
-        await _smsDbContext.SaveChangesAsync(ct);
+        Guid returnId;
 
-        return project.Id;
+        try {
+            var principalOwner = (await _ownerContactRepository.GetOwnersByIdAsync(
+                new List<Guid> { project.PrincipalOwnerId }, ct)
+            ).FirstOrDefault();
+
+            if (principalOwner is null) {
+                throw new DataException($"Cannot assign a non-existent ${nameof(OwnerContact)} with id: '${project.PrincipalOwnerId}' as the principal owner to a ${nameof(Project)}");
+            }
+
+            project.PrincipalOwner = principalOwner;
+
+            await _smsDbContext.Projects.AddAsync(project, ct);
+            await _smsDbContext.SaveChangesAsync(ct);
+            returnId = project.Id;
+        } catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while assigning the principal owner to a new {Project}", nameof(Project));
+
+            if (ex is DataException) {
+                ExceptionDispatchInfo.Capture(ex).Throw();
+            }
+
+            returnId = Guid.Empty;
+        }
+
+        return returnId;
     }
 
     public async Task<bool> UpdateProjectAsync(Guid id, string title, string description, CancellationToken ct)

@@ -2,13 +2,12 @@
 
 public class Project : IArchivable, IMetaData, ILockable
 {
-    public Project(string title, string description, string domain)
+    public Project(string title, string description, string domain, Guid principalOwnerId)
     {
         Title = title;
         Description = description;
         Domain = domain;
-        ProductOwners = null;
-        AssignedGroups = null;
+        PrincipalOwnerId = principalOwnerId;
     }
 
     public Guid Id { get; set; }
@@ -17,9 +16,14 @@ public class Project : IArchivable, IMetaData, ILockable
 
     public string Description { get; set; }
 
-    public ICollection<Group>? AssignedGroups { get; set; }
+    public List<Group>? AssignedGroups { get; set; } = new();
 
-    public ICollection<OwnerContact>? ProductOwners { get; set; }
+    public List<OwnerContact>? ProductOwners { get; set; } = new();
+
+    public Guid PrincipalOwnerId { get; set; }
+
+    // this property is initialised by the repository after we assert a valid principal owner ID was passed for assignment
+    public OwnerContact PrincipalOwner { get; set; } = null!;
 
     public string Domain { get; set; }
 

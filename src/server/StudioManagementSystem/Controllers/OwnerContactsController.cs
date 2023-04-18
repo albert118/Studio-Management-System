@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudioManagementSystem.Core.Dtos;
-using StudioManagementSystem.Infrastructure.Interfaces;
+using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
 
 namespace StudioManagementSystem.Controllers;
