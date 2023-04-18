@@ -63,12 +63,13 @@ export function useProject(projectId: Guid) {
             const response = await fetch(`${ApiConfig.API_URL}/project/${projectId}`, {
                 ...defaultRequestOptions
             });
+            const data = await response.json();
 
             if (response.ok) {
-                setProject(await response.json());
+                setProject(data);
                 setErrors(null);
             } else {
-                const errorData = (await response.json()) as KestrelServerError;
+                const errorData = data as KestrelServerError;
                 const apiError = { error: errorData.title, message: errorData.errors };
                 console.error(JSON.stringify(apiError));
                 setErrors(apiError);
