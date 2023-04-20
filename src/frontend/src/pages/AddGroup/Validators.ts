@@ -1,4 +1,5 @@
-import { SelectedPreferences, getPreferencesAsList } from './types';
+import { SelectedPreferences } from 'types/types';
+import { getPreferencesAsList } from './types';
 import { isUnique } from 'utils/array';
 import { IFormData } from './types';
 
