@@ -19,7 +19,7 @@ export default function useOwnerContacts(ownerContactIds:Guid[]) {
                 ...defaultRequestOptions,
                 method: 'POST',
                 body: JSON.stringify(
-                    {ids: ownerContactIds}
+                    {ids: ownerContactIds.map(id => id.toString())}
                 )
             });
         
