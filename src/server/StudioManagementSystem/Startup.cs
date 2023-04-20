@@ -28,6 +28,16 @@ public class Startup
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+
+        if (env.IsDevelopment()) {
+            services.AddCors(options => {
+                options.AddDefaultPolicy(policy => policy
+                    .WithOrigins("http://localhost:5175")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                );
+            });
+        }
     }
 
     /// <summary>
