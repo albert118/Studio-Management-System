@@ -1,5 +1,5 @@
 import { preferenceValidtor } from './Validators';
-import { SelectedPreferences } from './types';
+import { SelectedPreferences } from 'types/types';
 
 export const usePreferenceValidator = (existingPreferences: SelectedPreferences) => {
     const validate = () => {
