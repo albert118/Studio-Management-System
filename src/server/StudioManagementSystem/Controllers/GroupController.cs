@@ -37,7 +37,6 @@ public class GroupController : ControllerBase
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupRepository.AddGroupAsync(new(dto), ct);
-        // TODO add manager to call repo a second time, mapping and adding the preferences
         task.Wait(ct);
 
         if (task.Result == Guid.Empty)
