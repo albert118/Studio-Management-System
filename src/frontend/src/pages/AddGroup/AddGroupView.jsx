@@ -34,7 +34,6 @@ export default function AddGroupView({ availableProjects }) {
 
     const submit = async e => {
         e.preventDefault();
-        console.log(selectedPreferences);
         const groupId = await addGroup(
             NewGroupDto(...Object.values(formData), selectedPreferences)
         );
