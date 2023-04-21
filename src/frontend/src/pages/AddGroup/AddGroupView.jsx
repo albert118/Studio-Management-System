@@ -34,6 +34,7 @@ export default function AddGroupView({ availableProjects }) {
 
     const submit = async e => {
         e.preventDefault();
+        console.log(selectedPreferences);
         const groupId = await addGroup(
             NewGroupDto(...Object.values(formData), selectedPreferences)
         );
@@ -122,7 +123,7 @@ export default function AddGroupView({ availableProjects }) {
                             <PlaceholderSelectItem />
                             {availableProjects.map(project => (
                                 <SelectItem
-                                    text={project.description}
+                                    text={project.title}
                                     value={project.id}
                                     key={project.id}
                                 />
