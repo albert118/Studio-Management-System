@@ -2,6 +2,12 @@
 
 public class GroupProjectPreference
 {
+    public GroupProjectPreference(KeyValuePair<Guid, int> preference)
+    {
+        Rank = preference.Value;
+        ProjectId = preference.Key;
+    }
+
     public Guid Id { get; set; }
 
     public int Rank { get; set; }
