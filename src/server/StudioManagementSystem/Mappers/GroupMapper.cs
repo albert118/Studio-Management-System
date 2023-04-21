@@ -12,7 +12,7 @@ public static class GroupMapper
             Name: group.Name,
             Description: group.Description,
             MemberInfo: group.Members.ToMemberInfoDto(group),
-            Preferences: new(), // TODO
+            Preferences: group.GroupProjectPreferences.Select(GroupProjectPreferenceMapper.MapToPreferenceDto).ToList(),
             Project: group.AssignedProject?.MapToProjectDto(),
             MemberCount: $"{group.Members.Count}/{group.MaxMembers}"
         );
