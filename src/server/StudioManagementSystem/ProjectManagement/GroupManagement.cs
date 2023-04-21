@@ -1,6 +1,6 @@
 ﻿using StudioManagementSystem.Core.Dtos;
-using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
+using StudioManagementSystem.Mappers;
 
 namespace StudioManagementSystem.ProjectManagement;
 
@@ -24,12 +24,12 @@ public class ProjectGroupManager : IProjectGroupManager
         var groupId = await _groupRepository.AddGroupAsync(new(dto), ct);
         var group = await _groupRepository.GetGroupAsync(groupId, ct);
 
-        var groupProjectPreferences = dto.Preferences?
-            .Where(kvp => kvp.Key != Guid.Empty)
-            .Select(kvp => new GroupProjectPreference(kvp))
+        var groupProjectPreferences = dto.Preferences
+            .PreferencesAsList()
+            .Select(GroupProjectPreferenceMapper.MapToGroupProjectPreference)
             .ToList();
 
-        if (groupProjectPreferences != null && group != null) {
+        if (group != null) {
             await _groupRepository.AddGroupProjectPreferencesAsync(groupProjectPreferences, group, ct);
         }
 
