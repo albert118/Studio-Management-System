@@ -32,7 +32,7 @@ public class Startup
         if (env.IsDevelopment()) {
             services.AddCors(options => {
                 options.AddDefaultPolicy(policy => policy
-                    .WithOrigins("http://localhost:5173")
+                    .WithOrigins("http://localhost:5175")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                 );
