@@ -20,3 +20,7 @@
 # sensitive data
 
 *.env
+
+# nginx RSA keys
+
+nginx/keys.json
