@@ -1,4 +1,9 @@
+import AppRoutes from 'navigation/AppRoutes';
+import { useNavigate } from 'react-router-dom';
+
 function Error() {
+    const navigate = useNavigate();
+
     return (
         <div className='flex-container'>
             <div className='text-center'>
@@ -14,7 +19,7 @@ function Error() {
                     </span>
                 </h1>
                 <h3 className='fadeIn'>PAGE NOT FOUND</h3>
-                <button type='button' name='button'>
+                <button type='button' name='button' onClick={() => navigate(`${AppRoutes.root}`)}>
                     Return To Home
                 </button>
             </div>
