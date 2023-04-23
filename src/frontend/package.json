@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "tsc && vite build --config vite.config.production.ts",
         "preview": "vite preview  --config vite.config.production.ts",
-        "cert": "rmdir .certs && mkdir .certs && mkcert -key-file .certs/key.pem -cert-file .certs/cert.pem local.studiomanagementsystem.net"
+        "cert": "del .certs\\cert.crt .certs\\key.pem && rmdir .certs && mkdir .certs && mkcert -key-file .certs/key.pem -cert-file .certs/cert.crt studiomanagementsystem.localtest.me"
     },
     "dependencies": {
         "@carbon/react": "^1.26.0",
