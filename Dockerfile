@@ -15,7 +15,8 @@ WORKDIR /usr/src/app
 
 # install dependencies to the image
 COPY src/frontend/vite.config.ts src/frontend/tsconfig.node.json src/frontend/tsconfig.json src/frontend/package.json src/frontend/package-lock.json /usr/src/app/
-RUN npm ci --legacy-peer-deps
+RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+RUN npm ci
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
