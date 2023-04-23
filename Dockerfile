@@ -27,8 +27,11 @@ COPY src/frontend/ ./
 # build and the production app (this creates a build folder in the CWD)
 RUN npm run build
 
-## Nginx Proxy Manager (rev proxy)
+## Nginx (rev proxy)
 
-FROM jc21/nginx-proxy-manager:latest as production
+FROM nginx:1.23.4-alpine-slim as production-proxy
 
+COPY src/frontend/.certs/cert.crt src/frontend/.certs/key.pem /etc/ssl/certs/nginx/
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/includes/ /etc/nginx/includes
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
