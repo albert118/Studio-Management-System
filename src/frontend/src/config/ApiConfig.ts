@@ -1,5 +1,7 @@
 const ApiConfig = Object.freeze({
-    API_URL: 'https://localhost:7230/api'
+    API_HTTPS_HOST: 'https://localhost:7230',
+    API_HTTP_HOST: 'http://localhost:5230',
+    API_URL: '/api'
 });
 
 export const supaBaseURL = 'https://qhflbfdceoyhnplcpgnh.supabase.co';
