@@ -1,4 +1,6 @@
-﻿namespace StudioManagementSystem.Core.Entities;
+﻿using StudioManagementSystem.Core.Dtos;
+
+namespace StudioManagementSystem.Core.Entities;
 
 public class StudentContact : Contact
 {
@@ -6,6 +8,8 @@ public class StudentContact : Contact
     {
         AssignedGroup = null;
     }
+    
+    public StudentContact(CreateStudentContactDto dto) : base(dto.FirstName, dto.LastName, dto.Email) { }
 
     public Group? AssignedGroup { get; set; }
 }
