@@ -1,8 +1,2 @@
-# nginx proxy manager content
-
-letsencrypt-acme-challenge/*
-logs/*
-access/*
-
 # nginx RSA keys
 nginx/keys.json
