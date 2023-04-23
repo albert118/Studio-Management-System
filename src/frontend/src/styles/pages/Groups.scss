@@ -3,7 +3,21 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.groups-page__banner,
+.group-page {
+    p {
+        margin-top: $spacing-05;
+        margin-bottom: $spacing-05;
+
+        @include type-style('productive-heading-03');
+
+        @include breakpoint-between((320px + 1), md) {
+            max-width: 75%;
+        }
+
+        @include wrap-text();
+    }
+}
+
 .groups-page__table {
     margin-left: -20px;
     margin-right: -20px;
@@ -14,10 +28,8 @@
 }
 
 .groups-page__banner {
-    padding-top: $spacing-05;
-    padding-left: $spacing-05;
-    padding-bottom: $spacing-07 * 4;
-    @include neutral-banner__background;
+    padding-top: $spacing-07;
+    padding-bottom: $spacing-07;
 }
 
 .groups-page__table {
