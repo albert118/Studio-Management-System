@@ -18,9 +18,6 @@ public class Group : IArchivable, IMetaData, ILockable
         Members = new();
         MaxMembers = dto.MaxMembers;
         Description = dto.Description ?? string.Empty;
-
-        // TODO: migration for new field
-        // Preferences = dto.Preferences;
     }
 
     public Group(UpdateGroupDto dto)
@@ -53,4 +50,6 @@ public class Group : IArchivable, IMetaData, ILockable
     public string Description { get; set; }
 
     public List<StudentContact> Members { get; set; }
+
+    public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
 }

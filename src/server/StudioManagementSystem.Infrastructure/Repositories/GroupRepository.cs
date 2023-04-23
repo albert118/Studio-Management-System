@@ -31,6 +31,7 @@ public class GroupRepository : IGroupRepository
     {
         var group = await _smsDbContext.Groups
             .Include(e => e.Members)
+            .Include(e => e.GroupProjectPreferences).ThenInclude(c => c.Project)
             .FirstOrDefaultAsync(g => g.Id == id, ct);
         return group;
     }
@@ -75,6 +76,25 @@ public class GroupRepository : IGroupRepository
         }
         catch (Exception ex) {
             _logger.LogError(ex, "An exception occured while updating a {Group} with id: '{Id}'", nameof(Group), id);
+            return false;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> AddGroupProjectPreferencesAsync(List<GroupProjectPreference> preferences, Group group, CancellationToken ct)
+    {
+        try {
+            await _smsDbContext.GroupProjectPreferences.AddRangeAsync(preferences, ct);
+            group.GroupProjectPreferences = preferences;
+            await _smsDbContext.SaveChangesAsync(ct);
+        }
+        catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while adding {GroupProjectPreference}s to a {Group} with id: '{Id}'",
+                nameof(GroupProjectPreference),
+                nameof(Group),
+                group.Id
+            );
             return false;
         }
 

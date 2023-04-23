@@ -25,6 +25,11 @@ public class ProjectConfig
             .WithMany(e => e.ManagedProducts)
             .UsingEntity("ProductOwnersToManagedProducts");
 
-        builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
+        builder
+            .HasMany(e => e.GroupProjectPreferences)
+            .WithOne(e => e.Project)
+            .HasForeignKey(e => e.ProjectId);
+
+        builder.ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }
 }

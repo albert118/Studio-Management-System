@@ -2,6 +2,7 @@
 using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
+using StudioManagementSystem.ProjectManagement;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -11,11 +12,13 @@ public class GroupController : ControllerBase
 {
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
     private readonly IGroupRepository _groupRepository;
+    private readonly IProjectGroupManager _projectGroupManager;
 
-    public GroupController(IGroupRepository groupRepository,
+    public GroupController(IGroupRepository groupRepository, IProjectGroupManager projectGroupManager,
         ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _groupRepository = groupRepository;
+        _projectGroupManager = projectGroupManager;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
@@ -36,7 +39,8 @@ public class GroupController : ControllerBase
     public ActionResult<Guid> AddGroup(CreateGroupDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupRepository.AddGroupAsync(new(dto), ct);
+        var task = _projectGroupManager.CreateNewGroupAsync(dto, ct);
+
         task.Wait(ct);
 
         if (task.Result == Guid.Empty)

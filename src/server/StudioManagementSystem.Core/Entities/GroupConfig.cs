@@ -13,6 +13,11 @@ public class GroupConfig
 
         builder.Property(e => e.Name).IsRequired();
 
+        builder
+            .HasMany(e => e.GroupProjectPreferences)
+            .WithOne(e => e.Group)
+            .HasForeignKey(e => e.GroupId);
+
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }
 }

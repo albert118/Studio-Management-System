@@ -10,6 +10,7 @@ public interface IStudioManagementSystemDbContextAsync
     DbSet<StudentContact> StudentContacts { get; }
     DbSet<Group> Groups { get; }
     DbSet<Project> Projects { get; }
+    DbSet<GroupProjectPreference> GroupProjectPreferences { get; }
     
     Task<int> SaveChangesAsync(CancellationToken ct);
 }

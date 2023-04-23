@@ -17,7 +17,9 @@ public class StudioManagementSystemDbContextAsync : AsyncDbContext , IStudioMana
     public DbSet<Group> Groups => Set<Group>();
 
     public DbSet<Project> Projects => Set<Project>();
-    
+
+    public DbSet<GroupProjectPreference> GroupProjectPreferences => Set<GroupProjectPreference>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         new ContactConfig().Configure(builder.Entity<Contact>());
@@ -25,5 +27,7 @@ public class StudioManagementSystemDbContextAsync : AsyncDbContext , IStudioMana
         new GroupConfig().Configure(builder.Entity<Group>());
 
         new ProjectConfig().Configure(builder.Entity<Project>());
+
+        new GroupProjectPreferenceConfig().Configure(builder.Entity<GroupProjectPreference>());
     }
 }

@@ -122,7 +122,7 @@ export default function AddGroupView({ availableProjects }) {
                             <PlaceholderSelectItem />
                             {availableProjects.map(project => (
                                 <SelectItem
-                                    text={project.description}
+                                    text={project.title}
                                     value={project.id}
                                     key={project.id}
                                 />

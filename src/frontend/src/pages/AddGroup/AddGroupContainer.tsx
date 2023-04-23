@@ -1,19 +1,9 @@
 import AddGroupView from './AddGroupView';
+import { useProjects } from 'hooks';
 
-const availableProjects = [
-    {
-        id: '1',
-        description: 'Apple Inc.'
-    },
-    {
-        id: '2',
-        description: 'Microsft Corp.'
-    },
-    {
-        id: '3',
-        description: 'IBM'
-    }
-];
 export default function AddGroupContainer() {
-    return <AddGroupView availableProjects={availableProjects} />;
+    const { projects, isLoading } = useProjects();
+
+    // TODO: add a spinner
+    return isLoading ? <>loading...</> : <AddGroupView availableProjects={projects} />;
 }
