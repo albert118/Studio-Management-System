@@ -10,10 +10,12 @@ import {
     TableContainer,
     TableToolbar,
     TableToolbarContent,
-    TableToolbarSearch
+    TableToolbarSearch,
+    Button
 } from '@carbon/react';
 
 import AppRoutes from 'navigation/AppRoutes';
+import { useNavigate } from 'react-router-dom';
 import { GoToButton } from 'components';
 
 export function GroupsDataTable({ groups }) {
@@ -23,15 +25,26 @@ export function GroupsDataTable({ groups }) {
         { key: 'memberCount', header: 'Members' }
     ];
 
+    const navigate = useNavigate();
+
     const getRow = rowId => groups.find(({ id }) => id == rowId);
 
     return (
         <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
-                <TableContainer title='Groups'>
+                <TableContainer 
+                    title='Groups'
+                    description='This is a list of all the project for this semester.'
+                >
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
+                            <Button 
+                                onClick={() => navigate(`${AppRoutes.groups}/add`)}
+                                size="small" 
+                                kind="primary"> 
+                                Create a new group 
+                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>

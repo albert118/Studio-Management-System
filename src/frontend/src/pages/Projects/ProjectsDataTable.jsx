@@ -10,10 +10,12 @@ import {
     TableContainer,
     TableToolbar,
     TableToolbarContent,
-    TableToolbarSearch
+    TableToolbarSearch,
+    Button
 } from '@carbon/react';
 
 import AppRoutes from 'navigation/AppRoutes';
+import { useNavigate } from 'react-router-dom';
 import { GoToButton } from 'components';
 
 export function ProjectsDataTable({ projects }) {
@@ -24,6 +26,8 @@ export function ProjectsDataTable({ projects }) {
         { key: 'ownerNames', header: 'Owner(s)' }
     ];
 
+    const navigate = useNavigate();
+
     const getRow = rowId => projects.find(({ id }) => id == rowId);
 
     return (
@@ -31,11 +35,17 @@ export function ProjectsDataTable({ projects }) {
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
                 <TableContainer
                     title='Projects'
-                    description='This is a list of all the project for this semsester.'
+                    description='This is a list of all the project for this semester.'
                 >
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
+                            <Button 
+                                onClick={() => navigate(`${AppRoutes.projects}/add`)}
+                                size="small" 
+                                kind="primary"> 
+                                Create a new project
+                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
