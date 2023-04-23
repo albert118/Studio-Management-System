@@ -118,6 +118,12 @@ export class Project implements IProject {
     }
 }
 
+export interface IOwnerContact {
+    id: Guid;
+    name: string;
+    email: string;
+};
+
 export type PrincipalOwner = {
     id: Guid;
     name: string;
