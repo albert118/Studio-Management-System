@@ -2,5 +2,7 @@
 
 letsencrypt-acme-challenge/*
 logs/*
-custom_ssl/*
 access/*
+
+# nginx RSA keys
+nginx/keys.json

@@ -9,19 +9,20 @@
 # the alias is for grabbing build artifacts in a later stage
 FROM node:18-alpine as builder
 
-# # make a working directory for the app
+# make a working directory for the app
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# install dependencies to the image
-COPY src/frontend/vite.config.ts src/frontend/tsconfig.node.json src/frontend/tsconfig.json src/frontend/package.json src/frontend/package-lock.json /usr/src/app/
-RUN apk add --update python3 make g++ && rm -rf /var/cache/apk/*
+# copy config and install dependencies
+COPY src/frontend/vite.config.ts src/frontend/tsconfig.node.json src/frontend/tsconfig.json ./
+COPY src/frontend/package.json src/frontend/package-lock.json ./
+RUN apk add --no-cache --update python3 make g++ && rm -rf /var/cache/apk/*
 RUN npm ci
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # copy the app files to the image
-COPY src/frontend/ /usr/src/app/
+COPY src/frontend/ ./
 
 # build and the production app (this creates a build folder in the CWD)
 RUN npm run build
