@@ -1,5 +1,8 @@
+using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace StudioManagementSystem;
 
@@ -18,6 +21,26 @@ public class Startup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
     {
+        // Add authentication.
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "supabase",
+                    ValidAudience = "authenticated",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_jwt_secret"))
+                };
+            });
+        
         services.AddControllers();
 
         services.Configure<RouteOptions>(options => {

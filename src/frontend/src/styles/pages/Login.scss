@@ -1,0 +1,13 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '../mixins' as *;
+
+.loginClass {
+    margin-left: -20px;
+    margin-right: -20px;
+    @include breakpoint-down(md) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
