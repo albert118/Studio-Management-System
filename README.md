@@ -12,7 +12,7 @@ Having installed Docker (and potentially restarted editors, installed extensions
 
 In a console run the following,
 
-```
+```bash
 docker-compose up
 ```
 
@@ -28,23 +28,25 @@ The database data is stored as a Docker volume local to your machine. All import
 
 Having started up the docker dependencies, let's run the migrations. This is typical EF Core project, [read more here](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
 
+> Although you can install and configure your dotnet tools from any location, the project specific commands need to be run from [`src/server`](https://github.com/albert118/Studio-Management-System/tree/master/src/server)
+
 install the tools (if you haven't already), 
 
-```
+```bash
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
 ```
 
 verify your version and installation,
 
-```
+```bash
 dotnet ef
 ```
 
 update the database,
 
-```
-dotnet ef database update
+```bash
+dotnet ef database update --project StudioManagementSystem.Core\StudioManagementSystem.Core.csproj
 ```
 
 ## Using the Reverse Proxy (Nginx Proxy Manager)
@@ -72,3 +74,7 @@ In development mode, the MariaDb database is exposed via port `33060`. The vario
 ## Running and deploying the Production Build
 
 Running `docker-compose build && docker-compose up -d` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://localhost
+
+## The server/backend API
+
+Read more about the server API [here](https://github.com/albert118/Studio-Management-System/tree/master/src/server)
