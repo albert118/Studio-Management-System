@@ -28,16 +28,6 @@ public class Startup
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
-        if (env.IsDevelopment()) {
-            services.AddCors(options => {
-                options.AddDefaultPolicy(policy => policy
-                    .WithOrigins("http://localhost:5175")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                );
-            });
-        }
     }
 
     /// <summary>
@@ -63,18 +53,17 @@ public class Startup
         if (env.IsDevelopment()) {
             app.UseSwagger()
                 .UseSwaggerUI()
-                .UseDeveloperExceptionPage()
-                .UseCors();
+                .UseDeveloperExceptionPage();
         }
         else {
             // Enable the exception handler route
             app.UseExceptionHandler("/error")
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                .UseHsts();
+                .UseHsts()
+                .UseHttpsRedirection();
         }
 
-        app.UseHttpsRedirection();
-
+        app.UseCors();
         app.MapControllers();
     }
 }
