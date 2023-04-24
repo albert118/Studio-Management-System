@@ -30,7 +30,7 @@ Having started up the docker dependencies, let's run the migrations. This is typ
 
 > Although you can install and configure your dotnet tools from any location, the project specific commands need to be run from [`src/server`](https://github.com/albert118/Studio-Management-System/tree/master/src/server)
 
-install the tools (if you haven't already), 
+install the tools (if you haven't already),
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -73,7 +73,14 @@ In development mode, the MariaDb database is exposed via port `33060`. The vario
 
 ## Running and deploying the Production Build
 
-Running `docker-compose build && docker-compose up -d` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://localhost
+To test the production build locally, you'll need to provide SSL certificates to the app. This example uses mkcert to create a machine-signed certificate.
+
+```bash
+mkcert -install
+mkcert -key-file .certs\key.pem -cert-file .certs\cert.crt studiomanagementsystem.localtest.me
+```
+
+Running `docker-compose up -d --build` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://studiomanagementsystem.localtest.me
 
 ## The server/backend API
 
