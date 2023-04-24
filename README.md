@@ -62,6 +62,17 @@ mkcert -install
 mkcert -key-file .certs\key.pem -cert-file .certs\cert.crt studiomanagementsystem.localtest.me
 ```
 
+Successfully generating the machine-signed certs will log something like the following,
+
+```bash
+Created a new certificate valid for the following names 📜
+ - "localhost"
+
+The certificate is at ".certs/cert.crt" and the key at ".certs/key.pem" ✅
+
+It will expire on 23 July 2025 🗓
+```
+
 Running `docker-compose up -d --build` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://studiomanagementsystem.localtest.me
 
 ## The server/backend API

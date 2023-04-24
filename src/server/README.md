@@ -19,3 +19,7 @@ The `Core` project is a namespace for domain data models and also doubles as the
 The `Infrastructure` contains infrastructure layer concerns (typically database contexts or external integration for example). Communication with external data sources is implemented in this project. These implemented services are abstracted behind interfaces which are called in the API or Application (TODO, none exists yet) layer projects.
 
 > This means it's typically easier to either adapt or swap databases down the line
+
+## Build Process
+
+See the dockerfile for the build pipeline. Note, the docker-compose from the root dir will mount SSL certificates that are used in the production build environment.
