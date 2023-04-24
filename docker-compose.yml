@@ -1,14 +1,11 @@
 version: '3.9'
 
-# create an internal docker network for our application stack
 networks:
-    default:
-        name: sms-network
+    sms-network:
+        driver: bridge
 
-# custom
 volumes:
     database:
-    letsencrypt:
 
 services:
     maria-db:
@@ -19,7 +16,6 @@ services:
         container_name: maria-db
         build:
             context: ./database
-            dockerfile: Dockerfile
         volumes:
             - database:/var/lib/mysql
         ports:
@@ -32,14 +28,27 @@ services:
             MYSQL_ROOT_PASSWORD: super_secret_root_password
             MYSQL_HOST: localhost
 
+    backend_api:
+        container_name: backend_api
+        build:
+            context: ./src/server
+        ports:
+            - 7320:7320
+        networks:
+            - sms-network
+        restart: unless-stopped
+
     nginx-revproxy:
         container_name: nginx-revproxy
         build:
-            context: .
-            dockerfile: Dockerfile
+            context: ./src/frontend
+        volumes:
+            - ./.certs:/data/certs
         restart: unless-stopped
         ports:
             - '80:80'
             - '443:443'
+        networks:
+            - sms-network
         depends_on:
             - maria-db
