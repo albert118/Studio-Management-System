@@ -21,6 +21,8 @@ services:
         ports:
             - 33060:3306
         restart: unless-stopped
+        networks:
+            - sms-network
         environment:
             MYSQL_DATABASE: StudioManagementSystem
             MYSQL_USER: admin_user
@@ -37,6 +39,8 @@ services:
         networks:
             - sms-network
         restart: unless-stopped
+        depends_on:
+            - maria-db
 
     nginx-revproxy:
         container_name: nginx-revproxy
