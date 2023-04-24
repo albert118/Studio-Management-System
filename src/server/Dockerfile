@@ -22,4 +22,5 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=publisher /publish .
 
+ENV ASPNETCORE_ENVIRONMENT=Production
 ENTRYPOINT dotnet StudioManagementSystem.dll

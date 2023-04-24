@@ -1,11 +1,10 @@
 using StudioManagementSystem;
 
-const string appSettingsFilePath = "appsettings.json";
-
 // retrieve and inject the application configuration
 var appConfig = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile(appSettingsFilePath)
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
     .Build();
 
 // create the application
