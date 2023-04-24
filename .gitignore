@@ -18,7 +18,8 @@
 *.sw?
 
 # sensitive and local dev data
-
 .env
 *.env
-src/frontend/.certs/*
+.certs/*
+*.crt
+*.pem
