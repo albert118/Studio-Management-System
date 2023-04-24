@@ -10,6 +10,7 @@
 
 .projects-page__table {
     padding-left: $spacing-07;
+    
 }
 
 .projects-page__p {
@@ -28,6 +29,9 @@
     @include breakpoint-between((320px + 1), md) {
         max-width: 75%;
     }
+}
+.projects-page__datatable{
+    padding-bottom: 5%
 }
 
 .projects-page__datatable-row-detail {

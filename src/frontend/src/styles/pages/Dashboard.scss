@@ -12,16 +12,25 @@
     }
 }
 
-.dashboard-page__description {
-    padding: $spacing-05;
-    padding-left: $spacing-06;
+.dashboard-page__banner_content{
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.dashboard-page__description_content{
+    margin-left: 40px;
 }
 
 .dashboard-page__banner {
-    padding-top: $spacing-05;
+    padding-top: $spacing-05 * 4;
     padding-bottom: $spacing-07 * 4;
     padding-left: $spacing-06;
     @include neutral-banner__background;
+}
+
+.dashboard-page__description {
+    padding: $spacing-06;
+    padding-top: $spacing-05 * 4;
 }
 
 .dashboard-page__login {
@@ -29,6 +38,7 @@
 }
 
 .dashboard-page__logo {
+    padding: 5%;
     max-width: 100%;
     object-fit: cover;
     width: 500px;
@@ -53,5 +63,5 @@
 }
 
 .dashboard-page__description > .dashboard-page__p {
-    margin-bottom: $spacing-08;
+    padding-bottom: 100px;
 }
