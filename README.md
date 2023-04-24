@@ -49,24 +49,6 @@ update the database,
 dotnet ef database update --project StudioManagementSystem.Core\StudioManagementSystem.Core.csproj
 ```
 
-## Using the Reverse Proxy (Nginx Proxy Manager)
-
-We use Nginx Proxy Manager (aka. NPM for short - very confusing I know). This (docker) image has a web UI for configuring it easily.
-
-> [🔗 Checkout Nginx Proxy Manager's site for more details and docs](https://nginxproxymanager.com/)
-
-Credentials are distributed over a secure channel (currently MS Teams) on as-needed basis.
-
-For production, our SPA (React) is compiled into static files and served directly by the proxy.
-
-The nginx config for this lives at `nginx/default_host/site.conf`. The Dockerfile build process will copy the SPA static content to nginx at `/usr/share/nginx/html`.
-
-Custom services, dashboards, special auth requirements, streams, 404 hosts etc. can be easily added via the nginx GUI. Visit http://localhost:81 and login with provided admin credentials to configure.
-
-> This admin dashboard is not currently configured to be exposed securely over a public domain! Do so with appropriate measures if required.
-
-> The admin dashboard also provides an interface to add SSL configuration and certs
-
 ## Accessing the Database for Development Purposes
 
 In development mode, the MariaDb database is exposed via port `33060`. The various user credentials are currently under the `database/` directory in this repo.
