@@ -32,8 +32,8 @@ services:
         container_name: backend_api
         build:
             context: ./src/server
-        ports:
-            - 7320:7320
+        volumes:
+            - ./.certs:/app/certs
         networks:
             - sms-network
         restart: unless-stopped
