@@ -11,8 +11,8 @@ export default defineConfig({
     preview: {
         strictPort: true,
         https: {
-            key: './.certs/key.pem',
-            cert: './.certs/cert.pem'
+            key: '../../.certs/key.pem',
+            cert: '../../.certs/cert.pem'
         },
         open: true
     },
