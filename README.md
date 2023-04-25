@@ -57,10 +57,22 @@ In development mode, the MariaDb database is exposed via port `33060`. The vario
 
 To test the production build locally, you'll need to provide SSL certificates to the app. This example uses mkcert to create a machine-signed certificate.
 
+_Windows_
+
 ```bash
+choco install mkcert
 mkcert -install
 mkcert -key-file .certs\key.pem -cert-file .certs\cert.crt studiomanagementsystem.localtest.me
 ```
+
+_Unix_
+
+```bash
+homebrew install mkcert
+mkcert -install
+mkcert -key-file .certs/key.pem -cert-file .certs/cert.crt studiomanagementsystem.localtest.me
+```
+
 
 Successfully generating the machine-signed certs will log something like the following,
 
