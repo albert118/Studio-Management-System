@@ -6,13 +6,11 @@ export default function LoadingSpinner() {
             <ThreeCircles
             height="150"
             width="150"
-            color=""
             wrapperStyle={{
                 "margin": "auto",
-                "padding":"15%"
+                "padding":"10%",
             }}
             wrapperClass="loading-spinner circles"
-            visible={true}
             ariaLabel="three-circles-rotating"
             outerCircleColor="#bdbdbd"
             innerCircleColor="#0f62fe"
