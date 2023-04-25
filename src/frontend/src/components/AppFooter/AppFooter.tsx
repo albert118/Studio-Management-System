@@ -4,30 +4,7 @@ function AppFooter() {
     return (
         <div className='footer__main'>
             <div className='footer__wrapper'>
-                <div className='acknowledgement'>
-                    <div className='grid__container'>
-                        <div className='acknowledgement__row'>
-                            <div className='acknowledgement__col acknowledgement__col__1'>
-                                <div className='acknowledgement__text'>
-                                    <div className='acknowledgement__text__header'>
-                                        Acknowledgement of Country
-                                    </div>
-                                    <p>
-                                        UTS acknowledges the Gadigal people of the Eora Nation, the
-                                        Boorooberongal people of the Dharug Nation, the Bidiagal
-                                        people and the Gamaygal people, upon whose ancestral lands
-                                        our university stands. We would also like to pay respect to
-                                        the Elders both past and present, acknowledging them as the
-                                        traditional custodians of knowledge for these lands.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className='acknowledgement__col acknowledgement__col__2'>
-                                <img className='acknowledgement__media' alt='' src={radial} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
                 <footer className='footer footer-grid__container'>
                     <div className='footer-grid__row'>
                         <div className='footer__first footer-grid__col footer-grid--col-4'>
@@ -261,18 +238,6 @@ function AppFooter() {
                                     </ul>
                                 </nav>
                             </div>
-                        </div>
-                    </div>
-                    <div className='footer__third'>
-                        <div
-                            id='block-authoriserblock'
-                            className='block block-uts-article block-uts-article-authoriser-block'
-                        >
-                            <p>
-                                © Copyright UTS - CRICOS Provider No: 00099F - 07 March 2023 03:23
-                                PM. The page is authorised by the Chief Operating Officer and
-                                Vice-President (COO).
-                            </p>
                         </div>
                     </div>
                 </footer>
