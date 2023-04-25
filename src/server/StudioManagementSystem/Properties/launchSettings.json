@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "StudioManagementSystem": {
+    "StudioManagementSystem:Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -17,6 +17,15 @@
       "applicationUrl": "https://localhost:7230;http://localhost:5230",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "StudioManagementSystem:Production": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://studiomanagementsystem.localtest.me:7230;",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {
