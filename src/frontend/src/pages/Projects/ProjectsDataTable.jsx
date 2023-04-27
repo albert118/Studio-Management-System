@@ -40,12 +40,6 @@ export function ProjectsDataTable({ projects }) {
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
-                            <Button 
-                                onClick={() => navigate(`${AppRoutes.projects}/add`)}
-                                size="small" 
-                                kind="primary"> 
-                                Create a new project
-                            </Button>
                         </TableToolbarContent>
                     </TableToolbar>
                     <Table {...getTableProps()}>
