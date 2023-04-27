@@ -1,10 +1,4 @@
-import { Stack } from 'components';
-
-import {
-    Table,
-    TableBody,
-    TableContainer
-} from '@carbon/react';
+import { Table, TableBody, TableContainer } from '@carbon/react';
 
 import {
     SmsDataTable,
@@ -19,13 +13,12 @@ export function PendingApplications(groupApplications) {
         { key: 'email', header: 'Email' },
         { key: 'message', header: 'Message' },
         { header: 'Options' }
-
     ];
     const applications = groupApplications.groupApplications;
     return (
         <SmsDataTable rows={applications} headers={headers} className='groups-page__datatable'>
-            {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
-                <TableContainer 
+            {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+                <TableContainer
                     title='Pending Group Application'
                     description='This is a list of all the group application for this semester.'
                 >
@@ -41,8 +34,7 @@ export function PendingApplications(groupApplications) {
                                     row={row}
                                     headers={headers}
                                     getRowProps={getRowProps}
-                                >
-                                </ExpandingRowFragment>
+                                ></ExpandingRowFragment>
                             ))}
                         </TableBody>
                     </Table>
