@@ -31,26 +31,29 @@ export default function useGroupApplication(groupId: Guid) {
 
     const addGroupApplication = async (
         groupApplication: NewGroupApplicationDto
-    ): Promise<string> => {
+    ): Promise<boolean> => {
+        console.log(groupApplication);
+
         const response = await fetch(`${ApiConfig.API_URL}/groupapplication`, {
             ...defaultRequestOptions,
             method: 'POST',
             body: JSON.stringify(groupApplication)
         });
 
-        let newGroupId: string = '';
+        let retVal;
         const data = await response.json();
 
         if (response.ok) {
-            newGroupId = data;
+            retVal = true;
         } else {
             const errorData = data as KestrelServerError;
             const apiError = { error: errorData.title, message: errorData.errors };
             console.error(JSON.stringify(apiError));
             setErrors(apiError);
+            retVal = false;
         }
 
-        return newGroupId;
+        return retVal;
     };
 
     return { groupApplication, addGroupApplication, errors, isLoading };

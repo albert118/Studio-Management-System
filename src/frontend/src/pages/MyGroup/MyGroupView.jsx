@@ -12,14 +12,22 @@ import { NewGroupApplicationDto } from 'types/types';
 import { useGroupApplication } from 'hooks';
 
 export default function MyGroupView({ group, updateGroup }) {
-    const [editingGroup, setEditingGroup] = useState(group);
-    const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
-
-    const [inviteData, setInviteData] = useState({
+    const defaultInviteData = {
         studentIds: [],
         group: group.id,
         message: ''
-    });
+    };
+
+    const [editingGroup, setEditingGroup] = useState(group);
+    const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
+
+    const [inviteData, setInviteData] = useState(defaultInviteData);
+    const handleNewApplication = async () => {
+        if (await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))) {
+            // reset form data if there's no error
+            setInviteData(defaultInviteData);
+        }
+    };
 
     return (
         <Grid>
@@ -65,11 +73,7 @@ export default function MyGroupView({ group, updateGroup }) {
                                 description='Create and send invitations to new members.'
                                 buttonText='Invite'
                                 modalHeading='Create invitations'
-                                handleSubmit={async () =>
-                                    await addGroupApplication(
-                                        NewGroupApplicationDto(...Object.values(inviteData))
-                                    )
-                                }
+                                handleSubmit={handleNewApplication}
                             >
                                 <GroupMemberInvite
                                     inviteData={inviteData}

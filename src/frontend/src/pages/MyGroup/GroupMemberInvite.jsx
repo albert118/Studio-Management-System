@@ -32,7 +32,8 @@ export function GroupMemberInvite({ inviteData, setInviteData }) {
                                 onChange={output => {
                                     setInviteData({
                                         ...inviteData,
-                                        studentIds: output.selectedItems.map(item => item.id.value)
+                                        // set with ID directly, as the hook data already exists as a string
+                                        studentIds: output.selectedItems.map(item => item.id)
                                     });
                                 }}
                                 items={studentContacts}

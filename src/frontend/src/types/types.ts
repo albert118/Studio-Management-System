@@ -91,7 +91,7 @@ export type NewProjectDto = {
 };
 
 export const NewGroupApplicationDto = (
-    studentIds: Array<Guid>,
+    studentIds: Guid[],
     group: Guid,
     message: String
 ): NewGroupApplicationDto => {
@@ -103,7 +103,7 @@ export const NewGroupApplicationDto = (
 };
 
 export type NewGroupApplicationDto = {
-    studentIds: Array<Guid>;
+    studentIds: Guid[];
     group: Guid;
     message: undefined | string;
 };
