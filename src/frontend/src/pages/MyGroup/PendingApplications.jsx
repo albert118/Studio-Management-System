@@ -7,8 +7,9 @@ export function PendingApplications(groupApplications) {
         { key: 'firstName', header: 'First Name' },
         { key: 'lastName', header: 'Last Name' },
         { key: 'email', header: 'Email' },
-        { key: 'message', header: 'Message' },
-        { key: 'options', header: 'Options' }
+        { key: 'message', header: 'Message' }
+        // TODO: add management logic
+        // { key: 'options', header: 'Options' }
     ];
     const applications = groupApplications.groupApplications;
     return (
