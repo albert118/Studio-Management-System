@@ -36,9 +36,11 @@ export function GroupMemberInvite({ group, updateFormData }) {
                                 id='invitees'
                                 titleText='Invitees'
                                 label='Create multiple invites by selecting multiple people'
-                                onChange={e => {
-                                    setFormData({ ...formData, studentIds: e.selectedItems });
-                                    updateFormData(formData);
+                                onChange={output => {
+                                    setFormData({
+                                        ...formData,
+                                        studentIds: output.selectedItems.map(item => item.id.value)
+                                    });
                                 }}
                                 items={studentContacts}
                                 itemToString={item => (item ? item.name : '')}
