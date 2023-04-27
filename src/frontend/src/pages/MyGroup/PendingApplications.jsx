@@ -1,12 +1,33 @@
-import { Stack } from 'components';
+import { Table, TableBody, TableContainer } from '@carbon/react';
 
-export function PendingApplications() {
+import { SmsDataTable, SimpleHeader, SimpleRow } from 'components/SmsDataTable';
+
+export function PendingApplications(groupApplications) {
+    const headers = [
+        { key: 'name', header: 'Name', isSortable: true },
+        { key: 'message', header: 'Message' }
+        // TODO: add management logic
+        // { key: 'options', header: 'Options' }
+    ];
+    const applications = groupApplications.groupApplications;
+
     return (
-        <Stack>
-            <div className='simple-card invitation'>
-                <p>Jeremy would like to join the group</p>
-                <p>Hi you're group looked cool!</p>
-            </div>
-        </Stack>
+        <SmsDataTable rows={applications} headers={headers} className='groups-page__datatable'>
+            {({ rows, headers, getHeaderProps, getTableProps }) => (
+                <TableContainer
+                    title='Pending Group Application'
+                    description='This is a list of all the group application for this semester.'
+                >
+                    <Table {...getTableProps()}>
+                        <SimpleHeader headers={headers} getHeaderProps={getHeaderProps} />
+                        <TableBody>
+                            {rows.map(row => (
+                                <SimpleRow key={row.id} row={row} />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
+        </SmsDataTable>
     );
 }

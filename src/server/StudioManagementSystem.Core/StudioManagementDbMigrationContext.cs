@@ -14,7 +14,7 @@ public class StudioManagementDbMigrationContext : DbContext
     public DbSet<Project> Projects => Set<Project>();
 
     public DbSet<GroupProjectPreference> GroupProjectPreferences => Set<GroupProjectPreference>();
-
+    public DbSet<GroupApplication> GroupApplications => Set<GroupApplication>();
     protected override void OnModelCreating(ModelBuilder builder)
     {
         new ContactConfig().Configure(builder.Entity<Contact>());
@@ -24,5 +24,6 @@ public class StudioManagementDbMigrationContext : DbContext
         new ProjectConfig().Configure(builder.Entity<Project>());
 
         new GroupProjectPreferenceConfig().Configure(builder.Entity<GroupProjectPreference>());
+        new GroupApplicationConfig().Configure(builder.Entity<GroupApplication>());
     }
 }

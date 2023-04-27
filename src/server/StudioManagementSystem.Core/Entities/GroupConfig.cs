@@ -18,6 +18,11 @@ public class GroupConfig
             .WithOne(e => e.Group)
             .HasForeignKey(e => e.GroupId);
 
+        builder
+            .HasMany(e => e.Members)
+            .WithOne(e => e.AssignedGroup)
+            .HasForeignKey(e => e.AssignedGroupId);
+        
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }
 }

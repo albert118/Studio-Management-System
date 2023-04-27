@@ -2,6 +2,7 @@ import MyGroupView from './MyGroupView';
 import { useGroup } from 'hooks/GroupHooks';
 import { useParams } from 'react-router-dom';
 import { Guid } from 'guid-typescript';
+import { LoadingSpinner } from 'components';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
@@ -11,8 +12,8 @@ export default function MyGroupContainer() {
         return <div>Error! No group ID</div>;
     }
 
-    const { group, updateGroup, isLoading } = useGroup(Guid.parse(groupId));
+    const { group, updateGroup, isLoading, refreshGroup } = useGroup(Guid.parse(groupId));
 
     // TODO: add a spinner
-    return isLoading ? <>loading...</> : <MyGroupView group={group} updateGroup={updateGroup} />;
+    return isLoading ? <LoadingSpinner /> : <MyGroupView group={group} updateGroup={updateGroup} refreshGroup={refreshGroup} />;
 }

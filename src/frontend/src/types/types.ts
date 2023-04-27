@@ -5,7 +5,12 @@ export type Nullable<T> = T | null;
 export interface IMemberInfo {
     max: number;
     count: number;
-    members: Array<string>;
+    members: Array<IMemberDetail>;
+}
+
+export interface IMemberDetail {
+    id: Guid;
+    name: string;
 }
 
 export interface IPreference {
@@ -22,6 +27,14 @@ export interface IGroup {
     preferences: IPreference[];
     memberCount: string;
     project: string;
+}
+
+export interface IGroupApplication {
+    id: Guid;
+    groupId: Guid;
+    contactId: Guid;
+    name: string;
+    message: string;
 }
 
 export const NewGroupDto = (
@@ -75,6 +88,24 @@ export type NewProjectDto = {
     ownerContactIds: Guid[];
 };
 
+export const NewGroupApplicationDto = (
+    studentIds: Guid[],
+    groupId: Guid,
+    message: String
+): NewGroupApplicationDto => {
+    return {
+        studentIds,
+        groupId,
+        message
+    } as NewGroupApplicationDto;
+};
+
+export type NewGroupApplicationDto = {
+    studentIds: Guid[];
+    groupId: Guid;
+    message: undefined | string;
+};
+
 export interface IGroupFlyweight {
     groupId: Guid;
     name: string;
@@ -122,7 +153,13 @@ export interface IOwnerContact {
     id: Guid;
     name: string;
     email: string;
-};
+}
+
+export interface IStudentContact {
+    id: Guid;
+    name: string;
+    email: string;
+}
 
 export type PrincipalOwner = {
     id: Guid;

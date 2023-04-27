@@ -7,7 +7,6 @@ public class Group : IArchivable, IMetaData, ILockable
     public Group(string name)
     {
         Name = name;
-        Members = new();
         MaxMembers = 2;
         Description = string.Empty;
     }
@@ -15,7 +14,6 @@ public class Group : IArchivable, IMetaData, ILockable
     public Group(CreateGroupDto dto)
     {
         Name = dto.Name;
-        Members = new();
         MaxMembers = dto.MaxMembers;
         Description = dto.Description ?? string.Empty;
     }
@@ -23,12 +21,8 @@ public class Group : IArchivable, IMetaData, ILockable
     public Group(UpdateGroupDto dto)
     {
         Name = dto.Name;
-        Members = new();
         MaxMembers = dto.MaxMembers;
         Description = dto.Description;
-
-        // TODO: migration for new field
-        // Preferences = dto.Preferences;
     }
 
     public Guid Id { get; set; }
@@ -49,7 +43,9 @@ public class Group : IArchivable, IMetaData, ILockable
 
     public string Description { get; set; }
 
-    public List<StudentContact> Members { get; set; }
+    public ICollection<GroupApplication> MemberApplications { get; set; } = new List<GroupApplication>();
+
+    public ICollection<StudentContact> Members { get; set; } = new List<StudentContact>();
 
     public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
 }

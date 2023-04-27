@@ -54,18 +54,19 @@ export function useGroup(groupId: Guid) {
     const [group, setGroup] = useState<IGroup>({} as IGroup);
     const [isLoading, setLoading] = useState<boolean>(true);
 
+    const fetchGroup = async () => {
+        setLoading(true);
+
+        const response = await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
+            ...defaultRequestOptions
+        });
+        const data = await response.json();
+
+        setGroup(data);
+        setLoading(false);
+    };
+
     useEffect(() => {
-        const fetchGroup = async () => {
-            setLoading(true);
-
-            const response = await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
-                ...defaultRequestOptions
-            });
-            const data = await response.json();
-
-            setGroup(data);
-            setLoading(false);
-        };
         fetchGroup();
     }, []);
 
@@ -82,13 +83,5 @@ export function useGroup(groupId: Guid) {
         }
     };
 
-    const deleteGroup = async (groupId: number) => {
-        await fetch(`${ApiConfig.API_URL}/group/${groupId}`, {
-            ...defaultRequestOptions,
-            method: 'DELETE'
-        });
-        setGroup({} as IGroup);
-    };
-
-    return { group, updateGroup, deleteGroup, isLoading };
+    return { group, updateGroup, refreshGroup: fetchGroup, isLoading };
 }

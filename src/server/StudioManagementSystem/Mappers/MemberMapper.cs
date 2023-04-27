@@ -5,18 +5,21 @@ namespace StudioManagementSystem.Mappers;
 
 public static class MemberMapper
 {
-    public static MemberInfoDto ToMemberInfoDto(this List<StudentContact> members, Group group)
+    public static MemberInfoDto ToMemberInfoDto(this IEnumerable<StudentContact> members, Group group)
     {
-        return new MemberInfoDto(
+        var studentContacts = members as StudentContact[] ?? members.ToArray();
+
+        return new(
             Max: group.MaxMembers,
-            Count: members.Count,
-            Members: members.Select(m => m.ToGroupMemberDto()).ToList()
+            Count: studentContacts.Length,
+            Members: studentContacts.Select(m => m.ToGroupMemberDto()).ToList()
         );
     }
 
     public static GroupMemberDto ToGroupMemberDto(this StudentContact member)
     {
-        return new GroupMemberDto(
+        return new(
+            Id: member.Id,
             Name: $"{member.FirstName} {member.LastName}"
         );
     }
