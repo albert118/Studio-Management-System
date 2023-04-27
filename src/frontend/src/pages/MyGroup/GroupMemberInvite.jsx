@@ -4,7 +4,7 @@ import { LoadingSpinner, Stack } from 'components';
 import { FormContainer } from 'components/Forms';
 import { useStudentContacts } from 'hooks';
 
-export function GroupMemberInvite({ group, updateFormData }) {
+export function GroupMemberInvite({ group }) {
     const { studentContacts, isLoading } = useStudentContacts();
 
     const [formData, setFormData] = useState({
@@ -54,7 +54,6 @@ export function GroupMemberInvite({ group, updateFormData }) {
                                 rows={2}
                                 onChange={e => {
                                     setFormData({ ...formData, [e.target.name]: e.target.value });
-                                    updateFormData(formData);
                                 }}
                                 maxLength={100}
                             />

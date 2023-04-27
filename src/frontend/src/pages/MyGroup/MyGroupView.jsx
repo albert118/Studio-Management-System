@@ -15,12 +15,6 @@ export default function MyGroupView({ group, updateGroup }) {
     const [editingGroup, setEditingGroup] = useState(group);
     const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
 
-    const [formData, setFormData] = useState({
-        studentContact: '',
-        group: group.id,
-        message: ''
-    });
-
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
@@ -74,7 +68,6 @@ export default function MyGroupView({ group, updateGroup }) {
                                 <GroupMemberInvite
                                     members={group.memberInfo.members}
                                     group={group}
-                                    updateFormData={data => setFormData(data)}
                                 />
                             </EmailModalButton>
                         </div>
