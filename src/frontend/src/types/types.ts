@@ -92,19 +92,19 @@ export type NewProjectDto = {
 
 export const NewGroupApplicationDto = (
     studentIds: Guid[],
-    group: Guid,
+    groupId: Guid,
     message: String
 ): NewGroupApplicationDto => {
     return {
         studentIds,
-        group,
+        groupId,
         message
     } as NewGroupApplicationDto;
 };
 
 export type NewGroupApplicationDto = {
     studentIds: Guid[];
-    group: Guid;
+    groupId: Guid;
     message: undefined | string;
 };
 

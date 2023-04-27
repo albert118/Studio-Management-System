@@ -14,7 +14,7 @@ import { useGroupApplication } from 'hooks';
 export default function MyGroupView({ group, updateGroup }) {
     const defaultInviteData = {
         studentIds: [],
-        group: group.id,
+        groupId: group.id,
         message: ''
     };
 
