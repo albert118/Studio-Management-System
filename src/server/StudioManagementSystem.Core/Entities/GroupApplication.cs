@@ -12,7 +12,7 @@ public class GroupApplication: IMetaData
 
     public StudentContact Contact { get; set; } = null!;
     
-    public String? Messages { get; set; } = null!;
+    public string? Messages { get; set; } = null!;
     
     public DateTime UpdatedOn { get; set; }
     
