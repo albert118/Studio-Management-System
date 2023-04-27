@@ -2,27 +2,20 @@ import { useState, useEffect } from 'react';
 import { IOwnerContact, Nullable } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
-import { KestrelServerError, ApiError } from './types';
+import { ApiError } from './types';
 import { Guid } from 'guid-typescript';
 
-export default function useOwnerContacts(ownerContactIds:Guid[]) {
-
+export default function useOwnerContacts() {
     const [ownerContacts, setOwnerContacts] = useState<IOwnerContact[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
-    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
+    const [errors, _] = useState<Nullable<ApiError>>(null);
 
     useEffect(() => {
         const fetchContacts = async () => {
-            setLoading(true);
-
             const response = await fetch(`${ApiConfig.API_URL}/ownercontacts`, {
-                ...defaultRequestOptions,
-                method: 'POST',
-                body: JSON.stringify(
-                    {ids: ownerContactIds.map(id => id.toString())}
-                )
+                ...defaultRequestOptions
             });
-        
+
             const data = await response.json();
 
             setOwnerContacts(data);
@@ -31,6 +24,20 @@ export default function useOwnerContacts(ownerContactIds:Guid[]) {
         fetchContacts();
     }, []);
 
-    return { ownerContacts, isLoading, errors };
-}
+    const getOwnerContacts = async (ownerContactIds: Guid[]) => {
+        setLoading(true);
 
+        const response = await fetch(`${ApiConfig.API_URL}/ownercontacts`, {
+            ...defaultRequestOptions,
+            method: 'POST',
+            body: JSON.stringify({ ids: ownerContactIds.map(id => id.toString()) })
+        });
+
+        const data = await response.json();
+
+        setOwnerContacts(data);
+        setLoading(false);
+    };
+
+    return { ownerContacts, getOwnerContacts, isLoading, errors };
+}
