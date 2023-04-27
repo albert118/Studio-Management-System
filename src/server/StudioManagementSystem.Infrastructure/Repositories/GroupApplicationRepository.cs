@@ -27,7 +27,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         if (existingApplicationsForStudents is not null) {
             var num = existingApplicationsForStudents.Count;
             var plural = existingApplicationsForStudents.Count > 1 ? "s": string.Empty;
-            var names = existingApplicationsForStudents.Select(app => app.StudentContact.GetFullName());
+            var names = string.Join(", ", existingApplicationsForStudents.Select(app => app.StudentContact.GetFullName()));
             throw new DataException($"Cannot create a new application as {num} student{plural} have already been invited. Please remove {names} from the application if you would like to try again");
         }
 
