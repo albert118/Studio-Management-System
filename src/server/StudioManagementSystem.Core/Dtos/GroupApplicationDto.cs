@@ -4,8 +4,6 @@ public record GroupApplicationDto(
     Guid Id,
     Guid GroupId,
     Guid ContactId,
-    string FirstName,
-    string LastName,
-    string Email,
+    string Name,
     string Message
-    );
+);
