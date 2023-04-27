@@ -13,7 +13,7 @@ public static class GroupApplicationMapper
             ContactId: groupApplication.StudentContactId,
             FirstName: groupApplication.StudentContact.FirstName,
             LastName: groupApplication.StudentContact.LastName,
-            Email: groupApplication.StudentContact.Email,
+            Email: groupApplication.StudentContact.Email ?? string.Empty,
             Message: groupApplication.Message
         );
     }
