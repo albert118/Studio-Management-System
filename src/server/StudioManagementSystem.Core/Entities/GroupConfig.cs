@@ -20,7 +20,8 @@ public class GroupConfig
 
         builder
             .HasMany(e => e.Members)
-            .WithOne(e => e.AssignedGroup).HasForeignKey(e => e.AssignedGroupId);
+            .WithOne(e => e.AssignedGroup)
+            .HasForeignKey(e => e.AssignedGroupId);
         
         builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
     }

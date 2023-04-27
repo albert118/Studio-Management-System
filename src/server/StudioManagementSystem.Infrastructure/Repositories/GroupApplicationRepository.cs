@@ -46,7 +46,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
     
     public async Task<List<GroupApplication>> GetGroupApplicationAsync(Guid groupId, CancellationToken ct)
     {
-        var groupApplication = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.Contact).ToListAsync(ct);
+        var groupApplication = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.StudentContact).ToListAsync(ct);
         return groupApplication;
     }
     

@@ -10,9 +10,9 @@ public class GroupApplication: IMetaData
     
     public Guid StudentContactId { get; set; }
 
-    public StudentContact Contact { get; set; } = null!;
-    
-    public string? Message { get; set; }
+    public StudentContact StudentContact { get; set; } = null!;
+
+    public string Message { get; set; } = string.Empty;
     
     public DateTime UpdatedOn { get; set; }
     

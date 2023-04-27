@@ -43,6 +43,8 @@ public class Group : IArchivable, IMetaData, ILockable
 
     public string Description { get; set; }
 
+    public ICollection<GroupApplication> MemberApplications { get; set; } = new List<GroupApplication>();
+
     public ICollection<StudentContact> Members { get; set; } = new List<StudentContact>();
 
     public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
