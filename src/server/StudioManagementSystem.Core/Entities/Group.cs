@@ -49,7 +49,7 @@ public class Group : IArchivable, IMetaData, ILockable
 
     public string Description { get; set; }
 
-    public List<StudentContact> Members { get; set; }
+    public List<StudentContact>? Members { get; set; } = new();
 
     public ICollection<GroupProjectPreference> GroupProjectPreferences { get; set; } = new List<GroupProjectPreference>();
 }

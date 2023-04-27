@@ -30,10 +30,10 @@ export default function MyGroupView({ group, updateGroup }) {
                             </div>
                             <ModalWrapper
                                 buttonTriggerText='View'
-                                modalHeading='Group members'
+                                modalHeading={group.name + ' Group Members'}
                                 passiveModal
                             >
-                                <MyGroupMembers members={group.memberInfo.members} />
+                                <MyGroupMembers memberInfo={group.memberInfo} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>

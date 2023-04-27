@@ -84,7 +84,7 @@ function ExpandedRowDetail({ row }) {
                     {row && row.memberInfo?.members
                         ? row.memberInfo.members.map((member, idx) => (
                               <li key={idx}>
-                                  <p>{member}</p>
+                                  <p>{member.name}</p>
                               </li>
                           ))
                         : ''}

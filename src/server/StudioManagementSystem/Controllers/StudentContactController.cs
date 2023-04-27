@@ -8,12 +8,12 @@ namespace StudioManagementSystem.Controllers;
 [ApiController]
 public class StudentContactController : ControllerBase
 {
-    private readonly IStudentContactRepository _ownerContactRepository;
+    private readonly IStudentContactRepository _studentContactRepository;
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
 
-    public StudentContactController(IStudentContactRepository ownerContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
+    public StudentContactController(IStudentContactRepository studentContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
     {
-        _ownerContactRepository = ownerContactRepository;
+        _studentContactRepository = studentContactRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
@@ -21,7 +21,7 @@ public class StudentContactController : ControllerBase
     public ActionResult<Guid> CreateStudentContact(CreateStudentContactDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _ownerContactRepository.AddStudentContactAsync(new(dto), ct);
+        var task = _studentContactRepository.AddStudentContactAsync(new(dto), ct);
         task.Wait(ct);
 
         return task.Result;

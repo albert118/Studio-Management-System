@@ -5,7 +5,11 @@ export type Nullable<T> = T | null;
 export interface IMemberInfo {
     max: number;
     count: number;
-    members: Array<string>;
+    members: Array<IMemberDetail>;
+}
+
+export interface IMemberDetail {
+    name: string;
 }
 
 export interface IPreference {
@@ -122,7 +126,7 @@ export interface IOwnerContact {
     id: Guid;
     name: string;
     email: string;
-};
+}
 
 export type PrincipalOwner = {
     id: Guid;

@@ -10,6 +10,6 @@ public class StudentContact : Contact
     }
     
     public StudentContact(CreateStudentContactDto dto) : base(dto.FirstName, dto.LastName, dto.Email) { }
-
+    public Guid? AssignedGroupId { get; set; }
     public Group? AssignedGroup { get; set; }
 }
