@@ -11,9 +11,9 @@ public static class GroupApplicationMapper
             Id: groupApplication.Id,
             GroupId: groupApplication.GroupId,
             ContactId: groupApplication.StudentContactId,
-            FirstName: groupApplication.Contact.FirstName,
-            LastName: groupApplication.Contact.LastName,
-            Email: groupApplication.Contact.Email,
+            FirstName: groupApplication.StudentContact.FirstName,
+            LastName: groupApplication.StudentContact.LastName,
+            Email: groupApplication.StudentContact.Email,
             Message: groupApplication.Message
         );
     }
