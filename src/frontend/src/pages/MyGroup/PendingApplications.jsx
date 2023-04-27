@@ -22,7 +22,7 @@ export function PendingApplications(groupApplications) {
                         <SimpleHeader headers={headers} getHeaderProps={getHeaderProps} />
                         <TableBody>
                             {rows.map(row => (
-                                <SimpleRow row={row} />
+                                <SimpleRow key={row.id} row={row} />
                             ))}
                         </TableBody>
                     </Table>

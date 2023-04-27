@@ -1,6 +1,6 @@
 import React from 'react';
 import { HyrdateRowObjects } from './utils';
-
+import { Guid } from 'guid-typescript';
 import {
     TableHead,
     TableHeader,
