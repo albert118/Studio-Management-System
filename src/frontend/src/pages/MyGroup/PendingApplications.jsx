@@ -4,7 +4,7 @@ import { SmsDataTable, SimpleHeader, SimpleRow } from 'components/SmsDataTable';
 
 export function PendingApplications(groupApplications) {
     const headers = [
-        { key: 'name', header: 'Name' },
+        { key: 'name', header: 'Name', isSortable: true },
         { key: 'message', header: 'Message' }
         // TODO: add management logic
         // { key: 'options', header: 'Options' }

@@ -63,7 +63,9 @@ export function SimpleHeader({ headers, getHeaderProps }) {
         <TableHead>
             <TableRow>
                 {headers.map(header => (
-                    <TableHeader {...getHeaderProps({ header })}>{header.header}</TableHeader>
+                    <TableHeader {...getHeaderProps({ header })} isSortable={!!header.isSortable}>
+                        {header.header}
+                    </TableHeader>
                 ))}
             </TableRow>
         </TableHead>
