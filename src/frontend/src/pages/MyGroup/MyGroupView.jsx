@@ -11,7 +11,7 @@ import { MyGroupMembers } from './MyGroupMembers';
 import { NewGroupApplicationDto } from 'types/types';
 import { useGroupApplication } from 'hooks';
 
-export default function MyGroupView({ group, updateGroup }) {
+export default function MyGroupView({ group, updateGroup, refreshGroup }) {
     const defaultInviteData = {
         studentIds: [],
         groupId: group.id,
@@ -26,6 +26,8 @@ export default function MyGroupView({ group, updateGroup }) {
         if (await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))) {
             // reset form data if there's no error
             setInviteData(defaultInviteData);
+            // update the group data
+            await refreshGroup();
         }
     };
 
