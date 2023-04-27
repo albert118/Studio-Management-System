@@ -7,12 +7,12 @@ namespace StudioManagementSystem.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class StudentContactController : ControllerBase
+public class StudentContactsController : ControllerBase
 {
     private readonly IStudentContactRepository _studentContactRepository;
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
 
-    public StudentContactController(IStudentContactRepository studentContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
+    public StudentContactsController(IStudentContactRepository studentContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _studentContactRepository = studentContactRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
