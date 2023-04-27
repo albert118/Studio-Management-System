@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import { Column, MultiSelect, Form, TextArea } from '@carbon/react';
-import { Stack } from 'components';
+import { LoadingSpinner, Stack } from 'components';
 import { FormContainer } from 'components/Forms';
+import { useStudentContacts } from 'hooks';
 
-export function GroupMemberInvite({ members, group, updateFormData }) {
+export function GroupMemberInvite({ group, updateFormData }) {
+    const { studentContacts, isLoading } = useStudentContacts();
+
     const [formData, setFormData] = useState({
         studentIds: '',
         group: group.id,
         message: ''
     });
 
-    return (
+    return isLoading ? (
+        <LoadingSpinner />
+    ) : (
         <Stack>
             <FormContainer>
                 <Column lg={16} md={8} sm={4} className='__form-prompt'>
@@ -35,7 +40,7 @@ export function GroupMemberInvite({ members, group, updateFormData }) {
                                     setFormData({ ...formData, studentIds: e.selectedItems });
                                     updateFormData(formData);
                                 }}
-                                items={members}
+                                items={studentContacts}
                                 itemToString={item => (item ? item.name : '')}
                             />
                             <TextArea
