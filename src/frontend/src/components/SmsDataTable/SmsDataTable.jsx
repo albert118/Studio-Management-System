@@ -58,6 +58,18 @@ export function ExpandingRowFragment({ row, headers, getRowProps, ...optionalPro
     );
 }
 
+export function SimpleHeader({ headers, getHeaderProps }) {
+    return (
+        <TableHead>
+            <TableRow>
+                {headers.map(header => (
+                    <TableHeader {...getHeaderProps({ header })}>{header.header}</TableHeader>
+                ))}
+            </TableRow>
+        </TableHead>
+    );
+}
+
 export function SimpleRow({ row }) {
     return (
         <TableRow key={row.id}>

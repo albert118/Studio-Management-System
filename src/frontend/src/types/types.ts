@@ -33,9 +33,7 @@ export interface IGroupApplication {
     id: Guid;
     groupId: Guid;
     contactId: Guid;
-    firstName: string;
-    lastName: string;
-    email: string;
+    name: string;
     message: string;
 }
 
