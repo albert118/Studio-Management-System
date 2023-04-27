@@ -6,4 +6,5 @@ public interface IStudentContactRepository
 {
     Task<List<StudentContact>> GetStudentsByIdAsync(IEnumerable<Guid> studentContactIds, CancellationToken ct);
     Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct);
+    Task<StudentContact?> GetStudentByIdAsync(Guid studentContactIds, CancellationToken ct);
 }

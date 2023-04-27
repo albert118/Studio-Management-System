@@ -9,6 +9,7 @@ export interface IMemberInfo {
 }
 
 export interface IMemberDetail {
+    id: Guid;
     name: string;
 }
 
@@ -26,6 +27,16 @@ export interface IGroup {
     preferences: IPreference[];
     memberCount: string;
     project: string;
+}
+
+export interface IGroupApplication {
+    id: Guid;
+    groupId: Guid;
+    contactId: Guid;
+    firstName: string;
+    lastName: string;
+    email: string;
+    message: string;
 }
 
 export const NewGroupDto = (
@@ -77,6 +88,24 @@ export type NewProjectDto = {
     domain: string;
     principalOwnerContactId: Guid;
     ownerContactIds: Guid[];
+};
+
+export const NewGroupApplicationDto = (
+    studentIds: Array<Guid>,
+    group: Guid,
+    message: String
+): NewGroupApplicationDto => {
+    return {
+        studentIds,
+        group,
+        message
+    } as NewGroupApplicationDto;
+};
+
+export type NewGroupApplicationDto = {
+    studentIds: Array<Guid>;
+    group: Guid;
+    message: undefined | string;
 };
 
 export interface IGroupFlyweight {

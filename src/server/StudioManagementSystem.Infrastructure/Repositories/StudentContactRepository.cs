@@ -23,6 +23,12 @@ public class StudentContactRepository : IStudentContactRepository
         var students = _smsDbContext.StudentContacts.Where(c => studentContactIds.Contains(c.Id)).ToListAsync(ct);
         return students;
     }
+    
+    public Task<StudentContact?> GetStudentByIdAsync(Guid studentContactIds, CancellationToken ct)
+    {
+        var student = _smsDbContext.StudentContacts.FirstOrDefaultAsync(g => g.Id == studentContactIds, ct);
+        return student;
+    }
 
     public async Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct)
     {

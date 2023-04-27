@@ -17,6 +17,7 @@ public static class MemberMapper
     public static GroupMemberDto ToGroupMemberDto(this StudentContact member)
     {
         return new GroupMemberDto(
+            Id: member.Id,
             Name: $"{member.FirstName} {member.LastName}"
         );
     }

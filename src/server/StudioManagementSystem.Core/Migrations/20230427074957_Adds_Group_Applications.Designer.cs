@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudioManagementSystem.Core;
 
@@ -10,9 +11,11 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    partial class StudioManagementDbMigrationContextModelSnapshot : ModelSnapshot
+    [Migration("20230427074957_Adds_Group_Applications")]
+    partial class Adds_Group_Applications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,9 +137,6 @@ namespace StudioManagementSystem.Core.Migrations
 
                     b.Property<Guid>("GroupId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("Messages")
-                        .HasColumnType("longtext");
 
                     b.Property<Guid>("StudentContactId")
                         .HasColumnType("char(36)");

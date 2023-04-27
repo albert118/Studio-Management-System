@@ -11,8 +11,8 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    [Migration("20230418192941_Add_GroupProjectPreferences")]
-    partial class Add_GroupProjectPreferences
+    [Migration("20230427084131_Update_Group_Application_Table")]
+    partial class Update_Group_Application_Table
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,36 @@ namespace StudioManagementSystem.Core.Migrations
                     b.HasIndex("AssignedProjectId");
 
                     b.ToTable("Group", (string)null);
+                });
+
+            modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupApplication", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Messages")
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("StudentContactId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("StudentContactId");
+
+                    b.ToTable("GroupApplication", (string)null);
                 });
 
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupProjectPreference", b =>
@@ -238,6 +268,25 @@ namespace StudioManagementSystem.Core.Migrations
                         .HasForeignKey("AssignedProjectId");
 
                     b.Navigation("AssignedProject");
+                });
+
+            modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupApplication", b =>
+                {
+                    b.HasOne("StudioManagementSystem.Core.Entities.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StudioManagementSystem.Core.Entities.StudentContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("StudentContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Group");
                 });
 
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupProjectPreference", b =>

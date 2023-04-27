@@ -7,6 +7,7 @@ import {
 
 export function MyGroupMembers({memberInfo }) {
     var members = memberInfo.members;
+    
     return (
         <Stack>
             <ContainedList

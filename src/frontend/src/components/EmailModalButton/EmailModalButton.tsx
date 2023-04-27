@@ -7,6 +7,7 @@ export type Props = {
     description: string;
     buttonText: string;
     modalHeading: string;
+    handleSubmit: Function;
     children: React.ReactNode;
 };
 
@@ -15,6 +16,7 @@ export default function EmailModalButton({
     description,
     buttonText,
     modalHeading,
+    handleSubmit,
     children
 }: Props) {
     return (
@@ -28,6 +30,7 @@ export default function EmailModalButton({
                 buttonTriggerText={buttonText}
                 modalHeading={modalHeading}
                 primaryButtonText='Send'
+                handleSubmit={async () => await handleSubmit()}
             >
                 {children}
             </ModalWrapper>
