@@ -31,6 +31,11 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
         }
     };
 
+    const handleGroupUpdate = async () => {
+        await updateGroup(editingGroup);
+        await refreshGroup();
+    };
+
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
@@ -119,7 +124,7 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 buttonTriggerText='Edit group'
                                 danger
                                 modalHeading='Edit group'
-                                handleSubmit={async () => await updateGroup(editingGroup)}
+                                handleSubmit={handleGroupUpdate}
                             >
                                 <EditGroup group={editingGroup} setGroup={setEditingGroup} />
                             </ModalWrapper>
