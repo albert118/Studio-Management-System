@@ -54,7 +54,7 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                             </div>
                             <ModalWrapper
                                 buttonTriggerText='View'
-                                modalHeading={group.name + ' Group Members'}
+                                modalHeading={`${group.name} Group Members`}
                                 passiveModal
                             >
                                 <MyGroupMembers memberInfo={group.memberInfo} />
