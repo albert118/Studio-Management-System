@@ -31,7 +31,7 @@ public class GroupRepository : IGroupRepository
     {
         var group = await _smsDbContext.Groups
             .Include(e => e.Members)
-            // .Include(e => e.GroupProjectPreferences).ThenInclude(c => c.Project)
+            .Include(e => e.GroupProjectPreferences).ThenInclude(c => c.Project)
             .FirstOrDefaultAsync(g => g.Id == id, ct);
         return group;
     }
@@ -100,5 +100,4 @@ public class GroupRepository : IGroupRepository
 
         return true;
     }
-    
 }
