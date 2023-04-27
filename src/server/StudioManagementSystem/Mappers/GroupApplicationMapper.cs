@@ -14,7 +14,7 @@ public static class GroupApplicationMapper
             FirstName: groupApplication.Contact.FirstName,
             LastName: groupApplication.Contact.LastName,
             Email: groupApplication.Contact.Email,
-            Message: groupApplication.Messages
+            Message: groupApplication.Message
         );
     }
 }

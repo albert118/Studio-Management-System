@@ -26,7 +26,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
     
     public async Task<bool> AddGroupApplication(InvitationDto dto, CancellationToken ct)
     {
-        List <GroupApplication> groupApplications= dto.StudentIds.Select(studentId => new GroupApplication() {StudentContactId = studentId, GroupId = dto.GroupId, Messages = dto.Message}).ToList();
+        List <GroupApplication> groupApplications= dto.StudentIds.Select(studentId => new GroupApplication() {StudentContactId = studentId, GroupId = dto.GroupId, Message = dto.Message}).ToList();
 
         try
         {
