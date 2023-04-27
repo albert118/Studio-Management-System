@@ -68,7 +68,7 @@ export default function MyGroupView({ group, updateGroup }) {
                                 handleSubmit={async () =>
                                     await addGroupApplication(
                                         NewGroupApplicationDto(...Object.values(inviteData))
-                                    )()
+                                    )
                                 }
                             >
                                 <GroupMemberInvite
