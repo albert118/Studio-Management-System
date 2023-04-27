@@ -1,17 +1,10 @@
-import { useState } from 'react';
 import { Column, MultiSelect, Form, TextArea } from '@carbon/react';
 import { LoadingSpinner, Stack } from 'components';
 import { FormContainer } from 'components/Forms';
 import { useStudentContacts } from 'hooks';
 
-export function GroupMemberInvite({ group }) {
+export function GroupMemberInvite({ inviteData, setInviteData }) {
     const { studentContacts, isLoading } = useStudentContacts();
-
-    const [formData, setFormData] = useState({
-        studentIds: '',
-        group: group.id,
-        message: ''
-    });
 
     return isLoading ? (
         <LoadingSpinner />
@@ -37,8 +30,8 @@ export function GroupMemberInvite({ group }) {
                                 titleText='Invitees'
                                 label='Create multiple invites by selecting multiple people'
                                 onChange={output => {
-                                    setFormData({
-                                        ...formData,
+                                    setInviteData({
+                                        ...inviteData,
                                         studentIds: output.selectedItems.map(item => item.id.value)
                                     });
                                 }}
@@ -53,7 +46,10 @@ export function GroupMemberInvite({ group }) {
                                 placeholder='Optionally include a message with your invitation'
                                 rows={2}
                                 onChange={e => {
-                                    setFormData({ ...formData, [e.target.name]: e.target.value });
+                                    setInviteData({
+                                        ...inviteData,
+                                        [e.target.name]: e.target.value
+                                    });
                                 }}
                                 maxLength={100}
                             />

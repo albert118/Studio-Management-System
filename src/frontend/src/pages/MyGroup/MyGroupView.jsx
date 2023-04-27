@@ -8,12 +8,18 @@ import { LeaveGroup } from './LeaveGroup';
 import { GroupMemberInvite } from './GroupMemberInvite';
 import { PendingApplications } from './PendingApplications';
 import { MyGroupMembers } from './MyGroupMembers';
-import useGroupApplication from 'hooks/GroupApplicationHooks';
 import { NewGroupApplicationDto } from 'types/types';
+import { useGroupApplication } from 'hooks';
 
 export default function MyGroupView({ group, updateGroup }) {
     const [editingGroup, setEditingGroup] = useState(group);
     const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
+
+    const [inviteData, setInviteData] = useState({
+        studentIds: [],
+        group: group.id,
+        message: ''
+    });
 
     return (
         <Grid>
@@ -61,13 +67,13 @@ export default function MyGroupView({ group, updateGroup }) {
                                 modalHeading='Create invitations'
                                 handleSubmit={async () =>
                                     await addGroupApplication(
-                                        NewGroupApplicationDto(...Object.values(formData))
+                                        NewGroupApplicationDto(...Object.values(inviteData))
                                     )()
                                 }
                             >
                                 <GroupMemberInvite
-                                    members={group.memberInfo.members}
-                                    group={group}
+                                    inviteData={inviteData}
+                                    setInviteData={setInviteData}
                                 />
                             </EmailModalButton>
                         </div>
