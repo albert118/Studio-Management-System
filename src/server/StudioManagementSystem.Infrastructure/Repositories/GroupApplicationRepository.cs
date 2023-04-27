@@ -24,7 +24,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
     {
         var existingApplicationsForStudents = await GetGroupApplicationsByStudentIdsAsync(dto.StudentIds.ToList(), ct);
 
-        if (existingApplicationsForStudents is not null) {
+        if (existingApplicationsForStudents.Count > 0) {
             var num = existingApplicationsForStudents.Count;
             var plural = existingApplicationsForStudents.Count > 1 ? "s": string.Empty;
             var names = string.Join(", ", existingApplicationsForStudents.Select(app => app.StudentContact.GetFullName()));
