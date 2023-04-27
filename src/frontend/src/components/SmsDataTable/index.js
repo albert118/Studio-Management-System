@@ -1,3 +1,8 @@
-import { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment } from './SmsDataTable';
+import {
+    SmsDataTable,
+    ExpandingDataTableHeader,
+    ExpandingRowFragment,
+    SimpleRow
+} from './SmsDataTable';
 
-export { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment, IRowObject };
+export { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment, SimpleRow };

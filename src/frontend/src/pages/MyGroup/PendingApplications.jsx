@@ -1,10 +1,6 @@
 import { Table, TableBody, TableContainer } from '@carbon/react';
 
-import {
-    SmsDataTable,
-    ExpandingDataTableHeader,
-    ExpandingRowFragment
-} from 'components/SmsDataTable/SmsDataTable';
+import { SmsDataTable, ExpandingDataTableHeader, SimpleRow } from 'components/SmsDataTable';
 
 export function PendingApplications(groupApplications) {
     const headers = [
@@ -29,12 +25,7 @@ export function PendingApplications(groupApplications) {
                         />
                         <TableBody>
                             {rows.map(row => (
-                                <ExpandingRowFragment
-                                    key={row.id}
-                                    row={row}
-                                    headers={headers}
-                                    getRowProps={getRowProps}
-                                ></ExpandingRowFragment>
+                                <SimpleRow row={row} />
                             ))}
                         </TableBody>
                     </Table>

@@ -12,9 +12,7 @@ import {
     DataTable
 } from '@carbon/react';
 
-export { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment };
-
-function SmsDataTable({ rows, headers, tableHeader, ...optionalProps }) {
+export function SmsDataTable({ rows, headers, tableHeader, ...optionalProps }) {
     // add a loading check here,
     // we can use the CBS skeleton prop, see here:
     // https://carbondesignsystem.com/developing/react-tutorial/step-3#add-loading
@@ -30,7 +28,7 @@ function SmsDataTable({ rows, headers, tableHeader, ...optionalProps }) {
     );
 }
 
-function ExpandingDataTableHeader({ headers, getHeaderProps }) {
+export function ExpandingDataTableHeader({ headers, getHeaderProps }) {
     return (
         <TableHead>
             <TableRow>
@@ -43,7 +41,7 @@ function ExpandingDataTableHeader({ headers, getHeaderProps }) {
     );
 }
 
-function ExpandingRowFragment({ row, headers, getRowProps, ...optionalProps }) {
+export function ExpandingRowFragment({ row, headers, getRowProps, ...optionalProps }) {
     return (
         <React.Fragment key={row.id}>
             <TableExpandRow {...getRowProps({ row })}>
@@ -57,5 +55,15 @@ function ExpandingRowFragment({ row, headers, getRowProps, ...optionalProps }) {
                 </TableExpandedRow>
             )}
         </React.Fragment>
+    );
+}
+
+export function SimpleRow({ row }) {
+    return (
+        <TableRow key={row.id}>
+            {row.cells.map(cell => (
+                <TableCell key={cell.id}>{cell.value}</TableCell>
+            ))}
+        </TableRow>
     );
 }
