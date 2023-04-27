@@ -41,7 +41,6 @@ export function GroupsDataTable({ groups }) {
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
                             <Button 
                                 onClick={() => navigate(`${AppRoutes.groups}/add`)}
-                                size="small" 
                                 kind="primary"> 
                                 Create a new group 
                             </Button>
