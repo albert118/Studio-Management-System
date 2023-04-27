@@ -7,6 +7,9 @@ public static class StudentContactMapper
 {
     public static StudentDto MapToStudentDto(this StudentContact student)
     {
-        return new(Name: $"{student.FirstName} {student.LastName}");
+        return new(
+            Id: student.Id,
+            Name: $"{student.FirstName} {student.LastName}"
+        );
     }
 }
