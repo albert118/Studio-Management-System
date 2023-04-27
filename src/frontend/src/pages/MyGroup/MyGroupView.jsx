@@ -13,29 +13,14 @@ import { NewGroupApplicationDto } from 'types/types';
 
 export default function MyGroupView({ group, updateGroup }) {
     const [editingGroup, setEditingGroup] = useState(group);
-    const { groupApplication } = useGroupApplication(group.id);
+    const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
 
     const [formData, setFormData] = useState({
         studentContact: '',
         group: group.id,
-        message: '',
+        message: ''
     });
 
-    const UpdateFormData = (data) => {
-        setFormData(data);
-      };
-
-    const submit = async e => {
-        e.preventDefault();
-        const groupId = await addGroupApplication(
-            NewGroupApplicationDto(...Object.values(formData))
-        );
-
-        if (apiErrors) {
-            return;
-        }
-    };
-    
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
@@ -80,9 +65,17 @@ export default function MyGroupView({ group, updateGroup }) {
                                 description='Create and send invitations to new members.'
                                 buttonText='Invite'
                                 modalHeading='Create invitations'
-                                handleSubmit={async () => await submit()}
+                                handleSubmit={async () =>
+                                    await addGroupApplication(
+                                        NewGroupApplicationDto(...Object.values(formData))
+                                    )()
+                                }
                             >
-                                <GroupMemberInvite members={group.memberInfo.members}  group={group} updateFormData={UpdateFormData} />
+                                <GroupMemberInvite
+                                    members={group.memberInfo.members}
+                                    group={group}
+                                    updateFormData={data => setFormData(data)}
+                                />
                             </EmailModalButton>
                         </div>
                     </Stack>
