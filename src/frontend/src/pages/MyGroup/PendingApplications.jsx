@@ -12,7 +12,7 @@ export function PendingApplications(groupApplications) {
         { key: 'lastName', header: 'Last Name' },
         { key: 'email', header: 'Email' },
         { key: 'message', header: 'Message' },
-        { header: 'Options' }
+        { key: 'options', header: 'Options' }
     ];
     const applications = groupApplications.groupApplications;
     return (
