@@ -29,4 +29,14 @@ public class OwnerContactsController : ControllerBase
 
         return task.Result.Select(p => p.MapToOwnerDto()).ToList();
     }
+
+    [HttpGet]
+    public ActionResult<List<OwnerDto>> GetOwners()
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _ownerContactRepository.GetAllOwnersAsync(ct);
+        task.Wait(ct);
+
+        return task.Result.Select(p => p.MapToOwnerDto()).ToList();
+    }
 }
