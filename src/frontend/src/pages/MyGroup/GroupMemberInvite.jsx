@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Column, MultiSelect, Form, TextArea } from '@carbon/react';
 import { Stack } from 'components';
 import { FormContainer } from 'components/Forms';
-import useGroupApplication from 'hooks/GroupApplicationHooks';
 
 export function GroupMemberInvite({ members, group, updateFormData }) {
-    const { addGroupApplication, apiErrors } = useGroupApplication();
-    const [isSubmittable, setSubmittable] = useState(false);
-
     const [formData, setFormData] = useState({
         studentIds: '',
         group: group.id,
