@@ -53,5 +53,5 @@ export default function useGroupApplication(groupId: Guid) {
         return newGroupId;
     };
 
-    return { groupApplication, addGroupApplication, isLoading };
+    return { groupApplication, addGroupApplication, errors, isLoading };
 }
