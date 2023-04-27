@@ -157,6 +157,12 @@ export interface IOwnerContact {
     email: string;
 }
 
+export interface IStudentContact {
+    id: Guid;
+    name: string;
+    email: string;
+}
+
 export type PrincipalOwner = {
     id: Guid;
     name: string;
