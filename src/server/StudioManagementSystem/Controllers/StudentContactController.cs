@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
+using StudioManagementSystem.Mappers;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -25,5 +26,15 @@ public class StudentContactController : ControllerBase
         task.Wait(ct);
 
         return task.Result;
+    }
+
+    [HttpGet]
+    public ActionResult<List<StudentDto>> GetStudents()
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _studentContactRepository.GetAllStudentsAsync(ct);
+        task.Wait(ct);
+
+        return task.Result.Select(p => p.MapToStudentDto()).ToList();
     }
 }

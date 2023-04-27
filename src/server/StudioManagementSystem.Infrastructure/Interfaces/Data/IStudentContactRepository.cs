@@ -4,7 +4,6 @@ namespace StudioManagementSystem.Infrastructure.Interfaces.Data;
 
 public interface IStudentContactRepository
 {
-    Task<List<StudentContact>> GetStudentsByIdAsync(IEnumerable<Guid> studentContactIds, CancellationToken ct);
+    Task<List<StudentContact>> GetAllStudentsAsync(CancellationToken ct);
     Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct);
-    Task<StudentContact?> GetStudentByIdAsync(Guid studentContactIds, CancellationToken ct);
 }
