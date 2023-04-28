@@ -1,3 +1,3 @@
 ﻿namespace StudioManagementSystem.Core.Dtos;
 
-public record ManageInvitationDto(Guid Id, bool Status);
+public record ManageInvitationDto(IEnumerable<Guid> Ids, bool Status);

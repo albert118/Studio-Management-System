@@ -58,15 +58,15 @@ export type NewGroupDto = {
     preferences: SelectedPreferences;
 };
 
-export const NewInvitationDto = (id: Guid, status: boolean): NewInvitationDto => {
+export const NewInvitationDto = (ids: Guid[], status: boolean): NewInvitationDto => {
     return {
-        id,
+        ids,
         status
     } as NewInvitationDto;
 };
 
 export type NewInvitationDto = {
-    id: Guid;
+    ids: Guid[];
     status: boolean;
 };
 

@@ -53,15 +53,18 @@ public class GroupApplicationRepository: IGroupApplicationRepository
     {
         try
         {
-            GroupApplication application = await GetGroupApplicationByIdAsync(dto.Id, ct);
+            List<GroupApplication> applications = await GetGroupApplicationByIdAsync(dto.Ids, ct);
             if (dto.Status)
             {
-                _smsDbContext.StudentContacts.Find(application.StudentContactId).AssignedGroupId = application.GroupId;
-                _smsDbContext.GroupApplications.Remove(application);
+                foreach (var application in applications)
+                {
+                    _smsDbContext.StudentContacts.Find(application.StudentContactId).AssignedGroupId = application.GroupId;
+                    _smsDbContext.GroupApplications.RemoveRange(applications);
+                }
             }
             else
             {
-                _smsDbContext.GroupApplications.Remove(application);
+                _smsDbContext.GroupApplications.RemoveRange(applications);
             }
             await _smsDbContext.SaveChangesAsync(ct);
         }catch (Exception ex) {
@@ -75,10 +78,11 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         return true;
     }
     
-    public async Task<GroupApplication> GetGroupApplicationByIdAsync(Guid id, CancellationToken ct)
+    public async Task<List<GroupApplication>> GetGroupApplicationByIdAsync(IEnumerable<Guid> ids, CancellationToken ct)
     {
-        var groupApplication = await _smsDbContext.GroupApplications.Include(e=>e.StudentContact).FirstOrDefaultAsync(e => e.Id == id, ct);
-        return groupApplication;
+        var groupApplications = await _smsDbContext.GroupApplications
+            .Where(e => ids.Contains(e.Id)).ToListAsync(ct);
+        return groupApplications;
     }
     
     public async Task<List<GroupApplication>> GetGroupApplicationsAsync(Guid groupId, CancellationToken ct)
