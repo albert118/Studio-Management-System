@@ -21,6 +21,12 @@ public class StudentContactRepository : IStudentContactRepository
         return students;
     }
     
+    public async Task<List<StudentContact>> GetAllStudentsWithNoGroupsAsync(CancellationToken ct)
+    {
+        var students = await _smsDbContext.StudentContacts.Where(e=>e.AssignedGroupId == null).ToListAsync(ct);
+        return students;
+    }
+    
     public async Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct)
     {
         await _smsDbContext.StudentContacts.AddAsync(studentContact, ct);

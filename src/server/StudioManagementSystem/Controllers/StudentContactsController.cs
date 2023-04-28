@@ -37,4 +37,15 @@ public class StudentContactsController : ControllerBase
 
         return task.Result.Select(p => p.MapToStudentDto()).ToList();
     }
+    
+    [HttpGet("[action]")]
+    [ActionName("unassignedgroup")]
+    public ActionResult<List<StudentDto>> GetStudentsWithNoGroup()
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _studentContactRepository.GetAllStudentsWithNoGroupsAsync(ct);
+        task.Wait(ct);
+
+        return task.Result.Select(p => p.MapToStudentDto()).ToList();
+    }
 }

@@ -25,3 +25,25 @@ export default function useStudentContacts() {
 
     return { studentContacts, isLoading, errors };
 }
+
+export function useStudentContactNoGroup() {
+    const [studentContacts, setStudentContacts] = useState<IStudentContact[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, _] = useState<Nullable<ApiError>>(null);
+
+    useEffect(() => {
+        const fetchContacts = async () => {
+            const response = await fetch(`${ApiConfig.API_URL}/studentcontacts/unassignedgroup`, {
+                ...defaultRequestOptions
+            });
+
+            const data = await response.json();
+
+            setStudentContacts(data);
+            setLoading(false);
+        };
+        fetchContacts();
+    }, []);
+
+    return { studentContacts, isLoading, errors };
+}
