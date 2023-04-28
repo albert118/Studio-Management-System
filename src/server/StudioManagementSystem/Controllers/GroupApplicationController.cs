@@ -35,10 +35,10 @@ public class GroupApplicationController : ControllerBase
     }
 
     [HttpPatch()]
-    public ActionResult<bool> ManageGroupApplication(ManageInvitationDto dto)
+    public ActionResult<bool> RejectGroupApplication(RemoveInvitationDto dto)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupApplicationRepository.ManageGroupInvitation(dto, ct);
+        var task = _groupApplicationRepository.RejectGroupApplication(dto, ct);
 
         task.Wait(ct);
 

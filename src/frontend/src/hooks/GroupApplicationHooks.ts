@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Nullable, NewGroupApplicationDto, IGroupApplication, NewInvitationDto } from 'types/types';
+import {
+    Nullable,
+    NewGroupApplicationDto,
+    IGroupApplication,
+    RejectApplicationDto
+} from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
@@ -56,15 +61,17 @@ export default function useGroupApplication(groupId: Guid) {
 
     return { groupApplication, addGroupApplication, errors, isLoading };
 }
-export function useManageGroupApplicaton() {
+export function useManageGroupApplication() {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
-    const manageGroupApplicaton = async (NewInvitationDto: NewInvitationDto): Promise<boolean> => {
+    const rejectGroupApplication = async (
+        rejectApplicationDto: RejectApplicationDto
+    ): Promise<boolean> => {
         const response = await fetch(`${ApiConfig.API_URL}/groupapplication`, {
             ...defaultRequestOptions,
             method: 'PATCH',
-            body: JSON.stringify(NewInvitationDto)
+            body: JSON.stringify(rejectApplicationDto)
         });
 
         let retVal;
@@ -83,5 +90,5 @@ export function useManageGroupApplicaton() {
         return retVal;
     };
 
-    return { manageGroupApplicaton, isLoading };
+    return { rejectGroupApplication, isLoading };
 }

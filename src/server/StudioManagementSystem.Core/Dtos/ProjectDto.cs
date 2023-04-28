@@ -5,7 +5,7 @@ public record ProjectDto(
     string Title,
     string Description,
     List<OwnerDto> Owners,
-    OwnerDto PrincipalOwner,
+    OwnerDto? PrincipalOwner,
     List<AssignedGroupDto> AssignedGroups,
     ProjectMetaDto Meta
 );

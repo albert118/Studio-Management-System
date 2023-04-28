@@ -49,32 +49,19 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         return true;
     }
 
-    public async Task<bool> ManageGroupInvitation(ManageInvitationDto dto, CancellationToken ct)
+    public async Task<bool> RejectGroupApplication(RemoveInvitationDto dto, CancellationToken ct)
     {
         try
         {
             List<GroupApplication> applications = await GetGroupApplicationByIdAsync(dto.Ids, ct);
-            if (dto.Status)
-            {
-                foreach (var application in applications)
-                {
-                    _smsDbContext.StudentContacts.Find(application.StudentContactId).AssignedGroupId = application.GroupId;
-                    _smsDbContext.GroupApplications.RemoveRange(applications);
-                }
-            }
-            else
-            {
-                _smsDbContext.GroupApplications.RemoveRange(applications);
-            }
+            _smsDbContext.GroupApplications.RemoveRange(applications);
             await _smsDbContext.SaveChangesAsync(ct);
         }catch (Exception ex) {
-            _logger.LogError(ex, "An exception occured while adding {StudentContact}s to a {GroupApplication}",
-                nameof(GroupApplication),
-                nameof(StudentContact)
+            _logger.LogError(ex, "An exception occured while removing a {GroupApplication}",
+                nameof(GroupApplication)
             );
             return false;
         }
-
         return true;
     }
     

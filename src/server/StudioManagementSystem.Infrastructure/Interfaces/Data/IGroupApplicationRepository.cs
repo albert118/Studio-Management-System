@@ -8,7 +8,7 @@ public interface IGroupApplicationRepository
     Task<bool> AddGroupApplication(InvitationDto dto, CancellationToken ct);
 
     Task<List<GroupApplication>> GetGroupApplicationsAsync(Guid groupId, CancellationToken ct);
-    Task<bool> ManageGroupInvitation(ManageInvitationDto dto, CancellationToken ct);
+    Task<bool> RejectGroupApplication(RemoveInvitationDto dto, CancellationToken ct);
 
     Task<List<GroupApplication>> GetGroupApplicationsByStudentIdsAsync(List<Guid> studentIds, CancellationToken ct);
 }
