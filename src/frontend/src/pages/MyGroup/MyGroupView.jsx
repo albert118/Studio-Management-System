@@ -17,7 +17,6 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
         groupId: group.id,
         message: ''
     };
-
     const [editingGroup, setEditingGroup] = useState(group);
     const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
 
@@ -71,7 +70,9 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 modalHeading='Pending applications'
                                 passiveModal
                             >
-                                <PendingApplications groupApplications={groupApplication} />
+                                <PendingApplications
+                                    groupApplications={groupApplication}
+                                />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>

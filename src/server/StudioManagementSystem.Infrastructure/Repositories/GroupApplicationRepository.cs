@@ -13,7 +13,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
 {
     private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
     private readonly ILogger<GroupApplicationRepository> _logger;
-    
+
     public GroupApplicationRepository(IStudioManagementSystemDbContextAsync smsDbContext, ILogger<GroupApplicationRepository> logger)
     {
         _smsDbContext = smsDbContext;
@@ -48,11 +48,43 @@ public class GroupApplicationRepository: IGroupApplicationRepository
 
         return true;
     }
-    
-    public async Task<List<GroupApplication>> GetGroupApplicationAsync(Guid groupId, CancellationToken ct)
+
+    public async Task<bool> ManageGroupInvitation(ManageInvitationDto dto, CancellationToken ct)
     {
-        var groupApplication = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.StudentContact).ToListAsync(ct);
+        try
+        {
+            GroupApplication application = await GetGroupApplicationByIdAsync(dto.Id, ct);
+            if (dto.Status)
+            {
+                _smsDbContext.StudentContacts.Find(application.StudentContactId).AssignedGroupId = application.GroupId;
+                _smsDbContext.GroupApplications.Remove(application);
+            }
+            else
+            {
+                _smsDbContext.GroupApplications.Remove(application);
+            }
+            await _smsDbContext.SaveChangesAsync(ct);
+        }catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while adding {StudentContact}s to a {GroupApplication}",
+                nameof(GroupApplication),
+                nameof(StudentContact)
+            );
+            return false;
+        }
+
+        return true;
+    }
+    
+    public async Task<GroupApplication> GetGroupApplicationByIdAsync(Guid id, CancellationToken ct)
+    {
+        var groupApplication = await _smsDbContext.GroupApplications.Include(e=>e.StudentContact).FirstOrDefaultAsync(e => e.Id == id, ct);
         return groupApplication;
+    }
+    
+    public async Task<List<GroupApplication>> GetGroupApplicationsAsync(Guid groupId, CancellationToken ct)
+    {
+        var groupApplications = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.StudentContact).ToListAsync(ct);
+        return groupApplications;
     }
 
     public async Task<List<GroupApplication>> GetGroupApplicationsByStudentIdsAsync(List<Guid> studentIds, CancellationToken ct)

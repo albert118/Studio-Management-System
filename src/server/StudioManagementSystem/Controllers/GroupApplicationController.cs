@@ -33,12 +33,26 @@ public class GroupApplicationController : ControllerBase
 
         return task.Result;
     }
+
+    [HttpPatch()]
+    public ActionResult<bool> ManageGroupApplication(ManageInvitationDto dto)
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _groupApplicationRepository.ManageGroupInvitation(dto, ct);
+
+        task.Wait(ct);
+
+        if (!task.Result)
+            return StatusCode(500);
+
+        return task.Result;
+    }
     
     [HttpGet("{id}")]
     public List<GroupApplicationDto> GetGroupApplication(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupApplicationRepository.GetGroupApplicationAsync(id, ct);
+        var task = _groupApplicationRepository.GetGroupApplicationsAsync(id, ct);
         task.Wait(ct);
 
         return task.Result.Select(g => g.MapToGroupApplicationDtoDto()).ToList();

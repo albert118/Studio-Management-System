@@ -58,6 +58,18 @@ export type NewGroupDto = {
     preferences: SelectedPreferences;
 };
 
+export const NewInvitationDto = (id: Guid, status: boolean): NewInvitationDto => {
+    return {
+        id,
+        status
+    } as NewInvitationDto;
+};
+
+export type NewInvitationDto = {
+    id: Guid;
+    status: boolean;
+};
+
 export type SelectedPreferences = {
     preferenceOne: Nullable<string>;
     preferenceTwo: Nullable<string>;
