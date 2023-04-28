@@ -60,6 +60,7 @@ export function PendingApplications(groupApplications) {
                                 kind="danger"
                                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                 renderIcon={Close}
+                                onClick={batchActionClick(selectedRows,false)}
                             >
                                 Reject
                             </TableBatchAction>
