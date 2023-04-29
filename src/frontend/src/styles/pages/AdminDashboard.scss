@@ -15,6 +15,9 @@
         display: flex;
         column-gap: $spacing-12;
         justify-content: space-between;
+        // create a "tray" for tiles
+        background-color: var($sms-color-background);
+        padding: $spacing-05;
     }
 }
 

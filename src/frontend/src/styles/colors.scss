@@ -1,17 +1,11 @@
 // scss - css variable proxy
 // allows defining a SCSS variable and then injecting it back into the stylesheet
 
-$--electro-pulse-red: --electro-pulse-red;
-$--gray-swan-500: --gray-swan-500;
-$--gray-swan-700: --gray-swan-700;
-
 $sms-color-background-brand: --sms-color-background-brand;
 $sms-color-background-brand-alt: --sms-color-background-brand-alt;
 
+$sms-color-body-background: --sms-color-body-background;
 $sms-color-background: --sms-color-background;
-$sms-color-layer-01: --sms-color-layer-01;
-$sms-color-layer-02: --sms-color-layer-02;
-
 $sms-color-neutral-background: --sms-color-neutral-background;
 $sms-color-background: --sms-color-background;
 $sms-colour-danger-zone: --sms-colour-danger-zone;
