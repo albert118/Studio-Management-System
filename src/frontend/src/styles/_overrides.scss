@@ -1,12 +1,12 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/breakpoint' as *;
+@use './colors' as *;
 
 .cds--content {
     min-height: 80vh;
     margin-top: 3rem;
     padding: $spacing-06;
-    background: linear-gradient(.60turn, #0f4beb,transparent);
-    background-color:#ff2305
+    background: var($sms-color-body-background);
 }
 
 .cds--content .cds--css-grid {
@@ -17,21 +17,26 @@
     }
 }
 
+.cds--btn.cds--btn--primary {
+    fill: #fff;
+    background-color: var($sms-color-background-brand);
+}
+
 .cds--btn.cds--btn--ghost {
     font-weight: 600;
-    border-color: var(--sms-colours-danger-zone);
-    color: var(--sms-colours-danger-zone);
+    border-color: var($sms-colour-danger-zone);
+    color: var($sms-colour-danger-zone);
 }
 
 .danger.ghost {
     div[role='presentation'] > button {
         font-weight: 600;
-        color: var(--sms-colours-danger-zone);
+        color: var($sms-colour-danger-zone);
         background-color: transparent;
     }
 
     div[role='presentation'] > button {
-        border: 1px solid var(--sms-colours-danger-zone);
+        border: 1px solid var($sms-colour-danger-zone);
     }
 
     div[role='presentation'] > button:focus {
