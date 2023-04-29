@@ -1,0 +1,25 @@
+@import 'colors';
+
+// Default theme
+$theme-map-light: (
+    $--electro-pulse-red: #e10000,
+    $--gray-swan-500: #b4b4b4,
+    $--gray-swan-700: rgb(180, 180, 180, 0.6),
+    $sms-background-brand: orange,
+    $sms-background-brand-alt: pink,
+
+    $sms-colors-neutral-background: var($--gray-swan-700),
+    $sms-colors-background: var($--gray-swan-500),
+    $sms-colours-danger-zone: var($--electro-pulse-red)
+);
+
+@mixin spread-map($map: ()) {
+    @each $key, $value in $map {
+        #{$key}: $value;
+    }
+}
+
+// apply theming
+:root {
+    @include spread-map($theme-map-light);
+}

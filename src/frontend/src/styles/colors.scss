@@ -1,9 +1,17 @@
-.studio-management-system-theme {
-    --electro-pulse-red: #e10000;
-    --gray-swan-500: #b4b4b4;
-    --gray-swan-700: rgb(180, 180, 180, 0.6);
+// scss - css variable proxy
+// allows defining a SCSS variable and then injecting it back into the stylesheet
 
-    --sms-colors-neutral-background: var(--gray-swan-700);
-    --sms-colors-background: var(--gray-swan-500);
-    --sms-colours-danger-zone: var(--electro-pulse-red);
-}
+$--electro-pulse-red: --electro-pulse-red;
+$--gray-swan-500: --gray-swan-500;
+$--gray-swan-700: --gray-swan-700;
+
+$sms-background-brand: --sms-background-brand;
+$sms-background-brand-alt: --sms-background-brand-alt;
+
+$sms-color-background: --sms-color-background;
+$sms-color-layer-01: --sms-color-layer-01;
+$sms-color-layer-02: --sms-color-layer-02;
+
+$sms-colors-neutral-background: --sms-colors-neutral-background;
+$sms-colors-background: --sms-colors-background;
+$sms-colours-danger-zone: --sms-colours-danger-zone;

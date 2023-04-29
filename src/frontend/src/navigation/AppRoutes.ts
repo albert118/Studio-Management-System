@@ -11,6 +11,7 @@ const AppRoutes = Object.freeze({
     project: '/project',
     login: '/login',
     about: '/about',
+    admin: '/admin',
     error: '*'
 });
 
