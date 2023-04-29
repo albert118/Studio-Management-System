@@ -1,6 +1,9 @@
 // scss - css variable proxy
 // allows defining a SCSS variable and then injecting it back into the stylesheet
 
+$sms-color-subtle-blue: --sms-color-blue;
+$sms-color-subtle-green: --sms-color-green;
+
 $sms-color-background-brand: --sms-color-background-brand;
 $sms-color-background-brand-alt: --sms-color-background-brand-alt;
 

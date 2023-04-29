@@ -1,0 +1,34 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../mixins' as *;
+
+.statistic-box {
+    height: 200px;
+    width: 100%;
+
+    @include sms-feature-background();
+
+    &.blue {
+        color: #000;
+        background: unset;
+        background-color: var($sms-color-subtle-blue);
+    }
+
+    &.green {
+        color: #000;
+        background: unset;
+        background-color: var($sms-color-subtle-green);
+    }
+
+    .heading {
+        height: 100%;
+
+        h4 {
+            @include type-style('heading-01');
+        }
+
+        label {
+            @include type-style('body-compact-01');
+        }
+    }
+}

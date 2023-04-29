@@ -1,0 +1,34 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../mixins' as *;
+
+.management-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var($sms-color-neutral-background);
+    padding: $spacing-05;
+    padding-bottom: $spacing-06;
+    height: 600px;
+    width: 400px;
+
+    .heading {
+        h3 {
+            @include type-style('heading-04');
+        }
+
+        p {
+            @include type-style('body-compact-02');
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: column;
+        row-gap: $spacing-04;
+    }
+}
+
+.management-tile:hover {
+    @include sms-feature-background();
+}
