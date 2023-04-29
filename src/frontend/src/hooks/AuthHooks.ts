@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-import ApiConfig from 'config/ApiConfig';
-import defaultRequestOptions from './defaultRequestHeaders';
-import { NewProjectDto, Nullable } from 'types/types';
-import { KestrelServerError, ApiError } from './types';
-import { Guid } from 'guid-typescript';
+import { Nullable } from 'types/types';
+import {ApiError } from './types';
 import { supabase } from 'main';
 import { Session } from '@supabase/supabase-js';
 

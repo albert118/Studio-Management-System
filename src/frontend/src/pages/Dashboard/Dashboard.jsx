@@ -3,12 +3,21 @@ import { Button, Grid, Column } from '@carbon/react';
 import { useNavigate } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import logo from 'assets/logo.jpg';
+import useAuth from 'hooks/AuthHooks';
 
-function Dashboard() {
+function Banner() {
+    const { session, isLoading } = useAuth();
     const navigate = useNavigate();
 
-    return (
-        <Grid>
+    if (session?.user != undefined) {
+        return (
+            <Column lg={16} md={8} sm={4} className='dashboard-page__banner'>
+                <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
+                <p className='dashboard-page__p'>Signed in as {session.user.email}</p>
+            </Column>
+        );
+    } else {
+        return (
             <Column lg={16} md={8} sm={4} className='dashboard-page__banner'>
                 <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
                 <p className='dashboard-page__p'>Existing user? Sign in here</p>
@@ -19,7 +28,16 @@ function Dashboard() {
                     Login
                 </Button>
             </Column>
+        );
+    }
+}
 
+function Dashboard() {
+    const navigate = useNavigate();
+
+    return (
+        <Grid>
+            <Banner />
             <Column lg={16} md={8} sm={4}>
                 <Grid>
                     <Column md={4} lg={7} sm={4} className='dashboard-page__description'>

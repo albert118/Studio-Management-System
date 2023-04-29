@@ -1,32 +1,25 @@
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
+import useAuth from 'hooks/AuthHooks';
 import { supabase } from 'main';
+import { Navigate } from 'react-router-dom';
 
 function Login() {
-    const [session, setSession] = useState(null)
+    const { session, isLoading, errors } = useAuth();
 
-    useEffect(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session)
-      })
-
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session)
-      })
-      
-      return () => subscription.unsubscribe()
-    }, [])
-
-    if (!session) {
-        return <div className='loginClass'><Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={[]}></Auth></div>;
+    if (!session || isLoading) {
+        return (
+            <div className='loginClass'>
+                <Auth
+                    supabaseClient={supabase}
+                    appearance={{ theme: ThemeSupa }}
+                    providers={[]}
+                ></Auth>
+            </div>
+        );
+    } else {
+        return <Navigate replace to='/' />;
     }
-    else {
-      return (<div>Logged in!</div>)
-    }
-  }
 }
 
 export default Login;
-
