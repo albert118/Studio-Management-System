@@ -10,7 +10,14 @@ $theme-map-light: (
 
     $sms-color-neutral-background: #cacaca,
     $sms-color-background: #f4f4f4,
-    $sms-colour-danger-zone: #e10000
+    $sms-colour-danger-zone: #e10000,
+
+    // bind CDS mappings to our branding
+    $cds-overrides--cds-icon-secondary: #fff,
+    $cds-overrides--cds-border-interactive: var($sms-color-background-brand),
+    $cds-overrides--cds-button-primary-hover: var($sms-color-background-brand-alt),
+    $cds-overrides--cds-button-primary: var($sms-color-background-brand),
+    $cds-overrides--cds-focus: var($sms-color-background-brand)
 );
 
 @mixin spread-map($map: ()) {
