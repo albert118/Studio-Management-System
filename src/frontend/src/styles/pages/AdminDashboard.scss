@@ -1,0 +1,57 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '../mixins' as *;
+
+.admin-page {
+    .admin-page__r1,
+    .admin-page__r2,
+    .admin-page__r3 {
+        margin-bottom: $spacing-12;
+    }
+
+    .admin-page__r2,
+    .admin-page__r3 {
+        display: flex;
+        column-gap: $spacing-12;
+        justify-content: space-between;
+    }
+}
+
+.stat-box {
+    height: 200px;
+    width: 100%;
+    @include sms-feature-background();
+}
+
+.management-tile {
+    background-color: var($sms-colors-neutral-background);
+    height: min-content;
+    width: 100%;
+    padding: $spacing-05;
+    padding-bottom: $spacing-06;
+
+    h3 {
+        @include type-style('heading-04');
+        height: 10%;
+    }
+
+    p {
+        @include type-style('body-compact-02');
+        height: 20%;
+    }
+
+    .actions {
+        display: flex;
+        flex-direction: column-reverse;
+        flex-direction: column-reverse;
+        height: 70%;
+    }
+
+    p,
+    h3,
+    .actions > * {
+        margin-top: $spacing-04;
+        margin-bottom: $spacing-04;
+    }
+}

@@ -1,5 +1,6 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/theme' as *;
+@use './colors' as *;
 
 @mixin neutral-banner__background() {
     background-color: $layer-01;
@@ -24,4 +25,12 @@
     hyphens: auto;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+@mixin sms-feature-background() {
+    background: linear-gradient(
+        -15deg,
+        var($sms-background-brand-alt),
+        var($sms-background-brand) 40%
+    );
 }
