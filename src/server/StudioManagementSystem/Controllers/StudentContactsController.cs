@@ -18,16 +18,6 @@ public class StudentContactsController : ControllerBase
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
-    [HttpPost]
-    public ActionResult<Guid> CreateStudentContact(CreateStudentContactDto dto)
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _studentContactRepository.AddStudentContactAsync(new(dto), ct);
-        task.Wait(ct);
-
-        return task.Result;
-    }
-
     [HttpGet]
     public ActionResult<List<StudentDto>> GetStudents()
     {

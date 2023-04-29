@@ -33,4 +33,17 @@ public class StudentContactRepository : IStudentContactRepository
         await _smsDbContext.SaveChangesAsync(ct);
         return studentContact.Id;
     }
+    
+    public async Task<Guid> LeaveAssignedGroup(Guid id, CancellationToken ct)
+    {
+        StudentContact? student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
+        if (student != null)
+        {
+            student.AssignedGroupId = null;
+            await _smsDbContext.SaveChangesAsync(ct);
+            return student.Id;
+        }
+        return Guid.Empty;
+    }
+    
 }
