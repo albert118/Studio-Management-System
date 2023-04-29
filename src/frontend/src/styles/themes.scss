@@ -13,7 +13,6 @@ $theme-map-light: (
     $sms-colour-danger-zone: #e10000,
 
     // bind CDS mappings to our branding
-    $cds-overrides--cds-icon-secondary: #fff,
     $cds-overrides--cds-border-interactive: var($sms-color-background-brand),
     $cds-overrides--cds-button-primary-hover: var($sms-color-background-brand-alt),
     $cds-overrides--cds-button-primary: var($sms-color-background-brand),
