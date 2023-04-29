@@ -21,7 +21,7 @@ public class OwnerContactsController : ControllerBase
     public record OwnerContactRequest(List<Guid> Ids);
 
     [HttpPost]
-    public ActionResult<List<OwnerDto>> GetOwners(OwnerContactRequest request)
+    public List<OwnerDto?> GetOwners(OwnerContactRequest request)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _ownerContactRepository.GetOwnersByIdAsync(request.Ids, ct);
@@ -31,7 +31,7 @@ public class OwnerContactsController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<OwnerDto>> GetOwners()
+    public List<OwnerDto?> GetOwners()
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _ownerContactRepository.GetAllOwnersAsync(ct);

@@ -4,7 +4,7 @@ public record ProjectDto(
     Guid Id,
     string Title,
     string Description,
-    List<OwnerDto> Owners,
+    List<OwnerDto?> Owners,
     OwnerDto? PrincipalOwner,
     List<AssignedGroupDto> AssignedGroups,
     ProjectMetaDto Meta

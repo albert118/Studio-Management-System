@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudioManagementSystem.Core.Entities;
 using StudioManagementSystem.Infrastructure.DataServices;
@@ -23,6 +23,7 @@ public class GroupRepository : IGroupRepository
     {
         var groups = await _smsDbContext.Groups
             .Include(e => e.Members)
+            .Include(p=>p.AssignedProject)
             .ToListAsync(ct);
         return groups;
     }
@@ -31,7 +32,7 @@ public class GroupRepository : IGroupRepository
     {
         var group = await _smsDbContext.Groups
             .Include(e => e.Members)
-            .Include(e => e.GroupProjectPreferences).ThenInclude(c => c.Project)
+            /*.Include(e => e.GroupProjectPreferences).ThenInclude(c => c.Project)*/
             .FirstOrDefaultAsync(g => g.Id == id, ct);
         return group;
     }
