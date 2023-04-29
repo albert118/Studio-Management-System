@@ -9,6 +9,8 @@ import AddGroupContainer from 'pages/AddGroup/AddGroupContainer';
 import ProjectContainer from './Project/ProjectContainer';
 import AddProjectContainer from './AddProject/AddProjectContainer';
 
+export { default as AdminDashboard } from './AdminDashboard';
+
 export {
     Dashboard,
     ProjectsContainer as Projects,
