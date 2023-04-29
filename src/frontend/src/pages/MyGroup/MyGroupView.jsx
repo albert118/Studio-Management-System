@@ -8,9 +8,33 @@ import { LeaveGroup } from './LeaveGroup';
 import { GroupMemberInvite } from './GroupMemberInvite';
 import { PendingApplications } from './PendingApplications';
 import { MyGroupMembers } from './MyGroupMembers';
+import { NewGroupApplicationDto } from 'types/types';
+import { useGroupApplication } from 'hooks';
 
-export default function MyGroupView({ group, updateGroup }) {
+export default function MyGroupView({ group, updateGroup, refreshGroup }) {
+    const defaultInviteData = {
+        studentIds: [],
+        groupId: group.id,
+        message: ''
+    };
+
     const [editingGroup, setEditingGroup] = useState(group);
+    const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
+
+    const [inviteData, setInviteData] = useState(defaultInviteData);
+    const handleNewApplication = async () => {
+        if (await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))) {
+            // reset form data if there's no error
+            setInviteData(defaultInviteData);
+            // update the group data
+            await refreshGroup();
+        }
+    };
+
+    const handleGroupUpdate = async () => {
+        await updateGroup(editingGroup);
+        await refreshGroup();
+    };
 
     return (
         <Grid>
@@ -30,10 +54,10 @@ export default function MyGroupView({ group, updateGroup }) {
                             </div>
                             <ModalWrapper
                                 buttonTriggerText='View'
-                                modalHeading='Group members'
+                                modalHeading={`${group.name} Group Members`}
                                 passiveModal
                             >
-                                <MyGroupMembers members={group.memberInfo.members} />
+                                <MyGroupMembers memberInfo={group.memberInfo} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
@@ -47,7 +71,7 @@ export default function MyGroupView({ group, updateGroup }) {
                                 modalHeading='Pending applications'
                                 passiveModal
                             >
-                                <PendingApplications />
+                                <PendingApplications groupApplications={groupApplication} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
@@ -56,8 +80,12 @@ export default function MyGroupView({ group, updateGroup }) {
                                 description='Create and send invitations to new members.'
                                 buttonText='Invite'
                                 modalHeading='Create invitations'
+                                handleSubmit={handleNewApplication}
                             >
-                                <GroupMemberInvite />
+                                <GroupMemberInvite
+                                    inviteData={inviteData}
+                                    setInviteData={setInviteData}
+                                />
                             </EmailModalButton>
                         </div>
                     </Stack>
@@ -96,7 +124,7 @@ export default function MyGroupView({ group, updateGroup }) {
                                 buttonTriggerText='Edit group'
                                 danger
                                 modalHeading='Edit group'
-                                handleSubmit={async () => await updateGroup(editingGroup)}
+                                handleSubmit={handleGroupUpdate}
                             >
                                 <EditGroup group={editingGroup} setGroup={setEditingGroup} />
                             </ModalWrapper>

@@ -11,8 +11,8 @@ using StudioManagementSystem.Core;
 namespace StudioManagementSystem.Core.Migrations
 {
     [DbContext(typeof(StudioManagementDbMigrationContext))]
-    [Migration("20230418192941_Add_GroupProjectPreferences")]
-    partial class Add_GroupProjectPreferences
+    [Migration("20230427125820_Add_GroupApplications")]
+    partial class Add_GroupApplications
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,40 @@ namespace StudioManagementSystem.Core.Migrations
                     b.HasIndex("AssignedProjectId");
 
                     b.ToTable("Group", (string)null);
+                });
+
+            modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupApplication", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("longtext")
+                        .HasDefaultValue("");
+
+                    b.Property<Guid>("StudentContactId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("StudentContactId")
+                        .IsUnique();
+
+                    b.ToTable("GroupApplication", (string)null);
                 });
 
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupProjectPreference", b =>
@@ -240,6 +274,25 @@ namespace StudioManagementSystem.Core.Migrations
                     b.Navigation("AssignedProject");
                 });
 
+            modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupApplication", b =>
+                {
+                    b.HasOne("StudioManagementSystem.Core.Entities.Group", "Group")
+                        .WithMany("MemberApplications")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StudioManagementSystem.Core.Entities.StudentContact", "StudentContact")
+                        .WithOne("GroupApplication")
+                        .HasForeignKey("StudioManagementSystem.Core.Entities.GroupApplication", "StudentContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("StudentContact");
+                });
+
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.GroupProjectPreference", b =>
                 {
                     b.HasOne("StudioManagementSystem.Core.Entities.Group", "Group")
@@ -283,6 +336,8 @@ namespace StudioManagementSystem.Core.Migrations
                 {
                     b.Navigation("GroupProjectPreferences");
 
+                    b.Navigation("MemberApplications");
+
                     b.Navigation("Members");
                 });
 
@@ -296,6 +351,11 @@ namespace StudioManagementSystem.Core.Migrations
             modelBuilder.Entity("StudioManagementSystem.Core.Entities.OwnerContact", b =>
                 {
                     b.Navigation("PrincipalProjects");
+                });
+
+            modelBuilder.Entity("StudioManagementSystem.Core.Entities.StudentContact", b =>
+                {
+                    b.Navigation("GroupApplication");
                 });
 #pragma warning restore 612, 618
         }

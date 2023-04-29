@@ -1,3 +1,3 @@
 ﻿namespace StudioManagementSystem.Core.Dtos;
 
-public record GroupMemberDto(string Name);
+public record GroupMemberDto(Guid Id, string Name);

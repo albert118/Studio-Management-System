@@ -11,6 +11,7 @@ public interface IStudioManagementSystemDbContextAsync
     DbSet<Group> Groups { get; }
     DbSet<Project> Projects { get; }
     DbSet<GroupProjectPreference> GroupProjectPreferences { get; }
-    
+    DbSet<GroupApplication> GroupApplications { get; }
+
     Task<int> SaveChangesAsync(CancellationToken ct);
 }

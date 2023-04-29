@@ -30,7 +30,7 @@ Having started up the docker dependencies, let's run the migrations. This is typ
 
 > Although you can install and configure your dotnet tools from any location, the project specific commands need to be run from [`src/server`](https://github.com/albert118/Studio-Management-System/tree/master/src/server)
 
-install the tools (if you haven't already), 
+install the tools (if you haven't already),
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -49,31 +49,43 @@ update the database,
 dotnet ef database update --project StudioManagementSystem.Core\StudioManagementSystem.Core.csproj
 ```
 
-## Using the Reverse Proxy (Nginx Proxy Manager)
-
-We use Nginx Proxy Manager (aka. NPM for short - very confusing I know). This (docker) image has a web UI for configuring it easily.
-
-> [🔗 Checkout Nginx Proxy Manager's site for more details and docs](https://nginxproxymanager.com/)
-
-Credentials are distributed over a secure channel (currently MS Teams) on as-needed basis.
-
-For production, our SPA (React) is compiled into static files and served directly by the proxy.
-
-The nginx config for this lives at `nginx/default_host/site.conf`. The Dockerfile build process will copy the SPA static content to nginx at `/usr/share/nginx/html`.
-
-Custom services, dashboards, special auth requirements, streams, 404 hosts etc. can be easily added via the nginx GUI. Visit http://localhost:81 and login with provided admin credentials to configure.
-
-> This admin dashboard is not currently configured to be exposed securely over a public domain! Do so with appropriate measures if required.
-
-> The admin dashboard also provides an interface to add SSL configuration and certs
-
 ## Accessing the Database for Development Purposes
 
 In development mode, the MariaDb database is exposed via port `33060`. The various user credentials are currently under the `database/` directory in this repo.
 
 ## Running and deploying the Production Build
 
-Running `docker-compose build && docker-compose up -d` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://localhost
+To test the production build locally, you'll need to provide SSL certificates to the app. This example uses mkcert to create a machine-signed certificate.
+
+_Windows_
+
+```bash
+choco install mkcert
+mkcert -install
+mkcert -key-file .certs\key.pem -cert-file .certs\cert.crt studiomanagementsystem.localtest.me
+```
+
+_Unix_
+
+```bash
+homebrew install mkcert
+mkcert -install
+mkcert -key-file .certs/key.pem -cert-file .certs/cert.crt studiomanagementsystem.localtest.me
+```
+
+
+Successfully generating the machine-signed certs will log something like the following,
+
+```bash
+Created a new certificate valid for the following names 📜
+ - "localhost"
+
+The certificate is at ".certs/cert.crt" and the key at ".certs/key.pem" ✅
+
+It will expire on 23 July 2025 🗓
+```
+
+Running `docker-compose up -d --build` will build the latest source code and deploy it behind our rerverse proxy. This proxy will run on completion and make the build available at https://studiomanagementsystem.localtest.me
 
 ## The server/backend API
 

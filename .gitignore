@@ -17,10 +17,9 @@
 *.sln
 *.sw?
 
-# sensitive data
-
+# sensitive and local dev data
+.env
 *.env
-
-# nginx RSA keys
-
-nginx/keys.json
+.certs/*
+*.crt
+*.pem
