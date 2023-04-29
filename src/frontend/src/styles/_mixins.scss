@@ -30,7 +30,7 @@
 @mixin sms-feature-background() {
     background: linear-gradient(
         -15deg,
-        var($sms-background-brand-alt),
-        var($sms-background-brand) 40%
+        var($sms-color-background-brand-alt),
+        var($sms-color-background-brand) 40%
     );
 }

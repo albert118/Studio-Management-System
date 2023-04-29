@@ -5,12 +5,13 @@ $theme-map-light: (
     $--electro-pulse-red: #e10000,
     $--gray-swan-500: #b4b4b4,
     $--gray-swan-700: rgb(180, 180, 180, 0.6),
-    $sms-background-brand: orange,
-    $sms-background-brand-alt: pink,
 
-    $sms-colors-neutral-background: var($--gray-swan-700),
-    $sms-colors-background: var($--gray-swan-500),
-    $sms-colours-danger-zone: var($--electro-pulse-red)
+    $sms-color-background-brand: orange,
+    $sms-color-background-brand-alt: pink,
+
+    $sms-color-neutral-background: var($--gray-swan-700),
+    $sms-color-background: var($--gray-swan-500),
+    $sms-colour-danger-zone: var($--electro-pulse-red)
 );
 
 @mixin spread-map($map: ()) {
