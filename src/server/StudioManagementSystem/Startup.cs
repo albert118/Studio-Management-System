@@ -33,11 +33,10 @@ public class Startup
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = true,
+                    ValidateIssuer = false,
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "supabase",
                     ValidAudience = "authenticated",
                     // to fix later
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Pxje6J28POZQlq+nZNdNUzg7N/vBfwNb+U+dcthqKY1/5G6XqyEs1HZMSv6hhY8xhDQtHkc/+pt0cosGlgpfXQ==")),
@@ -116,8 +115,9 @@ public class Startup
                 .UseHsts()
                 .UseHttpsRedirection();
         }
-
+        
         app.UseAuthentication();
+        app.UseAuthorization();
         app.UseCors();
         app.MapControllers();
     }

@@ -17,7 +17,7 @@ export default function useGroupApplication(groupId: Guid) {
 
             const response = await fetch(`${ApiConfig.API_URL}/groupapplication/${groupId}`, {
                 ...defaultRequestOptions,
-                ...{Authorization: useAuth().session}
+                ...{Authorization: `Bearer: ${useAuth().session?.access_token}`}
             });
             const data = await response.json();
 

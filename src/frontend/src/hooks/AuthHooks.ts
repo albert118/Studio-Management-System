@@ -20,5 +20,11 @@ export default function useAuth() {
         fetchSession();
     }, []);
 
-    return { session, isLoading, errors };
+    const logout = async (session: Session) => {
+        supabase.auth.signOut();
+        setLoading(true);
+        setSession(null);
+    }
+
+    return { session, logout, isLoading, errors };
 }

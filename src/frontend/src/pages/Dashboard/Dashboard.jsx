@@ -6,14 +6,18 @@ import logo from 'assets/logo.jpg';
 import useAuth from 'hooks/AuthHooks';
 
 function Banner() {
-    const { session, isLoading } = useAuth();
+    const { session, logout } = useAuth();
     const navigate = useNavigate();
 
     if (session?.user != undefined) {
+        console.log(session.access_token)
         return (
             <Column lg={16} md={8} sm={4} className='dashboard-page__banner'>
                 <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
                 <p className='dashboard-page__p'>Signed in as {session.user.email}</p>
+                <Button className='dashboard-page__login' onClick={() => {logout()}}>
+                    Logout
+                </Button>
             </Column>
         );
     } else {
