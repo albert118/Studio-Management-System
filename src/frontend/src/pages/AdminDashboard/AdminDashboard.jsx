@@ -1,3 +1,4 @@
+import { Collaborate, Roadmap, Task } from '@carbon/icons-react';
 import { Tile, Grid, Column, ModalWrapper } from '@carbon/react';
 
 export default function AdminDashboard() {
@@ -17,7 +18,11 @@ export default function AdminDashboard() {
                 <StatisticBox title='Assigned Groups' label='12 out of 30' />
             </Column>
             <Column lg={16} md={8} sm={4} className='admin-page__r3'>
-                <ManagementTile title='Groups' description='Archive, and lock groups in bulk'>
+                <ManagementTile
+                    title='Groups'
+                    description='Archive, and lock groups in bulk'
+                    icon={<Collaborate size={32} />}
+                >
                     <ModalWrapper
                         buttonTriggerText='Add new owner contacts'
                         modalHeading='Create new contacts'
@@ -32,7 +37,11 @@ export default function AdminDashboard() {
                         {/* <PendingApplications groupApplications={groupApplication} /> */}
                     </ModalWrapper>
                 </ManagementTile>
-                <ManagementTile title='Projects' description='Archive, and lock projects in bulk'>
+                <ManagementTile
+                    title='Projects'
+                    description='Archive, and lock projects in bulk'
+                    icon={<Roadmap size={32} />}
+                >
                     <ModalWrapper
                         buttonTriggerText='Bulk project management'
                         modalHeading='Bulk project management'
@@ -41,8 +50,9 @@ export default function AdminDashboard() {
                     </ModalWrapper>
                 </ManagementTile>
                 <ManagementTile
-                    title='Group-Project Assignment'
+                    title='Assignment'
                     description='Manage groups project assignement'
+                    icon={<Task size={32} />}
                 >
                     <ModalWrapper
                         buttonTriggerText='Auto assign projects'
@@ -76,12 +86,16 @@ function StatisticBox({ title, label, variant }) {
     );
 }
 
-function ManagementTile({ title, description, children }) {
+function ManagementTile({ title, description, icon, children }) {
     return (
         <div className='management-tile'>
             <div className='heading'>
-                <h3>{title}</h3>
+                <div className='icon-header'>
+                    <h3>{title}</h3>
+                    {icon}
+                </div>
                 <p>{description}</p>
+                <div className='divider' />
             </div>
             <div className='actions'>{children}</div>
         </div>

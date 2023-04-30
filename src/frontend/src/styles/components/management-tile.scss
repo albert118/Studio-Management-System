@@ -3,32 +3,49 @@
 @use '../mixins' as *;
 
 .management-tile {
+    $tile-width: 400px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: var($sms-color-neutral-background);
-    padding: $spacing-05;
-    padding-bottom: $spacing-06;
+    padding: $spacing-07;
     height: 600px;
-    width: 400px;
+    width: $tile-width;
 
     .heading {
-        h3 {
-            @include type-style('heading-04');
-        }
-
         p {
             @include type-style('body-compact-02');
+        }
+
+        .divider {
+            position: relative;
+            top: 25%;
+            left: -$spacing-07;
+            width: $tile-width;
+            border: 1px dashed black;
+        }
+    }
+
+    .heading > .icon-header {
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+            @include type-style('heading-04');
+            margin-bottom: $spacing-05;
         }
     }
 
     .actions {
         display: flex;
         flex-direction: column;
-        row-gap: $spacing-04;
+        row-gap: $spacing-06;
     }
 }
 
 .management-tile:hover {
-    @include sms-feature-background();
+    color: white;
+    background-color: var($sms-color-neutral-background-active);
+    transition: all 0.3s ease-out;
 }
