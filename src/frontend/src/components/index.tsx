@@ -7,6 +7,7 @@ import InlineDetail from './InlineDetail/InlineDetail';
 import BlockDetail from './BlockDetail/BlockDetail';
 import VerticalSocialDivider from './VerticalSocialDivider/VerticalSocialDivider';
 import EmailModalButton from './EmailModalButton/EmailModalButton';
+import { ManagementTile, StatisticBox } from './Admin';
 
 export {
     Stack,
@@ -17,5 +18,7 @@ export {
     VerticalSocialDivider,
     SimpleCard,
     EmailModalButton,
-    LoadingSpinner
+    LoadingSpinner,
+    ManagementTile,
+    StatisticBox
 };

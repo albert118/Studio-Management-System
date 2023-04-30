@@ -1,5 +1,6 @@
-import { Collaborate, Roadmap, Task } from '@carbon/icons-react';
-import { Tile, Grid, Column, ModalWrapper } from '@carbon/react';
+import { Collaborate, Roadmap, Task, IbmWatsonTextToSpeech } from '@carbon/icons-react';
+import { Grid, Column, ModalWrapper } from '@carbon/react';
+import { ManagementTile, StatisticBox } from 'components';
 
 export default function AdminDashboard() {
     return (
@@ -13,9 +14,29 @@ export default function AdminDashboard() {
                 </p>
             </Column>
             <Column lg={16} md={8} sm={4} className='admin-page__r2'>
-                <StatisticBox title='Assigned Groups' label='12 out of 30' variant='green' />
-                <StatisticBox title='Assigned Groups' label='12 out of 30' variant='blue' />
-                <StatisticBox title='Assigned Groups' label='12 out of 30' />
+                <StatisticBox
+                    title='Assigned groups'
+                    label='Are active groups forming?'
+                    value={12}
+                    changeInValue={0.3}
+                    valueIcon={<Collaborate size={24} />}
+                    variant='green'
+                />
+                <StatisticBox
+                    title='PDJ contributions'
+                    label='Are projects progressing?'
+                    value={15}
+                    changeInValue={-0.07}
+                    valueIcon={<Roadmap size={24} />}
+                    variant='blue'
+                />
+                <StatisticBox
+                    title='ILC journal activity'
+                    label='Are students reflecting?'
+                    value={15}
+                    valueIcon={<IbmWatsonTextToSpeech size={24} />}
+                    changeInValue={0.86}
+                />
             </Column>
             <Column lg={16} md={8} sm={4} className='admin-page__r3'>
                 <ManagementTile
@@ -70,34 +91,5 @@ export default function AdminDashboard() {
                 </ManagementTile>
             </Column>
         </Grid>
-    );
-}
-
-function StatisticBox({ title, label, variant }) {
-    const classes = variant ? `statistic-box ${variant}` : 'statistic-box';
-
-    return (
-        <Tile className={classes}>
-            <div className='heading'>
-                <h4>{title}</h4>
-                <label>{label}</label>
-            </div>
-        </Tile>
-    );
-}
-
-function ManagementTile({ title, description, icon, children }) {
-    return (
-        <div className='management-tile'>
-            <div className='heading'>
-                <div className='icon-header'>
-                    <h3>{title}</h3>
-                    {icon}
-                </div>
-                <p>{description}</p>
-                <div className='divider' />
-            </div>
-            <div className='actions'>{children}</div>
-        </div>
     );
 }

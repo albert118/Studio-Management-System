@@ -5,32 +5,43 @@
 .statistic-box {
     $box-width: 300px;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: $spacing-07;
     height: 200px;
     width: $box-width;
 
     @include sms-feature-background();
 
+    label {
+        @include type-style('body-compact-01');
+    }
+
     &.blue {
-        color: #000;
         background: unset;
         background-color: var($sms-color-subtle-blue);
     }
 
     &.green {
-        color: #000;
         background: unset;
         background-color: var($sms-color-subtle-green);
     }
 
-    .heading {
-        height: 100%;
+    .statistic-value > span {
+        display: flex;
+        column-gap: $spacing-04;
+        align-items: center;
+        @include type-style('heading-05');
+    }
 
-        h4 {
-            @include type-style('heading-01');
-        }
-
-        label {
-            @include type-style('body-compact-01');
-        }
+    .change-in {
+        display: flex;
+        width: min-content;
+        align-items: center;
+        column-gap: $spacing-03;
+        position: relative;
+        left: 70%;
+        @include type-style('heading-03');
     }
 }
