@@ -12,16 +12,9 @@
         display: flex;
         flex-wrap: wrap;
         row-gap: $spacing-09;
+        column-gap: $spacing-09;
         // create a "tray" for tiles
         background-color: var($sms-color-background);
         padding: $spacing-06;
-    }
-
-    .admin-page__r2 {
-        justify-content: space-between;
-    }
-
-    .admin-page__r3 {
-        column-gap: $spacing-09;
     }
 }
