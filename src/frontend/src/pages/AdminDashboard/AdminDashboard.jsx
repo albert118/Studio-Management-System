@@ -21,7 +21,7 @@ export default function AdminDashboard() {
                 <ManagementTile
                     title='Groups'
                     description='Archive, and lock groups in bulk'
-                    icon={<Collaborate size={32} />}
+                    icon={<Collaborate size={48} />}
                 >
                     <ModalWrapper
                         buttonTriggerText='Add new owner contacts'
@@ -40,7 +40,7 @@ export default function AdminDashboard() {
                 <ManagementTile
                     title='Projects'
                     description='Archive, and lock projects in bulk'
-                    icon={<Roadmap size={32} />}
+                    icon={<Roadmap size={48} />}
                 >
                     <ModalWrapper
                         buttonTriggerText='Bulk project management'
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
                 <ManagementTile
                     title='Assignment'
                     description='Manage groups project assignement'
-                    icon={<Task size={32} />}
+                    icon={<Task size={48} />}
                 >
                     <ModalWrapper
                         buttonTriggerText='Auto assign projects'
