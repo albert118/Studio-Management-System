@@ -15,6 +15,7 @@ $theme-map-light: (
 
     // bind CDS mappings to our branding
     $cds-overrides--cds-border-interactive: var($sms-color-background-brand),
+    $cds-overrides--cds-button-primary-active: var($sms-color-background-brand-alt),
     $cds-overrides--cds-button-primary-hover: var($sms-color-background-brand-alt),
     $cds-overrides--cds-button-primary: var($sms-color-background-brand),
     $cds-overrides--cds-focus: var($sms-color-background-brand)
