@@ -3,19 +3,8 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.group-page {
-    p {
-        margin-top: $spacing-05;
-        margin-bottom: $spacing-05;
-
-        @include type-style('productive-heading-03');
-
-        @include breakpoint-between((320px + 1), md) {
-            max-width: 75%;
-        }
-
-        @include wrap-text();
-    }
+.groups-page {
+    min-height: 70vh;
 }
 
 .groups-page__table {

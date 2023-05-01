@@ -2,26 +2,37 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.dashboard-page__banner,
-.dashboard-page__description {
-    margin-left: -20px;
-    margin-right: -20px;
-    @include breakpoint-down(md) {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
-.dashboard-page__description {
+.dashboard-page{
+    min-height: 70vh;
     padding: $spacing-05;
-    padding-left: $spacing-06;
+    background: linear-gradient(.60turn, #0f4beb,transparent);
+    background-color:#ff2305
 }
 
-.dashboard-page__banner {
-    padding-top: $spacing-07;
-    padding-bottom: $spacing-07 * 4;
-    padding-left: $spacing-06;
-    @include neutral-banner__background;
+.dashboard-page-title{
+    padding: $spacing-06;
+    border-radius:10px;
+    background: rgba(252, 252, 252);
+    margin-bottom: $spacing-04;
+}
+
+.dashboard-page__content01{
+    padding-bottom: $spacing-05;
+}
+
+.dashboard-page__heading {
+    font-weight: 600;
+}
+
+.dashboard-page__content02{
+    padding-bottom: $spacing-08;
+}
+
+.dashboard-page-img{
+    padding:  $spacing-04;
+    border-radius:10px;
+    background: rgba(252, 252, 252);
+    margin-bottom: $spacing-04;
 }
 
 .dashboard-page__login {
@@ -30,28 +41,16 @@
 
 .dashboard-page__logo {
     max-width: 100%;
-    object-fit: cover;
-    width: 500px;
-}
-
-// .dashboard-page__heading {
-//     @include type-style('productive-heading-05');
-// }
-
-.dashboard-page__subheading {
-    // @include type-style('productive-heading-03');
-    font-weight: 600;
+    height: auto;
 }
 
 .dashboard-page__p {
-    // @include type-style('productive-heading-03');
     margin-top: $spacing-06;
-
     @include breakpoint-between((320px + 1), md) {
         max-width: 75%;
     }
 }
 
-.dashboard-page__description > .dashboard-page__p {
-    margin-bottom: $spacing-08;
+.dashboard-page__content02 > .dashboard-page__p {
+    padding-bottom: $spacing-08;
 }

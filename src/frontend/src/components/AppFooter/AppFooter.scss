@@ -26,34 +26,6 @@
     box-sizing: content-box;
 }
 
-@media (min-width: 600px) {
-    .acknowledgement__row {
-        display:-webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    }
-}
-
-.footer-grid__col,.acknowledgement__col,.footer-menu__level-1 > .footer-menu__item {
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
-
-@media (min-width: 600px) {
-    .acknowledgement__col__1,.acknowledgement__col__2 {
-        width:50%;
-    }
-}
-
 .footer-grid__row,.footer-menu__level-1 {
     display: -webkit-box;
     display: -webkit-flex;
@@ -241,79 +213,6 @@
     margin: 0 0 0.75rem;
 }
 
-.acknowledgement {
-    background: #323232;
-    margin-top: -2rem;
-    margin-bottom: 2rem;
-}
-
-@media (min-width: 600px) {
-    .acknowledgement {
-        margin-top:-4rem;
-        margin-bottom: 4rem;
-    }
-}
-
-.acknowledgement__col {
-    margin-bottom: 0;
-}
-
-.acknowledgement__col__1 {
-    padding: 1.5rem 0;
-    margin: auto;
-}
-
-@media (max-width: 999px) {
-    .acknowledgement__col__1 {
-        width:100%;
-    }
-}
-
-@media (min-width: 1000px) and (max-width:1199px) {
-    .acknowledgement__col__1 {
-        padding:0.9375rem 0;
-    }
-}
-
-.acknowledgement__col__2 {
-    text-align: right;
-}
-
-.acknowledgement__col__2 img {
-    height: 179px;
-    vertical-align: bottom;
-    margin-right: -20px;
-    -o-object-fit: cover;
-    object-fit: cover;
-}
-
-@media (min-width: 1000px) and (max-width:1199px) {
-    .acknowledgement__col__2 img {
-        height:149px;
-    }
-}
-
-@media (max-width: 999px) {
-    .acknowledgement__col__2 {
-        display:none;
-    }
-}
-
-.acknowledgement__text {
-    font-size: 0.8125rem;
-    line-height: 1rem;
-    color: #fff;
-}
-
-.acknowledgement__text__header {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.acknowledgement__text p {
-    color: #fff;
-    margin: 0;
-}
 
 .footer {
     color: #b2b2b2;
@@ -363,7 +262,6 @@
 @media (min-width: 600px) {
     .footer__wrapper {
         padding:4rem 0 0.5rem;
-        margin-top: 7.5rem;
     }
 }
 
