@@ -4,14 +4,13 @@
 
 .dashboard-page{
     min-height: 70vh;
-    padding: $spacing-05;
+    padding: $spacing-08;
     background: linear-gradient(.60turn, #0f4beb,transparent);
     background-color:#ff2305
 }
 
 .dashboard-page-title{
     padding: $spacing-06;
-    border-radius:10px;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
 }
@@ -30,7 +29,6 @@
 
 .dashboard-page-img{
     padding:  $spacing-04;
-    border-radius:10px;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
 }
