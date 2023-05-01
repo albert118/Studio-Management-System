@@ -23,7 +23,6 @@ public class Startup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
     {
-        // Add authentication.
         services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
