@@ -1,6 +1,7 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 @use '@carbon/react/scss/type' as *;
+@use '../mixins' as *;
 
 .dashboard-page__pitch {
     h2 {
@@ -18,6 +19,7 @@
     }
 
     button {
+        @include sms-feature-background();
         margin-top: $spacing-08;
     }
 }

@@ -21,7 +21,7 @@ export default function Dashboard() {
                     next.
                 </p>
 
-                <GoToButton url={`${AppRoutes.groups}/add`} text='Get started' />
+                <GoToButton url={`${AppRoutes.groups}/add`} text='Get started' size='xl' />
             </Column>
             <Column lg={{ span: 8, offset: 8 }} md={6} sm={4} className='dashboard-page__hero'>
                 <div className='dashboard-page__hero-boxes'>
