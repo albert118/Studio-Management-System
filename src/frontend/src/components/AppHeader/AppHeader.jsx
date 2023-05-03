@@ -54,11 +54,6 @@ function AppHeader() {
                         >
                             Groups
                         </HeaderMenuItem>
-                        <HeaderMenu aria-label='Link 4' menuLinkName='Link 4'>
-                            <HeaderMenuItem href={AppRoutes.root}>Sub-link 1</HeaderMenuItem>
-                            <HeaderMenuItem href={AppRoutes.root}>Sub-link 2</HeaderMenuItem>
-                            <HeaderMenuItem href={AppRoutes.root}>Sub-link 3</HeaderMenuItem>
-                        </HeaderMenu>
                     </HeaderNavigation>
                     <HeaderGlobalBar>
                         <HeaderGlobalAction aria-label='Notifications'>
