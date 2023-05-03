@@ -1,47 +1,42 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/breakpoint' as *;
-@use '../mixins' as *;
+@use '@carbon/react/scss/type' as *;
 
-.dashboard-page__title {
-    padding: $spacing-06;
-    background: rgba(252, 252, 252);
-    margin-bottom: $spacing-04;
-}
+.dashboard-page__pitch {
+    h1 {
+        margin-top: $spacing-10;
+        margin-bottom: $spacing-08;
+        @include type-style('heading-07');
 
-.dashboard-page__content01 {
-    padding-bottom: $spacing-05;
-}
+        & div:nth-child(3) svg {
+            margin-left: $spacing-04;
+        }
+    }
 
-.dashboard-page__heading {
-    font-weight: 600;
-}
-
-.dashboard-page__content02 {
-    padding-bottom: $spacing-08;
-}
-
-.dashboard-page__hero {
-    padding: $spacing-04;
-    background: rgba(252, 252, 252);
-    margin-bottom: $spacing-04;
-}
-
-.dashboard-page__login {
-    margin-top: $spacing-05;
-}
-
-.dashboard-page__logo {
-    max-width: 100%;
-    width: 100%;
-}
-
-.dashboard-page__p {
-    margin-top: $spacing-06;
-    @include breakpoint-between((320px + 1), md) {
-        max-width: 75%;
+    .dashboard-page__pitch-detail {
+        margin-top: $spacing-06;
+        margin-bottom: $spacing-06;
+        @include type-style('heading-02');
     }
 }
 
-.dashboard-page__content02 > .dashboard-page__p {
-    padding-bottom: $spacing-08;
+.dashboard-page__hero {
+    display: flex;
+    justify-content: center;
+
+    .dashboard-page__hero-logo {
+        max-width: 100%;
+        width: 60%;
+    }
+}
+
+.dashboard-page__existinguser {
+    margin-top: $spacing-05;
+
+    // .dashboard-page__existinguser-prompt {
+    //     // margin-top: $spacing-06;
+    //     // @include breakpoint-between((320px + 1), md) {
+    //     //     max-width: 75%;
+    //     // }
+    // }
 }
