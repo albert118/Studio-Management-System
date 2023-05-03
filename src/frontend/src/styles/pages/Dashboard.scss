@@ -2,14 +2,13 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-
-.dashboard-page__title{
+.dashboard-page__title {
     padding: $spacing-06;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
 }
 
-.dashboard-page__content01{
+.dashboard-page__content01 {
     padding-bottom: $spacing-05;
 }
 
@@ -17,12 +16,12 @@
     font-weight: 600;
 }
 
-.dashboard-page__content02{
+.dashboard-page__content02 {
     padding-bottom: $spacing-08;
 }
 
-.dashboard-page__hero{
-    padding:  $spacing-04;
+.dashboard-page__hero {
+    padding: $spacing-04;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
 }
