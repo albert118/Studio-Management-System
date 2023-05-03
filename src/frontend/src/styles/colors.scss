@@ -1,9 +1,22 @@
-.studio-management-system-theme {
-    --electro-pulse-red: #e10000;
-    --gray-swan-500: #b4b4b4;
-    --gray-swan-700: rgb(180, 180, 180, 0.6);
+// scss - css variable proxy
+// allows defining a SCSS variable and then injecting it back into the stylesheet
 
-    --sms-colors-neutral-background: var(--gray-swan-700);
-    --sms-colors-background: var(--gray-swan-500);
-    --sms-colours-danger-zone: var(--electro-pulse-red);
-}
+$sms-color-subtle-blue: --sms-color-blue;
+$sms-color-subtle-green: --sms-color-green;
+
+$sms-color-background-brand: --sms-color-background-brand;
+$sms-color-background-brand-alt: --sms-color-background-brand-alt;
+
+$sms-color-body-background: --sms-color-body-background;
+$sms-color-background: --sms-color-background;
+$sms-color-neutral-background-active: --sms-color-neutral-background-active;
+$sms-color-neutral-background: --sms-color-neutral-background;
+$sms-color-background: --sms-color-background;
+$sms-colour-danger-zone: --sms-colour-danger-zone;
+
+// cds-overrides
+$cds-overrides--cds-border-interactive: --cds-border-interactive;
+$cds-overrides--cds-button-primary-active: --cds-button-primary-active;
+$cds-overrides--cds-button-primary-hover: --cds-button-primary-hover;
+$cds-overrides--cds-button-primary: --cds-button-primary;
+$cds-overrides--cds-focus: --cds-focus;
