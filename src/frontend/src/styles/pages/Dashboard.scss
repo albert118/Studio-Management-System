@@ -19,6 +19,7 @@
     }
 
     button {
+        @include type-style('heading-01');
         @include sms-feature-background();
         margin-top: $spacing-08;
     }
@@ -31,9 +32,8 @@
     position: relative;
 
     .dashboard-page__hero-boxes {
-        .box1,
-        .box2,
-        .box3 {
+        div {
+            transition: background-color 0.3s ease-in;
             position: absolute;
             z-index: -1;
         }
@@ -88,11 +88,33 @@
     }
 }
 
+.dashboard-page__hero:hover {
+    .dashboard-page__hero-boxes > div {
+        transition: background-color 0.4s ease-out;
+    }
+
+    .dashboard-page__hero-boxes {
+        .box1 {
+            background-color: var($sms-color-background-brand);
+        }
+        .box2 {
+            background-color: var($sms-color-background-brand-alt);
+        }
+        .box3 {
+            background-color: var($sms-color-neutral-background-active);
+        }
+    }
+}
+
 .dashboard-page__existing-prompt {
     margin-top: calc($spacing-13 * 3);
 
     .simple-card {
         max-width: 500px;
+
+        button {
+            @include type-style('heading-01');
+        }
     }
 
     // no hover effect on this particular card
