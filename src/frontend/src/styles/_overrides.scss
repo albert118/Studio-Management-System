@@ -1,9 +1,12 @@
+@use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/breakpoint' as *;
 
 .cds--content {
+    min-height: 80vh;
     margin-top: 3rem;
-    padding: 0;
-    background: var(--cds-background);
+    padding: $spacing-06;
+    background: linear-gradient(.60turn, #0f4beb,transparent);
+    background-color:#ff2305
 }
 
 .cds--content .cds--css-grid {

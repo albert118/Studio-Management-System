@@ -3,13 +3,10 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.projects-page {
-    min-height: 70vh;
-}
-
 .projects-page__banner {
-    padding-top: $spacing-07;
-    padding-bottom: $spacing-07;
+    padding: $spacing-06;
+    background-color: rgba(252, 252, 252);
+    margin-bottom: $spacing-06;
 }
 
 .projects-page__table {

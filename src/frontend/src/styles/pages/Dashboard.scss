@@ -2,14 +2,8 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.dashboard-page{
-    min-height: 70vh;
-    padding: $spacing-08;
-    background: linear-gradient(.60turn, #0f4beb,transparent);
-    background-color:#ff2305
-}
 
-.dashboard-page-title{
+.dashboard-page__title{
     padding: $spacing-06;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
@@ -27,7 +21,7 @@
     padding-bottom: $spacing-08;
 }
 
-.dashboard-page-img{
+.dashboard-page__hero{
     padding:  $spacing-04;
     background: rgba(252, 252, 252);
     margin-bottom: $spacing-04;
@@ -39,7 +33,7 @@
 
 .dashboard-page__logo {
     max-width: 100%;
-    height: auto;
+    width: 100%;
 }
 
 .dashboard-page__p {

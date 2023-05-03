@@ -8,12 +8,12 @@ import {Container, Row, Col} from 'react-bootstrap';
 
 function Dashboard() {
     const navigate = useNavigate();
-    // This page may require restructuring however its current purpose is to act as a template dashboard page.
+    // This page may require restructuring however its current purpose is to act as a template home page.
 
     return (
         <div className='dashboard-page'>
             <Grid>
-                <Column lg={10} md={8} sm={4} className='dashboard-page-title'>
+                <Column lg={10} md={8} sm={4} className='dashboard-page__title'>
                     <Column className='dashboard-page__content01'>
                         <h1 className='dashboard-page__heading'>{BrandConfig.BrandName}</h1>
                         <p className='dashboard-page__p'>Existing user? Sign in here</p>
@@ -36,7 +36,7 @@ function Dashboard() {
                         <Button onClick={() => navigate(`${AppRoutes.about}`)}>Read more</Button>
                     </Column>
                 </Column>
-                <Column md={7} lg={{span: 6}} sm={4} className='dashboard-page-img'>
+                <Column md={7} lg={{span: 6}} sm={4} className='dashboard-page__hero'>
                     <img className='dashboard-page__logo' src={logo} alt='studio word art' />
                 </Column>
             </Grid>

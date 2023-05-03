@@ -3,22 +3,10 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.groups-page {
-    min-height: 70vh;
-}
-
-.groups-page__table {
-    margin-left: -20px;
-    margin-right: -20px;
-    @include breakpoint-down(md) {
-        margin-left: 0;
-        margin-right: 0;
-    }
-}
-
 .groups-page__banner {
-    padding-top: $spacing-07;
-    padding-bottom: $spacing-07;
+    padding: $spacing-06;
+    background-color: rgba(252, 252, 252);
+    margin-bottom: $spacing-06;
 }
 
 .groups-page__table {
