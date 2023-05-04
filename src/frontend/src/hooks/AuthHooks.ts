@@ -12,9 +12,7 @@ export default function useAuth() {
     useEffect(() => {
         setLoading(true);
         const fetchSession = async () => {
-            supabase.auth.getSession().then(({ data: { session } }) => {
-                setSession(session);
-            });
+            const response = await supabase.auth.getSession();
             setLoading(false);
         };
         fetchSession();
