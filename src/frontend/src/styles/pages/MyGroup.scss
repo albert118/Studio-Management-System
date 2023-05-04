@@ -27,8 +27,6 @@
     @include breakpoint-between((320px + 1), md) {
         max-width: 75%;
     }
-
-    @include contain-text();
 }
 
 .mygroup-page__heading {
