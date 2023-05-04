@@ -28,7 +28,8 @@
 .dashboard-page__hero {
     display: flex;
     align-items: center;
-    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
 
     .dashboard-page__hero-boxes {
@@ -39,18 +40,16 @@
         }
 
         .box1 {
-            width: 500px;
-            height: 600px;
-            top: 30%;
-            left: 20%;
+            width: 600px;
+            height: 500px;
             background-color: var($sms-color-background-brand-alt);
         }
 
         .box2 {
-            width: 900px;
-            height: 300px;
+            width: 800px;
+            height: 400px;
             top: 15%;
-            right: 35%;
+            right: 0;
             background-color: var($sms-color-background-brand);
         }
 
@@ -70,6 +69,7 @@
         justify-content: stretch;
         width: 400px;
         word-spacing: $spacing-06;
+        margin-left: 240px;
         @include type-style('heading-06');
 
         & div:last-child {
