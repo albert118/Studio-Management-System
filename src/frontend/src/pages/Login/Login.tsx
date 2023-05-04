@@ -6,7 +6,7 @@ import AppRoutes from 'navigation/AppRoutes';
 import { Navigate } from 'react-router-dom';
 
 function Login() {
-    const { session, isLoading } = useAuth();
+    const { session } = useAuth();
     // I want auto redirect but it's not working
     if (!session) {
         return (
@@ -23,5 +23,3 @@ function Login() {
         return <Navigate replace to='/' />;
     }
 }
-
-export default Login;

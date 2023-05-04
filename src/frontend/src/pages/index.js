@@ -1,23 +1,14 @@
-import Dashboard from 'pages/Dashboard/Dashboard';
-import GroupsContainer from 'pages/Groups';
-import ProjectsContainer from 'pages/Projects';
-import Error from 'pages/Error/Error';
-import Login from 'pages/Login/Login';
-import Layout from 'pages/Layout';
-import MyGroupContainer from 'pages/MyGroup/MyGroupContainer';
-import AddGroupContainer from 'pages/AddGroup/AddGroupContainer';
-import ProjectContainer from './Project/ProjectContainer';
-import AddProjectContainer from './AddProject/AddProjectContainer';
+export { default as Error } from './Error';
+export { default as Layout } from './Layout';
 
-export {
-    Dashboard,
-    ProjectsContainer as Projects,
-    Login,
-    GroupsContainer as Groups,
-    Error,
-    Layout,
-    MyGroupContainer as MyGroup,
-    AddGroupContainer as AddGroup,
-    ProjectContainer as Project,
-    AddProjectContainer as AddProject
-};
+export { default as Login } from './Login';
+
+export { default as Groups } from './Groups';
+export { default as MyGroup } from './MyGroup';
+export { default as AddGroup } from './AddGroup';
+
+export { default as Projects } from './Projects';
+export { default as Project } from './Project';
+export { default as AddProject } from './AddProject';
+export { default as Dashboard } from './Dashboard';
+export { default as AdminDashboard } from './AdminDashboard';

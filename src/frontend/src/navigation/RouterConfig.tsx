@@ -10,7 +10,8 @@ import {
     MyGroup,
     AddGroup,
     Project,
-    AddProject
+    AddProject,
+    AdminDashboard
 } from 'pages';
 import AppRoutes from 'navigation/AppRoutes';
 
@@ -76,6 +77,14 @@ const routes: RouteObject[] = [
         element: (
             <Layout>
                 <Error />
+            </Layout>
+        )
+    },
+    {
+        path: AppRoutes.admin,
+        element: (
+            <Layout>
+                <AdminDashboard />
             </Layout>
         )
     },

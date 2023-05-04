@@ -1,0 +1,20 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.admin-page {
+    .admin-page__r1,
+    .admin-page__r2,
+    .admin-page__r3 {
+        margin-bottom: $spacing-12;
+    }
+
+    .admin-page__r2,
+    .admin-page__r3 {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: $spacing-09;
+        column-gap: $spacing-09;
+        // create a "tray" for tiles
+        background-color: var($sms-color-background);
+        padding: $spacing-06;
+    }
+}

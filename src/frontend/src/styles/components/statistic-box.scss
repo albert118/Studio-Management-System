@@ -1,0 +1,47 @@
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../mixins' as *;
+
+.statistic-box {
+    $box-width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: $spacing-07;
+    height: 200px;
+    width: $box-width;
+
+    @include sms-feature-background();
+
+    label {
+        @include type-style('body-compact-01');
+    }
+
+    &.blue {
+        background: unset;
+        background-color: var($sms-color-subtle-blue);
+    }
+
+    &.green {
+        background: unset;
+        background-color: var($sms-color-subtle-green);
+    }
+
+    .statistic-value > span {
+        display: flex;
+        column-gap: $spacing-04;
+        align-items: center;
+        @include type-style('heading-05');
+    }
+
+    .change-in {
+        display: flex;
+        width: min-content;
+        align-items: center;
+        column-gap: $spacing-03;
+        position: relative;
+        left: 70%;
+        @include type-style('heading-03');
+    }
+}

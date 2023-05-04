@@ -11,7 +11,7 @@ export default function GroupsView({ groups }) {
     const currentSession = 'Autumn 2023';
 
     return (
-        <Grid>
+        <Grid className='groups-page'>
             <Column lg={16} md={8} sm={4} className='groups-page__banner'>
                 <h1 className='groups-page__heading'>{currentSession} Groups</h1>
                 <p className='groups-page__p'>Browse all active groups</p>
