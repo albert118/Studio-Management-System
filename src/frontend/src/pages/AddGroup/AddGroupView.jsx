@@ -50,10 +50,15 @@ export default function AddGroupView({ availableProjects }) {
             <Column lg={16} md={8} sm={4} className='add-group-page__heading'>
                 <h1>Create a new group</h1>
                 <p>
-                    Creating a new group will allow you to join a project and collaborate with your
-                    team mates.
+                    Welcome! We're thrilled that you're interested in forming a group to work 
+                    on a project with your peers.
                     <br />
-                    Not everyone has to create a new group, feel free discover an existing group.
+                    <br />
+                    Note* Not everyone has to create a new group, feel free discover an existing group.
+                    <br />
+                    <br />
+                    If you are still interest in creating your own group, then follow the 
+                    steps below and get your team set up!
                 </p>
             </Column>
             <Column lg={16} md={8} sm={4}>
