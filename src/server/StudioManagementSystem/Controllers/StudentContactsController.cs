@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
@@ -17,7 +18,8 @@ public class StudentContactsController : ControllerBase
         _studentContactRepository = studentContactRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
-
+    
+    [Authorize]
     [HttpPost]
     public ActionResult<Guid> CreateStudentContact(CreateStudentContactDto dto)
     {

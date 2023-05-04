@@ -1,5 +1,10 @@
+using System.Text;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+
 
 namespace StudioManagementSystem;
 
@@ -18,6 +23,26 @@ public class Startup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
     {
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidAudience = "authenticated",
+                    // to fix later
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Pxje6J28POZQlq+nZNdNUzg7N/vBfwNb+U+dcthqKY1/5G6XqyEs1HZMSv6hhY8xhDQtHkc/+pt0cosGlgpfXQ==")),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+        
         services.AddControllers();
 
         services.Configure<RouteOptions>(options => {
@@ -27,7 +52,34 @@ public class Startup
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Studio Management Subject", Version = "v1" });
+
+            // Define the security scheme
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "JWT Authorization header using the Bearer scheme",
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer"
+            });
+
+            // Define the security requirement
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] { }
+                }
+            });
+        });    
     }
 
     /// <summary>
@@ -62,7 +114,9 @@ public class Startup
                 .UseHsts()
                 .UseHttpsRedirection();
         }
-
+        
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseCors();
         app.MapControllers();
     }

@@ -21,7 +21,7 @@ public class GroupController : ControllerBase
         _projectGroupManager = projectGroupManager;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
-
+    
     [HttpGet("{id}")]
     public ActionResult<GroupDto> GetGroup(Guid id)
     {

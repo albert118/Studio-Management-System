@@ -1,4 +1,5 @@
-﻿using StudioManagementSystem.Core.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
 
@@ -19,6 +20,7 @@ public class ProjectGroupManager : IProjectGroupManager
         _groupRepository = groupRepository;
     }
 
+    [Authorize]
     public async Task<Guid> CreateNewGroupAsync(CreateGroupDto dto, CancellationToken ct)
     {
         var groupId = await _groupRepository.AddGroupAsync(new(dto), ct);

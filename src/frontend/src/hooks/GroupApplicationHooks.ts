@@ -4,6 +4,7 @@ import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
 import { Guid } from 'guid-typescript';
+import useAuth from './AuthHooks';
 
 export default function useGroupApplication(groupId: Guid) {
     const [groupApplication, setGroupApplication] = useState<IGroupApplication[]>([]);
@@ -15,7 +16,8 @@ export default function useGroupApplication(groupId: Guid) {
             setLoading(true);
 
             const response = await fetch(`${ApiConfig.API_URL}/groupapplication/${groupId}`, {
-                ...defaultRequestOptions
+                ...defaultRequestOptions,
+                ...{Authorization: `Bearer: ${useAuth().session?.access_token}`}
             });
             const data = await response.json();
 

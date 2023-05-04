@@ -5,18 +5,20 @@ import defaultRequestOptions from './defaultRequestHeaders';
 import { NewProjectDto } from 'types/types';
 import { KestrelServerError, ApiError } from './types';
 import { Guid } from 'guid-typescript';
+import useAuth from './AuthHooks';
 
 export default function useProjects() {
     const [projects, setProjects] = useState<IProject[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
+    const {session} = useAuth();
 
     useEffect(() => {
         const fetchProjects = async () => {
             setLoading(true);
 
             const response = await fetch(`${ApiConfig.API_URL}/projects/all`, {
-                ...defaultRequestOptions
+                ...defaultRequestOptions, ...{headers: {Authorisation: `Bearer ${session?.access_token}`}}
             });
             const data = await response.json();
 
@@ -28,7 +30,7 @@ export default function useProjects() {
 
     const addProject = async (project: NewProjectDto): Promise<string> => {
         const response = await fetch(ApiConfig.API_URL + '/project', {
-            ...defaultRequestOptions,
+            ...defaultRequestOptions, ...{headers: {Authorisation: `Bearer ${session?.access_token}`}},
             method: 'POST',
             body: JSON.stringify(project)
         });
@@ -55,13 +57,14 @@ export function useProject(projectId: Guid) {
     const [project, setProject] = useState<IProject>({} as IProject);
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
+    const {session} = useAuth();
 
     useEffect(() => {
         const fetchGroup = async () => {
             setLoading(true);
 
             const response = await fetch(`${ApiConfig.API_URL}/project/${projectId}`, {
-                ...defaultRequestOptions
+                ...defaultRequestOptions, ...{headers: {Authorisation: `Bearer ${session?.access_token}`}}
             });
             const data = await response.json();
 
@@ -83,7 +86,7 @@ export function useProject(projectId: Guid) {
 
     const updateProject = async (project: IProject) => {
         const response = await fetch(`${ApiConfig.API_URL}/project/${project.id}`, {
-            ...defaultRequestOptions,
+            ...defaultRequestOptions, ...{headers: {Authorisation: `Bearer ${session?.access_token}`}},
             method: 'PUT',
             body: JSON.stringify(project)
         });
@@ -96,7 +99,7 @@ export function useProject(projectId: Guid) {
 
     const deleteProject = async (projectId: number) => {
         await fetch(`${ApiConfig.API_URL}/project/${projectId}`, {
-            ...defaultRequestOptions,
+            ...defaultRequestOptions, ...{headers: {Authorisation: `Bearer ${session?.access_token}`}},
             method: 'DELETE'
         });
 
