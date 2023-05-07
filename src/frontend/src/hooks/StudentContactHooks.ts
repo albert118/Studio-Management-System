@@ -33,7 +33,7 @@ export default function useStudentContacts() {
     return { studentContacts, isLoading, errors };
 }
 
-export function useStudentContactNoGroup() {
+export function useStudentContactsWithoutGroup() {
     const [studentContacts, setStudentContacts] = useState<IStudentContact[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);

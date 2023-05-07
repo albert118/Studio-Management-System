@@ -1,10 +1,10 @@
 import { Column, MultiSelect, Form, TextArea } from '@carbon/react';
 import { LoadingSpinner, Stack } from 'components';
 import { FormContainer } from 'components/Forms';
-import { useStudentContactNoGroup } from 'hooks';
+import { useStudentContactsWithoutGroup } from 'hooks';
 
 export function GroupMemberInvite({ inviteData, setInviteData }) {
-    const { studentContacts, isLoading } = useStudentContactNoGroup();
+    const { studentContacts, isLoading } = useStudentContactsWithoutGroup();
     return isLoading ? (
         <LoadingSpinner />
     ) : (
