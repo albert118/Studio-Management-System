@@ -1,47 +1,124 @@
 @use '@carbon/react/scss/spacing' as *;
 @use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/type' as *;
 @use '../mixins' as *;
 
-.dashboard-page__title {
-    padding: $spacing-06;
-    background: rgba(252, 252, 252);
-    margin-bottom: $spacing-04;
-}
+.dashboard-page__pitch {
+    h2 {
+        margin-top: $spacing-12;
+        @include type-style('heading-07');
 
-.dashboard-page__content01 {
-    padding-bottom: $spacing-05;
-}
+        & div:last-child svg {
+            margin-left: $spacing-04;
+        }
+    }
 
-.dashboard-page__heading {
-    font-weight: 600;
-}
+    .dashboard-page__pitch-detail {
+        margin-top: $spacing-08;
+        @include type-style('heading-02');
+    }
 
-.dashboard-page__content02 {
-    padding-bottom: $spacing-08;
-}
-
-.dashboard-page__hero {
-    padding: $spacing-04;
-    background: rgba(252, 252, 252);
-    margin-bottom: $spacing-04;
-}
-
-.dashboard-page__login {
-    margin-top: $spacing-05;
-}
-
-.dashboard-page__logo {
-    max-width: 100%;
-    width: 100%;
-}
-
-.dashboard-page__p {
-    margin-top: $spacing-06;
-    @include breakpoint-between((320px + 1), md) {
-        max-width: 75%;
+    button {
+        @include type-style('heading-01');
+        @include sms-feature-background();
+        margin-top: $spacing-08;
     }
 }
 
-.dashboard-page__content02 > .dashboard-page__p {
-    padding-bottom: $spacing-08;
+.dashboard-page__hero {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+    .dashboard-page__hero-boxes {
+        div {
+            transition: background-color 0.3s ease-in;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .box1 {
+            width: 600px;
+            height: 500px;
+            background-color: var($sms-color-background-brand-alt);
+        }
+
+        .box2 {
+            width: 800px;
+            height: 400px;
+            top: 15%;
+            right: 0;
+            background-color: var($sms-color-background-brand);
+        }
+
+        .box3 {
+            top: 10%;
+            left: 30%;
+            width: 500px;
+            height: 600px;
+            background-color: var($sms-color-neutral-background);
+        }
+    }
+
+    h1 {
+        z-index: 99;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: stretch;
+        width: 400px;
+        word-spacing: $spacing-06;
+        margin-left: 240px;
+        @include type-style('heading-06');
+
+        & div:last-child {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            color: var($sms-color-background-brand-alt);
+            @include type-style('heading-07');
+
+            .divider {
+                border: 1px solid black;
+                height: 1px;
+                margin-left: $spacing-12;
+            }
+        }
+    }
+}
+
+.dashboard-page__hero:hover {
+    .dashboard-page__hero-boxes > div {
+        transition: background-color 0.4s ease-out;
+    }
+
+    .dashboard-page__hero-boxes {
+        .box1 {
+            background-color: var($sms-color-background-brand);
+        }
+        .box2 {
+            background-color: var($sms-color-background-brand-alt);
+        }
+        .box3 {
+            background-color: var($sms-color-neutral-background-active);
+        }
+    }
+}
+
+.dashboard-page__existing-prompt {
+    margin-top: calc($spacing-13 * 3);
+
+    .simple-card {
+        max-width: 500px;
+
+        button {
+            @include type-style('heading-01');
+        }
+    }
+
+    // remove the hover effect on this particular card
+    .simple-card:hover {
+        background-color: var($sms-color-neutral-background);
+    }
 }

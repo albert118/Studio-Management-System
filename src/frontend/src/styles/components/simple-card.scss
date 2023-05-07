@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--sms-colors-neutral-background);
+    background-color: var($sms-color-neutral-background);
     @include drop-shadow();
 
     button {
@@ -15,7 +15,7 @@
 }
 
 .simple-card:hover {
-    background-color: var(--sms-colors-background);
+    background-color: var($sms-color-neutral-background-active);
 }
 
 .simple-card--sm {

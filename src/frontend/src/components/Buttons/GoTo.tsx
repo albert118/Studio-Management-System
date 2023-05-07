@@ -5,15 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 export interface IComponentProps {
     url: string;
+    text?: string;
+    size?: string;
 }
 
-export default function GoToButton({ url }: IComponentProps) {
+export default function GoToButton({ url, text = 'Go to', size = 'lg' }: IComponentProps) {
     const navigate = useNavigate();
 
     return (
         // @ts-ignore
-        <Button onClick={() => navigate(url)} renderIcon={ArrowRight}>
-            Go to
+        <Button size={size} onClick={() => navigate(url)} renderIcon={ArrowRight}>
+            {text}
         </Button>
     );
 }
