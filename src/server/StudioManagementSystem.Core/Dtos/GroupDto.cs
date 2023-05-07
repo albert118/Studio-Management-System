@@ -1,6 +1,4 @@
-﻿using StudioManagementSystem.Core.Entities;
-
-namespace StudioManagementSystem.Core.Dtos;
+﻿namespace StudioManagementSystem.Core.Dtos;
 
 public record GroupDto(
     Guid Id,
