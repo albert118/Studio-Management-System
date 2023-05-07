@@ -21,8 +21,6 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
     const [editingGroup, setEditingGroup] = useState(group);
     const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
 
-    console.log(groupApplications);
-
     const [inviteData, setInviteData] = useState(defaultInviteData);
 
     const handleNewApplication = async () => {
@@ -75,6 +73,7 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 buttonTriggerText='View'
                                 modalHeading='Pending applications'
                                 passiveModal
+                                handleSubmit={() => console.log('closing')}
                             >
                                 <PendingApplications
                                     groupApplications={groupApplications}
