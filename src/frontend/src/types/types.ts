@@ -58,16 +58,6 @@ export type NewGroupDto = {
     preferences: SelectedPreferences;
 };
 
-export const RejectApplicationDto = (ids: Guid[]): RejectApplicationDto => {
-    return {
-        ids
-    } as RejectApplicationDto;
-};
-
-export type RejectApplicationDto = {
-    ids: Guid[];
-};
-
 export type SelectedPreferences = {
     preferenceOne: Nullable<string>;
     preferenceTwo: Nullable<string>;

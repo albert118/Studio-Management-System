@@ -11,7 +11,7 @@ public static class ProjectMapper
             Id: project.Id,
             Title: project.Title,
             Description: project.Description,
-            Owners: project.ProductOwners?.Select(o => o.MapToOwnerDto()).ToList() ?? new(),
+            Owners: project.ProductOwners?.Select(o => o.MapToOwnerDto()).ToList(),
             PrincipalOwner: project.PrincipalOwner.MapToOwnerDto(),
             AssignedGroups: project.AssignedGroups?.Select(g => g.MapToAssignedGroupDto()).ToList() ?? new(),
             Meta: project.MapToProjectMetaDto()

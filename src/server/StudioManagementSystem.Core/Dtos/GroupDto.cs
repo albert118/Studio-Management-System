@@ -1,4 +1,6 @@
-﻿namespace StudioManagementSystem.Core.Dtos;
+﻿using StudioManagementSystem.Core.Entities;
+
+namespace StudioManagementSystem.Core.Dtos;
 
 public record GroupDto(
     Guid Id,
@@ -6,6 +8,6 @@ public record GroupDto(
     string Description,
     MemberInfoDto MemberInfo,
     List<PreferenceDto> Preferences,
-    string? Project,
+    ProjectDto? Project,
     string MemberCount
 );

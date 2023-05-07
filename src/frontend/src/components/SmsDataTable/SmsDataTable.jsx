@@ -9,6 +9,8 @@ import {
     TableExpandRow,
     TableExpandedRow,
     TableCell,
+    TableSelectRow,
+    TableSelectAll,
     DataTable
 } from '@carbon/react';
 
@@ -79,5 +81,31 @@ export function SimpleRow({ row }) {
                 <TableCell key={cell.id}>{cell.value}</TableCell>
             ))}
         </TableRow>
+    );
+}
+
+export function SelectableHeader({ headers, getHeaderProps, getSelectionProps }) {
+    return (
+            <TableHead>
+                <TableRow>
+                    <TableSelectAll {...getSelectionProps()} />
+                    {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                            {header.header}
+                        </TableHeader>
+                    ))}
+                </TableRow>
+            </TableHead>
+    );
+}
+
+export function SelectableRow({ row, getRowProps, getSelectionProps }) {
+    return (
+            <TableRow key={row.id} {...getRowProps({ row })}>
+                <TableSelectRow {...getSelectionProps({ row })} />
+                {row.cells.map(cell => (
+                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+            </TableRow>
     );
 }

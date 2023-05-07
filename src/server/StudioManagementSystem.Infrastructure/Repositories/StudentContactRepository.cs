@@ -20,13 +20,7 @@ public class StudentContactRepository : IStudentContactRepository
         var students = await _smsDbContext.StudentContacts.ToListAsync(ct);
         return students;
     }
-    
-    public async Task<List<StudentContact>> GetAllStudentsWithNoGroupsAsync(CancellationToken ct)
-    {
-        var students = await _smsDbContext.StudentContacts.Where(e=>e.AssignedGroupId == null).ToListAsync(ct);
-        return students;
-    }
-    
+
     public async Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct)
     {
         await _smsDbContext.StudentContacts.AddAsync(studentContact, ct);
@@ -34,7 +28,7 @@ public class StudentContactRepository : IStudentContactRepository
         return studentContact.Id;
     }
     
-    public async Task<Guid> LeaveAssignedGroup(Guid id, CancellationToken ct)
+    public async Task<Guid> RemoveAssignedGroupAsync(Guid id, CancellationToken ct)
     {
         StudentContact? student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
         if (student != null)

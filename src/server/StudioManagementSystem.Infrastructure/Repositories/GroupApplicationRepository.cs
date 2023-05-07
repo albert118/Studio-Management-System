@@ -49,11 +49,11 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         return true;
     }
 
-    public async Task<bool> RejectGroupApplication(RemoveInvitationDto dto, CancellationToken ct)
+    public async Task<bool> RemoveGroupApplicationsAsync(List<Guid> ids, CancellationToken ct)
     {
         try
         {
-            List<GroupApplication> applications = await GetGroupApplicationByIdAsync(dto.Ids, ct);
+            List<GroupApplication> applications = await GetGroupApplicationByIdAsync(ids, ct);
             _smsDbContext.GroupApplications.RemoveRange(applications);
             await _smsDbContext.SaveChangesAsync(ct);
         }catch (Exception ex) {

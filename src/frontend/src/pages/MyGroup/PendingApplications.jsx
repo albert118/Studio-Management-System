@@ -2,18 +2,13 @@ import {
     Table,
     TableBody,
     TableContainer,
-    TableCell,
-    TableRow,
     TableBatchActions,
     TableBatchAction,
-    TableToolbar,
-    TableSelectRow,
-    TableHeader,
-    TableHead,
-    TableSelectAll
+    TableToolbar
 } from '@carbon/react';
 import { Close } from '@carbon/react/icons';
 import { SmsDataTable } from 'components/SmsDataTable';
+import { SelectableHeader, SelectableRow } from 'components/SmsDataTable/SmsDataTable';
 import { useManageGroupApplication } from 'hooks';
 
 export function PendingApplications(groupApplications) {
@@ -25,10 +20,9 @@ export function PendingApplications(groupApplications) {
     const applications = groupApplications.groupApplications;
 
     const batchActionClick = selectedRows => () => {
-        rejectGroupApplication({
-            ids: selectedRows.filter(data => data.hasOwnProperty('id')).map(data => data.id)
-        });
-        window.location.reload(false);
+        rejectGroupApplication( selectedRows.filter(data => data.hasOwnProperty('id')).map(data => data.id)
+        );
+        // window.location.reload(false);
     };
 
     return (
@@ -64,24 +58,18 @@ export function PendingApplications(groupApplications) {
                             </TableBatchActions>
                         </TableToolbar>
                         <Table {...getTableProps()}>
-                            <TableHead>
-                                <TableRow>
-                                    <TableSelectAll {...getSelectionProps()} />
-                                    {headers.map((header, i) => (
-                                        <TableHeader key={i} {...getHeaderProps({ header })}>
-                                            {header.header}
-                                        </TableHeader>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
+                            <SelectableHeader
+                                headers={headers}
+                                getHeaderProps={getHeaderProps}
+                                getSelectionProps={getSelectionProps}
+                            />
                             <TableBody>
-                                {rows.map((row, i) => (
-                                    <TableRow key={i} {...getRowProps({ row })}>
-                                        <TableSelectRow {...getSelectionProps({ row })} />
-                                        {row.cells.map(cell => (
-                                            <TableCell key={cell.id}>{cell.value}</TableCell>
-                                        ))}
-                                    </TableRow>
+                                {rows.map(row => (
+                                    <SelectableRow
+                                        row={row}
+                                        getRowProps={getRowProps}
+                                        getSelectionProps={getSelectionProps}
+                                    ></SelectableRow>
                                 ))}
                             </TableBody>
                         </Table>

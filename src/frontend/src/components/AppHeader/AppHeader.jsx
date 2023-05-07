@@ -9,11 +9,7 @@ import {
     SkipToContent,
     HeaderMenu,
     HeaderGlobalAction,
-    HeaderGlobalBar,
-    HeaderPanel,
-    Switcher,
-    SwitcherItem,
-    SwitcherDivider
+    HeaderGlobalBar
 } from '@carbon/react';
 
 import { Notification, UserAvatar } from '@carbon/icons-react';
@@ -23,7 +19,6 @@ import { supabase } from 'main';
 
 function AppHeader() {
     const [login, setLogin] = useState('Log In');
-    const [isUserPanel, setUserPanel] = useState(false);
     const location = useLocation();
     useEffect(() => {
         async function getUserEmail() {
@@ -32,11 +27,6 @@ function AppHeader() {
         }
         getUserEmail();
     });
-
-    const togglePanel = flag => () => {
-        if (isUserPanel == true) setUserPanel(false);
-        else setUserPanel(true);
-    };
 
     return (
         <HeaderContainer
@@ -70,34 +60,10 @@ function AppHeader() {
                         <HeaderGlobalAction aria-label='Notifications'>
                             <Notification />
                         </HeaderGlobalAction>
-                        <HeaderGlobalAction aria-label={login} onClick={togglePanel()}>
+                        <HeaderGlobalAction aria-label={login}>
                             <UserAvatar />
                         </HeaderGlobalAction>
                     </HeaderGlobalBar>
-                    <HeaderPanel aria-label='Header Panel' expanded={isUserPanel}>
-                        <Switcher aria-label='Switcher Container'>
-                            <SwitcherItem isSelected aria-label='Profile' href='#'>
-                                Profile
-                            </SwitcherItem>
-                            <SwitcherDivider />
-                            <SwitcherItem href='#' aria-label='Link 2'>
-                                Manage Group Application
-                            </SwitcherItem>
-                            <SwitcherItem href='#' aria-label='Link 3'>
-                                Link 3
-                            </SwitcherItem>
-                            <SwitcherItem href='#' aria-label='Link 4'>
-                                Link 4
-                            </SwitcherItem>
-                            <SwitcherItem href='#' aria-label='Link 5'>
-                                Link 5
-                            </SwitcherItem>
-                            <SwitcherDivider />
-                            <SwitcherItem href='#' aria-label='Leave Group'>
-                                Leave Group
-                            </SwitcherItem>
-                        </Switcher>
-                    </HeaderPanel>
                 </Header>
             )}
         />

@@ -65,12 +65,10 @@ export function useManageGroupApplication() {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
-    const rejectGroupApplication = async (
-        rejectApplicationDto: RejectApplicationDto
-    ): Promise<boolean> => {
-        const response = await fetch(`${ApiConfig.API_URL}/groupapplication`, {
+    const rejectGroupApplication = async (rejectApplicationDto: Guid[]): Promise<boolean> => {
+        const response = await fetch(`${ApiConfig.API_URL}/groupapplication/rejectgroup`, {
             ...defaultRequestOptions,
-            method: 'PATCH',
+            method: 'POST',
             body: JSON.stringify(rejectApplicationDto)
         });
 

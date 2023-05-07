@@ -23,7 +23,6 @@ public class GroupRepository : IGroupRepository
     {
         var groups = await _smsDbContext.Groups
             .Include(e => e.Members)
-            .Include(p=>p.AssignedProject)
             .ToListAsync(ct);
         return groups;
     }

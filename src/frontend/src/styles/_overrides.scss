@@ -39,6 +39,10 @@
     }
 }
 
+.cds--actions-list {
+    column-gap: 4px;
+}
+
 .cds--btn--primary:hover {
     background-image: none;
     transition: background-color 0.3s ease-in;
