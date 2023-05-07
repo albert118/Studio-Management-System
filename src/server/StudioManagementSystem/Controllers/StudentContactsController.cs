@@ -35,13 +35,13 @@ public class StudentContactsController : ControllerBase
     }
     
     [HttpGet("[action]")]
-    [ActionName("unassignedgroup")]
-    public ActionResult<List<StudentDto>> GetStudentsWithNoGroup()
+    [ActionName("withoutgroup")]
+    public ActionResult<List<StudentDto>> GetStudentsWithoutGroup()
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupManager.GetAllStudentsWithNoGroupsAsync(ct);
         task.Wait(ct);
-        
+
         if (!task.IsCompleted)
             return StatusCode(500);
 
