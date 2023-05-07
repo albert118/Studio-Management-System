@@ -7,6 +7,7 @@ import {
     HeaderNavigation,
     HeaderMenuItem,
     SkipToContent,
+    HeaderMenu,
     HeaderGlobalAction,
     HeaderGlobalBar
 } from '@carbon/react';
