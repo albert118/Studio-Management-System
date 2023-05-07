@@ -20,11 +20,24 @@ public class StudentContactRepository : IStudentContactRepository
         var students = await _smsDbContext.StudentContacts.ToListAsync(ct);
         return students;
     }
-    
+
     public async Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct)
     {
         await _smsDbContext.StudentContacts.AddAsync(studentContact, ct);
         await _smsDbContext.SaveChangesAsync(ct);
         return studentContact.Id;
     }
+    
+    public async Task<Guid> RemoveAssignedGroupAsync(Guid id, CancellationToken ct)
+    {
+        StudentContact? student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
+        if (student != null)
+        {
+            student.AssignedGroupId = null;
+            await _smsDbContext.SaveChangesAsync(ct);
+            return student.Id;
+        }
+        return Guid.Empty;
+    }
+    
 }

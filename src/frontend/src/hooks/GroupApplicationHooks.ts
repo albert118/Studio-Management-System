@@ -5,8 +5,8 @@ import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
 import { Guid } from 'guid-typescript';
 
-export default function useGroupApplication(groupId: Guid) {
-    const [groupApplication, setGroupApplication] = useState<IGroupApplication[]>([]);
+export default function useGroupApplications(groupId: Guid) {
+    const [groupApplications, setgroupApplications] = useState<IGroupApplication[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
@@ -20,24 +20,23 @@ export default function useGroupApplication(groupId: Guid) {
             const data = await response.json();
 
             if (Array.isArray(data)) {
-                setGroupApplication(data);
+                setgroupApplications(data);
             } else {
-                setGroupApplication([data]);
+                setgroupApplications([data]);
             }
             setLoading(false);
         };
+
         fetchGroup();
     }, []);
 
     const addGroupApplication = async (
-        groupApplication: NewGroupApplicationDto
+        groupApplications: NewGroupApplicationDto
     ): Promise<boolean> => {
-        console.log(groupApplication);
-
         const response = await fetch(`${ApiConfig.API_URL}/groupapplication`, {
             ...defaultRequestOptions,
             method: 'POST',
-            body: JSON.stringify(groupApplication)
+            body: JSON.stringify(groupApplications)
         });
 
         let retVal;
@@ -56,5 +55,38 @@ export default function useGroupApplication(groupId: Guid) {
         return retVal;
     };
 
-    return { groupApplication, addGroupApplication, errors, isLoading };
+    return { groupApplications, addGroupApplication, errors, isLoading };
+}
+export function useManageGroupApplication() {
+    const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
+
+    const rejectGroupApplication = async (rejectApplicationDto: Guid[]): Promise<boolean> => {
+        setLoading(true);
+
+        const response = await fetch(`${ApiConfig.API_URL}/groupapplication/rejectgroup`, {
+            ...defaultRequestOptions,
+            method: 'POST',
+            body: JSON.stringify(rejectApplicationDto)
+        });
+
+        let retVal;
+        const data = await response.json();
+
+        setLoading(false);
+
+        if (response.ok) {
+            retVal = true;
+        } else {
+            const errorData = data as KestrelServerError;
+            const apiError = { error: errorData.title, message: errorData.errors };
+            console.error(JSON.stringify(apiError));
+            setErrors(apiError);
+            retVal = false;
+        }
+
+        return retVal;
+    };
+
+    return { rejectGroupApplication, isLoading, errors };
 }

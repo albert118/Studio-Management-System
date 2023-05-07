@@ -13,7 +13,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
 {
     private readonly IStudioManagementSystemDbContextAsync _smsDbContext;
     private readonly ILogger<GroupApplicationRepository> _logger;
-    
+
     public GroupApplicationRepository(IStudioManagementSystemDbContextAsync smsDbContext, ILogger<GroupApplicationRepository> logger)
     {
         _smsDbContext = smsDbContext;
@@ -48,11 +48,34 @@ public class GroupApplicationRepository: IGroupApplicationRepository
 
         return true;
     }
-    
-    public async Task<List<GroupApplication>> GetGroupApplicationAsync(Guid groupId, CancellationToken ct)
+
+    public async Task<bool> RemoveGroupApplicationsAsync(List<Guid> ids, CancellationToken ct)
     {
-        var groupApplication = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.StudentContact).ToListAsync(ct);
-        return groupApplication;
+        try
+        {
+            List<GroupApplication> applications = await GetGroupApplicationByIdAsync(ids, ct);
+            _smsDbContext.GroupApplications.RemoveRange(applications);
+            await _smsDbContext.SaveChangesAsync(ct);
+        }catch (Exception ex) {
+            _logger.LogError(ex, "An exception occured while removing a {GroupApplication}",
+                nameof(GroupApplication)
+            );
+            return false;
+        }
+        return true;
+    }
+    
+    public async Task<List<GroupApplication>> GetGroupApplicationByIdAsync(IEnumerable<Guid> ids, CancellationToken ct)
+    {
+        var groupApplications = await _smsDbContext.GroupApplications
+            .Where(e => ids.Contains(e.Id)).ToListAsync(ct);
+        return groupApplications;
+    }
+    
+    public async Task<List<GroupApplication>> GetGroupApplicationsAsync(Guid groupId, CancellationToken ct)
+    {
+        var groupApplications = await _smsDbContext.GroupApplications.Where(e => e.GroupId == groupId).Include(e=>e.StudentContact).ToListAsync(ct);
+        return groupApplications;
     }
 
     public async Task<List<GroupApplication>> GetGroupApplicationsByStudentIdsAsync(List<Guid> studentIds, CancellationToken ct)

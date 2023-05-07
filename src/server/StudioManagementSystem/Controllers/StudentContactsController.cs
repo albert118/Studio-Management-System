@@ -2,6 +2,7 @@
 using StudioManagementSystem.Core.Dtos;
 using StudioManagementSystem.Infrastructure.Interfaces.Data;
 using StudioManagementSystem.Mappers;
+using StudioManagementSystem.ProjectManagement;
 
 namespace StudioManagementSystem.Controllers;
 
@@ -11,21 +12,13 @@ public class StudentContactsController : ControllerBase
 {
     private readonly IStudentContactRepository _studentContactRepository;
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
+    private readonly IGroupManager _groupManager;
 
-    public StudentContactsController(IStudentContactRepository studentContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
+    public StudentContactsController(IStudentContactRepository studentContactRepository, IGroupManager groupManager, ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _studentContactRepository = studentContactRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
-    }
-
-    [HttpPost]
-    public ActionResult<Guid> CreateStudentContact(CreateStudentContactDto dto)
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _studentContactRepository.AddStudentContactAsync(new(dto), ct);
-        task.Wait(ct);
-
-        return task.Result;
+        _groupManager = groupManager;
     }
 
     [HttpGet]
@@ -34,6 +27,23 @@ public class StudentContactsController : ControllerBase
         var ct = _cancellationTokenAccessor.Token;
         var task = _studentContactRepository.GetAllStudentsAsync(ct);
         task.Wait(ct);
+        
+        if (!task.IsCompleted)
+            return StatusCode(500);
+        
+        return task.Result.Select(p => p.MapToStudentDto()).ToList();
+    }
+    
+    [HttpGet("[action]")]
+    [ActionName("withoutgroup")]
+    public ActionResult<List<StudentDto>> GetStudentsWithoutGroup()
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _groupManager.GetAllStudentsWithNoGroupsAsync(ct);
+        task.Wait(ct);
+
+        if (!task.IsCompleted)
+            return StatusCode(500);
 
         return task.Result.Select(p => p.MapToStudentDto()).ToList();
     }

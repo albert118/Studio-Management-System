@@ -9,7 +9,7 @@ import { GroupMemberInvite } from './GroupMemberInvite';
 import { PendingApplications } from './PendingApplications';
 import { MyGroupMembers } from './MyGroupMembers';
 import { NewGroupApplicationDto } from 'types/types';
-import { useGroupApplication } from 'hooks';
+import { useGroupApplications } from 'hooks';
 
 export default function MyGroupView({ group, updateGroup, refreshGroup }) {
     const defaultInviteData = {
@@ -19,15 +19,18 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
     };
 
     const [editingGroup, setEditingGroup] = useState(group);
-    const { groupApplication, addGroupApplication } = useGroupApplication(group.id);
+    const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
 
     const [inviteData, setInviteData] = useState(defaultInviteData);
+
     const handleNewApplication = async () => {
         if (await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))) {
             // reset form data if there's no error
             setInviteData(defaultInviteData);
             // update the group data
             await refreshGroup();
+            // and reload the window to show the changes
+            window.location.reload(false);
         }
     };
 
@@ -71,7 +74,10 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 modalHeading='Pending applications'
                                 passiveModal
                             >
-                                <PendingApplications groupApplications={groupApplication} />
+                                <PendingApplications
+                                    groupApplications={groupApplications}
+                                    onSubmit={refreshGroup}
+                                />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
