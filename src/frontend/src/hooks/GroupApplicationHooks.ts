@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-    Nullable,
-    NewGroupApplicationDto,
-    IGroupApplication,
-    RejectApplicationDto
-} from 'types/types';
+import { Nullable, NewGroupApplicationDto, IGroupApplication } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
@@ -66,6 +61,8 @@ export function useManageGroupApplication() {
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
     const rejectGroupApplication = async (rejectApplicationDto: Guid[]): Promise<boolean> => {
+        setLoading(true);
+
         const response = await fetch(`${ApiConfig.API_URL}/groupapplication/rejectgroup`, {
             ...defaultRequestOptions,
             method: 'POST',
@@ -74,6 +71,8 @@ export function useManageGroupApplication() {
 
         let retVal;
         const data = await response.json();
+
+        setLoading(false);
 
         if (response.ok) {
             retVal = true;
@@ -88,5 +87,5 @@ export function useManageGroupApplication() {
         return retVal;
     };
 
-    return { rejectGroupApplication, isLoading };
+    return { rejectGroupApplication, isLoading, errors };
 }

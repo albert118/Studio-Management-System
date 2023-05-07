@@ -4,7 +4,7 @@ import { FormContainer } from 'components/Forms';
 import { useStudentContactNoGroup } from 'hooks';
 
 export function GroupMemberInvite({ inviteData, setInviteData }) {
-    const {studentContacts, isLoading } = useStudentContactNoGroup();
+    const { studentContacts, isLoading } = useStudentContactNoGroup();
     return isLoading ? (
         <LoadingSpinner />
     ) : (

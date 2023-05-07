@@ -20,9 +20,9 @@ export function PendingApplications(groupApplications) {
     const applications = groupApplications.groupApplications;
 
     const batchActionClick = selectedRows => () => {
-        rejectGroupApplication( selectedRows.filter(data => data.hasOwnProperty('id')).map(data => data.id)
+        rejectGroupApplication(
+            selectedRows.filter(data => data.hasOwnProperty('id')).map(data => data.id)
         );
-        // window.location.reload(false);
     };
 
     return (
@@ -66,6 +66,7 @@ export function PendingApplications(groupApplications) {
                             <TableBody>
                                 {rows.map(row => (
                                     <SelectableRow
+                                        key={row.id}
                                         row={row}
                                         getRowProps={getRowProps}
                                         getSelectionProps={getSelectionProps}

@@ -70,9 +70,7 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 modalHeading='Pending applications'
                                 passiveModal
                             >
-                                <PendingApplications
-                                    groupApplications={groupApplication}
-                                />
+                                <PendingApplications groupApplications={groupApplication} />
                             </ModalWrapper>
                         </div>
                         <div className='simple-card'>
