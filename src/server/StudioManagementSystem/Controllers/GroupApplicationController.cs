@@ -12,13 +12,12 @@ public class GroupApplicationController : ControllerBase
 {
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
     private readonly IGroupApplicationRepository _groupApplicationRepository;
-    private readonly IGroupManager _groupManager;
+    private readonly IProjectGroupManager _projectGroupManager;
 
-    public GroupApplicationController(IGroupApplicationRepository groupApplicationRepository, IGroupManager groupManager,
-        ICancellationTokenAccessor cancellationTokenAccessor)
+    public GroupApplicationController(IGroupApplicationRepository groupApplicationRepository, IProjectGroupManager projectGroupManager, ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _groupApplicationRepository = groupApplicationRepository;
-        _groupManager = groupManager;
+        _projectGroupManager = projectGroupManager;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
 
@@ -41,7 +40,7 @@ public class GroupApplicationController : ControllerBase
     public ActionResult<bool> RejectGroupApplication(List<Guid> ids)
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupManager.RejectGroupApplicationAsync(ids, ct);
+        var task = _projectGroupManager.RejectGroupApplicationsAsync(ids, ct);
 
         task.Wait(ct);
 
@@ -51,8 +50,8 @@ public class GroupApplicationController : ControllerBase
         return task.Result;
     }
     
-    [HttpGet("{id}")]
-    public List<GroupApplicationDto> GetGroupApplication(Guid id)
+    [HttpGet("{id:guid}")]
+    public ActionResult<List<GroupApplicationDto>> GetGroupApplication(Guid id)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupApplicationRepository.GetGroupApplicationsAsync(id, ct);
