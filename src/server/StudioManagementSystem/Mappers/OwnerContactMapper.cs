@@ -5,7 +5,7 @@ namespace StudioManagementSystem.Mappers;
 
 public static class OwnerContactMapper
 {
-    public static OwnerDto MapToOwnerDto(this OwnerContact? owner)
+    public static OwnerDto MapToOwnerDto(this OwnerContact owner)
     {
         return new(Name: $"{owner.FirstName} {owner.LastName}");
     }
