@@ -42,7 +42,7 @@ export function useStudentContactsWithoutGroup() {
         const fetchContacts = async () => {
             setLoading(true);
 
-            const response = await fetch(`${ApiConfig.API_URL}/studentcontacts/unassignedgroup`, {
+            const response = await fetch(`${ApiConfig.API_URL}/studentcontacts/withoutgroup`, {
                 ...defaultRequestOptions
             });
 
