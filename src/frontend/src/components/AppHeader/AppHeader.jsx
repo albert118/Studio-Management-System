@@ -27,7 +27,6 @@ function AppHeader() {
         }
         getUserEmail();
     });
-
     return (
         <HeaderContainer
             render={() => (
