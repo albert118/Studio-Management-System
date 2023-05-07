@@ -3,17 +3,17 @@ import { useGroup } from 'hooks/GroupHooks';
 import { useParams } from 'react-router-dom';
 import { Guid } from 'guid-typescript';
 import { LoadingSpinner } from 'components';
+import { Navigate } from 'react-router-dom';
+import AppRoutes from 'navigation/AppRoutes';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
 
     if (!groupId) {
-        // TODO: develop an error page and handle this better
-        return <div>Error! No group ID</div>;
+        return <Navigate to={AppRoutes.error} />
     }
 
     const { group, updateGroup, isLoading, refreshGroup } = useGroup(Guid.parse(groupId));
 
-    // TODO: add a spinner
     return isLoading ? <LoadingSpinner /> : <MyGroupView group={group} updateGroup={updateGroup} refreshGroup={refreshGroup} />;
 }

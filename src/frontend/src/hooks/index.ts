@@ -4,4 +4,7 @@ export {
     default as useStudentContacts,
     useStudentContactsWithoutGroup
 } from './StudentContactHooks';
-export { default as useGroupApplication, useManageGroupApplication } from './GroupApplicationHooks';
+export {
+    default as useGroupApplications,
+    useManageGroupApplication
+} from './GroupApplicationHooks';

@@ -11,22 +11,24 @@ import { SmsDataTable } from 'components/SmsDataTable';
 import { SelectableHeader, SelectableRow } from 'components/SmsDataTable/SmsDataTable';
 import { useManageGroupApplication } from 'hooks';
 
-export function PendingApplications(groupApplications) {
+export function PendingApplications({ groupApplications, onSubmit }) {
     const { rejectGroupApplication } = useManageGroupApplication();
+
     const headers = [
         { key: 'name', header: 'Name', isSortable: true },
         { key: 'message', header: 'Message' }
     ];
-    const applications = groupApplications.groupApplications;
 
-    const batchActionClick = selectedRows => () => {
+    const batchActionClick = async selectedRows => {
         rejectGroupApplication(
             selectedRows.filter(data => data.hasOwnProperty('id')).map(data => data.id)
         );
+
+        await onSubmit();
     };
 
     return (
-        <SmsDataTable rows={applications} headers={headers} className='groups-page__datatable'>
+        <SmsDataTable rows={groupApplications} headers={headers} className='groups-page__datatable'>
             {({
                 rows,
                 headers,
@@ -51,7 +53,7 @@ export function PendingApplications(groupApplications) {
                                     kind='danger'
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                     renderIcon={Close}
-                                    onClick={batchActionClick(selectedRows)}
+                                    onClick={() => batchActionClick(selectedRows)}
                                 >
                                     Reject
                                 </TableBatchAction>
