@@ -73,7 +73,6 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                                 buttonTriggerText='View'
                                 modalHeading='Pending applications'
                                 passiveModal
-                                handleSubmit={() => console.log('closing')}
                             >
                                 <PendingApplications
                                     groupApplications={groupApplications}
