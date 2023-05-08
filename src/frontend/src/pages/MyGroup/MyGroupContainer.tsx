@@ -6,14 +6,7 @@ import AppRoutes from 'navigation/AppRoutes';
 import { Guid } from 'guid-typescript';
 import { LoadingSpinner } from 'components';
 import MyGroupView from './MyGroupView';
-
-const getDefaultInviteData = (groupId: Guid): NewGroupApplicationDto => {
-    return {
-        studentIds: [],
-        groupId: groupId,
-        message: ''
-    };
-}
+import { getDefaultInviteData } from './helpers';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
@@ -23,16 +16,17 @@ export default function MyGroupContainer() {
     }
 
     const { group, updateGroup, isLoading, refreshGroup } = useGroup(Guid.parse(groupId));
-    const [editingGroup, setEditingGroup] = useState(group);
     const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
-    const [inviteData, setInviteData] = useState(getDefaultInviteData(group.id));
+
+    const [editingGroup, setEditingGroup] = useState(group);
+    const [invite, setInvite] = useState(getDefaultInviteData(group.id));
 
     const handleNewApplication = async () => {
         // @ts-ignore
-        const submittedSuccessfully = await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))
+        const submittedSuccessfully = await addGroupApplication(NewGroupApplicationDto(...Object.values(invite)))
 
         if (submittedSuccessfully) {
-            setInviteData(getDefaultInviteData(group.id));
+            setInvite(getDefaultInviteData(group.id));
             await refreshGroup();
             window.location.reload();
         }
@@ -50,8 +44,8 @@ export default function MyGroupContainer() {
                 group={group}
                 groupApplications={groupApplications}
                 refreshGroup={refreshGroup}
-                inviteData={inviteData}
-                setInviteData={setInviteData}
+                inviteData={invite}
+                setInviteData={setInvite}
                 handleNewApplication={handleNewApplication}
                 editingGroup={editingGroup}
                 setEditingGroup={setEditingGroup}
