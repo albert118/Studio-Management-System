@@ -1,13 +1,7 @@
 import { Grid, Column } from '@carbon/react';
-import { Button } from '@carbon/react';
-
-import AppRoutes from 'navigation/AppRoutes';
-import { useNavigate } from 'react-router-dom';
 import { GroupsDataTable } from './GroupsDataTable';
 
 export default function GroupsView({ groups }) {
-    const navigate = useNavigate();
-
     const currentSession = 'Autumn 2023';
 
     return (
