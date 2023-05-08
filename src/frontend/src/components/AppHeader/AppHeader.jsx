@@ -16,9 +16,23 @@ import AppRoutes from 'navigation/AppRoutes';
 import { useEffect, useState } from 'react';
 import { supabase } from 'main';
 
+// this is a placeholder for a 'real hook' providing the current user data (ID, name, role, etc.)
+// ideally we would actually implement this and back it with a fully fledged auth + session system
+// for now, I've mocked it with an ID and name from a real StudentContact I manually added on my machine
+// this lets me fake myself as the below user for demo purposes
+const useSession = () => {
+    return {
+        user: {
+            id: 'f8b20b08-7a50-4afa-994b-1bd34a7c114c',
+            name: 'Lucy Hawking',
+            role: 'admin'
+        }
+    };
+};
+
 export default function AppHeader() {
     const [login, setLogin] = useState('Log In');
-    const [role, setRole] = useState('admin');
+    const { user } = useSession();
 
     useEffect(() => {
         async function getUserEmail() {
@@ -36,7 +50,7 @@ export default function AppHeader() {
                     <HeaderName href={AppRoutes.root} prefix='UTS'>
                         Studio Mangement System
                     </HeaderName>
-                    <Menu role={role} />
+                    <Menu role={user.role} />
                     <HeaderGlobalBar>
                         <HeaderGlobalAction aria-label='Notifications'>
                             <Notification />
