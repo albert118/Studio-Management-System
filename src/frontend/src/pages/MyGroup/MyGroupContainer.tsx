@@ -6,7 +6,6 @@ import AppRoutes from 'navigation/AppRoutes';
 import { Guid } from 'guid-typescript';
 import { LoadingSpinner } from 'components';
 import MyGroupView from './MyGroupView';
-import { getDefaultInviteData } from './helpers';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
@@ -19,14 +18,14 @@ export default function MyGroupContainer() {
     const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
 
     const [editingGroup, setEditingGroup] = useState(group);
-    const [invite, setInvite] = useState(getDefaultInviteData(group.id));
+    const [invite, setInvite] = useState(NewGroupApplicationDto([], group.id, ''));
 
     const handleNewApplication = async () => {
         // @ts-ignore
-        const submittedSuccessfully = await addGroupApplication(NewGroupApplicationDto(...Object.values(invite)))
+        const submittedSuccessfully = await addGroupApplication(invite)
 
         if (submittedSuccessfully) {
-            setInvite(getDefaultInviteData(group.id));
+            setInvite(NewGroupApplicationDto([], group.id, ''));
             await refreshGroup();
             window.location.reload();
         }
