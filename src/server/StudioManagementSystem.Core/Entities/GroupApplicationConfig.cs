@@ -23,7 +23,6 @@ public class GroupApplicationConfig
         builder
             .HasOne(e => e.StudentContact)
             .WithMany(e => e.GroupApplications)
-            .HasForeignKey(e => e.StudentContactId)
-            .IsRequired();
+            .HasForeignKey(e => e.StudentContactId);
     }
 }
