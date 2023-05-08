@@ -12,3 +12,4 @@ export { default as Project } from './Project';
 export { default as AddProject } from './AddProject';
 export { default as Dashboard } from './Dashboard';
 export { default as AdminDashboard } from './AdminDashboard';
+export { default as Notifications } from './Notifications';
