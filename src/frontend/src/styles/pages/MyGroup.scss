@@ -3,64 +3,53 @@
 @use '@carbon/react/scss/breakpoint' as *;
 @use '../mixins' as *;
 
-.mygroup-page__r1 {
-    padding-top: $spacing-05;
-    padding-left: $spacing-05;
-    padding-right: $spacing-05;
-    padding-bottom: $spacing-07 * 4;
-    @include neutral-banner__background;
+.mygroup-page {
+    .mygroup-page__r1 {
+        .mygroup-page__p {
+            margin-top: $spacing-05;
+            margin-bottom: $spacing-05;
 
-    margin-left: -20px;
-    margin-right: -20px;
-    @include breakpoint-down(md) {
-        margin-left: 0;
-        margin-right: 0;
+            @include type-style('productive-heading-03');
+
+            @include breakpoint-between((320px + 1), md) {
+                max-width: 75%;
+            }
+        }
+
+        .mygroup-page__heading {
+            @include type-style('productive-heading-05');
+        }
     }
-}
 
-.mygroup-page__p {
-    margin-top: $spacing-05;
-    margin-bottom: $spacing-05;
+    .mygroup-page__r2 {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: $spacing-09;
+        column-gap: $spacing-09;
+        // create a "tray" for tiles
+        background-color: var($sms-color-background);
+        padding: $spacing-06;
 
-    @include type-style('productive-heading-03');
+        .project {
+            filter: grayscale(1);
+        }
+        .project:hover {
+            filter: grayscale(0);
+        }
 
-    @include breakpoint-between((320px + 1), md) {
-        max-width: 75%;
+        .danger {
+            border: 2px solid var($sms-colour-danger-zone);
+        }
+
+        label.mygroup--members-group-count {
+            display: flex;
+            align-items: center;
+            column-gap: $spacing-05;
+        }
     }
-}
 
-.mygroup-page__heading {
-    @include type-style('productive-heading-05');
-}
-
-.mygroup-page__r1,
-.mygroup-page__r2,
-.mygroup-page__r3 {
-    margin-bottom: $spacing-12;
-}
-
-.mygroup-page__r2,
-.mygroup-page__r3 {
-    display: flex;
-    column-gap: $spacing-12;
-    justify-content: space-between;
-}
-
-.mygroup-page__application-management,
-.mygroup-page__project-preference-management,
-.mygroup-page__dangerous-management-options {
-    flex: 1;
-}
-
-.mygroup-page__dangerous-management-options {
-    flex-grow: 0;
-    flex-basis: calc(50% - 0.5 * $spacing-12);
-    border: 1px solid var(--sms-colours-danger-zone);
-}
-
-.project {
-    filter: grayscale(1);
-}
-.project:hover {
-    filter: grayscale(0);
+    .mygroup-page__r1,
+    .mygroup-page__r2 {
+        margin-bottom: $spacing-12;
+    }
 }

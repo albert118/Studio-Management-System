@@ -28,7 +28,7 @@ export function PendingApplications({ groupApplications, onSubmit }) {
     };
 
     return (
-        <SmsDataTable rows={groupApplications} headers={headers} className='groups-page__datatable'>
+        <SmsDataTable rows={groupApplications} headers={headers}>
             {({
                 rows,
                 headers,
@@ -43,10 +43,7 @@ export function PendingApplications({ groupApplications, onSubmit }) {
                 const batchActionProps = getBatchActionProps();
 
                 return (
-                    <TableContainer
-                        title='Pending Group Application'
-                        description='This is a list of all the group application for this semester.'
-                    >
+                    <TableContainer>
                         <TableToolbar {...getToolbarProps()}>
                             <TableBatchActions {...batchActionProps}>
                                 <TableBatchAction

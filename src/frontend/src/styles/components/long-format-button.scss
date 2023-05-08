@@ -1,0 +1,14 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.long-format-call-to-action {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-05;
+    align-items: center;
+    width: 100%;
+
+    label:nth-child(2) {
+        padding-left: $spacing-03;
+        flex-grow: 1;
+    }
+}

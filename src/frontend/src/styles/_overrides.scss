@@ -34,6 +34,18 @@
         border: 1px solid var($sms-colour-danger-zone);
     }
 
+    div[role='presentation'] > button:hover {
+        color: #fff;
+        background-color: var($sms-colour-danger-zone);
+        transition: all 0.4s ease-in;
+    }
+
+    div[role='presentation'] > button:hover {
+        color: #fff;
+        background-color: var($sms-colour-danger-zone);
+        transition: all 0.3s ease-in;
+    }
+
     div[role='presentation'] > button:focus {
         box-shadow: unset;
     }

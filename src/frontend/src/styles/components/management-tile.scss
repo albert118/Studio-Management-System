@@ -14,6 +14,9 @@
     width: $tile-width;
     color: #000;
 
+    // avoid the divider overflowing the card
+    overflow: hidden;
+
     .heading {
         p {
             @include type-style('body-compact-02');
@@ -43,10 +46,4 @@
         flex-direction: column;
         row-gap: $spacing-06;
     }
-}
-
-.management-tile:hover {
-    color: white;
-    background-color: var($sms-color-neutral-background-active);
-    transition: all 0.3s ease-out;
 }
