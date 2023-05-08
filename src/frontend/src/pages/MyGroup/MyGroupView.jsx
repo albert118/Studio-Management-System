@@ -1,6 +1,6 @@
-import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
-import { Stack, EmailModalButton, ManagementTile } from 'components';
-import { EmailNew, Collaborate, Edit, Exit, WarningHex } from '@carbon/icons-react';
+import { ModalWrapper, Grid, Column } from '@carbon/react';
+import { Stack, LongFormatButton, ManagementTile } from 'components';
+import { EmailNew, Collaborate, Edit, Exit, WarningHex, Roadmap } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
 import { LeaveGroup } from './LeaveGroup';
@@ -20,7 +20,7 @@ export default function MyGroupView({
     handleGroupUpdate
 }) {
     return (
-        <Grid>
+        <Grid className='mygroup-page'>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
                 <h1 className='mygroup-page__heading'>{group.name}</h1>
                 <p className='mygroup-page__p'>{group.description}</p>
@@ -35,8 +35,6 @@ export default function MyGroupView({
                     onSubmitInvites={handleNewApplication}
                 />
                 <ProjectPreferences group={group} />
-            </Column>
-            <Column lg={16} md={8} sm={4} className='mygroup-page__r3'>
                 <DangerZone
                     group={editingGroup}
                     setGroup={setEditingGroup}
@@ -56,137 +54,85 @@ function ManageGroup({
     onSubmitInvites
 }) {
     return (
-        <Tile className='mygroup-page__application-management'>
-            <h3>Manage your group</h3>
-            <Stack>
-                <div className='simple-card'>
-                    <Collaborate size={32} />
-                    <div>
-                        <h5>View existing group members</h5>
-                        See who's current members and contact details.
-                    </div>
-                    <ModalWrapper
-                        buttonTriggerText='View'
-                        modalHeading={`${group.name} Group Members`}
-                        passiveModal
-                    >
-                        <MyGroupMembers memberInfo={group.memberInfo} />
-                    </ModalWrapper>
-                </div>
-                <div className='simple-card'>
-                    <EmailNew size={32} />
-                    <div>
-                        <h5>Manage group applications</h5>
-                        Approve (or deny) new member applications.
-                    </div>
-                    <ModalWrapper
-                        buttonTriggerText='View'
-                        modalHeading='Pending applications'
-                        passiveModal
-                    >
-                        <PendingApplications
-                            groupApplications={groupApplications}
-                            onSubmit={onSubmitPendingApplications}
-                        />
-                    </ModalWrapper>
-                </div>
-                <div className='simple-card'>
-                    <EmailModalButton
-                        title='Invite new group members'
-                        description='Create and send invitations to new members.'
-                        buttonText='Invite'
-                        modalHeading='Create invitations'
-                        handleSubmit={onSubmitInvites}
-                    >
-                        <GroupMemberInvite inviteData={invites} setInviteData={setInvites} />
-                    </EmailModalButton>
-                </div>
-            </Stack>
-        </Tile>
+        <ManagementTile title='Manage your group' icon={<Collaborate size={48} />}>
+            <LongFormatButton
+                title='View members'
+                icon={<Collaborate size={32} />}
+                buttonText='View'
+                modalHeading={`${group.name} Group Members`}
+            >
+                <MyGroupMembers memberInfo={group.memberInfo} />
+            </LongFormatButton>
+            <LongFormatButton
+                title='Manage invites'
+                icon={<Collaborate size={32} />}
+                buttonText='Manage'
+                modalHeading='Pending applications'
+            >
+                <PendingApplications
+                    groupApplications={groupApplications}
+                    onSubmit={onSubmitPendingApplications}
+                />
+            </LongFormatButton>
+            <LongFormatButton
+                title='Invite members'
+                buttonText='Invite'
+                icon={<EmailNew size={32} />}
+                modalHeading='Create invitations'
+                handleSubmit={onSubmitInvites}
+            >
+                <GroupMemberInvite inviteData={invites} setInviteData={setInvites} />
+            </LongFormatButton>
+        </ManagementTile>
     );
 }
 
 function ProjectPreferences({ group }) {
+    console.log(group.preferences);
     return (
-        <Tile className='mygroup-page__project-preference-management'>
-            <h3>Project Preferences</h3>
-            <Stack>
-                {group.preferences ? (
-                    group.preferences.map(preference => {
-                        return (
-                            <ProjectPreferenceCard
-                                key={preference.rank}
-                                title={preference.title}
-                                rank={preference.rank}
-                                projectId={preference.projectId}
-                            />
-                        );
-                    })
-                ) : (
-                    <NoProjectPreferenceCard />
-                )}
-            </Stack>
-        </Tile>
+        <ManagementTile title='Project preferences' icon={<Roadmap size={48} />}>
+            {group.preferences && group.preferences.length !== 0 ? (
+                group.preferences.map(preference => {
+                    return (
+                        <ProjectPreferenceCard
+                            key={preference.rank}
+                            title={preference.title}
+                            rank={preference.rank}
+                            projectId={preference.projectId}
+                        />
+                    );
+                })
+            ) : (
+                <NoProjectPreferenceCard />
+            )}
+        </ManagementTile>
     );
 }
 
 function DangerZone({ group, setGroup, onSubmit }) {
     return (
-        <Tile className='mygroup-page__dangerous-management-options'>
-            <ManagementTile
-                title='Danger zone'
-                className='danger ghost'
-                icon={<WarningHex size={48} />}
+        <ManagementTile
+            title='Danger zone'
+            className='danger ghost'
+            icon={<WarningHex size={48} />}
+        >
+            <ModalWrapper
+                buttonTriggerText='Edit group'
+                danger
+                modalHeading='Edit group'
+                handleSubmit={onSubmit}
             >
-                <ModalWrapper
-                    buttonTriggerText='Edit group'
-                    danger
-                    modalHeading='Edit group'
-                    handleSubmit={onSubmit}
-                >
-                    <EditGroup group={group} setGroup={setGroup} />
-                </ModalWrapper>
+                <EditGroup group={group} setGroup={setGroup} />
+            </ModalWrapper>
 
-                <ModalWrapper
-                    buttonTriggerText='Leave group'
-                    modalHeading='Leave group'
-                    danger
-                    primaryButtonText='Leave'
-                >
-                    <LeaveGroup />
-                </ModalWrapper>
-            </ManagementTile>
-
-            {/* <div className='simple-card danger ghost'>
-                    <Edit className='danger ghost' size={32} />
-                    <div>
-                        <h5>Edit your group</h5>
-                        Update details such as group name.
-                    </div>
-                    <ModalWrapper
-                        buttonTriggerText='Edit group'
-                        danger
-                        modalHeading='Edit group'
-                        handleSubmit={onSubmit}
-                    >
-                        <EditGroup group={group} setGroup={setGroup} />
-                    </ModalWrapper>
-                </div>
-                <div className='simple-card danger ghost'>
-                    <Exit className='danger ghost' size={32} />
-                    <div>
-                        <h5>Leave your group</h5>
-                        You will have to reapply to join back.
-                    </div>
-                    <ModalWrapper
-                        buttonTriggerText='Leave group'
-                        modalHeading='Leave group'
-                        danger
-                        primaryButtonText='Leave'
-                    >
-                        <LeaveGroup />
-                    </ModalWrapper>
-                </div> */}
-        </Tile>
+            <ModalWrapper
+                buttonTriggerText='Leave group'
+                modalHeading='Leave group'
+                danger
+                primaryButtonText='Leave'
+            >
+                <LeaveGroup />
+            </ModalWrapper>
+        </ManagementTile>
     );
 }

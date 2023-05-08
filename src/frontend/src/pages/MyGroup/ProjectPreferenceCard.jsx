@@ -15,12 +15,10 @@ export function ProjectPreferenceCard({ title, rank, projectId }) {
 
 export function NoProjectPreferenceCard() {
     return (
-        <div className='simple-card project'>
-            <div>
-                <h5>No project preferences selected!</h5>
-                Please select some preferences by editing your group and then updating your
-                preferences.
-            </div>
+        <div>
+            <h5>No project preferences selected!</h5>
+            <br />
+            Please select some preferences by editing your group and then updating your preferences.
         </div>
     );
 }

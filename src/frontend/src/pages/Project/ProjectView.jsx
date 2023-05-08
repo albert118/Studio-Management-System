@@ -8,9 +8,9 @@ import {
     GoToButton,
     VerticalDivider,
     VerticalSocialDivider,
-    EmailModalButton
+    LongFormatButton
 } from 'components';
-
+import { EmailNew } from '@carbon/icons-react';
 import { Size } from 'types/enums';
 
 export default function ProjectView({ project }) {
@@ -69,32 +69,35 @@ export default function ProjectView({ project }) {
                             detail='Contact these stakeholders for further information'
                         >
                             <Stack>
-                                <EmailModalButton
+                                <LongFormatButton
                                     title='Product Owner(s)'
                                     description=''
+                                    icon={<EmailNew size={32} />}
                                     buttonText='Contact'
                                     modalHeading='Create email'
                                 >
                                     this
-                                </EmailModalButton>
+                                </LongFormatButton>
 
-                                <EmailModalButton
+                                <LongFormatButton
                                     title='Industry sponsor'
                                     description=''
+                                    icon={<EmailNew size={32} />}
                                     buttonText='Contact'
                                     modalHeading='Create email'
                                 >
                                     this
-                                </EmailModalButton>
+                                </LongFormatButton>
 
-                                <EmailModalButton
+                                <LongFormatButton
                                     title='Previous group(s)'
                                     description=''
+                                    icon={<EmailNew size={32} />}
                                     buttonText='Contact'
                                     modalHeading='Create email'
                                 >
                                     this
-                                </EmailModalButton>
+                                </LongFormatButton>
                             </Stack>
                         </BlockDetail>
                     </Column>
