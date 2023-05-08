@@ -94,15 +94,15 @@ export const NewGroupApplicationDto = (
     message: String
 ): NewGroupApplicationDto => {
     return {
-        studentIds,
-        groupId,
-        message
+        studentIds: studentIds,
+        groupId: groupId.toString(),
+        message: message
     } as NewGroupApplicationDto;
 };
 
 export type NewGroupApplicationDto = {
     studentIds: Guid[];
-    groupId: Guid;
+    groupId: string; // Guid string expected for parsing
     message: undefined | string;
 };
 

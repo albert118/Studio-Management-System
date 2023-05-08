@@ -69,12 +69,8 @@ export function ProjectsDataTable({ projects }) {
 function ExpandedRowDetail({ row }) {
     return (
         <div className='projects-page__datatable-row-detail'>
-            <p>
-                <h5>Description</h5>
-                {row && row.description ? row.description : ''}
-            </p>
             <div className='goto-action'>
-                <GoToButton url={`${AppRoutes.project}/${row.id}`} />
+                <GoToButton text='View project' url={`${AppRoutes.project}/${row.id}`} />
             </div>
         </div>
     );
