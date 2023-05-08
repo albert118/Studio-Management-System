@@ -6,8 +6,8 @@ export function MyGroupMembers({ memberInfo }) {
         <Stack>
             <ContainedList
                 label={
-                    <label>
-                        <span className='mygroup--members-group-count-label'>Group Members</span>
+                    <label className='mygroup--members-group-count'>
+                        <span>Group Members</span>
                         <Tag size='sm'>{memberInfo.count}</Tag>
                     </label>
                 }
