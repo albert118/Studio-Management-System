@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
 import { Stack, EmailModalButton } from 'components';
 import { EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
@@ -8,37 +7,18 @@ import { LeaveGroup } from './LeaveGroup';
 import { GroupMemberInvite } from './GroupMemberInvite';
 import { PendingApplications } from './PendingApplications';
 import { MyGroupMembers } from './MyGroupMembers';
-import { NewGroupApplicationDto } from 'types/types';
-import { useGroupApplications } from 'hooks';
 
-export default function MyGroupView({ group, updateGroup, refreshGroup }) {
-    const defaultInviteData = {
-        studentIds: [],
-        groupId: group.id,
-        message: ''
-    };
-
-    const [editingGroup, setEditingGroup] = useState(group);
-    const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
-
-    const [inviteData, setInviteData] = useState(defaultInviteData);
-
-    const handleNewApplication = async () => {
-        if (await addGroupApplication(NewGroupApplicationDto(...Object.values(inviteData)))) {
-            // reset form data if there's no error
-            setInviteData(defaultInviteData);
-            // update the group data
-            await refreshGroup();
-            // and reload the window to show the changes
-            window.location.reload(false);
-        }
-    };
-
-    const handleGroupUpdate = async () => {
-        await updateGroup(editingGroup);
-        await refreshGroup();
-    };
-
+export default function MyGroupView({
+    group,
+    groupApplications,
+    refreshGroup,
+    inviteData,
+    setInviteData,
+    handleNewApplication,
+    editingGroup,
+    setEditingGroup,
+    handleGroupUpdate
+}) {
     return (
         <Grid>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r1'>
@@ -46,113 +26,146 @@ export default function MyGroupView({ group, updateGroup, refreshGroup }) {
                 <p className='mygroup-page__p'>{group.description}</p>
             </Column>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r2'>
-                <Tile className='mygroup-page__application-management'>
-                    <h3>Manage your group</h3>
-                    <Stack>
-                        <div className='simple-card'>
-                            <Collaborate size={32} />
-                            <div>
-                                <h5>View existing group members</h5>
-                                See who's current members and contact details.
-                            </div>
-                            <ModalWrapper
-                                buttonTriggerText='View'
-                                modalHeading={`${group.name} Group Members`}
-                                passiveModal
-                            >
-                                <MyGroupMembers memberInfo={group.memberInfo} />
-                            </ModalWrapper>
-                        </div>
-                        <div className='simple-card'>
-                            <EmailNew size={32} />
-                            <div>
-                                <h5>Manage group applications</h5>
-                                Approve (or deny) new member applications.
-                            </div>
-                            <ModalWrapper
-                                buttonTriggerText='View'
-                                modalHeading='Pending applications'
-                                passiveModal
-                            >
-                                <PendingApplications
-                                    groupApplications={groupApplications}
-                                    onSubmit={refreshGroup}
-                                />
-                            </ModalWrapper>
-                        </div>
-                        <div className='simple-card'>
-                            <EmailModalButton
-                                title='Invite new group members'
-                                description='Create and send invitations to new members.'
-                                buttonText='Invite'
-                                modalHeading='Create invitations'
-                                handleSubmit={handleNewApplication}
-                            >
-                                <GroupMemberInvite
-                                    inviteData={inviteData}
-                                    setInviteData={setInviteData}
-                                />
-                            </EmailModalButton>
-                        </div>
-                    </Stack>
-                </Tile>
-                <Tile className='mygroup-page__project-preference-management'>
-                    <h3>Project Preferences</h3>
-                    <Stack>
-                        {group.preferences ? (
-                            group.preferences.map(preference => {
-                                return (
-                                    <ProjectPreferenceCard
-                                        key={preference.rank}
-                                        title={preference.title}
-                                        rank={preference.rank}
-                                        projectId={preference.projectId}
-                                    />
-                                );
-                            })
-                        ) : (
-                            <NoProjectPreferenceCard />
-                        )}
-                    </Stack>
-                </Tile>
+                <ManageGroup
+                    group={group}
+                    groupApplications={groupApplications}
+                    onSubmitPendingApplications={refreshGroup}
+                    invites={inviteData}
+                    setInvites={setInviteData}
+                    onSubmitInvites={handleNewApplication}
+                />
+                <ProjectPreferences group={group} />
             </Column>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r3'>
-                <Tile className='mygroup-page__dangerous-management-options'>
-                    <h3>Danger Zone</h3>
-                    <Stack>
-                        <div className='simple-card danger ghost'>
-                            <Edit className='danger ghost' size={32} />
-                            <div>
-                                <h5>Edit your group</h5>
-                                Update details such as group name.
-                            </div>
-                            <ModalWrapper
-                                buttonTriggerText='Edit group'
-                                danger
-                                modalHeading='Edit group'
-                                handleSubmit={handleGroupUpdate}
-                            >
-                                <EditGroup group={editingGroup} setGroup={setEditingGroup} />
-                            </ModalWrapper>
-                        </div>
-                        <div className='simple-card danger ghost'>
-                            <Exit className='danger ghost' size={32} />
-                            <div>
-                                <h5>Leave your group</h5>
-                                You will have to reapply to join back.
-                            </div>
-                            <ModalWrapper
-                                buttonTriggerText='Leave group'
-                                modalHeading='Leave group'
-                                danger
-                                primaryButtonText='Leave'
-                            >
-                                <LeaveGroup />
-                            </ModalWrapper>
-                        </div>
-                    </Stack>
-                </Tile>
+                <DangerZone
+                    group={editingGroup}
+                    setGroup={setEditingGroup}
+                    onSubmit={handleGroupUpdate}
+                />
             </Column>
         </Grid>
+    );
+}
+
+function ManageGroup({
+    group,
+    groupApplications,
+    onSubmitPendingApplications,
+    invites,
+    setInvites,
+    onSubmitInvites
+}) {
+    return (
+        <Tile className='mygroup-page__application-management'>
+            <h3>Manage your group</h3>
+            <Stack>
+                <div className='simple-card'>
+                    <Collaborate size={32} />
+                    <div>
+                        <h5>View existing group members</h5>
+                        See who's current members and contact details.
+                    </div>
+                    <ModalWrapper
+                        buttonTriggerText='View'
+                        modalHeading={`${group.name} Group Members`}
+                        passiveModal
+                    >
+                        <MyGroupMembers memberInfo={group.memberInfo} />
+                    </ModalWrapper>
+                </div>
+                <div className='simple-card'>
+                    <EmailNew size={32} />
+                    <div>
+                        <h5>Manage group applications</h5>
+                        Approve (or deny) new member applications.
+                    </div>
+                    <ModalWrapper
+                        buttonTriggerText='View'
+                        modalHeading='Pending applications'
+                        passiveModal
+                    >
+                        <PendingApplications
+                            groupApplications={groupApplications}
+                            onSubmit={onSubmitPendingApplications}
+                        />
+                    </ModalWrapper>
+                </div>
+                <div className='simple-card'>
+                    <EmailModalButton
+                        title='Invite new group members'
+                        description='Create and send invitations to new members.'
+                        buttonText='Invite'
+                        modalHeading='Create invitations'
+                        handleSubmit={onSubmitInvites}
+                    >
+                        <GroupMemberInvite inviteData={invites} setInviteData={setInvites} />
+                    </EmailModalButton>
+                </div>
+            </Stack>
+        </Tile>
+    );
+}
+
+function ProjectPreferences({ group }) {
+    return (
+        <Tile className='mygroup-page__project-preference-management'>
+            <h3>Project Preferences</h3>
+            <Stack>
+                {group.preferences ? (
+                    group.preferences.map(preference => {
+                        return (
+                            <ProjectPreferenceCard
+                                key={preference.rank}
+                                title={preference.title}
+                                rank={preference.rank}
+                                projectId={preference.projectId}
+                            />
+                        );
+                    })
+                ) : (
+                    <NoProjectPreferenceCard />
+                )}
+            </Stack>
+        </Tile>
+    );
+}
+
+function DangerZone({ group, setGroup, onSubmit }) {
+    return (
+        <Tile className='mygroup-page__dangerous-management-options'>
+            <h3>Danger Zone</h3>
+            <Stack>
+                <div className='simple-card danger ghost'>
+                    <Edit className='danger ghost' size={32} />
+                    <div>
+                        <h5>Edit your group</h5>
+                        Update details such as group name.
+                    </div>
+                    <ModalWrapper
+                        buttonTriggerText='Edit group'
+                        danger
+                        modalHeading='Edit group'
+                        handleSubmit={onSubmit}
+                    >
+                        <EditGroup group={group} setGroup={setGroup} />
+                    </ModalWrapper>
+                </div>
+                <div className='simple-card danger ghost'>
+                    <Exit className='danger ghost' size={32} />
+                    <div>
+                        <h5>Leave your group</h5>
+                        You will have to reapply to join back.
+                    </div>
+                    <ModalWrapper
+                        buttonTriggerText='Leave group'
+                        modalHeading='Leave group'
+                        danger
+                        primaryButtonText='Leave'
+                    >
+                        <LeaveGroup />
+                    </ModalWrapper>
+                </div>
+            </Stack>
+        </Tile>
     );
 }

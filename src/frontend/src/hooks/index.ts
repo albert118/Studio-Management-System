@@ -8,3 +8,4 @@ export {
     default as useGroupApplications,
     useManageGroupApplication
 } from './GroupApplicationHooks';
+export { default as useGroups, useGroup } from './GroupHooks';
