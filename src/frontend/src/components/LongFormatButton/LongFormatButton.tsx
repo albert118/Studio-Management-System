@@ -25,10 +25,10 @@ export default function LongFormatButton({
     return (
         <div className='long-format-call-to-action'>
             {icon}
-            <div>
+            <label>
                 <h5>{title}</h5>
                 {description}
-            </div>
+            </label>
             <ModalWrapper
                 buttonTriggerText={buttonText}
                 modalHeading={modalHeading}

@@ -7,7 +7,7 @@
     align-items: center;
     width: 100%;
 
-    :nth-child(2) {
+    label:nth-child(2) {
         padding-left: $spacing-03;
         flex-grow: 1;
     }
