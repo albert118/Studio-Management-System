@@ -32,17 +32,18 @@ export function GroupsDataTable({ groups }) {
     return (
         <SmsDataTable rows={groups} headers={headers} className='groups-page__datatable'>
             {({ rows, headers, getHeaderProps, getRowProps, getTableProps, onInputChange }) => (
-                <TableContainer 
+                <TableContainer
                     title='Groups'
                     description='This is a list of all the project for this semester.'
                 >
                     <TableToolbar>
                         <TableToolbarContent>
                             <TableToolbarSearch defaultExpanded={true} onChange={onInputChange} />
-                            <Button 
+                            <Button
                                 onClick={() => navigate(`${AppRoutes.groups}/add`)}
-                                kind="primary"> 
-                                Create a new group 
+                                kind='primary'
+                            >
+                                Create a new group
                             </Button>
                         </TableToolbarContent>
                     </TableToolbar>
@@ -71,26 +72,41 @@ export function GroupsDataTable({ groups }) {
 }
 
 function ExpandedRowDetail({ row }) {
+    console.log(row);
+
     return (
         <div className='groups-page__datatable-row-detail'>
-            <div className='description'>
-                <h5>Description</h5>
-                <p>{row && row.description ? row.description : ''}</p>
+            <div className='row-detail--r1'>
+                <div className='description'>
+                    <label>Description</label>
+                    <p>{row && row.description ? row.description : ''}</p>
+                </div>
+                <div>
+                    <label>Group members</label>
+                    <ul>
+                        {row && row.memberInfo?.members
+                            ? row.memberInfo.members.map((member, idx) => (
+                                  <li key={idx}>
+                                      <p>{member.name}</p>
+                                  </li>
+                              ))
+                            : ''}
+                    </ul>
+                </div>
+                <div className='goto-action'>
+                    <GoToButton text='View group' url={`${AppRoutes.group}/${row.id}`} />
+                </div>
             </div>
-            <div>
-                <h5>Group Members</h5>
-                <ul>
-                    {row && row.memberInfo?.members
-                        ? row.memberInfo.members.map((member, idx) => (
-                              <li key={idx}>
-                                  <p>{member.name}</p>
-                              </li>
-                          ))
-                        : ''}
-                </ul>
-            </div>
-            <div className='goto-action'>
-                <GoToButton url={`${AppRoutes.group}/${row.id}`} />
+
+            <div className='row-detail--r2'>
+                <label>Project preferences</label>
+                <div className='preferences'>
+                    {row.preferences && row.preferences.length > 0
+                        ? row.preferences.map(preference => {
+                              <li>{preference.title}</li>;
+                          })
+                        : 'This group has no project preferences (yet)'}
+                </div>
             </div>
         </div>
     );
