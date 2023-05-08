@@ -62,12 +62,12 @@ public class GroupApplicationController : ControllerBase
 
     [HttpGet("[action]/{studentId:guid}")]
     [ActionName("forstudent")]
-    public ActionResult<List<GroupApplicationDto>> GetGroupApplicationForStudent(Guid studentId)
+    public ActionResult<List<PotentialInvite>> GetGroupApplicationForStudent(Guid studentId)
     {
         var ct = _cancellationTokenAccessor.Token;
         var task = _groupApplicationRepository.GetGroupApplicationsForStudentAsync(studentId, ct);
         task.Wait(ct);
 
-        return task.Result.Select(g => g.MapToGroupApplicationDtoDto()).ToList();
+        return task.Result.Select(g => g.MapToPotentialInvite()).ToList();
     }
 }

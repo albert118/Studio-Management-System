@@ -15,4 +15,13 @@ public static class GroupApplicationMapper
             Message: groupApplication.Message
         );
     }
+
+    public static PotentialInvite MapToPotentialInvite(this GroupApplication groupApplication)
+    {
+        return new(
+            InviteId: groupApplication.Id,
+            GroupName: groupApplication.Group.Name,
+            Message: groupApplication.Message
+        );
+    }
 }

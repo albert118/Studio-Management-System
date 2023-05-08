@@ -53,8 +53,7 @@ public class GroupApplicationRepository: IGroupApplicationRepository
     {
         var groupApplicationsForStudent = await _smsDbContext.GroupApplications
             .Where(e => e.StudentContactId == studentId)
-            // include the StudentContact. Although we could ditch it if the API used a different DTO (we don't need to send student details back)
-            .Include(e => e.StudentContact)
+            .Include(e => e.Group)
             .ToListAsync(ct);
 
         return groupApplicationsForStudent;

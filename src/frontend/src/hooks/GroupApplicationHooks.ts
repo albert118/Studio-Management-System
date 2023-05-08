@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Nullable, NewGroupApplicationDto, IGroupApplication } from 'types/types';
+import { Nullable, NewGroupApplicationDto, IGroupApplication, IPotentialInvite } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
@@ -93,7 +93,7 @@ export function useManageGroupApplication() {
 }
 
 export function useGroupApplicationsForStudent(studentId: Guid) {
-    const [studentApplications, setStudentApplications] = useState<IGroupApplication[]>([]);
+    const [potentialInvites, setPotentialInvites] = useState<IPotentialInvite[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -105,7 +105,7 @@ export function useGroupApplicationsForStudent(studentId: Guid) {
                 }
             );
 
-            setStudentApplications(await response.json());
+            setPotentialInvites(await response.json());
         };
 
         setLoading(true);
@@ -113,5 +113,5 @@ export function useGroupApplicationsForStudent(studentId: Guid) {
         setLoading(false);
     }, []);
 
-    return { studentApplications, isLoading };
+    return { potentialInvites, isLoading };
 }

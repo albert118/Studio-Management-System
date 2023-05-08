@@ -29,6 +29,12 @@ export interface IGroup {
     project: string;
 }
 
+export interface IPotentialInvite {
+    inviteId: Guid;
+    groupName: string;
+    message: string;
+}
+
 export interface IGroupApplication {
     id: Guid;
     groupId: Guid;

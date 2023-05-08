@@ -12,7 +12,7 @@ import { Checkmark } from '@carbon/icons-react';
 
 export function PotentialInvites({ invites }) {
     const headers = [
-        { key: 'name', header: 'Name', isSortable: true },
+        { key: 'groupName', header: 'Group' },
         { key: 'message', header: 'Message' }
     ];
 
