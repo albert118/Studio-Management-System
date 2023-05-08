@@ -42,7 +42,11 @@ export function PotentialInvites({ invites }) {
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                     renderIcon={Checkmark}
                                     onClick={() =>
-                                        console.log(`accepted with row data: ${selectedRows}`)
+                                        console.log(
+                                            `accepted with invite IDs: ${selectedRows.map(
+                                                r => r.id
+                                            )}`
+                                        )
                                     }
                                 >
                                     Accept
@@ -52,7 +56,11 @@ export function PotentialInvites({ invites }) {
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                     renderIcon={Close}
                                     onClick={() =>
-                                        console.log(`rejected with row data: ${selectedRows}`)
+                                        console.log(
+                                            `rejected with invite IDs: ${selectedRows.map(
+                                                r => r.id
+                                            )}`
+                                        )
                                     }
                                 >
                                     Reject
