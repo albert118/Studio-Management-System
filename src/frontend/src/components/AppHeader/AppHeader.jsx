@@ -7,7 +7,6 @@ import {
     HeaderNavigation,
     HeaderMenuItem,
     SkipToContent,
-    HeaderMenu,
     HeaderGlobalAction,
     HeaderGlobalBar
 } from '@carbon/react';
@@ -17,9 +16,10 @@ import AppRoutes from 'navigation/AppRoutes';
 import { useEffect, useState } from 'react';
 import { supabase } from 'main';
 
-function AppHeader() {
+export default function AppHeader() {
     const [login, setLogin] = useState('Log In');
     const location = useLocation();
+
     useEffect(() => {
         async function getUserEmail() {
             const supaUser = await supabase.auth.getUser();
@@ -27,6 +27,7 @@ function AppHeader() {
         }
         getUserEmail();
     });
+
     return (
         <HeaderContainer
             render={() => (
@@ -36,12 +37,6 @@ function AppHeader() {
                         Studio Mangement System
                     </HeaderName>
                     <HeaderNavigation aria-label='UTS Software Mangement System'>
-                        <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.root}
-                            href={AppRoutes.root}
-                        >
-                            Home
-                        </HeaderMenuItem>
                         <HeaderMenuItem
                             isCurrentPage={location.pathname == AppRoutes.projects}
                             href={AppRoutes.projects}
@@ -68,5 +63,3 @@ function AppHeader() {
         />
     );
 }
-
-export default AppHeader;
