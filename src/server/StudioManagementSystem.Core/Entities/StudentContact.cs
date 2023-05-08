@@ -17,5 +17,5 @@ public class StudentContact : Contact
 
     public Group? AssignedGroup { get; set; }
 
-    public GroupApplication? GroupApplication { get; set; }
+    public ICollection<GroupApplication> GroupApplications { get; set; } = new List<GroupApplication>();
 }
