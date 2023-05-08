@@ -57,6 +57,7 @@ export default function useGroupApplications(groupId: Guid) {
 
     return { groupApplications, addGroupApplication, errors, isLoading };
 }
+
 export function useManageGroupApplication() {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
@@ -89,4 +90,28 @@ export function useManageGroupApplication() {
     };
 
     return { rejectGroupApplication, isLoading, errors };
+}
+
+export function useGroupApplicationsForStudent(studentId: Guid) {
+    const [studentApplications, setStudentApplications] = useState<IGroupApplication[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        const fetchGroup = async () => {
+            const response = await fetch(
+                `${ApiConfig.API_URL}/groupapplication/forstudent/${studentId}`,
+                {
+                    ...defaultRequestOptions
+                }
+            );
+
+            setStudentApplications(await response.json());
+        };
+
+        setLoading(true);
+        fetchGroup();
+        setLoading(false);
+    }, []);
+
+    return { studentApplications, isLoading };
 }

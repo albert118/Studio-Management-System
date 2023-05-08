@@ -49,6 +49,17 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         return true;
     }
 
+    public async Task<List<GroupApplication>> GetGroupApplicationsForStudentAsync(Guid studentId, CancellationToken ct)
+    {
+        var groupApplicationsForStudent = await _smsDbContext.GroupApplications
+            .Where(e => e.StudentContactId == studentId)
+            // include the StudentContact. Although we could ditch it if the API used a different DTO (we don't need to send student details back)
+            .Include(e => e.StudentContact)
+            .ToListAsync(ct);
+
+        return groupApplicationsForStudent;
+    }
+
     public async Task<bool> RemoveGroupApplicationsAsync(List<Guid> ids, CancellationToken ct)
     {
         var returnValue = false;

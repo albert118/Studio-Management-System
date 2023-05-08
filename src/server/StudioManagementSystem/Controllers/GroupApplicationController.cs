@@ -59,4 +59,15 @@ public class GroupApplicationController : ControllerBase
 
         return task.Result.Select(g => g.MapToGroupApplicationDtoDto()).ToList();
     }
+
+    [HttpGet("[action]/{studentId:guid}")]
+    [ActionName("forstudent")]
+    public ActionResult<List<GroupApplicationDto>> GetGroupApplicationForStudent(Guid studentId)
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _groupApplicationRepository.GetGroupApplicationsForStudentAsync(studentId, ct);
+        task.Wait(ct);
+
+        return task.Result.Select(g => g.MapToGroupApplicationDtoDto()).ToList();
+    }
 }
