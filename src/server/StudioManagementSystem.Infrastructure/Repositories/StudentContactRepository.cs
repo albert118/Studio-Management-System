@@ -28,16 +28,19 @@ public class StudentContactRepository : IStudentContactRepository
         return studentContact.Id;
     }
     
-    public async Task<Guid> RemoveAssignedGroupAsync(Guid id, CancellationToken ct)
+    public async Task<bool> RemoveAssignedGroupAsync(Guid id, CancellationToken ct)
     {
-        StudentContact? student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
-        if (student != null)
-        {
-            student.AssignedGroupId = null;
-            await _smsDbContext.SaveChangesAsync(ct);
-            return student.Id;
-        }
-        return Guid.Empty;
+        var returnValue = false;
+
+        var student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == id, cancellationToken: ct);
+        if (student == null)
+            return returnValue;
+
+        student.AssignedGroupId = null;
+        await _smsDbContext.SaveChangesAsync(ct);
+        returnValue = true;
+
+        return returnValue;
     }
     
 }

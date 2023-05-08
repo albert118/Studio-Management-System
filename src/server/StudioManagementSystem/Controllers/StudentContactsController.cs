@@ -12,13 +12,13 @@ public class StudentContactsController : ControllerBase
 {
     private readonly IStudentContactRepository _studentContactRepository;
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
-    private readonly IGroupManager _groupManager;
+    private readonly IProjectGroupManager _projectGroupManager;
 
-    public StudentContactsController(IStudentContactRepository studentContactRepository, IGroupManager groupManager, ICancellationTokenAccessor cancellationTokenAccessor)
+    public StudentContactsController(IStudentContactRepository studentContactRepository, IProjectGroupManager projectGroupManager, ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _studentContactRepository = studentContactRepository;
         _cancellationTokenAccessor = cancellationTokenAccessor;
-        _groupManager = groupManager;
+        _projectGroupManager = projectGroupManager;
     }
 
     [HttpGet]
@@ -39,7 +39,7 @@ public class StudentContactsController : ControllerBase
     public ActionResult<List<StudentDto>> GetStudentsWithoutGroup()
     {
         var ct = _cancellationTokenAccessor.Token;
-        var task = _groupManager.GetAllStudentsWithNoGroupsAsync(ct);
+        var task = _projectGroupManager.GetAllStudentsWithoutGroupsAsync(ct);
         task.Wait(ct);
 
         if (!task.IsCompleted)
