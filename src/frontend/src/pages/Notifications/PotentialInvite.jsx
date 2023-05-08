@@ -7,6 +7,8 @@ import {
     TableBatchAction,
     TableToolbar
 } from '@carbon/react';
+import { Close } from '@carbon/react/icons';
+import { Checkmark } from '@carbon/icons-react';
 
 export function PotentialInvites({ invites }) {
     const headers = [
@@ -30,9 +32,21 @@ export function PotentialInvites({ invites }) {
                 const batchActionProps = getBatchActionProps();
 
                 return (
-                    <TableContainer>
+                    <TableContainer
+                        title='Pending invites'
+                        description='Here you can accept or reject invitations from groups'
+                    >
                         <TableToolbar {...getToolbarProps()}>
                             <TableBatchActions {...batchActionProps}>
+                                <TableBatchAction
+                                    tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
+                                    renderIcon={Checkmark}
+                                    onClick={() =>
+                                        console.log(`accepted with row data: ${selectedRows}`)
+                                    }
+                                >
+                                    Accept
+                                </TableBatchAction>
                                 <TableBatchAction
                                     kind='danger'
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
