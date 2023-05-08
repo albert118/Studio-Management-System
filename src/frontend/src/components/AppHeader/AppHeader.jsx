@@ -7,7 +7,6 @@ import {
     HeaderNavigation,
     HeaderMenuItem,
     SkipToContent,
-    HeaderMenu,
     HeaderGlobalAction,
     HeaderGlobalBar
 } from '@carbon/react';
@@ -17,9 +16,10 @@ import AppRoutes from 'navigation/AppRoutes';
 import { useEffect, useState } from 'react';
 import { supabase } from 'main';
 
-function AppHeader() {
+export default function AppHeader() {
     const [login, setLogin] = useState('Log In');
-    const location = useLocation();
+    const [role, setRole] = useState('admin');
+
     useEffect(() => {
         async function getUserEmail() {
             const supaUser = await supabase.auth.getUser();
@@ -27,6 +27,7 @@ function AppHeader() {
         }
         getUserEmail();
     });
+
     return (
         <HeaderContainer
             render={() => (
@@ -35,31 +36,13 @@ function AppHeader() {
                     <HeaderName href={AppRoutes.root} prefix='UTS'>
                         Studio Mangement System
                     </HeaderName>
-                    <HeaderNavigation aria-label='UTS Software Mangement System'>
-                        <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.root}
-                            href={AppRoutes.root}
-                        >
-                            Home
-                        </HeaderMenuItem>
-                        <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.projects}
-                            href={AppRoutes.projects}
-                        >
-                            Projects
-                        </HeaderMenuItem>
-                        <HeaderMenuItem
-                            isCurrentPage={location.pathname == AppRoutes.groups}
-                            href={AppRoutes.groups}
-                        >
-                            Groups
-                        </HeaderMenuItem>
-                    </HeaderNavigation>
+                    <Menu role={role} />
                     <HeaderGlobalBar>
                         <HeaderGlobalAction aria-label='Notifications'>
                             <Notification />
                         </HeaderGlobalAction>
-                        <HeaderGlobalAction aria-label={login}>
+
+                        <HeaderGlobalAction aria-label='Login'>
                             <UserAvatar />
                         </HeaderGlobalAction>
                     </HeaderGlobalBar>
@@ -69,4 +52,31 @@ function AppHeader() {
     );
 }
 
-export default AppHeader;
+function Menu({ role }) {
+    const location = useLocation();
+
+    return (
+        <HeaderNavigation aria-label='UTS Software Mangement System'>
+            <HeaderMenuItem
+                isCurrentPage={location.pathname == AppRoutes.projects}
+                href={AppRoutes.projects}
+            >
+                Projects
+            </HeaderMenuItem>
+            <HeaderMenuItem
+                isCurrentPage={location.pathname == AppRoutes.groups}
+                href={AppRoutes.groups}
+            >
+                Groups
+            </HeaderMenuItem>
+            {role === 'admin' && (
+                <HeaderMenuItem
+                    isCurrentPage={location.pathname == AppRoutes.admin}
+                    href={AppRoutes.admin}
+                >
+                    Admin dashboard
+                </HeaderMenuItem>
+            )}
+        </HeaderNavigation>
+    );
+}
