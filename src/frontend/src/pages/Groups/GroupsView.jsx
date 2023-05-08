@@ -18,12 +18,6 @@ export default function GroupsView({ groups }) {
                 <p className='groups-page__p'>
                     Looking to create a new group? Let's get you setup!
                 </p>
-                <Button
-                    className='groups-page__new-group-prompt'
-                    onClick={() => navigate(`${AppRoutes.groups}/add`)}
-                >
-                    Create a new group
-                </Button>
             </Column>
             <Column lg={16} md={8} sm={4} className='groups-page__datatable'>
                 <GroupsDataTable groups={groups} />
