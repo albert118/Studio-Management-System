@@ -9,3 +9,4 @@ export {
     useManageGroupApplication
 } from './GroupApplicationHooks';
 export { default as useGroups, useGroup } from './GroupHooks';
+export { default as useSession } from './SessionFakeHooks';

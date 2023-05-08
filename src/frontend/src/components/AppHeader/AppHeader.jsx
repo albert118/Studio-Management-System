@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
     Header,
@@ -13,34 +13,22 @@ import {
 
 import { Notification, UserAvatar } from '@carbon/icons-react';
 import AppRoutes from 'navigation/AppRoutes';
-import { useEffect, useState } from 'react';
-import { supabase } from 'main';
-
-// this is a placeholder for a 'real hook' providing the current user data (ID, name, role, etc.)
-// ideally we would actually implement this and back it with a fully fledged auth + session system
-// for now, I've mocked it with an ID and name from a real StudentContact I manually added on my machine
-// this lets me fake myself as the below user for demo purposes
-const useSession = () => {
-    return {
-        user: {
-            id: 'f8b20b08-7a50-4afa-994b-1bd34a7c114c',
-            name: 'Lucy Hawking',
-            role: 'admin'
-        }
-    };
-};
+import { useSession } from 'hooks';
+// import { useEffect, useState } from 'react';
+// import { supabase } from 'main';
 
 export default function AppHeader() {
-    const [login, setLogin] = useState('Log In');
     const { user } = useSession();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        async function getUserEmail() {
-            const supaUser = await supabase.auth.getUser();
-            setLogin(supaUser.data.user?.email ?? '');
-        }
-        getUserEmail();
-    });
+    // const [login, setLogin] = useState('Log In');
+    // useEffect(() => {
+    //     async function getUserEmail() {
+    //         const supaUser = await supabase.auth.getUser();
+    //         setLogin(supaUser.data.user?.email ?? '');
+    //     }
+    //     getUserEmail();
+    // });
 
     return (
         <HeaderContainer
@@ -52,11 +40,18 @@ export default function AppHeader() {
                     </HeaderName>
                     <Menu role={user.role} />
                     <HeaderGlobalBar>
-                        <HeaderGlobalAction aria-label='Notifications'>
+                        <HeaderGlobalAction
+                            aria-label='Notifications'
+                            onClick={() => navigate(AppRoutes.notifications)}
+                        >
                             <Notification />
                         </HeaderGlobalAction>
 
-                        <HeaderGlobalAction aria-label='Login'>
+                        <HeaderGlobalAction
+                            aria-label={`Hey ${user.name}!`}
+                            tooltipAlignment='end'
+                            onClick={() => navigate(AppRoutes.userProfile)}
+                        >
                             <UserAvatar />
                         </HeaderGlobalAction>
                     </HeaderGlobalBar>
@@ -72,20 +67,20 @@ function Menu({ role }) {
     return (
         <HeaderNavigation aria-label='UTS Software Mangement System'>
             <HeaderMenuItem
-                isCurrentPage={location.pathname == AppRoutes.projects}
+                isActive={location.pathname == AppRoutes.projects}
                 href={AppRoutes.projects}
             >
                 Projects
             </HeaderMenuItem>
             <HeaderMenuItem
-                isCurrentPage={location.pathname == AppRoutes.groups}
+                isActive={location.pathname == AppRoutes.groups}
                 href={AppRoutes.groups}
             >
                 Groups
             </HeaderMenuItem>
             {role === 'admin' && (
                 <HeaderMenuItem
-                    isCurrentPage={location.pathname == AppRoutes.admin}
+                    isActive={location.pathname == AppRoutes.admin}
                     href={AppRoutes.admin}
                 >
                     Admin dashboard
