@@ -14,18 +14,20 @@ export default function MyGroupContainer() {
         return <Navigate to={AppRoutes.error} />
     }
 
-    const { group, updateGroup, isLoading, refreshGroup } = useGroup(Guid.parse(groupId));
-    const { groupApplications, addGroupApplication } = useGroupApplications(group.id);
+    const groupIdAsGuid = Guid.parse(groupId);
+
+    const { group, updateGroup, isLoading, refreshGroup } = useGroup(groupIdAsGuid);
+    const { groupApplications, addGroupApplication } = useGroupApplications(groupIdAsGuid);
 
     const [editingGroup, setEditingGroup] = useState(group);
-    const [invite, setInvite] = useState(NewGroupApplicationDto([], group.id, ''));
+    const [invite, setInvite] = useState(NewGroupApplicationDto([], groupIdAsGuid, ''));
 
     const handleNewApplication = async () => {
         // @ts-ignore
         const submittedSuccessfully = await addGroupApplication(invite)
 
         if (submittedSuccessfully) {
-            setInvite(NewGroupApplicationDto([], group.id, ''));
+            setInvite(NewGroupApplicationDto([], groupIdAsGuid, ''));
             await refreshGroup();
             window.location.reload();
         }
