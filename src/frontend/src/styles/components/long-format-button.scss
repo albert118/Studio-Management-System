@@ -1,6 +1,9 @@
-.email-call-to-action {
+@use '@carbon/react/scss/spacing' as *;
+
+.long-format-call-to-action {
     display: flex;
     justify-content: space-between;
+    gap: $spacing-05;
     align-items: center;
     width: 100%;
 }

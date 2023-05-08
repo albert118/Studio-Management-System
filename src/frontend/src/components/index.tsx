@@ -6,7 +6,7 @@ import LoadingSpinner from './Spinner/Spinner';
 import InlineDetail from './InlineDetail/InlineDetail';
 import BlockDetail from './BlockDetail/BlockDetail';
 import VerticalSocialDivider from './VerticalSocialDivider/VerticalSocialDivider';
-import EmailModalButton from './EmailModalButton/EmailModalButton';
+import LongFormatButton from './LongFormatButton/LongFormatButton';
 import { ManagementTile, StatisticBox } from './Admin';
 
 export {
@@ -17,7 +17,7 @@ export {
     VerticalDivider,
     VerticalSocialDivider,
     SimpleCard,
-    EmailModalButton,
+    LongFormatButton,
     LoadingSpinner,
     ManagementTile,
     StatisticBox
