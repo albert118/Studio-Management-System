@@ -35,6 +35,7 @@ export default function MyGroupContainer() {
     const handleGroupUpdate = async () => {
         await updateGroup(editingGroup);
         await refreshGroup();
+        window.location.reload();
     };
 
     return (
