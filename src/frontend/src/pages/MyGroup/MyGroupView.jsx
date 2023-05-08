@@ -90,7 +90,6 @@ function ManageGroup({
 }
 
 function ProjectPreferences({ group }) {
-    console.log(group.preferences);
     return (
         <ManagementTile title='Project preferences' icon={<Roadmap size={48} />}>
             {group.preferences && group.preferences.length !== 0 ? (

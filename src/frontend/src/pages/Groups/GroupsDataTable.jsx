@@ -72,8 +72,6 @@ export function GroupsDataTable({ groups }) {
 }
 
 function ExpandedRowDetail({ row }) {
-    console.log(row);
-
     return (
         <div className='groups-page__datatable-row-detail'>
             <div className='row-detail--r1'>
