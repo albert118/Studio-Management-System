@@ -1,30 +1,20 @@
 import { Stack } from 'components';
-import {
-    ContainedList,
-    ContainedListItem,
-    Tag
-} from '@carbon/react';
+import { ContainedList, ContainedListItem, Tag } from '@carbon/react';
 
-export function MyGroupMembers({memberInfo }) {
-    var members = memberInfo.members;
-    
+export function MyGroupMembers({ memberInfo }) {
     return (
         <Stack>
             <ContainedList
-                label={<div style={
-                    { 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'space-between', 
-                    }}> 
-                    <span>Group Members</span>
-                    <Tag size="sm">{memberInfo.count}</Tag>
-                    </div>
-                    }
+                label={
+                    <label>
+                        <span className='mygroup--members-group-count-label'>Group Members</span>
+                        <Tag size='sm'>{memberInfo.count}</Tag>
+                    </label>
+                }
             >
-            {members.map((member, idx) => (
-                <ContainedListItem key={idx}>{member.name}</ContainedListItem>
-            ))}
+                {memberInfo.members.map((member, idx) => (
+                    <ContainedListItem key={idx}>{member.name}</ContainedListItem>
+                ))}
             </ContainedList>
         </Stack>
     );

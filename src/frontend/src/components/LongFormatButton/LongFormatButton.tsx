@@ -5,6 +5,7 @@ export type Props = {
     title: string;
     description: string;
     icon: React.ReactNode;
+    passiveModal: boolean;
     buttonText: string;
     modalHeading: string;
     handleSubmit: Function;
@@ -15,6 +16,7 @@ export default function LongFormatButton({
     title,
     description,
     icon,
+    passiveModal,
     buttonText,
     modalHeading,
     handleSubmit,
@@ -32,6 +34,7 @@ export default function LongFormatButton({
                 modalHeading={modalHeading}
                 primaryButtonText='Send'
                 handleSubmit={async () => await handleSubmit()}
+                passiveModal={passiveModal}
             >
                 {children}
             </ModalWrapper>

@@ -40,6 +40,10 @@
         .danger {
             border: 2px solid var($sms-colour-danger-zone);
         }
+
+        label.mygroup--members-group-count > span {
+            padding-right: $spacing-05;
+        }
     }
 
     .mygroup-page__r1,

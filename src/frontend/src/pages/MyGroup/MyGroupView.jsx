@@ -1,6 +1,6 @@
 import { ModalWrapper, Grid, Column } from '@carbon/react';
-import { Stack, LongFormatButton, ManagementTile } from 'components';
-import { EmailNew, Collaborate, Edit, Exit, WarningHex, Roadmap } from '@carbon/icons-react';
+import { LongFormatButton, ManagementTile } from 'components';
+import { EmailNew, Collaborate, WarningHex, Roadmap } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
 import { LeaveGroup } from './LeaveGroup';
@@ -59,7 +59,8 @@ function ManageGroup({
                 title='View members'
                 icon={<Collaborate size={32} />}
                 buttonText='View'
-                modalHeading={`${group.name} Group Members`}
+                modalHeading={`Members`}
+                passiveModal
             >
                 <MyGroupMembers memberInfo={group.memberInfo} />
             </LongFormatButton>
@@ -68,6 +69,7 @@ function ManageGroup({
                 icon={<Collaborate size={32} />}
                 buttonText='Manage'
                 modalHeading='Pending applications'
+                passiveModal
             >
                 <PendingApplications
                     groupApplications={groupApplications}
