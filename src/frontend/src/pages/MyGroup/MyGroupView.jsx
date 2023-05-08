@@ -1,6 +1,6 @@
 import { ModalWrapper, Tile, Grid, Column } from '@carbon/react';
-import { Stack, EmailModalButton } from 'components';
-import { EmailNew, Collaborate, Edit, Exit } from '@carbon/icons-react';
+import { Stack, EmailModalButton, ManagementTile } from 'components';
+import { EmailNew, Collaborate, Edit, Exit, WarningHex } from '@carbon/icons-react';
 import { ProjectPreferenceCard, NoProjectPreferenceCard } from './ProjectPreferenceCard';
 import { EditGroup } from './EditGroup';
 import { LeaveGroup } from './LeaveGroup';
@@ -133,9 +133,31 @@ function ProjectPreferences({ group }) {
 function DangerZone({ group, setGroup, onSubmit }) {
     return (
         <Tile className='mygroup-page__dangerous-management-options'>
-            <h3>Danger Zone</h3>
-            <Stack>
-                <div className='simple-card danger ghost'>
+            <ManagementTile
+                title='Danger zone'
+                className='danger ghost'
+                icon={<WarningHex size={48} />}
+            >
+                <ModalWrapper
+                    buttonTriggerText='Edit group'
+                    danger
+                    modalHeading='Edit group'
+                    handleSubmit={onSubmit}
+                >
+                    <EditGroup group={group} setGroup={setGroup} />
+                </ModalWrapper>
+
+                <ModalWrapper
+                    buttonTriggerText='Leave group'
+                    modalHeading='Leave group'
+                    danger
+                    primaryButtonText='Leave'
+                >
+                    <LeaveGroup />
+                </ModalWrapper>
+            </ManagementTile>
+
+            {/* <div className='simple-card danger ghost'>
                     <Edit className='danger ghost' size={32} />
                     <div>
                         <h5>Edit your group</h5>
@@ -164,8 +186,7 @@ function DangerZone({ group, setGroup, onSubmit }) {
                     >
                         <LeaveGroup />
                     </ModalWrapper>
-                </div>
-            </Stack>
+                </div> */}
         </Tile>
     );
 }
