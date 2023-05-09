@@ -12,7 +12,6 @@ export default function MyGroupContainer() {
     const { user } = useSession();
 
     if (!groupId) {
-        2BlB ^ zjqe@TGhHk1r$0O
         return <Navigate to={AppRoutes.error} replace />
     }
 
