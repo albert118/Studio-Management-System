@@ -27,7 +27,7 @@ export default function MyGroupView({
                 <p className='mygroup-page__p'>{group.description}</p>
             </Column>
             <Column lg={16} md={8} sm={4} className='mygroup-page__r2'>
-                {/* <ManageGroup
+                <ManageGroup
                     group={group}
                     groupApplications={groupApplications}
                     onSubmitPendingApplications={refreshGroup}
@@ -41,7 +41,7 @@ export default function MyGroupView({
                     setGroup={setEditingGroup}
                     onSubmit={handleGroupUpdate}
                     onLeave={onLeave}
-                /> */}
+                />
             </Column>
         </Grid>
     );
