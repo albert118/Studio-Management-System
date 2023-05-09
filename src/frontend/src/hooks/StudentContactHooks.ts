@@ -3,6 +3,7 @@ import { IStudentContact, Nullable } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { ApiError } from './types';
+import { handleErrors } from './helpers';
 
 export default function useStudentContacts() {
     const [studentContacts, setStudentContacts] = useState<IStudentContact[]>([]);
@@ -20,10 +21,7 @@ export default function useStudentContacts() {
                 const data = await response.json();
                 setStudentContacts(data);
             } else {
-                const errorData = await response.json();
-                const apiError = { error: errorData.title, message: errorData.errors };
-                console.error(JSON.stringify(apiError));
-                setErrors(apiError);
+                await handleErrors(response, setErrors);
             }
         };
 
@@ -52,10 +50,7 @@ export function useStudentContactsWithoutGroup() {
                 const data = await response.json();
                 setStudentContacts(data);
             } else {
-                const errorData = await response.json();
-                const apiError = { error: errorData.title, message: errorData.errors };
-                console.error(JSON.stringify(apiError));
-                setErrors(apiError);
+                await handleErrors(response, setErrors);
             }
         };
 
