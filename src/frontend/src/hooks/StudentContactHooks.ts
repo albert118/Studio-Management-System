@@ -23,6 +23,8 @@ export default function useStudentContacts() {
             } else {
                 await handleErrors(response, setErrors);
             }
+
+            setLoading(false);
         };
 
         fetchContacts();

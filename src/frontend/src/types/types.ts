@@ -172,7 +172,7 @@ export interface IStudentContact {
     id: Guid;
     name: string;
     email: string;
-    groupId: Guid | undefined;
+    assignedGroupId: Guid | undefined;
 }
 
 export type PrincipalOwner = {
