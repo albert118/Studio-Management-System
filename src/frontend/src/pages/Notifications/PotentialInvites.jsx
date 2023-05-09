@@ -10,7 +10,7 @@ import {
 import { Close } from '@carbon/react/icons';
 import { Checkmark } from '@carbon/icons-react';
 
-export function PotentialInvites({ invites }) {
+export function PotentialInvites({ invites, batchReject, acceptInvite }) {
     const headers = [
         { key: 'groupName', header: 'Group' },
         { key: 'message', header: 'Message' }
@@ -41,13 +41,8 @@ export function PotentialInvites({ invites }) {
                                 <TableBatchAction
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                     renderIcon={Checkmark}
-                                    onClick={() =>
-                                        console.log(
-                                            `accepted with invite IDs: ${selectedRows.map(
-                                                r => r.id
-                                            )}`
-                                        )
-                                    }
+                                    onClick={() => acceptInvite(selectedRows)}
+                                    disabled={selectedRows.length !== 1}
                                 >
                                     Accept
                                 </TableBatchAction>
@@ -55,13 +50,7 @@ export function PotentialInvites({ invites }) {
                                     kind='danger'
                                     tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                                     renderIcon={Close}
-                                    onClick={() =>
-                                        console.log(
-                                            `rejected with invite IDs: ${selectedRows.map(
-                                                r => r.id
-                                            )}`
-                                        )
-                                    }
+                                    onClick={() => batchReject(selectedRows)}
                                 >
                                     Reject
                                 </TableBatchAction>
