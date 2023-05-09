@@ -91,7 +91,7 @@ export function useGroup(groupId: Guid) {
         setLoading(false);
     };
 
-    const leaveGroup = async () => {
+    const leaveGroup = async (): Promise<boolean> => {
         setLoading(true);
 
         const response = await fetch(
@@ -103,9 +103,11 @@ export function useGroup(groupId: Guid) {
 
         if (!response.ok) {
             await handleErrors(response, setErrors);
+            return false;
         }
 
         setLoading(false);
+        return true;
     };
 
     return { group, updateGroup, refreshGroup: fetchGroup, leaveGroup, isLoading, errors };

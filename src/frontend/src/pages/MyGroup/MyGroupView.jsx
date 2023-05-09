@@ -18,7 +18,7 @@ export default function MyGroupView({
     editingGroup,
     setEditingGroup,
     handleGroupUpdate,
-    leaveGroup
+    onLeave
 }) {
     return (
         <Grid className='mygroup-page'>
@@ -40,7 +40,7 @@ export default function MyGroupView({
                     group={editingGroup}
                     setGroup={setEditingGroup}
                     onSubmit={handleGroupUpdate}
-                    onLeave={leaveGroup}
+                    onLeave={onLeave}
                 />
             </Column>
         </Grid>

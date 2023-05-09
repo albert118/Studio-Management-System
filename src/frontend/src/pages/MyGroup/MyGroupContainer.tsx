@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NewGroupApplicationDto } from 'types/types';
 import { useGroupApplications, useGroup } from 'hooks';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import { Guid } from 'guid-typescript';
 import { LoadingSpinner } from 'components';
@@ -9,6 +9,7 @@ import MyGroupView from './MyGroupView';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
+    const navigate = useNavigate();
 
     if (!groupId) {
         return <Navigate to={AppRoutes.error} />
@@ -39,6 +40,12 @@ export default function MyGroupContainer() {
         window.location.reload();
     };
 
+    const onLeave = async () => {
+        if (await leaveGroup()) {
+            navigate(AppRoutes.root);
+        }
+    };
+
     return (
         isLoading
             ? <LoadingSpinner />
@@ -52,7 +59,7 @@ export default function MyGroupContainer() {
                 editingGroup={editingGroup}
                 setEditingGroup={setEditingGroup}
                 handleGroupUpdate={handleGroupUpdate}
-                leaveGroup={leaveGroup}
+                onLeave={onLeave}
             />
     );
 }
