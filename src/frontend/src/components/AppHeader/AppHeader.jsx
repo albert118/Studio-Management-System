@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
     Header,
@@ -8,25 +8,28 @@ import {
     HeaderMenuItem,
     SkipToContent,
     HeaderGlobalAction,
-    HeaderGlobalBar
+    HeaderGlobalBar,
+    Button
 } from '@carbon/react';
 
 import { Notification, UserAvatar } from '@carbon/icons-react';
 import AppRoutes from 'navigation/AppRoutes';
-import { useEffect, useState } from 'react';
-import { supabase } from 'main';
+import { useSession } from 'hooks';
+// import { useEffect, useState } from 'react';
+// import { supabase } from 'main';
 
 export default function AppHeader() {
-    const [login, setLogin] = useState('Log In');
-    const [role, setRole] = useState('admin');
+    const { user, setRole } = useSession();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        async function getUserEmail() {
-            const supaUser = await supabase.auth.getUser();
-            setLogin(supaUser.data.user?.email ?? '');
-        }
-        getUserEmail();
-    });
+    // const [login, setLogin] = useState('Log In');
+    // useEffect(() => {
+    //     async function getUserEmail() {
+    //         const supaUser = await supabase.auth.getUser();
+    //         setLogin(supaUser.data.user?.email ?? '');
+    //     }
+    //     getUserEmail();
+    // });
 
     return (
         <HeaderContainer
@@ -36,13 +39,20 @@ export default function AppHeader() {
                     <HeaderName href={AppRoutes.root} prefix='UTS'>
                         Studio Mangement System
                     </HeaderName>
-                    <Menu role={role} />
+                    <Menu user={user} setRole={setRole} />
                     <HeaderGlobalBar>
-                        <HeaderGlobalAction aria-label='Notifications'>
+                        <HeaderGlobalAction
+                            aria-label='Notifications'
+                            onClick={() => navigate(AppRoutes.notifications)}
+                        >
                             <Notification />
                         </HeaderGlobalAction>
 
-                        <HeaderGlobalAction aria-label='Login'>
+                        <HeaderGlobalAction
+                            aria-label={`Hey ${user.name}!`}
+                            tooltipAlignment='end'
+                            onClick={() => navigate(AppRoutes.userProfile)}
+                        >
                             <UserAvatar />
                         </HeaderGlobalAction>
                     </HeaderGlobalBar>
@@ -52,30 +62,59 @@ export default function AppHeader() {
     );
 }
 
-function Menu({ role }) {
+function Menu({ user, setRole }) {
     const location = useLocation();
 
     return (
         <HeaderNavigation aria-label='UTS Software Mangement System'>
             <HeaderMenuItem
-                isCurrentPage={location.pathname == AppRoutes.projects}
+                isActive={location.pathname == AppRoutes.projects}
                 href={AppRoutes.projects}
             >
                 Projects
             </HeaderMenuItem>
             <HeaderMenuItem
-                isCurrentPage={location.pathname == AppRoutes.groups}
+                isActive={location.pathname == AppRoutes.groups}
                 href={AppRoutes.groups}
             >
                 Groups
             </HeaderMenuItem>
-            {role === 'admin' && (
+            {user.role === 'admin' && (
                 <HeaderMenuItem
-                    isCurrentPage={location.pathname == AppRoutes.admin}
+                    isActive={location.pathname == AppRoutes.admin}
                     href={AppRoutes.admin}
                 >
                     Admin dashboard
                 </HeaderMenuItem>
+            )}
+
+            {user.role === 'student' && (
+                <HeaderMenuItem
+                    isActive={location.pathname == AppRoutes.myGroup}
+                    href={`${AppRoutes.myGroup}/${user.groupId}`}
+                >
+                    My group
+                </HeaderMenuItem>
+            )}
+            {/* neat way to demo the admin/student roles without fleshing out the whole feature */}
+            {user.role === 'admin' ? (
+                <Button
+                    kind='ghost'
+                    onClick={() => {
+                        setRole('student');
+                    }}
+                >
+                    Swap to student role
+                </Button>
+            ) : (
+                <Button
+                    kind='ghost'
+                    onClick={() => {
+                        setRole('admin');
+                    }}
+                >
+                    Swap to admin role
+                </Button>
             )}
         </HeaderNavigation>
     );

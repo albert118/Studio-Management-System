@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Nullable, NewGroupApplicationDto, IGroupApplication } from 'types/types';
+import { Nullable, NewGroupApplicationDto, IGroupApplication, IPotentialInvite } from 'types/types';
 import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
 import { Guid } from 'guid-typescript';
+import { handleErrors } from './helpers';
 
 export default function useGroupApplications(groupId: Guid) {
     const [groupApplications, setgroupApplications] = useState<IGroupApplication[]>([]);
@@ -40,15 +41,11 @@ export default function useGroupApplications(groupId: Guid) {
         });
 
         let retVal;
-        const data = await response.json();
 
         if (response.ok) {
             retVal = true;
         } else {
-            const errorData = data as KestrelServerError;
-            const apiError = { error: errorData.title, message: errorData.errors };
-            console.error(JSON.stringify(apiError));
-            setErrors(apiError);
+            await handleErrors(response, setErrors);
             retVal = false;
         }
 
@@ -57,6 +54,7 @@ export default function useGroupApplications(groupId: Guid) {
 
     return { groupApplications, addGroupApplication, errors, isLoading };
 }
+
 export function useManageGroupApplication() {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
@@ -71,17 +69,13 @@ export function useManageGroupApplication() {
         });
 
         let retVal;
-        const data = await response.json();
 
         setLoading(false);
 
         if (response.ok) {
             retVal = true;
         } else {
-            const errorData = data as KestrelServerError;
-            const apiError = { error: errorData.title, message: errorData.errors };
-            console.error(JSON.stringify(apiError));
-            setErrors(apiError);
+            await handleErrors(response, setErrors);
             retVal = false;
         }
 
@@ -89,4 +83,74 @@ export function useManageGroupApplication() {
     };
 
     return { rejectGroupApplication, isLoading, errors };
+}
+
+export function useGroupApplicationsForStudent(studentId: Guid) {
+    const [potentialInvites, setPotentialInvites] = useState<IPotentialInvite[]>([]);
+    const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
+
+    useEffect(() => {
+        const fetchGroupApplications = async () => {
+            setLoading(true);
+
+            const response = await fetch(
+                `${ApiConfig.API_URL}/groupapplication/forstudent/${studentId}`,
+                {
+                    ...defaultRequestOptions
+                }
+            );
+
+            setPotentialInvites(await response.json());
+
+            setLoading(false);
+        };
+
+        fetchGroupApplications();
+    }, []);
+
+    const rejectInvites = async (rejectedInviteIds: Guid[]) => {
+        setLoading(true);
+
+        const response = await fetch(`${ApiConfig.API_URL}/groupapplication/rejectforstudent`, {
+            ...defaultRequestOptions,
+            method: 'POST',
+            body: JSON.stringify(rejectedInviteIds.map(id => id.toString()))
+        });
+
+        if (response.ok) {
+            setPotentialInvites(
+                potentialInvites.filter(i => !rejectedInviteIds.includes(i.inviteId))
+            );
+        } else {
+            await handleErrors(response, setErrors);
+        }
+
+        setLoading(false);
+    };
+
+    const acceptInvite = async (acceptedInviteId: Guid): Promise<Guid | undefined> => {
+        setLoading(true);
+
+        let retValue = undefined;
+        const response = await fetch(
+            `${ApiConfig.API_URL}/groupapplication/acceptforstudent/${acceptedInviteId.toString()}`,
+            {
+                ...defaultRequestOptions
+            }
+        );
+
+        if (response.ok) {
+            setPotentialInvites([] as IPotentialInvite[]);
+            // returns group ID
+            retValue = Guid.parse(await response.json());
+        } else {
+            await handleErrors(response, setErrors);
+        }
+
+        setLoading(false);
+        return retValue;
+    };
+
+    return { potentialInvites, rejectInvites, acceptInvite, isLoading, errors };
 }

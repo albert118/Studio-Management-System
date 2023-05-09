@@ -11,7 +11,8 @@ import {
     AddGroup,
     Project,
     AddProject,
-    AdminDashboard
+    AdminDashboard,
+    Notifications
 } from 'pages';
 import AppRoutes from 'navigation/AppRoutes';
 
@@ -65,7 +66,7 @@ const routes: RouteObject[] = [
         )
     },
     {
-        path: `${AppRoutes.group}/:groupId`,
+        path: `${AppRoutes.myGroup}/:groupId`,
         element: (
             <Layout>
                 <MyGroup />
@@ -85,6 +86,14 @@ const routes: RouteObject[] = [
         element: (
             <Layout>
                 <AdminDashboard />
+            </Layout>
+        )
+    },
+    {
+        path: AppRoutes.notifications,
+        element: (
+            <Layout>
+                <Notifications />
             </Layout>
         )
     },

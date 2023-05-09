@@ -9,7 +9,8 @@ public static class StudentContactMapper
     {
         return new(
             Id: student.Id,
-            Name: $"{student.FirstName} {student.LastName}"
+            Name: $"{student.FirstName} {student.LastName}",
+            AssignedGroupId: student.AssignedGroupId
         );
     }
 }

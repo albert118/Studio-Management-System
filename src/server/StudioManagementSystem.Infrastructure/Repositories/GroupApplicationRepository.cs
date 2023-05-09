@@ -49,6 +49,26 @@ public class GroupApplicationRepository: IGroupApplicationRepository
         return true;
     }
 
+    public async Task<List<GroupApplication>> GetGroupApplicationsByIdsAsync(List<Guid> applicationIds,
+    CancellationToken ct)
+    {
+        var groupApplicationsForStudent = await _smsDbContext.GroupApplications
+            .Where(e => applicationIds.Contains(e.Id))
+            .ToListAsync(ct);
+
+        return groupApplicationsForStudent;
+    }
+
+    public async Task<List<GroupApplication>> GetGroupApplicationsForStudentAsync(Guid studentId, CancellationToken ct)
+    {
+        var groupApplicationsForStudent = await _smsDbContext.GroupApplications
+            .Where(e => e.StudentContactId == studentId)
+            .Include(e => e.Group)
+            .ToListAsync(ct);
+
+        return groupApplicationsForStudent;
+    }
+
     public async Task<bool> RemoveGroupApplicationsAsync(List<Guid> ids, CancellationToken ct)
     {
         var returnValue = false;

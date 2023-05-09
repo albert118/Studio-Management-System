@@ -3,7 +3,17 @@ import {
     ExpandingDataTableHeader,
     ExpandingRowFragment,
     SimpleRow,
-    SimpleHeader
+    SimpleHeader,
+    SelectableHeader,
+    SelectableRow
 } from './SmsDataTable';
 
-export { SmsDataTable, ExpandingDataTableHeader, ExpandingRowFragment, SimpleRow, SimpleHeader };
+export {
+    SmsDataTable,
+    ExpandingDataTableHeader,
+    ExpandingRowFragment,
+    SimpleRow,
+    SimpleHeader,
+    SelectableHeader,
+    SelectableRow
+};
