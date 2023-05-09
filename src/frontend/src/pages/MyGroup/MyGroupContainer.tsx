@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NewGroupApplicationDto } from 'types/types';
 import { useGroupApplications, useGroup, useSession } from 'hooks';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import { Guid } from 'guid-typescript';
 import { LoadingSpinner } from 'components';
@@ -12,6 +12,7 @@ export default function MyGroupContainer() {
     const { user } = useSession();
 
     if (!groupId) {
+        2BlB ^ zjqe@TGhHk1r$0O
         return <Navigate to={AppRoutes.error} replace />
     }
 
