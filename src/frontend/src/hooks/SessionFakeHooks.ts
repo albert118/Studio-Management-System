@@ -20,6 +20,9 @@ export default function useSession() {
         groupId: undefined
     });
 
+    // debug helper, remove after this hook is replaced with the real thing
+    console.log(user);
+
     const updateGroup = (groupId: Guid) => {
         setUser({
             ...user,
