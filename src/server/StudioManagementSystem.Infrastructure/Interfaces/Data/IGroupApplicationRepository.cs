@@ -9,6 +9,8 @@ public interface IGroupApplicationRepository
 
     Task<List<GroupApplication>> GetGroupApplicationsAsync(Guid groupId, CancellationToken ct);
 
+    Task<List<GroupApplication>> GetGroupApplicationsByIdsAsync(List<Guid> applicationIds, CancellationToken ct);
+
     Task<List<GroupApplication>> GetGroupApplicationsForStudentAsync(Guid studentId, CancellationToken ct);
 
     Task<bool> RemoveGroupApplicationsAsync(List<Guid> ids, CancellationToken ct);
