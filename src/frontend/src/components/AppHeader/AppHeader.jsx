@@ -91,7 +91,7 @@ function Menu({ user, setRole }) {
             {user.role === 'student' && (
                 <HeaderMenuItem
                     isActive={location.pathname == AppRoutes.myGroup}
-                    href={`${AppRoutes.groups}/${user.groupId}`}
+                    href={`${AppRoutes.myGroup}/${user.groupId}`}
                 >
                     My group
                 </HeaderMenuItem>
