@@ -1,6 +1,6 @@
 import { Grid, Column } from '@carbon/react';
 import { IPotentialInvite } from "types/types";
-import { PotentialInvites } from './PotentialInvite';
+import { PotentialInvites } from './PotentialInvites';
 
 export type Props = {
     invites: IPotentialInvite[];
