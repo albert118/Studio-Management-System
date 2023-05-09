@@ -66,7 +66,7 @@ const routes: RouteObject[] = [
         )
     },
     {
-        path: `${AppRoutes.group}/:groupId`,
+        path: `${AppRoutes.myGroup}/:groupId`,
         element: (
             <Layout>
                 <MyGroup />

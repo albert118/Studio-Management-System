@@ -18,7 +18,7 @@ import { useSession } from 'hooks';
 // import { supabase } from 'main';
 
 export default function AppHeader() {
-    const { user } = useSession();
+    const { user, setRole } = useSession();
     const navigate = useNavigate();
 
     // const [login, setLogin] = useState('Log In');
@@ -38,7 +38,7 @@ export default function AppHeader() {
                     <HeaderName href={AppRoutes.root} prefix='UTS'>
                         Studio Mangement System
                     </HeaderName>
-                    <Menu role={user.role} />
+                    <Menu role={user.role} setRole={setRole} />
                     <HeaderGlobalBar>
                         <HeaderGlobalAction
                             aria-label='Notifications'
@@ -61,7 +61,7 @@ export default function AppHeader() {
     );
 }
 
-function Menu({ role }) {
+function Menu({ role, setRole }) {
     const location = useLocation();
 
     return (
@@ -84,6 +84,33 @@ function Menu({ role }) {
                     href={AppRoutes.admin}
                 >
                     Admin dashboard
+                </HeaderMenuItem>
+            )}
+
+            {role === 'student' && (
+                <HeaderMenuItem
+                    isActive={location.pathname == AppRoutes.myGroup}
+                    href={AppRoutes.myGroup}
+                >
+                    My group
+                </HeaderMenuItem>
+            )}
+            {/* neat way to demo the admin/student roles without fleshing out the whole feature */}
+            {role === 'admin' ? (
+                <HeaderMenuItem
+                    onClick={() => {
+                        setRole('student');
+                    }}
+                >
+                    Swap to student role
+                </HeaderMenuItem>
+            ) : (
+                <HeaderMenuItem
+                    onClick={() => {
+                        setRole('admin');
+                    }}
+                >
+                    Swap to admin role
                 </HeaderMenuItem>
             )}
         </HeaderNavigation>

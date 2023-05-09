@@ -30,5 +30,12 @@ export default function useSession() {
         });
     };
 
-    return { user, updateGroup };
+    const setRole = (role: string) => {
+        setUser({
+            ...user,
+            role: role
+        });
+    };
+
+    return { user, updateGroup, setRole };
 }

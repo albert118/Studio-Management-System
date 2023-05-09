@@ -7,6 +7,7 @@ const AppRoutes = Object.freeze({
     root: '/',
     groups: '/groups',
     group: '/group',
+    myGroup: '/myGroup',
     projects: '/projects',
     project: '/project',
     login: '/login',
