@@ -16,7 +16,7 @@ export default function MyGroupContainer() {
 
     const groupIdAsGuid = Guid.parse(groupId);
 
-    const { group, updateGroup, isLoading, refreshGroup } = useGroup(groupIdAsGuid);
+    const { group, updateGroup, leaveGroup, isLoading, refreshGroup } = useGroup(groupIdAsGuid);
     const { groupApplications, addGroupApplication } = useGroupApplications(groupIdAsGuid);
 
     const [editingGroup, setEditingGroup] = useState(group);
@@ -52,6 +52,7 @@ export default function MyGroupContainer() {
                 editingGroup={editingGroup}
                 setEditingGroup={setEditingGroup}
                 handleGroupUpdate={handleGroupUpdate}
+                leaveGroup={leaveGroup}
             />
     );
 }

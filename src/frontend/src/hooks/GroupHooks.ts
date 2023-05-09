@@ -4,6 +4,7 @@ import ApiConfig from 'config/ApiConfig';
 import defaultRequestOptions from './defaultRequestHeaders';
 import { KestrelServerError, ApiError } from './types';
 import { Guid } from 'guid-typescript';
+import { handleErrors } from './helpers';
 
 export default function useGroups() {
     const [groups, setGroups] = useState<IGroup[]>([]);
@@ -53,6 +54,7 @@ export default function useGroups() {
 export function useGroup(groupId: Guid) {
     const [group, setGroup] = useState<IGroup>({} as IGroup);
     const [isLoading, setLoading] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
     const fetchGroup = async () => {
         setLoading(true);
@@ -71,6 +73,8 @@ export function useGroup(groupId: Guid) {
     }, []);
 
     const updateGroup = async (updatedGroup: IGroup) => {
+        setLoading(true);
+
         const response = await fetch(`${ApiConfig.API_URL}/group/${group.id}`, {
             ...defaultRequestOptions,
             method: 'PATCH',
@@ -80,8 +84,29 @@ export function useGroup(groupId: Guid) {
         if (response.ok) {
             const updatedGroup = await response.json();
             setGroup(updatedGroup);
+        } else {
+            await handleErrors(response, setErrors);
         }
+
+        setLoading(false);
     };
 
-    return { group, updateGroup, refreshGroup: fetchGroup, isLoading };
+    const leaveGroup = async () => {
+        setLoading(true);
+
+        const response = await fetch(
+            `${ApiConfig.API_URL}/studentcontact/leavegroup/${group.id.toString()}`,
+            {
+                ...defaultRequestOptions
+            }
+        );
+
+        if (!response.ok) {
+            await handleErrors(response, setErrors);
+        }
+
+        setLoading(false);
+    };
+
+    return { group, updateGroup, refreshGroup: fetchGroup, leaveGroup, isLoading, errors };
 }

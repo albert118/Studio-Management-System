@@ -17,7 +17,8 @@ export default function MyGroupView({
     handleNewApplication,
     editingGroup,
     setEditingGroup,
-    handleGroupUpdate
+    handleGroupUpdate,
+    leaveGroup
 }) {
     return (
         <Grid className='mygroup-page'>
@@ -39,6 +40,7 @@ export default function MyGroupView({
                     group={editingGroup}
                     setGroup={setEditingGroup}
                     onSubmit={handleGroupUpdate}
+                    onLeave={leaveGroup}
                 />
             </Column>
         </Grid>
@@ -110,7 +112,7 @@ function ProjectPreferences({ group }) {
     );
 }
 
-function DangerZone({ group, setGroup, onSubmit }) {
+function DangerZone({ group, setGroup, onSubmit, onLeave }) {
     return (
         <ManagementTile
             title='Danger zone'
@@ -131,6 +133,7 @@ function DangerZone({ group, setGroup, onSubmit }) {
                 modalHeading='Leave group'
                 danger
                 primaryButtonText='Leave'
+                handleSubmit={onLeave}
             >
                 <LeaveGroup />
             </ModalWrapper>

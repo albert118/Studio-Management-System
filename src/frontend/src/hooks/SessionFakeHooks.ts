@@ -34,12 +34,11 @@ export default function useSession() {
                 // @ts-ignore
                 groupId: Guid.parse(testContact.assignedGroupId)
             });
-
-            // debug helper, remove after this hook is replaced with the real thing
-            console.log(user);
         };
 
         setUpFakeUser();
+        // debug helper, remove after this hook is replaced with the real thing
+        console.log(user);
     }, [isLoading]);
 
     const updateGroup = (groupId: Guid) => {
