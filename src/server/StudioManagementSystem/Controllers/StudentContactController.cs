@@ -10,13 +10,11 @@ namespace StudioManagementSystem.Controllers;
 public class StudentContactController : ControllerBase
 {
     private readonly IStudentContactRepository _studentContactRepository;
-    private readonly IProjectGroupManager _projectGroupManager;
     private readonly ICancellationTokenAccessor _cancellationTokenAccessor;
 
-    public StudentContactController(IStudentContactRepository studentContactRepository, IProjectGroupManager projectGroupManager, ICancellationTokenAccessor cancellationTokenAccessor)
+    public StudentContactController(IStudentContactRepository studentContactRepository, ICancellationTokenAccessor cancellationTokenAccessor)
     {
         _studentContactRepository = studentContactRepository;
-        _projectGroupManager = projectGroupManager;
         _cancellationTokenAccessor = cancellationTokenAccessor;
     }
     
@@ -28,19 +26,5 @@ public class StudentContactController : ControllerBase
         task.Wait(ct);
 
         return task.Result;
-    }
-    
-    [HttpPost("[action]/{id:guid}")]
-    [ActionName("leavegroup")]
-    public ActionResult LeaveAssignedGroup(Guid id)
-    {
-        var ct = _cancellationTokenAccessor.Token;
-        var task = _projectGroupManager.LeaveAssignedGroupAsync(id, ct);
-        task.Wait(ct);
-
-        if (!task.Result)
-            return StatusCode(500);
-
-        return Ok();
     }
 }

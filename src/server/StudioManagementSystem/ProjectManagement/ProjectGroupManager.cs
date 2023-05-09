@@ -11,7 +11,7 @@ public interface IProjectGroupManager
 
     Task<List<StudentContact>> GetAllStudentsWithoutGroupsAsync(CancellationToken ct);
 
-    Task<bool> LeaveAssignedGroupAsync(Guid id, CancellationToken ct);
+    Task<bool> LeaveAssignedGroupAsync(Guid studentContactId, CancellationToken ct);
 
     Task<bool> RejectGroupApplicationsAsync(List<Guid> ids, CancellationToken ct);
 }
@@ -53,9 +53,9 @@ public class ProjectGroupManager : IProjectGroupManager
         return students.Where(e=>e.AssignedGroupId == null).ToList();
     }
 
-    public async Task<bool> LeaveAssignedGroupAsync(Guid id, CancellationToken ct)
+    public async Task<bool> LeaveAssignedGroupAsync(Guid studentContactId, CancellationToken ct)
     {
-        return await _studentContactRepository.RemoveAssignedGroupAsync(id, ct);
+        return await _studentContactRepository.RemoveAssignedGroupAsync(studentContactId, ct);
     }
 
     public async Task<bool> RejectGroupApplicationsAsync(List<Guid> ids, CancellationToken ct)
