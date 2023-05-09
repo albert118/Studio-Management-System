@@ -31,8 +31,10 @@ export default function useSession() {
 
             setUser({
                 ...user,
-                // @ts-ignore
-                groupId: Guid.parse(testContact.assignedGroupId)
+                groupId: testContact.assignedGroupId
+                    ? // @ts-ignore
+                      Guid.parse(testContact.assignedGroupId)
+                    : undefined
             });
         };
 

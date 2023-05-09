@@ -91,11 +91,11 @@ export function useGroup(groupId: Guid) {
         setLoading(false);
     };
 
-    const leaveGroup = async (): Promise<boolean> => {
+    const leaveGroup = async (studentContactId: Guid): Promise<boolean> => {
         setLoading(true);
 
         const response = await fetch(
-            `${ApiConfig.API_URL}/studentcontact/leavegroup/${group.id.toString()}`,
+            `${ApiConfig.API_URL}/group/leavegroup/${studentContactId.toString()}`,
             {
                 ...defaultRequestOptions
             }
