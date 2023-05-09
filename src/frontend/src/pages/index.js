@@ -4,6 +4,7 @@ export { default as Layout } from './Layout';
 export { default as Login } from './Login';
 
 export { default as Groups } from './Groups';
+export { default as Group } from './Group';
 export { default as MyGroup } from './MyGroup';
 export { default as AddGroup } from './AddGroup';
 

@@ -9,6 +9,7 @@ import {
     Login,
     MyGroup,
     AddGroup,
+    Group,
     Project,
     AddProject,
     AdminDashboard,
@@ -62,6 +63,14 @@ const routes: RouteObject[] = [
         element: (
             <Layout>
                 <AddGroup />
+            </Layout>
+        )
+    },
+    {
+        path: `${AppRoutes.group}/:groupId`,
+        element: (
+            <Layout>
+                <Group />
             </Layout>
         )
     },
