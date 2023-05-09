@@ -1,17 +1,23 @@
 import ProjectView from './ProjectView';
 import { useProject } from 'hooks/ProjectHooks';
 import { Guid } from 'guid-typescript';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+import { LoadingSpinner } from 'components';
+import AppRoutes from 'navigation/AppRoutes';
 
 export default function ProjectContainer() {
     const { projectId } = useParams();
 
     if (!projectId) {
-        // TODO: develop an error page and handle this better
-        return <div>Error! No project ID</div>;
+        return <Navigate to={AppRoutes.error} replace />
     }
 
-    const { project, isLoading } = useProject(Guid.parse(projectId));
+    const projectIdAsGuid = Guid.parse(projectId);
+    if (projectIdAsGuid.isEmpty()) {
+        return <Navigate to={AppRoutes.error} replace />
+    }
 
-    return isLoading ? <>loading...</> : <ProjectView project={project} />;
+    const { project, isLoading } = useProject(projectIdAsGuid);
+
+    return isLoading ? <LoadingSpinner /> : <ProjectView project={project} />;
 }
