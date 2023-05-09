@@ -8,7 +8,8 @@ import {
     HeaderMenuItem,
     SkipToContent,
     HeaderGlobalAction,
-    HeaderGlobalBar
+    HeaderGlobalBar,
+    Button
 } from '@carbon/react';
 
 import { Notification, UserAvatar } from '@carbon/icons-react';
@@ -38,7 +39,7 @@ export default function AppHeader() {
                     <HeaderName href={AppRoutes.root} prefix='UTS'>
                         Studio Mangement System
                     </HeaderName>
-                    <Menu role={user.role} setRole={setRole} />
+                    <Menu user={user} setRole={setRole} />
                     <HeaderGlobalBar>
                         <HeaderGlobalAction
                             aria-label='Notifications'
@@ -61,7 +62,7 @@ export default function AppHeader() {
     );
 }
 
-function Menu({ role, setRole }) {
+function Menu({ user, setRole }) {
     const location = useLocation();
 
     return (
@@ -78,7 +79,7 @@ function Menu({ role, setRole }) {
             >
                 Groups
             </HeaderMenuItem>
-            {role === 'admin' && (
+            {user.role === 'admin' && (
                 <HeaderMenuItem
                     isActive={location.pathname == AppRoutes.admin}
                     href={AppRoutes.admin}
@@ -87,31 +88,33 @@ function Menu({ role, setRole }) {
                 </HeaderMenuItem>
             )}
 
-            {role === 'student' && (
+            {user.role === 'student' && (
                 <HeaderMenuItem
                     isActive={location.pathname == AppRoutes.myGroup}
-                    href={AppRoutes.myGroup}
+                    href={`${AppRoutes.groups}/${user.groupId}`}
                 >
                     My group
                 </HeaderMenuItem>
             )}
             {/* neat way to demo the admin/student roles without fleshing out the whole feature */}
-            {role === 'admin' ? (
-                <HeaderMenuItem
+            {user.role === 'admin' ? (
+                <Button
+                    kind='ghost'
                     onClick={() => {
                         setRole('student');
                     }}
                 >
                     Swap to student role
-                </HeaderMenuItem>
+                </Button>
             ) : (
-                <HeaderMenuItem
+                <Button
+                    kind='ghost'
                     onClick={() => {
                         setRole('admin');
                     }}
                 >
                     Swap to admin role
-                </HeaderMenuItem>
+                </Button>
             )}
         </HeaderNavigation>
     );

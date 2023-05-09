@@ -2,6 +2,13 @@ import { Guid } from 'guid-typescript';
 
 export type Nullable<T> = T | null;
 
+export interface IUser {
+    id: Guid;
+    name: string;
+    role: string;
+    groupId: Guid | undefined;
+}
+
 export interface IMemberInfo {
     max: number;
     count: number;
@@ -165,6 +172,7 @@ export interface IStudentContact {
     id: Guid;
     name: string;
     email: string;
+    groupId: Guid | undefined;
 }
 
 export type PrincipalOwner = {
