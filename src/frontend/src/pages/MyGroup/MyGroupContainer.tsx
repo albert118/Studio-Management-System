@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NewGroupApplicationDto } from 'types/types';
-import { useGroupApplications, useGroup } from 'hooks';
+import { useGroupApplications, useGroup, useSession } from 'hooks';
 import { Navigate, useParams } from 'react-router-dom';
 import AppRoutes from 'navigation/AppRoutes';
 import { Guid } from 'guid-typescript';
@@ -9,14 +9,18 @@ import MyGroupView from './MyGroupView';
 
 export default function MyGroupContainer() {
     const { groupId } = useParams();
+    const { user } = useSession();
 
     if (!groupId) {
-        return <Navigate to={AppRoutes.error} />
+        return <Navigate to={AppRoutes.error} replace />
     }
 
     const groupIdAsGuid = Guid.parse(groupId);
+    if (groupIdAsGuid.isEmpty()) {
+        return <Navigate to={AppRoutes.error} replace />
+    }
 
-    const { group, updateGroup, isLoading, refreshGroup } = useGroup(groupIdAsGuid);
+    const { group, updateGroup, leaveGroup, isLoading, refreshGroup } = useGroup(groupIdAsGuid);
     const { groupApplications, addGroupApplication } = useGroupApplications(groupIdAsGuid);
 
     const [editingGroup, setEditingGroup] = useState(group);
@@ -39,6 +43,12 @@ export default function MyGroupContainer() {
         window.location.reload();
     };
 
+    const onLeave = async () => {
+        if (await leaveGroup(user.id)) {
+            return <Navigate to={AppRoutes.error} replace />
+        }
+    };
+
     return (
         isLoading
             ? <LoadingSpinner />
@@ -52,6 +62,7 @@ export default function MyGroupContainer() {
                 editingGroup={editingGroup}
                 setEditingGroup={setEditingGroup}
                 handleGroupUpdate={handleGroupUpdate}
+                onLeave={onLeave}
             />
     );
 }
