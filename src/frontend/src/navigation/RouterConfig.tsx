@@ -13,7 +13,8 @@ import {
     Project,
     AddProject,
     AdminDashboard,
-    Notifications
+    Notifications,
+    AssignStudentsToGroup
 } from 'pages';
 import AppRoutes from 'navigation/AppRoutes';
 
@@ -103,6 +104,14 @@ const routes: RouteObject[] = [
         element: (
             <Layout>
                 <Notifications />
+            </Layout>
+        )
+    },
+    {
+        path: AppRoutes.assignStudentsToGroup,
+        element: (
+            <Layout>
+                <AssignStudentsToGroup />
             </Layout>
         )
     },

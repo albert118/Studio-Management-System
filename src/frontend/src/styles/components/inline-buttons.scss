@@ -1,0 +1,6 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.inline-buttons {
+    display: flex;
+    column-gap: $spacing-05;
+}

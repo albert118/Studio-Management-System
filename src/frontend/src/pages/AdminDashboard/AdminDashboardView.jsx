@@ -21,6 +21,11 @@ export default function AdminDashboardView() {
                     description='Archive, and lock groups in bulk'
                     icon={<Collaborate size={48} />}
                 >
+                    <GoToButton
+                        url={`${AppRoutes.assignStudentsToGroup}`}
+                        text='Assign students to group'
+                    />
+
                     <ModalWrapper
                         buttonTriggerText='Add new owner contacts'
                         modalHeading='Create new contacts'
