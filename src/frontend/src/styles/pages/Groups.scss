@@ -85,10 +85,13 @@
     .row-detail--r2 > .preferences {
         display: flex;
         flex-direction: column;
-        row-gap: $spacing-04;
+        row-gap: $spacing-02;
+        margin-top: $spacing-03;
+        padding-left: $spacing-06;
 
         li {
             padding-left: $spacing-03;
+            list-style: decimal-leading-zero;
         }
     }
 }

@@ -98,13 +98,11 @@ function ExpandedRowDetail({ row }) {
 
             <div className='row-detail--r2'>
                 <label>Project preferences</label>
-                <div className='preferences'>
+                <ul className='preferences'>
                     {row.preferences && row.preferences.length > 0
-                        ? row.preferences.map(preference => {
-                              <li>{preference.title}</li>;
-                          })
+                        ? row.preferences.map(preference => <li>{preference.title}</li>)
                         : 'This group has no project preferences (yet)'}
-                </div>
+                </ul>
             </div>
         </div>
     );
