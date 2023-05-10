@@ -11,4 +11,6 @@ public interface IStudentContactRepository
     Task<Guid> AddStudentContactAsync(StudentContact studentContact, CancellationToken ct);
 
     Task<bool> AssignStudentToGroupAsync(Guid studentId, Guid groupId, CancellationToken ct);
+
+    Task<bool> AssignStudentsToGroupAsync(List<Guid> studentIds, Guid groupId, CancellationToken ct);
 }

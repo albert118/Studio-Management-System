@@ -14,6 +14,8 @@ public interface IProjectGroupManager
     Task<bool> LeaveAssignedGroupAsync(Guid studentContactId, CancellationToken ct);
 
     Task<bool> RejectGroupApplicationsAsync(List<Guid> ids, CancellationToken ct);
+
+    Task<bool> AssignStudentsToGroupAsync(Guid groupId, List<Guid> studentContactIds, CancellationToken ct);
 }
 
 [InstanceScopedBusinessService]
@@ -65,5 +67,10 @@ public class ProjectGroupManager : IProjectGroupManager
         }
 
         return await _groupApplicationRepository.RemoveGroupApplicationsAsync(ids, ct);
+    }
+
+    public async Task<bool> AssignStudentsToGroupAsync(Guid groupId, List<Guid> studentContactIds, CancellationToken ct)
+    {
+        return await _studentContactRepository.AssignStudentsToGroupAsync(studentContactIds, groupId, ct);
     }
 }

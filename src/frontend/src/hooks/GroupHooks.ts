@@ -48,7 +48,27 @@ export default function useGroups() {
         return newGroupId;
     };
 
-    return { groups, addGroup, isLoading, errors };
+    const assignStudents = async (groupId: Guid, studentIds: Guid[]): Promise<boolean> => {
+        setLoading(true);
+        const response = await fetch(`${ApiConfig.API_URL}/group/assignstudents`, {
+            ...defaultRequestOptions,
+            method: 'POST',
+            body: JSON.stringify({
+                groupId: groupId,
+                studentIds: studentIds
+            })
+        });
+
+        if (!response.ok) {
+            await handleErrors(await response.json(), setErrors);
+        }
+
+        setLoading(false);
+
+        return response.ok;
+    };
+
+    return { groups, addGroup, assignStudents, isLoading, errors };
 }
 
 export function useGroup(groupId: Guid) {

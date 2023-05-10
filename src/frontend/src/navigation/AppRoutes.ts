@@ -7,13 +7,14 @@ const AppRoutes = Object.freeze({
     root: '/',
     groups: '/groups',
     group: '/group',
-    myGroup: '/myGroup',
+    myGroup: '/my-group',
     projects: '/projects',
     project: '/project',
     login: '/login',
     about: '/about',
     admin: '/admin',
     notifications: '/notifications',
+    assignStudentsToGroup: '/assign-students-to-group',
     error: '*'
 });
 

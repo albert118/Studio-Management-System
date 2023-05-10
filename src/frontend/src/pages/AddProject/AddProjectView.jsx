@@ -54,14 +54,14 @@ export default function AddProjectView({ availableOwners }) {
             <Column lg={16} md={8} sm={4} className='add-project-page__heading'>
                 <h1>Create a new project</h1>
                 <p>
-                    Welcome! We're excited that you're interested in proposing a new project 
-                    for the studio!
+                    Welcome! We're excited that you're interested in proposing a new project for the
+                    studio!
                     <br />
                     <br />
-                    Creating a project is easy! Simply fill out the form below with all of the necessary 
-                    information about your project. Be sure to include a clear and concise project description, 
-                    a list of necessary resources, and any other pertinent information that you think will be 
-                    helpful for potential groups.
+                    Creating a project is easy! Simply fill out the form below with all of the
+                    necessary information about your project. Be sure to include a clear and concise
+                    project description, a list of necessary resources, and any other pertinent
+                    information that you think will be helpful for potential groups.
                 </p>
             </Column>
             <Column lg={16} md={8} sm={4}>

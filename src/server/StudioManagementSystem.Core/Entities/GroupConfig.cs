@@ -23,6 +23,6 @@ public class GroupConfig
             .WithOne(e => e.AssignedGroup)
             .HasForeignKey(e => e.AssignedGroupId);
         
-        builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureLockable();
+        builder.ConfigureMetaData().ConfigureArchivable().ConfigureLockable();
     }
 }

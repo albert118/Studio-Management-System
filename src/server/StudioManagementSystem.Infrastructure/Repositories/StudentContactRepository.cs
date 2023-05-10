@@ -28,17 +28,25 @@ public class StudentContactRepository : IStudentContactRepository
         return studentContact.Id;
     }
 
-    public async Task<bool> AssignStudentToGroupAsync(Guid studentId, Guid groupId, CancellationToken ct)
-    {
-        var student = await _smsDbContext.StudentContacts.FirstOrDefaultAsync(e => e.Id == studentId, ct);
+    public Task<bool> AssignStudentToGroupAsync(Guid studentId, Guid groupId, CancellationToken ct) =>
+        AssignStudentsToGroupAsync(new() { studentId }, groupId, ct);
 
-        if (student == null) {
+    public async Task<bool> AssignStudentsToGroupAsync(List<Guid> studentIds, Guid groupId, CancellationToken ct)
+    {
+        var students = await _smsDbContext.StudentContacts
+            .Where(e => studentIds.Contains(e.Id))
+            .Include(e => e.AssignedGroup)
+            .ToListAsync(ct);
+
+        if (!students.Any()) {
             return false;
         }
 
-        student.AssignedGroupId = groupId;
-        await _smsDbContext.SaveChangesAsync(ct);
+        foreach (var student in students) {
+            student.AssignedGroupId = groupId;
+        }
 
+        await _smsDbContext.SaveChangesAsync(ct);
         return true;
     }
 
