@@ -11,14 +11,7 @@ export type Props = {
 
 export default function GroupView({ group }: Props) {
     const projectDetailsText = () => {
-        const detailText = {
-            0: 'This group hasn\'t worked on any projects yet',
-            1: 'This group has worked on one project',
-            // default: `${group.pre ?.length} groups have worked on this project`
-        };
-
-        // return detailText[project.assignedGroups?.length] || detailText['default'];
-        return detailText[0];
+        return 'This group hasn\'t worked on any projects yet';
     };
 
     return (
@@ -26,8 +19,8 @@ export default function GroupView({ group }: Props) {
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
                 <Grid className='project-page__overview-content'>
                     <Column lg={1}>
-                        {/* TODO: similar group page social divider links */}
-                        {/* <VerticalSocialDivider /> */}
+                        {/* // @ts-ignore */}
+                        <VerticalSocialDivider onClickFigma={null} onClickGitHub={null} onClickJupyter={null} />
                     </Column>
                     <Column lg={{ span: 5, offset: 2 }} md={4} sm={4} className='overview'>
                         <h1 className='project-page__heading'>{group.name}</h1>
@@ -41,7 +34,7 @@ export default function GroupView({ group }: Props) {
                             <InlineDetail label='domain' detail={group..meta?.domain} /> */}
                         </Stack>
 
-                        <BlockDetail label='Projects' detail={projectDetailsText()}>
+                        <BlockDetail label='Project preferences' detail={projectDetailsText()}>
                             <Stack>
                                 {group.preferences &&
                                     group.preferences.map(flyweight => (
@@ -75,7 +68,7 @@ export default function GroupView({ group }: Props) {
 function MemberContactList({ members }: { members: IMemberDetail[] }) {
     return (
         <BlockDetail
-            label='Group members contacts'
+            label='Group member contacts'
             detail='Contact for further information'
         >
             <br />
