@@ -1,8 +1,9 @@
 import { Collaborate, Roadmap, Task, IbmWatsonTextToSpeech } from '@carbon/icons-react';
 import { Grid, Column, ModalWrapper } from '@carbon/react';
-import { ManagementTile, StatisticBox } from 'components';
+import { GoToButton, ManagementTile, StatisticBox } from 'components';
+import AppRoutes from 'navigation/AppRoutes';
 
-export default function AdminDashboard() {
+export default function AdminDashboardView() {
     return (
         <Grid className='admin-page'>
             <Column lg={16} md={8} sm={4} className='admin-page__r1'>
@@ -13,31 +14,7 @@ export default function AdminDashboard() {
                     obcaecati quo repellendus cum at! Soluta, ducimus iusto!
                 </p>
             </Column>
-            <Column lg={16} md={8} sm={4} className='admin-page__r2'>
-                <StatisticBox
-                    title='Assigned groups'
-                    label='Are active groups forming?'
-                    value={12}
-                    changeInValue={0.3}
-                    valueIcon={<Collaborate size={24} />}
-                    variant='green'
-                />
-                <StatisticBox
-                    title='PDJ contributions'
-                    label='Are projects progressing?'
-                    value={15}
-                    changeInValue={-0.07}
-                    valueIcon={<Roadmap size={24} />}
-                    variant='blue'
-                />
-                <StatisticBox
-                    title='ILC journal activity'
-                    label='Are students reflecting?'
-                    value={15}
-                    valueIcon={<IbmWatsonTextToSpeech size={24} />}
-                    changeInValue={0.86}
-                />
-            </Column>
+            <Stats />
             <Column lg={16} md={8} sm={4} className='admin-page__r3'>
                 <ManagementTile
                     title='Groups'
@@ -63,6 +40,7 @@ export default function AdminDashboard() {
                     description='Archive, and lock projects in bulk'
                     icon={<Roadmap size={48} />}
                 >
+                    <GoToButton url={`${AppRoutes.projects}/add`} text='Create a new project' />
                     <ModalWrapper
                         buttonTriggerText='Bulk project management'
                         modalHeading='Bulk project management'
@@ -91,5 +69,35 @@ export default function AdminDashboard() {
                 </ManagementTile>
             </Column>
         </Grid>
+    );
+}
+
+function Stats() {
+    return (
+        <Column lg={16} md={8} sm={4} className='admin-page__r2'>
+            <StatisticBox
+                title='Assigned groups'
+                label='Are active groups forming?'
+                value={12}
+                changeInValue={0.3}
+                valueIcon={<Collaborate size={24} />}
+                variant='green'
+            />
+            <StatisticBox
+                title='PDJ contributions'
+                label='Are projects progressing?'
+                value={15}
+                changeInValue={-0.07}
+                valueIcon={<Roadmap size={24} />}
+                variant='blue'
+            />
+            <StatisticBox
+                title='ILC journal activity'
+                label='Are students reflecting?'
+                value={15}
+                valueIcon={<IbmWatsonTextToSpeech size={24} />}
+                changeInValue={0.86}
+            />
+        </Column>
     );
 }
