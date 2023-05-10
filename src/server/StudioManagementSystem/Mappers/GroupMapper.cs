@@ -14,7 +14,8 @@ public static class GroupMapper
             MemberInfo: group.Members.ToMemberInfoDto(group),
             Preferences: group.GroupProjectPreferences.Select(GroupProjectPreferenceMapper.MapToPreferenceDto).ToList(),
             Project: group.AssignedProject?.MapToProjectDto(),
-            MemberCount: $"{group.Members.Count}/{group.MaxMembers}"
+            MemberCount: $"{group.Members.Count}/{group.MaxMembers}",
+            Meta: new(group.CreatedOn.Year.ToString())
         );
     }
 

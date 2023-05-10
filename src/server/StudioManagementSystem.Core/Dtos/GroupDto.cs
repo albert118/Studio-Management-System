@@ -7,5 +7,6 @@ public record GroupDto(
     MemberInfoDto MemberInfo,
     List<PreferenceDto> Preferences,
     ProjectDto? Project,
-    string MemberCount
+    string MemberCount,
+    MetaDto Meta
 );

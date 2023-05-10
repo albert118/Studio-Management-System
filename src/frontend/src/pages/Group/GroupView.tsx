@@ -10,24 +10,26 @@ export type Props = {
 };
 
 export default function GroupView({ group }: Props) {
-    const projectDetailsText = () => {
-        const detailText = {
-            0: 'This group hasn\'t worked on any projects yet',
-            1: 'This group has worked on one project',
-            // default: `${group.pre ?.length} groups have worked on this project`
-        };
-
-        // return detailText[project.assignedGroups?.length] || detailText['default'];
-        return detailText[0];
+    const projectDetailsText = (idx: number) => {
+        return !idx || idx === 0 ? 'This group hasn\'t added any preferences just yet' : '';
     };
+
+    const indexString = (idx: number) => {
+        return {
+            1: '1st',
+            2: '2nd',
+            3: '3rd',
+        }[idx + 1]
+    };
+
+    const truncate = (input: string, limit = 1000) => `${input.substring(0, limit)}...`;
 
     return (
         <Grid className='project-page'>
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
                 <Grid className='project-page__overview-content'>
                     <Column lg={1}>
-                        {/* TODO: similar group page social divider links */}
-                        {/* <VerticalSocialDivider /> */}
+                        <VerticalSocialDivider onClickFigma={null} onClickGitHub={null} onClickJupyter={null} />
                     </Column>
                     <Column lg={{ span: 5, offset: 2 }} md={4} sm={4} className='overview'>
                         <h1 className='project-page__heading'>{group.name}</h1>
@@ -36,20 +38,18 @@ export default function GroupView({ group }: Props) {
                                 label='Group size'
                                 detail={`${group.memberInfo.count}/${group.memberInfo.max}`}
                             />
-                            {/* TODO: add group metadata to API */}
-                            {/* <InlineDetail label='year' detail={group.meta?.createdYear} />
-                            <InlineDetail label='domain' detail={group..meta?.domain} /> */}
+                            <InlineDetail label='year' detail={group.meta?.createdYear} />
                         </Stack>
 
-                        <BlockDetail label='Projects' detail={projectDetailsText()}>
+                        <BlockDetail label='Project preferences' detail={projectDetailsText(group.preferences.length)}>
                             <Stack>
                                 {group.preferences &&
-                                    group.preferences.map(flyweight => (
+                                    group.preferences.map((flyweight, idx) => (
                                         <SimpleCard
                                             key={flyweight.projectId.toString()}
                                             size={Size.sm}
                                             title={flyweight.title}
-                                            label='...A label...'
+                                            label={`${indexString(idx)} preference`}
                                         >
                                             <GoToButton
                                                 url={`${AppRoutes.project}/${flyweight.projectId}`}
@@ -64,7 +64,7 @@ export default function GroupView({ group }: Props) {
                         <VerticalDivider />
                     </Column>
                     <Column lg={{ span: 6, offset: 10 }} md={4} sm={4}>
-                        <p>{group.description}</p>
+                        <p>{truncate(group.description)}</p>
                     </Column>
                 </Grid>
             </Column>
@@ -75,7 +75,7 @@ export default function GroupView({ group }: Props) {
 function MemberContactList({ members }: { members: IMemberDetail[] }) {
     return (
         <BlockDetail
-            label='Group members contacts'
+            label='Group member contacts'
             detail='Contact for further information'
         >
             <br />

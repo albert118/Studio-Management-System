@@ -116,9 +116,4 @@
             @include type-style('heading-01');
         }
     }
-
-    // remove the hover effect on this particular card
-    .simple-card:hover {
-        background-color: var($sms-color-neutral-background);
-    }
 }
