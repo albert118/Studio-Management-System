@@ -19,7 +19,6 @@ export default function GroupView({ group }: Props) {
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
                 <Grid className='project-page__overview-content'>
                     <Column lg={1}>
-                        {/* // @ts-ignore */}
                         <VerticalSocialDivider onClickFigma={null} onClickGitHub={null} onClickJupyter={null} />
                     </Column>
                     <Column lg={{ span: 5, offset: 2 }} md={4} sm={4} className='overview'>
@@ -29,9 +28,7 @@ export default function GroupView({ group }: Props) {
                                 label='Group size'
                                 detail={`${group.memberInfo.count}/${group.memberInfo.max}`}
                             />
-                            {/* TODO: add group metadata to API */}
-                            {/* <InlineDetail label='year' detail={group.meta?.createdYear} />
-                            <InlineDetail label='domain' detail={group..meta?.domain} /> */}
+                            <InlineDetail label='year' detail={group.meta?.createdYear} />
                         </Stack>
 
                         <BlockDetail label='Project preferences' detail={projectDetailsText()}>

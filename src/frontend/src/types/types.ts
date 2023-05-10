@@ -26,6 +26,10 @@ export interface IPreference {
     projectId: Guid;
 }
 
+export interface IMetaDto {
+    createdYear: string;
+}
+
 export interface IGroup {
     id: Guid;
     name: string;
@@ -34,6 +38,7 @@ export interface IGroup {
     preferences: IPreference[];
     memberCount: string;
     project: string;
+    meta: IMetaDto;
 }
 
 export interface IPotentialInvite {
