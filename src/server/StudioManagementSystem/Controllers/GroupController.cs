@@ -82,4 +82,18 @@ public class GroupController : ControllerBase
 
         return Ok();
     }
+
+    [HttpPost("[action]")]
+    [ActionName("assignstudents")]
+    public ActionResult LeaveAssignedGroup(AssignStudentsToGroupDto dto)
+    {
+        var ct = _cancellationTokenAccessor.Token;
+        var task = _projectGroupManager.AssignStudentsToGroupAsync(dto.GroupId, dto.StudentIds, ct);
+        task.Wait(ct);
+
+        if (!task.Result)
+            return StatusCode(500);
+
+        return Ok();
+    }
 }
