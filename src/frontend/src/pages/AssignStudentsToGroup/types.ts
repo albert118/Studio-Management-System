@@ -11,4 +11,6 @@ export type ViewProps = {
     availableGroups: IGroup[];
     onSubmit: Function;
     onFinish: Function;
+    assignedStudentsFormData: AssignedStudentsFormData;
+    setAssignedStudentsFormData: Function;
 };

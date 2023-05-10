@@ -8,7 +8,9 @@ export default function StudentsToGroupForm({
     assignableStudents,
     availableGroups,
     onSubmit,
-    onFinish
+    onFinish,
+    formData,
+    setFormData
 }) {
     return (
         <Form onSubmit={onSubmit}>
@@ -20,7 +22,7 @@ export default function StudentsToGroupForm({
                     name='group'
                     invalidText='A group must be selected to assign students to it'
                     labelText='Group'
-                    // onChange={e => setFormData({ ...formData, [e.target.name]: e.target.value })}
+                    onChange={e => setFormData({ ...formData, [e.target.name]: e.target.value })}
                 >
                     <SelectItem text='Choose a group' value={defaultItem} />
                     {availableGroups &&
@@ -35,12 +37,12 @@ export default function StudentsToGroupForm({
                     id='students'
                     name='students'
                     invalidText='Some students must be selected so that they can be assigned'
-                    // onChange={output => {
-                    //     setFormData({
-                    //         ...formData,
-                    //         owners: output.selectedItems.map(item => item.id.value)
-                    //     });
-                    // }}
+                    onChange={output => {
+                        setFormData({
+                            ...formData,
+                            studentIds: output.selectedItems.map(item => item.id)
+                        });
+                    }}
                     items={mapToDropdownItems(assignableStudents)}
                     label='Select students to asasign'
                     titleText='Product owners'

@@ -3,17 +3,21 @@ import { useGroups, useStudentContactsWithoutGroup } from 'hooks';
 import { LoadingSpinner } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { AssignedStudentsFormData } from './types';
+import { useState } from 'react';
 
 export default function AddProjectContainer() {
     const { studentContacts, isLoading: isLoadingStudents } = useStudentContactsWithoutGroup();
     const { groups, isLoading: isLoadingGroups } = useGroups();
     const navigate = useNavigate();
 
+    const [assignedStudentsFormData, setAssignedStudentsFormData] = useState({} as AssignedStudentsFormData);
+
     const availableGroups = groups.filter(group => group.memberInfo.count < group.memberInfo.max);
 
-    const onSubmit = (e: React.SyntheticEvent, formData: AssignedStudentsFormData) => {
+    const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(formData);
+        console.log(assignedStudentsFormData);
+        setAssignedStudentsFormData({} as AssignedStudentsFormData);
     }
 
     const isLoading = isLoadingGroups || isLoadingStudents;
@@ -26,6 +30,8 @@ export default function AddProjectContainer() {
                 availableGroups={availableGroups}
                 onSubmit={onSubmit}
                 onFinish={() => navigate(-1)}
+                assignedStudentsFormData={assignedStudentsFormData}
+                setAssignedStudentsFormData={setAssignedStudentsFormData}
             />
     );
 }
