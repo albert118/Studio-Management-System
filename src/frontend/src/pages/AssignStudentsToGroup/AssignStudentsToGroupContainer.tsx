@@ -6,7 +6,7 @@ import { AssignedStudentsFormData } from './types';
 import { useState } from 'react';
 
 export default function AddProjectContainer() {
-    const { studentContacts, isLoading: isLoadingStudents } = useStudentContactsWithoutGroup();
+    const { studentContacts, refreshStudentContacts, isLoading: isLoadingStudents } = useStudentContactsWithoutGroup();
     const { groups, assignStudents, isLoading: isLoadingGroups } = useGroups();
     const navigate = useNavigate();
 
@@ -17,8 +17,9 @@ export default function AddProjectContainer() {
     const onSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         await assignStudents(assignedStudentsFormData.groupId, assignedStudentsFormData.studentIds);
+        await refreshStudentContacts();
         setAssignedStudentsFormData({} as AssignedStudentsFormData);
-    };
+    }
 
     const isLoading = isLoadingGroups || isLoadingStudents;
 

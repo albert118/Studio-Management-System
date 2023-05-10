@@ -38,26 +38,26 @@ export function useStudentContactsWithoutGroup() {
     const [isLoading, setLoading] = useState<boolean>(true);
     const [errors, setErrors] = useState<Nullable<ApiError>>(null);
 
+    const fetchContacts = async () => {
+        setLoading(true);
+
+        const response = await fetch(`${ApiConfig.API_URL}/studentcontacts/withoutgroup`, {
+            ...defaultRequestOptions
+        });
+
+        setLoading(false);
+
+        if (response.ok) {
+            const data = await response.json();
+            setStudentContacts(data);
+        } else {
+            await handleErrors(response, setErrors);
+        }
+    };
+
     useEffect(() => {
-        const fetchContacts = async () => {
-            setLoading(true);
-
-            const response = await fetch(`${ApiConfig.API_URL}/studentcontacts/withoutgroup`, {
-                ...defaultRequestOptions
-            });
-
-            setLoading(false);
-
-            if (response.ok) {
-                const data = await response.json();
-                setStudentContacts(data);
-            } else {
-                await handleErrors(response, setErrors);
-            }
-        };
-
         fetchContacts();
     }, []);
 
-    return { studentContacts, isLoading, errors };
+    return { studentContacts, refreshStudentContacts: fetchContacts, isLoading, errors };
 }

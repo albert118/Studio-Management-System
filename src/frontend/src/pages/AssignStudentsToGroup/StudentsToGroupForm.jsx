@@ -19,7 +19,7 @@ export default function StudentsToGroupForm({
                     defaultValue={defaultItem}
                     helperText='The group you want to assign students to'
                     id='group'
-                    name='group'
+                    name='groupId'
                     invalidText='A group must be selected to assign students to it'
                     labelText='Group'
                     onChange={e => setFormData({ ...formData, [e.target.name]: e.target.value })}
@@ -53,7 +53,7 @@ export default function StudentsToGroupForm({
                         Assign (and repeat)
                     </Button>
                     <Button kind='secondary' type='button' onClick={onFinish}>
-                        Create and view
+                        Done
                     </Button>
                 </div>
             </Stack>
