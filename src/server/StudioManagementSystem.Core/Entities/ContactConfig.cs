@@ -22,6 +22,6 @@ public class ContactConfig
         builder.Property(e => e.FirstName).IsRequired();
         builder.Property(e => e.LastName).IsRequired();
 
-        builder.ConfigureMetaData().ConfigureArchivable().ConfigureMetaData().ConfigureActive();
+        builder.ConfigureMetaData().ConfigureArchivable().ConfigureActive();
     }
 }
