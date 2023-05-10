@@ -14,6 +14,14 @@ export default function GroupView({ group }: Props) {
         return 'This group hasn\'t worked on any projects yet';
     };
 
+    const indexString = (idx: number) => {
+        return {
+            1: '1st',
+            2: '2nd',
+            3: '3rd',
+        }[idx + 1]
+    };
+
     return (
         <Grid className='project-page'>
             <Column lg={16} md={8} sm={4} className='project-page__r1'>
@@ -34,12 +42,12 @@ export default function GroupView({ group }: Props) {
                         <BlockDetail label='Project preferences' detail={projectDetailsText()}>
                             <Stack>
                                 {group.preferences &&
-                                    group.preferences.map(flyweight => (
+                                    group.preferences.map((flyweight, idx) => (
                                         <SimpleCard
                                             key={flyweight.projectId.toString()}
                                             size={Size.sm}
                                             title={flyweight.title}
-                                            label='...A label...'
+                                            label={`${indexString(idx)} preference`}
                                         >
                                             <GoToButton
                                                 url={`${AppRoutes.project}/${flyweight.projectId}`}
