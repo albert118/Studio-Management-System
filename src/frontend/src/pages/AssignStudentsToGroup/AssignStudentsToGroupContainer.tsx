@@ -7,18 +7,18 @@ import { useState } from 'react';
 
 export default function AddProjectContainer() {
     const { studentContacts, isLoading: isLoadingStudents } = useStudentContactsWithoutGroup();
-    const { groups, isLoading: isLoadingGroups } = useGroups();
+    const { groups, assignStudents, isLoading: isLoadingGroups } = useGroups();
     const navigate = useNavigate();
 
     const [assignedStudentsFormData, setAssignedStudentsFormData] = useState({} as AssignedStudentsFormData);
 
     const availableGroups = groups.filter(group => group.memberInfo.count < group.memberInfo.max);
 
-    const onSubmit = (e: React.SyntheticEvent) => {
+    const onSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(assignedStudentsFormData);
+        await assignStudents(assignedStudentsFormData.groupId, assignedStudentsFormData.studentIds);
         setAssignedStudentsFormData({} as AssignedStudentsFormData);
-    }
+    };
 
     const isLoading = isLoadingGroups || isLoadingStudents;
 
