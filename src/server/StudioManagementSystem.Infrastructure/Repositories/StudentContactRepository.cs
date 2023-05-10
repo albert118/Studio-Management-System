@@ -33,7 +33,10 @@ public class StudentContactRepository : IStudentContactRepository
 
     public async Task<bool> AssignStudentsToGroupAsync(List<Guid> studentIds, Guid groupId, CancellationToken ct)
     {
-        var students = await _smsDbContext.StudentContacts.Where(e => studentIds.Contains(e.Id)).ToListAsync(ct);
+        var students = await _smsDbContext.StudentContacts
+            .Where(e => studentIds.Contains(e.Id))
+            .Include(e => e.AssignedGroup)
+            .ToListAsync(ct);
 
         if (!students.Any()) {
             return false;
