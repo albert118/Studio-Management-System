@@ -10,8 +10,8 @@ export type Props = {
 };
 
 export default function GroupView({ group }: Props) {
-    const projectDetailsText = () => {
-        return 'This group hasn\'t worked on any projects yet';
+    const projectDetailsText = (idx: number) => {
+        return !idx || idx === 0 ? 'This group hasn\'t added any preferences just yet' : '';
     };
 
     const indexString = (idx: number) => {
@@ -21,6 +21,8 @@ export default function GroupView({ group }: Props) {
             3: '3rd',
         }[idx + 1]
     };
+
+    const truncate = (input: string, limit = 1000) => `${input.substring(0, limit)}...`;
 
     return (
         <Grid className='project-page'>
@@ -39,7 +41,7 @@ export default function GroupView({ group }: Props) {
                             <InlineDetail label='year' detail={group.meta?.createdYear} />
                         </Stack>
 
-                        <BlockDetail label='Project preferences' detail={projectDetailsText()}>
+                        <BlockDetail label='Project preferences' detail={projectDetailsText(group.preferences.length)}>
                             <Stack>
                                 {group.preferences &&
                                     group.preferences.map((flyweight, idx) => (
@@ -62,7 +64,7 @@ export default function GroupView({ group }: Props) {
                         <VerticalDivider />
                     </Column>
                     <Column lg={{ span: 6, offset: 10 }} md={4} sm={4}>
-                        <p>{group.description}</p>
+                        <p>{truncate(group.description)}</p>
                     </Column>
                 </Grid>
             </Column>
