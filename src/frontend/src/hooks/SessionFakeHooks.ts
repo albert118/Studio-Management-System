@@ -9,12 +9,12 @@ import useStudentContacts from './StudentContactHooks';
 // this lets me fake myself as the below user for demo purposes
 export default function useSession() {
     // allows us to grab a real contact, which includes the current group ID (if assigned to a group)
-    const testingUserId = 'f8b20b08-7a50-4afa-994b-1bd34a7c114c';
+    const testingUserId = '4e9cb689-267d-44a5-92d0-332968dbacf2';
     const { studentContacts, isLoading } = useStudentContacts();
 
     const [user, setUser] = useState<IUser>({
         id: Guid.parse(testingUserId),
-        name: 'Lucy Hawking',
+        name: 'Ryan Cleminson',
         role: 'admin',
         groupId: undefined
     });
