@@ -1,1 +1,1 @@
-export { default } from './AssignStudentsTogroupContainer';
+export { default } from './AssignStudentsToGroupContainer';

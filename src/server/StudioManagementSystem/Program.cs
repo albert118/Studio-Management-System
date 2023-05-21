@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using StudioManagementSystem;
+using StudioManagementSystem.Core;
 
 // retrieve and inject the application configuration
 var appConfig = new ConfigurationBuilder()
@@ -22,5 +24,12 @@ var app = builder.Build();
 
 // Configure the app and web request pipeline
 startup.Configure(app, builder.Environment);
+
+// only attempt to auto-run migrations outside of development environs to speed up build-times
+if (!builder.Environment.IsDevelopment()) {
+    using var scope = app.Services.CreateScope();
+    var migrationDbContext = scope.ServiceProvider.GetRequiredService<StudioManagementDbMigrationContext>();
+    migrationDbContext.Database.Migrate();
+}
 
 app.Run();
