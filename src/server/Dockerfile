@@ -23,5 +23,4 @@ WORKDIR /app
 COPY --from=publisher /publish .
 
 ENV ASPNETCORE_ENVIRONMENT=Production
-RUN dotnet ef database update
 ENTRYPOINT dotnet StudioManagementSystem.dll
