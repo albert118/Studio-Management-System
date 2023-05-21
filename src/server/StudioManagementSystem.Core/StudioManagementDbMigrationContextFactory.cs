@@ -22,6 +22,7 @@ public class StudioManagementDbMigrationContextFactory : IDesignTimeDbContextFac
         var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile(AppSettingsFilePath)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
             .Build();
 
         var connectionString = configuration.GetConnectionString("StudioManagementDbConnection");
