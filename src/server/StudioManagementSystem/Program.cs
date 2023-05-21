@@ -25,7 +25,7 @@ var app = builder.Build();
 // Configure the app and web request pipeline
 startup.Configure(app, builder.Environment);
 
-// development envs should run migrations manually, as needed (speeds up launch time for dev's)
+// only attempt to auto-run migrations outside of development environs to speed up build-times
 if (!builder.Environment.IsDevelopment()) {
     using var scope = app.Services.CreateScope();
     var migrationDbContext = scope.ServiceProvider.GetRequiredService<StudioManagementDbMigrationContext>();

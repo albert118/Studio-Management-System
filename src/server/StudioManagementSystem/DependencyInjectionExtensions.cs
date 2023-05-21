@@ -1,5 +1,6 @@
 using Autofac;
 using Microsoft.EntityFrameworkCore;
+using StudioManagementSystem.Core;
 using StudioManagementSystem.Infrastructure;
 using StudioManagementSystem.Infrastructure.DataServices;
 
@@ -46,7 +47,9 @@ public static class EfContextRegistrationExtensions
     /// </summary>
     public static ContainerBuilder AddEfCoreDbContexts(this ContainerBuilder builder)
     {
-        return builder.AddStudioManagementSystemDbContext();
+        return builder
+            .AddStudioManagementSystemDbContext()
+            .AddStudioManagementMigrationsDbContext();
     }
 
     /// <summary>
@@ -95,6 +98,16 @@ public static class EfContextRegistrationExtensions
              .As<IStudioManagementSystemDbContextAsync>()
              .InstancePerLifetimeScope();
          
+         return builder;
+     }
+
+     private static ContainerBuilder AddStudioManagementMigrationsDbContext(this ContainerBuilder builder)
+     {
+         builder
+             .RegisterType<StudioManagementDbMigrationContext>()
+             .WithParameter("opts", StudioManagementDbMigrationContextFactory.GetDbContextOptions())
+             .InstancePerLifetimeScope();
+
          return builder;
      }
 }

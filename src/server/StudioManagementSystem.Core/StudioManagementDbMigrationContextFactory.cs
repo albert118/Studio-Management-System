@@ -4,17 +4,20 @@ using Microsoft.Extensions.Configuration;
 
 namespace StudioManagementSystem.Core;
 
-public class InMealDbMigrationContextFactory : IDesignTimeDbContextFactory<StudioManagementDbMigrationContext>
+public class StudioManagementDbMigrationContextFactory : IDesignTimeDbContextFactory<StudioManagementDbMigrationContext>
 {
     // Holds migration infrastructure settings
     private const string AppSettingsFilePath = "appsettings.json";
 
     public StudioManagementDbMigrationContext CreateDbContext(string[] args)
     {
-        Console.WriteLine("Starting migration...");
+        Console.WriteLine("created db context");
+        return new(GetDbContextOptions());
+    }
 
-        // configuration for a JSON settings file will not work without
-        // this package installed 'Microsoft.Extensions.Configuration.Json'
+    public static DbContextOptions<StudioManagementDbMigrationContext> GetDbContextOptions()
+    {
+        Console.WriteLine("Starting migrations...");
 
         var configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -23,7 +26,7 @@ public class InMealDbMigrationContextFactory : IDesignTimeDbContextFactory<Studi
 
         var connectionString = configuration.GetConnectionString("StudioManagementDbConnection");
 
-        Console.WriteLine($"Attempting to run a migration using the connection settings from '{connectionString}'");
+        Console.WriteLine($"Attempting to run migrations with connection: '{connectionString}'");
 
         var majorVersion = int.Parse(configuration.GetSection("ConnectionStrings:ServerVersionMajor").Value!);
         var minorVersion = int.Parse(configuration.GetSection("ConnectionStrings:ServerVersionMinor").Value!);
@@ -34,8 +37,8 @@ public class InMealDbMigrationContextFactory : IDesignTimeDbContextFactory<Studi
         var dbContextBuilder =
             new DbContextOptionsBuilder<StudioManagementDbMigrationContext>().UseMySql(connectionString!, serverVersion);
 
-        Console.WriteLine("created db context");
+        Console.WriteLine("created db context options");
 
-        return new(dbContextBuilder.Options);
+        return dbContextBuilder.Options;
     }
 }
